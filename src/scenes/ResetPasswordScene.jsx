@@ -166,7 +166,7 @@ ResetPasswordScene.defaultProps = {
   updatePasswordAPIUrl: `${window.API_ENDPOINT}/reset-password`,
   validateTokenUrl: `${window.API_ENDPOINT}/Member`,
   removeAccessTokenUrl: `${window.API_ENDPOINT}/Member/logout`,
-  skipValidation: true,
+  skipValidation: false,
   redirectUrl: '/login',
   title: 'Set new password',
   subTitle: 'Write new password and click save!',
