@@ -91,7 +91,7 @@ class ResetPasswordScene extends Component {
     const { query } = this.state;
     const { removeAccessTokenUrl } = this.props;
     const { access_token } = query;
-    return axios.post(`${removeAccessTokenUrl}/logout`, undefined, { params: { access_token } });
+    return axios.post(removeAccessTokenUrl, undefined, { params: { access_token } });
   }
 
   render() {
