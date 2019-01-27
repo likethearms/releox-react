@@ -97,7 +97,7 @@ class LoginScene extends Component {
       credentials, message, redirect, loading,
     } = this.state;
     const { email, password } = credentials;
-    if (redirect) return <Redirect />;
+    if (redirect) return <Redirect to={redirect} />;
     if (loading) return <CenterContent><Loading /></CenterContent>;
     return (
       <AuthLayout>
