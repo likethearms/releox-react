@@ -3,7 +3,7 @@ import ForgotScene from './scenes/ForgotScene';
 import LoginScene from './scenes/LoginScene';
 import ResetPasswordScene from './scenes/ResetPasswordScene';
 
-export default {
+export {
   AcceptInvitation,
   ForgotScene,
   LoginScene,
