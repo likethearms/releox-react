@@ -147,7 +147,7 @@ ResetPasswordScene.propTypes = {
 };
 
 ResetPasswordScene.defaultProps = {
-  updatePasswordAPIUrl: `${window.API_ENDPOINT}/reset-password`,
+  updatePasswordAPIUrl: `${window.API_ENDPOINT}/Members/reset-password`,
   validateTokenUrl: `${window.API_ENDPOINT}/Members`,
   removeAccessTokenUrl: `${window.API_ENDPOINT}/Members/logout`,
   skipValidation: false,
