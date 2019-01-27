@@ -1,0 +1,8 @@
+.storybook
+.vscode
+node_modules
+stories
+todo
+.gitignore
+.editorconfig
+.babelrc
