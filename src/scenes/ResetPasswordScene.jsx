@@ -6,6 +6,7 @@ import queryString from 'query-string';
 import AuthLayout from '../components/AuthLayout';
 import Loading from '../components/Loading';
 import getErrorMessage from '../utils/get-error-message';
+import OneInputActionForm from '../components/OneInputActionForm';
 
 class ResetPasswordScene extends Component {
   constructor(props) {
@@ -31,6 +32,10 @@ class ResetPasswordScene extends Component {
     } else {
       this.validateToken();
     }
+  }
+
+  onInputChange(e) {
+    this.setState({ password: e.target.value });
   }
 
   onSubmit(e) {
@@ -111,37 +116,19 @@ class ResetPasswordScene extends Component {
     }
     return (
       <AuthLayout>
-        <form onSubmit={this.onSubmit.bind(this)}>
-          <h1>{this.getTitle()}</h1>
-          <p className="text-muted">{this.getSubTitle()}</p>
-          <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text">
-                <i className="fa fa-lock" />
-              </span>
-            </div>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              placeholder={this.getPlaceholder()}
-              value={password}
-              onChange={e => this.setState({ password: e.target.value })}
-            />
-          </div>
-          <div className="row">
-            <div className="col-12 text-right">
-              <button type="submit" className="btn btn-primary px-4">{this.getButtonText()}</button>
-            </div>
-          </div>
-          {message ? (
-            <div className="row">
-              <div className="col-md-12">
-                <p className="text-muted text-center mt-4">{message}</p>
-              </div>
-            </div>
-          ) : undefined}
-        </form>
+        <OneInputActionForm
+          onSubmit={this.onSubmit.bind(this)}
+          title={this.getTitle()}
+          subTitle={this.getSubTitle()}
+          value={password}
+          label="fa fa-lock"
+          name="password"
+          type="password"
+          buttonText={this.getButtonText()}
+          placeholder={this.getPlaceholder()}
+          onChange={this.onInputChange.bind(this)}
+          message={message}
+        />
       </AuthLayout>
     );
   }

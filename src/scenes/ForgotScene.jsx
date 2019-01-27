@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import getErrorMessage from '../utils/get-error-message';
 import AuthLayout from '../components/AuthLayout';
-import InputInlineGroup from '../components/InputInlineGroup';
+import OneInputActionForm from '../components/OneInputActionForm';
 
 class ForgotScene extends Component {
   constructor(props) {
@@ -72,7 +72,7 @@ class ForgotScene extends Component {
 
   render() {
     const {
-      thankYouLink, tokenLocalStorageKey, authorizedRedirectUrl, backUrl,
+      thankYouLink, backUrl,
     } = this.props;
     const { email, errorMessage, showThanksPage } = this.state;
     let page;
@@ -86,40 +86,25 @@ class ForgotScene extends Component {
       );
     } else {
       page = (
-        <form onSubmit={this.onSubmit.bind(this)}>
-          <h1>{this.getTitle()}</h1>
-          <p className="text-muted">{this.getSubTitle()}</p>
-          <InputInlineGroup
-            value={email}
-            label="fa fa-user"
-            placeholder={this.getPlaceholder()}
-            name="email"
-            type="email"
-            onChange={this.onInputChange.bind(this)}
-          />
-          <div className="row">
-            <div className="col-6">
-              <NavLink className="btn btn-link px-0" to={backUrl}>{this.getBackText()}</NavLink>
-            </div>
-            <div className="col-6 text-right">
-              <button type="submit" className="btn btn-primary px-4">{this.getResetButtonText()}</button>
-            </div>
-          </div>
-          {errorMessage ? (
-            <div className="row">
-              <div className="col-md-12">
-                <p className="text-muted text-center mt-4">{errorMessage}</p>
-              </div>
-            </div>
-          ) : undefined}
-        </form>
+        <OneInputActionForm
+          onSubmit={this.onSubmit.bind(this)}
+          title={this.getTitle()}
+          subTitle={this.getSubTitle()}
+          value={email}
+          label="fa fa-user"
+          name="email"
+          type="email"
+          buttonText={this.getResetButtonText()}
+          placeholder={this.getPlaceholder()}
+          onChange={this.onInputChange.bind(this)}
+          backUrl={backUrl}
+          backText={this.getBackText()}
+          message={errorMessage}
+        />
       );
     }
     return (
-      <AuthLayout
-        tokenLocalStorageKey={tokenLocalStorageKey}
-        authorizedRedirectUrl={authorizedRedirectUrl}
-      >
+      <AuthLayout>
         {page}
       </AuthLayout>
     );
@@ -139,12 +124,9 @@ ForgotScene.propTypes = {
   thankYouSubTitle: PropTypes.string,
   thankYouBackText: PropTypes.string,
   thankYouLink: PropTypes.string,
-  tokenLocalStorageKey: PropTypes.string,
-  authorizedRedirectUrl: PropTypes.string,
 };
 
 ForgotScene.defaultProps = {
-  tokenLocalStorageKey: window.TOKEN_LOCAL_STORAGE_KEY,
   backUrl: '/login',
   passwordResetAPIUrl: `${window.API_ENDPOINT}/Members/reset`,
   emailRedirectUrl: `${window.location.origin}/forgot`,
@@ -157,7 +139,6 @@ ForgotScene.defaultProps = {
   thankYouSubTitle: 'Reset link is sent to your email!',
   thankYouBackText: 'Back to login',
   thankYouLink: '',
-  authorizedRedirectUrl: '/',
 };
 
 export default ForgotScene;

@@ -17,6 +17,7 @@ import ForgotScene from '../src/scenes/ForgotScene';
 import Loading from '../src/components/Loading';
 import ResetPasswordScene from '../src/scenes/ResetPasswordScene';
 import CenterContent from '../src/components/CenterContent';
+import OneInputActionForm from '../src/components/OneInputActionForm';
 
 storiesOf('Welcome', module)
   .add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
@@ -46,6 +47,19 @@ storiesOf('Components', module)
   ))
   .add('Card', () => <Card />)
   .add('CenterContent', () => <CenterContent>Content</CenterContent>)
+  .add('AuthOneInputCard', () => (
+    <OneInputActionForm
+      label="fa fa-user"
+      placeholder="Name"
+      buttonText="Save"
+      title="The title"
+      subTitle="The Subtitle"
+      onSubmit={() => { }}
+      value=""
+      name="name"
+      onChange={() => { }}
+    />
+  ))
   .add('Loading', () => <Loading />)
   .add('InputInlineGroup', () => (
     <div>
