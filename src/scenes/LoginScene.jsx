@@ -7,6 +7,7 @@ import getErrorMessage from '../utils/get-error-message';
 import InputInlineGroup from '../components/InputInlineGroup';
 import Loading from '../components/Loading';
 import CenterContent from '../components/CenterContent';
+import CardTitle from '../components/CardTitle';
 
 class LoginScene extends Component {
   constructor(props) {
@@ -101,7 +102,7 @@ class LoginScene extends Component {
     return (
       <AuthLayout>
         <form onSubmit={this.onSubmit.bind(this)}>
-          <h1>{this.getTitle()}</h1>
+          <CardTitle>{this.getTitle()}</CardTitle>
           <p className="text-muted">{this.getSubTitle()}</p>
           <InputInlineGroup
             value={email}

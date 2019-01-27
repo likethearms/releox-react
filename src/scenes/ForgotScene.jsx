@@ -5,6 +5,8 @@ import { NavLink } from 'react-router-dom';
 import getErrorMessage from '../utils/get-error-message';
 import AuthLayout from '../components/AuthLayout';
 import OneInputActionForm from '../components/OneInputActionForm';
+import CenterContent from '../components/CenterContent';
+import Loading from '../components/Loading';
 
 class ForgotScene extends Component {
   constructor(props) {
@@ -38,8 +40,8 @@ class ForgotScene extends Component {
     this.setState({ errorMessage: getErrorMessage(error) });
   }
 
-  getResetButtonText() {
-    return this.props.resetButtonText;
+  getButtonText() {
+    return this.props.buttonText;
   }
 
   getBackText() {
@@ -71,11 +73,12 @@ class ForgotScene extends Component {
   }
 
   render() {
+    const { thankYouLink, backUrl } = this.props;
     const {
-      thankYouLink, backUrl,
-    } = this.props;
-    const { email, errorMessage, showThanksPage } = this.state;
+      email, errorMessage, showThanksPage, loading,
+    } = this.state;
     let page;
+    if (loading) return <CenterContent><Loading /></CenterContent>;
     if (showThanksPage) {
       page = (
         <div className="text-center">
@@ -94,7 +97,7 @@ class ForgotScene extends Component {
           label="fa fa-user"
           name="email"
           type="email"
-          buttonText={this.getResetButtonText()}
+          buttonText={this.getButtonText()}
           placeholder={this.getPlaceholder()}
           onChange={this.onInputChange.bind(this)}
           backUrl={backUrl}
@@ -115,7 +118,7 @@ ForgotScene.propTypes = {
   passwordResetAPIUrl: PropTypes.string,
   backUrl: PropTypes.string,
   emailRedirectUrl: PropTypes.string,
-  resetButtonText: PropTypes.string,
+  buttonText: PropTypes.string,
   backText: PropTypes.string,
   title: PropTypes.string,
   subTitle: PropTypes.string,
@@ -130,7 +133,7 @@ ForgotScene.defaultProps = {
   backUrl: '/login',
   passwordResetAPIUrl: `${window.API_ENDPOINT}/Members/reset`,
   emailRedirectUrl: `${window.location.origin}/forgot`,
-  resetButtonText: 'Reset',
+  buttonText: 'Reset',
   backText: 'Back to login',
   title: 'Reset your password',
   subTitle: 'Please write your email and we send you password reset link.',

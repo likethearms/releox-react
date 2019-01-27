@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import InputInlineGroup from './InputInlineGroup';
+import CardTitle from './CardTitle';
 
 const OneInputActionForm = (props) => {
   const {
@@ -10,7 +11,7 @@ const OneInputActionForm = (props) => {
   } = props;
   return (
     <form onSubmit={onSubmit}>
-      <h1>{title}</h1>
+      <CardTitle>{title}</CardTitle>
       <p className="text-muted">{subTitle}</p>
       <InputInlineGroup
         value={value}

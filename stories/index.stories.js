@@ -18,6 +18,7 @@ import Loading from '../src/components/Loading';
 import ResetPasswordScene from '../src/scenes/ResetPasswordScene';
 import CenterContent from '../src/components/CenterContent';
 import OneInputActionForm from '../src/components/OneInputActionForm';
+import AcceptInvitation from '../src/scenes/AcceptInvitation';
 
 storiesOf('Welcome', module)
   .add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
@@ -29,6 +30,7 @@ storiesOf('Scenes', module)
     </MemoryRouter>
   ))
   .add('LoginScene', () => <LoginScene />)
+  .add('AcceptInvitation', () => <AcceptInvitation skipValidation />)
   .add('ForgotScene', () => <ForgotScene passwordResetAPIUrl="http://localhost:3001/api/Members/reset" />)
   .add('ResetPasswordScene', () => <ResetPasswordScene skipValidation />);
 
