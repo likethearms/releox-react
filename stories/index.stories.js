@@ -14,6 +14,8 @@ import Card from '../src/components/Card';
 import CardLink from '../src/components/CardLink';
 import InputInlineGroup from '../src/components/InputInlineGroup';
 import ForgotScene from '../src/scenes/ForgotScene';
+import Loading from '../src/components/Loading';
+import ResetPasswordScene from '../src/scenes/ResetPasswordScene';
 
 storiesOf('Welcome', module)
   .add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
@@ -25,7 +27,8 @@ storiesOf('Scenes', module)
     </MemoryRouter>
   ))
   .add('LoginScene', () => <LoginScene />)
-  .add('ForgotScene', () => <ForgotScene passwordResetAPIUrl="http://localhost:3001/api/Members/reset" />);
+  .add('ForgotScene', () => <ForgotScene passwordResetAPIUrl="http://localhost:3001/api/Members/reset" />)
+  .add('ResetPasswordScene', () => <ResetPasswordScene skipValidation />);
 
 storiesOf('Components', module)
   .add('AuthLayout', () => <AuthLayout />)
@@ -41,6 +44,7 @@ storiesOf('Components', module)
     </div>
   ))
   .add('Card', () => <Card />)
+  .add('Loading', () => <Loading />)
   .add('InputInlineGroup', () => (
     <div>
       <InputInlineGroup

@@ -1,6 +1,6 @@
 {
   "name": "releox-react",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "query-string": "^6.2.0",
+    "react-loading": "^2.0.3"
+  },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@coreui/coreui": "^2.1.6",
