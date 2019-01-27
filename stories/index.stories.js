@@ -16,6 +16,7 @@ import InputInlineGroup from '../src/components/InputInlineGroup';
 import ForgotScene from '../src/scenes/ForgotScene';
 import Loading from '../src/components/Loading';
 import ResetPasswordScene from '../src/scenes/ResetPasswordScene';
+import CenterContent from '../src/components/CenterContent';
 
 storiesOf('Welcome', module)
   .add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
@@ -44,6 +45,7 @@ storiesOf('Components', module)
     </div>
   ))
   .add('Card', () => <Card />)
+  .add('CenterContent', () => <CenterContent>Content</CenterContent>)
   .add('Loading', () => <Loading />)
   .add('InputInlineGroup', () => (
     <div>

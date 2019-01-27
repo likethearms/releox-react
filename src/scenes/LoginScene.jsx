@@ -5,6 +5,8 @@ import Axios from 'axios';
 import AuthLayout from '../components/AuthLayout';
 import getErrorMessage from '../utils/get-error-message';
 import InputInlineGroup from '../components/InputInlineGroup';
+import Loading from '../components/Loading';
+import CenterContent from '../components/CenterContent';
 
 class LoginScene extends Component {
   constructor(props) {
@@ -15,6 +17,7 @@ class LoginScene extends Component {
         password: props.preSetPassword,
       },
       message: '',
+      loading: false,
       redirect: '',
     };
   }
@@ -40,11 +43,12 @@ class LoginScene extends Component {
     e.preventDefault();
     const { tokenLocalStorageKey, redirectUrl } = this.props;
     const { credentials } = this.state;
+    this.setState({ loading: true });
     this.onLogin(credentials, redirectUrl, tokenLocalStorageKey);
   }
 
   onCatchError(error) {
-    this.setState({ message: getErrorMessage(error) });
+    this.setState({ message: getErrorMessage(error), loading: false });
   }
 
   getLoginRequestUrl() {
@@ -88,9 +92,12 @@ class LoginScene extends Component {
   }
 
   render() {
-    const { credentials, message, redirect } = this.state;
+    const {
+      credentials, message, redirect, loading,
+    } = this.state;
     const { email, password } = credentials;
     if (redirect) return <Redirect />;
+    if (loading) return <CenterContent><Loading /></CenterContent>;
     return (
       <AuthLayout>
         <form onSubmit={this.onSubmit.bind(this)}>
