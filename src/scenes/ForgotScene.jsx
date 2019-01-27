@@ -132,7 +132,7 @@ ForgotScene.propTypes = {
 ForgotScene.defaultProps = {
   backUrl: '/login',
   passwordResetAPIUrl: `${window.API_ENDPOINT}/Members/reset`,
-  emailRedirectUrl: `${window.location.origin}/forgot`,
+  emailRedirectUrl: `${window.location.origin}/reset-password`,
   buttonText: 'Reset',
   backText: 'Back to login',
   title: 'Reset your password',

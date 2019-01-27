@@ -155,8 +155,8 @@ AcceptInvitation.propTypes = {
 AcceptInvitation.defaultProps = {
   redirectUrl: '/login',
   updateUrl: `${window.API_ENDPOINT}/reset-password`,
-  validateTokenUrl: `${window.API_ENDPOINT}/Member`,
-  removeAccessTokenUrl: `${window.API_ENDPOINT}/Member/logout`,
+  validateTokenUrl: `${window.API_ENDPOINT}/Members`,
+  removeAccessTokenUrl: `${window.API_ENDPOINT}/Members/logout`,
   title: 'Accept invitation',
   skipValidation: false,
   subTitle: 'Finnish your account and login!',
