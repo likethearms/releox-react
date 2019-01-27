@@ -13,7 +13,7 @@ class ResetPasswordScene extends Component {
     super(props);
     let query = {};
     if (!props.skipValidation) {
-      query = queryString.parse(props.location.search);
+      query = queryString.parse(window.location.search);
     }
     this.state = {
       loading: true,
@@ -139,9 +139,6 @@ ResetPasswordScene.propTypes = {
   subTitle: PropTypes.string,
   placeholder: PropTypes.string,
   buttonText: PropTypes.string,
-  location: PropTypes.shape({
-    search: PropTypes.string,
-  }).isRequired,
   updatePasswordAPIUrl: PropTypes.string,
   skipValidation: PropTypes.bool,
   removeAccessTokenUrl: PropTypes.string,

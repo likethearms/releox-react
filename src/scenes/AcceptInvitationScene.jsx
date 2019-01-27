@@ -20,7 +20,7 @@ class AcceptInvitation extends Component {
     super(props);
     let query = {};
     if (!props.skipValidation) {
-      query = queryString.parse(props.location.search);
+      query = queryString.parse(window.location.search);
     }
     this.state = {
       query,
@@ -142,9 +142,6 @@ class AcceptInvitation extends Component {
 
 AcceptInvitation.propTypes = {
   redirectUrl: PropTypes.string,
-  location: PropTypes.shape({
-    search: PropTypes.string,
-  }).isRequired,
   skipValidation: PropTypes.bool,
   title: PropTypes.string,
   subTitle: PropTypes.string,
