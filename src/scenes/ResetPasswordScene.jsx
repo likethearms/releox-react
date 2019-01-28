@@ -4,34 +4,26 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import AuthLayout from '../components/AuthLayout';
-import Loading from '../components/Loading';
 import getErrorMessage from '../utils/get-error-message';
 import OneInputActionForm from '../components/OneInputActionForm';
+import AuthBlockMessage from '../components/AuthBlockMessage';
+import ValidateTokenMiddlewareWithLoading from '../components/ValidateTokenMiddlewareWithLoading';
+import Loading from '../components/Loading';
 
 class ResetPasswordScene extends Component {
   constructor(props) {
     super(props);
     let query = {};
-    if (!props.skipValidation) {
-      query = queryString.parse(window.location.search);
-    }
+    query = queryString.parse(window.location.search);
     this.state = {
-      loading: true,
+      loading: false,
+      isValidating: true,
       redirect: false,
       query,
       password: '',
       message: '',
       blockMessage: '',
     };
-  }
-
-  componentDidMount() {
-    const { skipValidation } = this.props;
-    if (skipValidation) {
-      this.setState({ loading: false });
-    } else {
-      this.validateToken();
-    }
   }
 
   onInputChange(e) {
@@ -49,9 +41,17 @@ class ResetPasswordScene extends Component {
 
   onCatchError(error, isBlockMessage) {
     if (isBlockMessage) {
-      return this.setState({ blockMessage: getErrorMessage(error), loading: false });
+      return this.setState({
+        blockMessage: getErrorMessage(error),
+        loading: false,
+        isValidating: false,
+      });
     }
-    return this.setState({ message: getErrorMessage(error), loading: false });
+    return this.setState({
+      message: getErrorMessage(error),
+      loading: false,
+      isValidating: false,
+    });
   }
 
   getTitle() {
@@ -70,16 +70,6 @@ class ResetPasswordScene extends Component {
     return this.props.buttonText;
   }
 
-  validateToken() {
-    const { query } = this.state;
-    const { validateTokenUrl } = this.props;
-    axios.get(`${validateTokenUrl}/${query.user || query.userId}?access_token=${query.access_token}`)
-      .then(() => this.setState({ loading: false }))
-      .catch((error) => {
-        this.onCatchError(error, true);
-      });
-  }
-
   resetRequest() {
     const { password, query: { access_token } } = this.state;
     const { updatePasswordAPIUrl } = this.props;
@@ -96,24 +86,24 @@ class ResetPasswordScene extends Component {
 
   render() {
     const {
-      password, loading, message, redirect, blockMessage,
+      password, isValidating, message, redirect, blockMessage, query, loading,
     } = this.state;
-    const { redirectUrl } = this.props;
+    const { redirectUrl, skipValidation, validateTokenUrl } = this.props;
     if (redirect) return (<Redirect to={redirectUrl} />);
-    if (loading) {
+    if (isValidating) {
       return (
-        <AuthLayout>
-          <Loading centeredVertical />
-        </AuthLayout>
+        <ValidateTokenMiddlewareWithLoading
+          accessToken={query.access_token}
+          user={query.user || query.userId}
+          skipValidation={skipValidation}
+          validateTokenUrl={validateTokenUrl}
+          onSuccess={() => this.setState({ isValidating: false })}
+          onFail={e => this.onCatchError(e, true)}
+        />
       );
     }
-    if (blockMessage) {
-      return (
-        <AuthLayout>
-          <h4>{blockMessage}</h4>
-        </AuthLayout>
-      );
-    }
+    if (loading) return <Loading centeredVertical />;
+    if (blockMessage) return <AuthBlockMessage message={blockMessage} />;
     return (
       <AuthLayout>
         <OneInputActionForm
@@ -148,7 +138,7 @@ ResetPasswordScene.propTypes = {
 
 ResetPasswordScene.defaultProps = {
   updatePasswordAPIUrl: `${window.API_ENDPOINT}/Members/reset-password`,
-  validateTokenUrl: `${window.API_ENDPOINT}/Members`,
+  validateTokenUrl: undefined,
   removeAccessTokenUrl: `${window.API_ENDPOINT}/Members/logout`,
   skipValidation: false,
   redirectUrl: '/login',

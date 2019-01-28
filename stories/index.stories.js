@@ -19,6 +19,7 @@ import ResetPasswordScene from '../src/scenes/ResetPasswordScene';
 import CenterContent from '../src/components/CenterContent';
 import OneInputActionForm from '../src/components/OneInputActionForm';
 import AcceptInvitationScene from '../src/scenes/AcceptInvitationScene';
+import AuthBlockMessage from '../src/components/AuthBlockMessage';
 
 storiesOf('Welcome', module)
   .add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
@@ -98,6 +99,7 @@ storiesOf('ReactRouterDom', module)
       </div>
     </MemoryRouter>
   ))
+  .add('AuthBlockMessage', () => <AuthBlockMessage message="Hello world!" />)
   .add('CardLink', () => (
     <Card>
       <CardLink linkString="/link|fa fa-user" />

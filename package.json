@@ -1,6 +1,6 @@
 {
   "name": "releox-react",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
   "main": "dist/index.js",
   "typings": "index.d.ts",
@@ -8,8 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build": "babel src -d dist",
-    "prepublish": "rm -rf dist && babel src -d dist"
+    "build": "BABEL_ENV=build babel src -d dist",
+    "prepublish": "rm -rf dist && BABEL_ENV=build babel src -d dist"
   },
   "keywords": [],
   "author": "Henrik Salmela",
