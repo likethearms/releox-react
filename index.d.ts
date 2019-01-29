@@ -5,7 +5,7 @@ interface IAuthRoutes {
 
 interface IAcceptInvitationProps {
   redirectUrl: string;
-  skipValidation: bool;
+  skipValidation: boolean;
   title: string;
   subTitle: string;
   placeholder: string;
