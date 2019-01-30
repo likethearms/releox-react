@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';
-import ValidateTokenMiddlewareWithLoading from '../components/ValidateTokenMiddlewareWithLoading';
 import AuthLayout from '../components/AuthLayout';
 import Loading from '../components/Loading';
 import getErrorMessage from '../utils/get-error-message';
@@ -11,11 +10,6 @@ import OneInputActionForm from '../components/OneInputActionForm';
 import AuthBlockMessage from '../components/AuthBlockMessage';
 
 class AcceptInvitation extends Component {
-  static checkInvitationIsNotDone(user) {
-    if (user.invitationDone) return Promise.reject(new Error('Account already is ready to use.'));
-    return Promise.resolve(user);
-  }
-
   constructor(props) {
     super(props);
     let query = {};
@@ -24,11 +18,23 @@ class AcceptInvitation extends Component {
       query,
       password: '',
       accessDenied: '',
-      loading: false,
-      isValidating: true,
+      loading: true,
       redirect: false,
       message: '',
     };
+  }
+
+  componentWillMount() {
+    const { query } = this.state;
+    const { skipValidation } = this.props;
+    if (skipValidation) {
+      this.setState({ loading: false });
+    } else {
+      axios
+        .get(`${this.getValidateTokenUrl()}?uid=${query.invitation_token}&invitation_token=${query.invitation_token}`)
+        .then(() => this.setState({ loading: false }))
+        .catch(e => this.onCatchError(e, true));
+    }
   }
 
   onInputChange(e) {
@@ -37,24 +43,21 @@ class AcceptInvitation extends Component {
 
   onCatchError(e, accessDenied) {
     if (accessDenied) {
-      this.setState({ isValidating: false, accessDenied: getErrorMessage(e), loading: false });
+      this.setState({ accessDenied: getErrorMessage(e), loading: false });
     } else {
-      this.setState({ isValidating: false, message: getErrorMessage(e), loading: false });
+      this.setState({ message: getErrorMessage(e), loading: false });
     }
   }
 
   onSubmit(e) {
     e.preventDefault();
     this.updatePassword()
-      .then(() => this.removeToken())
       .then(() => this.setState({ redirect: true }))
       .catch(this.onCatchError.bind(this));
   }
 
-  onSuccessValidation(user) {
-    AcceptInvitation.checkInvitationIsNotDone(user)
-      .then(() => this.setState({ isValidating: false }))
-      .catch(e => this.onCatchError(e, true));
+  getValidateTokenUrl() {
+    return this.props.validateTokenUrl;
   }
 
   getTitle() {
@@ -75,39 +78,16 @@ class AcceptInvitation extends Component {
 
   updatePassword() {
     const { password, query } = this.state;
-    const { updateUrl } = this.props;
-    return axios.patch(`${updateUrl}/${query.user}?access_token=${query.access_token}`, {
-      password,
-      emailVerified: true,
-      invitationDone: true,
-    });
-  }
-
-  removeToken() {
-    const { removeAccessTokenUrl } = this.props;
-    const { query } = this.state;
-    const opt = { params: { access_token: query.access_token } };
-    return axios.post(removeAccessTokenUrl, undefined, opt);
+    const { acceptInvitationUrl } = this.props;
+    return axios.post(`${acceptInvitationUrl}?invitation_token=${query.invitation_token}&uid=${query.uid}`, { password });
   }
 
   render() {
     const {
-      password, message, loading, redirect, accessDenied, isValidating, query,
+      password, message, loading, redirect, accessDenied,
     } = this.state;
-    const { redirectUrl, skipValidation, validateTokenUrl } = this.props;
+    const { redirectUrl } = this.props;
     if (redirect) return <Redirect to={redirectUrl} />;
-    if (isValidating) {
-      return (
-        <ValidateTokenMiddlewareWithLoading
-          accessToken={query.access_token}
-          user={query.user || query.userId}
-          skipValidation={skipValidation}
-          validateTokenUrl={validateTokenUrl}
-          onSuccess={user => this.onSuccessValidation(user)}
-          onFail={e => this.onCatchError(e, true)}
-        />
-      );
-    }
     if (loading) return <Loading centeredVertical />;
     if (accessDenied) return <AuthBlockMessage message={accessDenied} />;
     return (
@@ -138,15 +118,13 @@ AcceptInvitation.propTypes = {
   placeholder: PropTypes.string,
   buttonText: PropTypes.string,
   validateTokenUrl: PropTypes.string,
-  updateUrl: PropTypes.string,
-  removeAccessTokenUrl: PropTypes.string,
+  acceptInvitationUrl: PropTypes.string,
 };
 
 AcceptInvitation.defaultProps = {
   redirectUrl: '/login',
-  updateUrl: `${window.API_ENDPOINT}/Members`,
-  validateTokenUrl: undefined,
-  removeAccessTokenUrl: `${window.API_ENDPOINT}/Members/logout`,
+  acceptInvitationUrl: `${window.API_ENDPOINT}/Members/accept-invitation`,
+  validateTokenUrl: `${window.API_ENDPOINT}/Members/validate-invitation-token`,
   title: 'Accept invitation',
   skipValidation: false,
   subTitle: 'Finnish your account and login!',
