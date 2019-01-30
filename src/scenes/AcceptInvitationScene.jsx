@@ -31,7 +31,7 @@ class AcceptInvitation extends Component {
       this.setState({ loading: false });
     } else {
       axios
-        .get(`${this.getValidateTokenUrl()}?uid=${query.invitation_token}&invitation_token=${query.uid}`)
+        .get(`${this.getValidateTokenUrl()}?uid=${query.uid}&invitation_token=${query.invitation_token}`)
         .then(() => this.setState({ loading: false }))
         .catch(e => this.onCatchError(e, true));
     }
