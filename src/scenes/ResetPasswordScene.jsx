@@ -10,6 +10,21 @@ import AuthBlockMessage from '../components/AuthBlockMessage';
 import ValidateTokenMiddlewareWithLoading from '../components/ValidateTokenMiddlewareWithLoading';
 import Loading from '../components/Loading';
 
+const translation = {
+  fi: {
+    title: 'Aseta uusi salasana',
+    subTitle: 'Kirjoita uusi salasana ja paina tallenna',
+    placeholder: 'Salasana',
+    buttonText: 'Tallenna',
+  },
+  en: {
+    title: 'Set new password',
+    subTitle: 'Write new password and click save!',
+    placeholder: 'Password',
+    buttonText: 'Save',
+  },
+};
+
 class ResetPasswordScene extends Component {
   constructor(props) {
     super(props);
@@ -54,20 +69,25 @@ class ResetPasswordScene extends Component {
     });
   }
 
+  getTranslation(key) {
+    const { locale } = this.props;
+    return this.props[key] || translation[locale][key];
+  }
+
   getTitle() {
-    return this.props.title;
+    return this.getTranslation('title');
   }
 
   getSubTitle() {
-    return this.props.subTitle;
+    return this.getTranslation('subTitle');
   }
 
   getPlaceholder() {
-    return this.props.placeholder;
+    return this.getTranslation('placeholder');
   }
 
   getButtonText() {
-    return this.props.buttonText;
+    return this.getTranslation('buttonText');
   }
 
   resetRequest() {
@@ -125,10 +145,11 @@ class ResetPasswordScene extends Component {
 }
 
 ResetPasswordScene.propTypes = {
-  title: PropTypes.string,
-  subTitle: PropTypes.string,
-  placeholder: PropTypes.string,
-  buttonText: PropTypes.string,
+  title: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  subTitle: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  placeholder: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  buttonText: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  locale: PropTypes.string,
   updatePasswordAPIUrl: PropTypes.string,
   skipValidation: PropTypes.bool,
   removeAccessTokenUrl: PropTypes.string,
@@ -139,13 +160,14 @@ ResetPasswordScene.propTypes = {
 ResetPasswordScene.defaultProps = {
   updatePasswordAPIUrl: `${window.API_ENDPOINT}/Members/reset-password`,
   validateTokenUrl: undefined,
+  locale: 'fi',
   removeAccessTokenUrl: `${window.API_ENDPOINT}/Members/logout`,
   skipValidation: false,
   redirectUrl: '/login',
-  title: 'Set new password',
-  subTitle: 'Write new password and click save!',
-  placeholder: 'Password',
-  buttonText: 'Save',
+  title: undefined,
+  subTitle: undefined,
+  placeholder: undefined,
+  buttonText: undefined,
 };
 
 export default ResetPasswordScene;

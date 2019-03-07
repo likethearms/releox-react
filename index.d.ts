@@ -53,6 +53,7 @@ interface IResetPasswordSceneProps {
   emailPlaceholder?: string;
   passwordPlaceholder?: string;
   forgotPasswordText?: string;
+  locale?: string;
   loginButtonText?: string;
   registerText?: string;
   registerUrl?: string;
