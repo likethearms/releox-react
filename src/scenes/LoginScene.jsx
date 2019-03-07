@@ -9,6 +9,27 @@ import Loading from '../components/Loading';
 import CenterContent from '../components/CenterContent';
 import CardTitle from '../components/CardTitle';
 
+const translation = {
+  fi: {
+    title: 'Kirjaudu',
+    subTitle: 'Täytä tiedot ja kirjaudu sisään',
+    emailPlaceholder: 'Sähköposti',
+    passwordPlaceholder: 'Salasana',
+    forgotPasswordText: 'Unohditko salasanasi?',
+    registerText: 'Oletko uusi? Luo tunnus!',
+    loginButtonText: 'Kirjaudu',
+  },
+  en: {
+    title: 'Login',
+    subTitle: 'Fill form and login',
+    emailPlaceholder: 'Email',
+    passwordPlaceholder: 'Password',
+    forgotPasswordText: 'Forgot password?',
+    registerText: 'New? Create new account!',
+    loginButtonText: 'Login',
+  },
+};
+
 class LoginScene extends Component {
   constructor(props) {
     super(props);
@@ -52,36 +73,41 @@ class LoginScene extends Component {
     this.setState({ message: getErrorMessage(error), loading: false });
   }
 
+  getTranslation(key) {
+    const { locale } = this.props;
+    return this.props[key] || translation[locale][key];
+  }
+
   getLoginRequestUrl() {
     return this.props.loginRequestUrl;
   }
 
   getTitle() {
-    return this.props.title;
+    return this.getTranslation('title');
   }
 
   getSubTitle() {
-    return this.props.subTitle;
+    return this.getTranslation('subTitle');
   }
 
   getEmailPlaceholder() {
-    return this.props.emailPlaceholder;
+    return this.getTranslation('emailPlaceholder');
   }
 
   getPasswordPlaceholder() {
-    return this.props.passwordPlaceholder;
+    return this.getTranslation('passwordPlaceholder');
   }
 
   getForgotText() {
-    return this.props.forgotPasswordText;
+    return this.getTranslation('forgotPasswordText');
   }
 
   getLoginButtonText() {
-    return this.props.loginButtonText;
+    return this.getTranslation('loginButtonText');
   }
 
   getRegisterText() {
-    return this.props.registerText;
+    return this.getTranslation('registerText');
   }
 
   getRegisterUrl() {
@@ -149,13 +175,14 @@ class LoginScene extends Component {
 }
 
 LoginScene.propTypes = {
-  title: PropTypes.string,
-  subTitle: PropTypes.string,
-  emailPlaceholder: PropTypes.string,
-  passwordPlaceholder: PropTypes.string,
-  forgotPasswordText: PropTypes.string,
-  loginButtonText: PropTypes.string,
-  registerText: PropTypes.string,
+  locale: PropTypes.string,
+  title: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  subTitle: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  emailPlaceholder: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  passwordPlaceholder: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  forgotPasswordText: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  loginButtonText: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  registerText: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
   registerUrl: PropTypes.string,
   redirectUrl: PropTypes.string,
   forgotPasswordUrl: PropTypes.string,
@@ -166,14 +193,15 @@ LoginScene.propTypes = {
 };
 
 LoginScene.defaultProps = {
-  title: 'Login',
-  subTitle: 'Fill form and login',
-  emailPlaceholder: 'Email',
-  passwordPlaceholder: 'Password',
-  forgotPasswordText: 'Forgot password?',
+  locale: 'fi',
+  title: undefined,
+  subTitle: undefined,
+  emailPlaceholder: undefined,
+  passwordPlaceholder: undefined,
+  forgotPasswordText: undefined,
+  registerText: undefined,
+  loginButtonText: undefined,
   redirectUrl: '/',
-  loginButtonText: 'Login',
-  registerText: 'New? Create new account!',
   forgotPasswordUrl: '/forgot',
   loginRequestUrl: `${window.API_ENDPOINT}/Members/login`,
   registerUrl: undefined,

@@ -9,6 +9,21 @@ import getErrorMessage from '../utils/get-error-message';
 import OneInputActionForm from '../components/OneInputActionForm';
 import AuthBlockMessage from '../components/AuthBlockMessage';
 
+const translation = {
+  fi: {
+    title: 'Hyväksy kutsu',
+    subTitle: 'Viimeistele tunnuksesi antamalla salasana ja kirjaudu sisään!',
+    placeholder: 'Salasana',
+    buttonText: 'Tallenna',
+  },
+  en: {
+    title: 'Accept invitation',
+    subTitle: 'Finnish your account and login!',
+    placeholder: 'Password',
+    buttonText: 'Save',
+  },
+};
+
 class AcceptInvitation extends Component {
   constructor(props) {
     super(props);
@@ -56,24 +71,29 @@ class AcceptInvitation extends Component {
       .catch(this.onCatchError.bind(this));
   }
 
+  getTranslation(key) {
+    const { locale } = this.props;
+    return this.props[key] || translation[locale][key];
+  }
+
   getValidateTokenUrl() {
     return this.props.validateTokenUrl;
   }
 
   getTitle() {
-    return this.props.title;
+    return this.getTranslation('title');
   }
 
   getSubTitle() {
-    return this.props.subTitle;
+    return this.getTranslation('subTitle');
   }
 
   getPlaceholder() {
-    return this.props.placeholder;
+    return this.getTranslation('placeholder');
   }
 
   getButtonText() {
-    return this.props.buttonText;
+    return this.getTranslation('buttonText');
   }
 
   updatePassword() {
@@ -113,23 +133,25 @@ class AcceptInvitation extends Component {
 AcceptInvitation.propTypes = {
   redirectUrl: PropTypes.string,
   skipValidation: PropTypes.bool,
-  title: PropTypes.string,
-  subTitle: PropTypes.string,
-  placeholder: PropTypes.string,
-  buttonText: PropTypes.string,
+  locale: PropTypes.string,
   validateTokenUrl: PropTypes.string,
+  title: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  subTitle: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  placeholder: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  buttonText: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
   acceptInvitationUrl: PropTypes.string,
 };
 
 AcceptInvitation.defaultProps = {
   redirectUrl: '/login',
+  locale: 'fi',
   acceptInvitationUrl: `${window.API_ENDPOINT}/Members/accept-invitation`,
   validateTokenUrl: `${window.API_ENDPOINT}/Members/validate-invitation-token`,
-  title: 'Accept invitation',
   skipValidation: false,
-  subTitle: 'Finnish your account and login!',
-  placeholder: 'Password',
-  buttonText: 'Save',
+  title: undefined,
+  subTitle: undefined,
+  placeholder: undefined,
+  buttonText: undefined,
 };
 
 export default AcceptInvitation;

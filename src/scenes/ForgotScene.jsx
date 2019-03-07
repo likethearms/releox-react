@@ -8,6 +8,29 @@ import OneInputActionForm from '../components/OneInputActionForm';
 import CenterContent from '../components/CenterContent';
 import Loading from '../components/Loading';
 
+const translation = {
+  fi: {
+    buttonText: 'Nollaa',
+    backText: 'Takaisin kirjautumissivulle',
+    title: 'Nolla salasana',
+    subTitle: 'Kirjoita sähköpostiosoitteesi niin lähetämme sinulle linkin jolla voit vaihtaa salasanasi.',
+    placeholder: 'Sähköposti',
+    thankYouTitle: 'Kiitos!',
+    thankYouSubTitle: 'Salasanan nollaus linkki on lähetetty sähköpostiisi!',
+    thankYouBackText: 'Takaisin kirjautumissivulle',
+  },
+  en: {
+    buttonText: 'Reset',
+    backText: 'Back to login',
+    title: 'Reset your password',
+    subTitle: 'Please write your email and we send you password reset link.',
+    placeholder: 'Email',
+    thankYouTitle: 'Thank you!',
+    thankYouSubTitle: 'Reset link is sent to your email!',
+    thankYouBackText: 'Back to login',
+  },
+};
+
 class ForgotScene extends Component {
   constructor(props) {
     super(props);
@@ -40,36 +63,41 @@ class ForgotScene extends Component {
     this.setState({ errorMessage: getErrorMessage(error) });
   }
 
+  getTranslation(key) {
+    const { locale } = this.props;
+    return this.props[key] || translation[locale][key];
+  }
+
   getButtonText() {
-    return this.props.buttonText;
+    return this.getTranslation('buttonText');
   }
 
   getBackText() {
-    return this.props.backText;
+    return this.getTranslation('backText');
   }
 
   getTitle() {
-    return this.props.title;
+    return this.getTranslation('title');
   }
 
   getSubTitle() {
-    return this.props.subTitle;
+    return this.getTranslation('subTitle');
   }
 
   getPlaceholder() {
-    return this.props.placeholder;
+    return this.getTranslation('placeholder');
   }
 
   getThankYouTitle() {
-    return this.props.thankYouTitle;
+    return this.getTranslation('thankYouTitle');
   }
 
   getThankYouSubTitle() {
-    return this.props.thankYouSubTitle;
+    return this.getTranslation('thankYouSubTitle');
   }
 
   getThankYouBackText() {
-    return this.props.thankYouBackText;
+    return this.getTranslation('thankYouBackText');
   }
 
   render() {
@@ -117,31 +145,33 @@ class ForgotScene extends Component {
 ForgotScene.propTypes = {
   passwordResetAPIUrl: PropTypes.string,
   backUrl: PropTypes.string,
+  locale: PropTypes.string,
   emailRedirectUrl: PropTypes.string,
-  buttonText: PropTypes.string,
-  backText: PropTypes.string,
-  title: PropTypes.string,
-  subTitle: PropTypes.string,
-  placeholder: PropTypes.string,
-  thankYouTitle: PropTypes.string,
-  thankYouSubTitle: PropTypes.string,
-  thankYouBackText: PropTypes.string,
   thankYouLink: PropTypes.string,
+  buttonText: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  backText: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  title: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  subTitle: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  placeholder: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  thankYouTitle: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  thankYouSubTitle: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
+  thankYouBackText: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
 };
 
 ForgotScene.defaultProps = {
+  locale: 'fi',
   backUrl: '/login',
   passwordResetAPIUrl: `${window.API_ENDPOINT}/Members/reset`,
   emailRedirectUrl: `${window.location.origin}/reset-password`,
-  buttonText: 'Reset',
-  backText: 'Back to login',
-  title: 'Reset your password',
-  subTitle: 'Please write your email and we send you password reset link.',
-  placeholder: 'Email',
-  thankYouTitle: 'Thank you!',
-  thankYouSubTitle: 'Reset link is sent to your email!',
-  thankYouBackText: 'Back to login',
-  thankYouLink: '',
+  buttonText: undefined,
+  backText: undefined,
+  title: undefined,
+  subTitle: undefined,
+  placeholder: undefined,
+  thankYouTitle: undefined,
+  thankYouSubTitle: undefined,
+  thankYouBackText: undefined,
+  thankYouLink: undefined,
 };
 
 export default ForgotScene;

@@ -8,6 +8,7 @@ interface IAcceptInvitationProps {
   skipValidation?: boolean;
   title?: string;
   subTitle?: string;
+  locale?: string;
   placeholder?: string;
   buttonText?: string;
   validateTokenUrl?: string;
@@ -18,6 +19,7 @@ interface IAcceptInvitationProps {
 interface IForgotSceneProps {
   passwordResetAPIUrl?: string;
   backUrl?: string;
+  locale?: string;
   emailRedirectUrl?: string;
   buttonText?: string;
   backText?: string;
@@ -33,6 +35,7 @@ interface IForgotSceneProps {
 interface ILoginSceneProps {
   title?: string;
   subTitle?: string;
+  locale?: string;
   emailPlaceholder?: string;
   passwordPlaceholder?: string;
   forgotPasswordText?: string;
