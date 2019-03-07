@@ -1,6 +1,6 @@
 interface IAuthRoutes {
   path: string;
-  component: JSX.Element,
+  component: JSX.Element | Function;
 }
 
 interface IAcceptInvitationProps {
