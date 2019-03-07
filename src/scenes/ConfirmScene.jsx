@@ -28,13 +28,13 @@ class ConfirmScene extends Component {
 
   componentWillMount() {
     const query = queryString.parse(window.location.search);
-    Axios.get(`${this.getConfirmUrl()}?uid=${query.uid}&invitation_token=${query.invitation_token}`)
+    Axios.get(`${this.getConfirmUrl()}?uid=${query.uid}&invitation_token=${query.token}`)
       .then(() => this.setState({ loading: false }))
       .catch(e => this.onCatchError(e));
   }
 
   onCatchError(error) {
-    this.setState({ error: getErrorMessage(error) });
+    this.setState({ error: getErrorMessage(error), loading: false });
   }
 
   getConfirmUrl() {
