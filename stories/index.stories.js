@@ -3,10 +3,9 @@ import '../node_modules/@coreui/coreui/dist/css/coreui.css';
 import '../node_modules/font-awesome/css/font-awesome.css';
 import './decorator.css';
 import { MemoryRouter } from 'react-router-dom';
-
 import { storiesOf } from '@storybook/react';
+import moxios from 'moxios';
 import { linkTo } from '@storybook/addon-links';
-
 import { Welcome } from '@storybook/react/demo';
 import LoginScene from '../src/scenes/LoginScene';
 import AuthLayout from '../src/components/AuthLayout';
@@ -20,6 +19,9 @@ import CenterContent from '../src/components/CenterContent';
 import OneInputActionForm from '../src/components/OneInputActionForm';
 import AcceptInvitationScene from '../src/scenes/AcceptInvitationScene';
 import AuthBlockMessage from '../src/components/AuthBlockMessage';
+import ConfirmScene from '../src/scenes/ConfirmScene';
+
+moxios.install();
 
 storiesOf('Welcome', module)
   .add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
@@ -31,6 +33,13 @@ storiesOf('Scenes', module)
     </MemoryRouter>
   ))
   .add('LoginScene', () => <LoginScene />)
+  .add('ConfirmScene', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({ status: 200, response: 'hello' });
+    });
+    return <ConfirmScene />;
+  })
   .add('AcceptInvitationScene', () => <AcceptInvitationScene skipValidation />)
   .add('ForgotScene', () => <ForgotScene passwordResetAPIUrl="http://localhost:3001/api/Members/reset" />)
   .add('ResetPasswordScene', () => <ResetPasswordScene skipValidation />);

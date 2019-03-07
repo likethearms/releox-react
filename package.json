@@ -1,6 +1,6 @@
 {
   "name": "releox-react",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "",
   "main": "dist/index.js",
   "typings": "index.d.ts",
@@ -43,6 +43,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "font-awesome": "^4.7.0",
+    "moxios": "^0.4.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-router-dom": "^4.3.1"

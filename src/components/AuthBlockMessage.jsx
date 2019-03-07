@@ -5,12 +5,12 @@ import CenterContent from './CenterContent';
 import CardTitle from './CardTitle';
 import Card from './Card';
 
-const AuthBlockMessage = ({ message }) => (
+const AuthBlockMessage = ({ message, backToLoginText }) => (
   <CenterContent>
     <div className="col-6 text-center">
       <Card>
         <CardTitle>{message}</CardTitle>
-        <Link to="/login">Back to login</Link>
+        <Link to="/login">{backToLoginText}</Link>
       </Card>
     </div>
   </CenterContent>
@@ -18,6 +18,11 @@ const AuthBlockMessage = ({ message }) => (
 
 AuthBlockMessage.propTypes = {
   message: PropTypes.string.isRequired,
+  backToLoginText: PropTypes.string,
+};
+
+AuthBlockMessage.defaultProps = {
+  backToLoginText: 'Back to login',
 };
 
 export default AuthBlockMessage;
