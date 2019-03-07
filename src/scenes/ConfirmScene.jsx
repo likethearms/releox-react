@@ -28,7 +28,7 @@ class ConfirmScene extends Component {
 
   componentWillMount() {
     const query = queryString.parse(window.location.search);
-    Axios.get(`${this.getConfirmUrl()}?uid=${query.uid}&invitation_token=${query.token}`)
+    Axios.get(`${this.getConfirmUrl()}?uid=${query.uid}&token=${query.token}`)
       .then(() => this.setState({ loading: false }))
       .catch(e => this.onCatchError(e));
   }
