@@ -68,10 +68,43 @@ interface IResetPasswordSceneProps {
   tokenLocalStorageKey?: string;
 }
 
+interface LoadingProps {
+  centeredVertical?: boolean;
+}
+
+interface CardProps {
+  children: JSX.Element;
+}
+
+interface ConfirmSceneProps {
+  confirmUrl?: string,
+  locale?: string,
+  message?: string,
+  backToLoginText?: string,
+}
+
+interface CardLinkProps {
+  linkString: string;
+}
+
+interface CardTitleProps {
+  children: JSX.Element;
+}
+
+interface CenterContentProps {
+  children: JSX.Element;
+}
+
 declare module 'releox-react' {
-  export class AcceptInvitation extends React.Component<IAcceptInvitationProps, any> { }
-  export class ForgotScene extends React.Component<IForgotSceneProps, any> { }
-  export class LoginScene extends React.Component<ILoginSceneProps, any> { }
-  export class ResetPasswordScene extends React.Component<IResetPasswordSceneProps, any> { }
+  export class AcceptInvitation extends React.Component<IAcceptInvitationProps> { }
+  export class ForgotScene extends React.Component<IForgotSceneProps> { }
+  export class LoginScene extends React.Component<ILoginSceneProps> { }
+  export class ResetPasswordScene extends React.Component<IResetPasswordSceneProps> { }
+  export class Loading extends React.Component<LoadingProps> { }
+  export class Card extends React.Component<CardProps> { }
+  export class ConfirmScene extends React.Component<ConfirmSceneProps> { }
+  export class CardLink extends React.Component<CardLinkProps> { }
+  export class CardTitle extends React.Component<CardTitleProps> { }
+  export class CenterContent extends React.Component<CenterContentProps> { }
   export const authRoutes: IAuthRoutes[];
 }
