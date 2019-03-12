@@ -1,0 +1,8 @@
+.CenterContent {
+  display: flex;
+  min-height: 100vh;
+}
+
+.CenterContent-row > * {
+  flex: 0;
+}

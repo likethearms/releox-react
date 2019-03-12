@@ -1,7 +1,15 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../releox.css';
 import { storiesOf } from '@storybook/react';
-import Card from '../components/Card';
+import CenterContent from '../components/CenterContent/CenterContent';
 
 
-storiesOf('Card', module)
-  .add('just card', () => <Card>Hello</Card>)
+storiesOf('CenterContent', module)
+  .add('just card', () => (
+    <CenterContent>
+      <div className="col-md-5">
+        Fi
+    </div>
+    </CenterContent>
+  ))

@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/enzyme": "^3.9.0",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "24.0.11",
     "@types/node": "11.11.2",
     "@types/react": "16.8.8",
@@ -36,6 +38,10 @@
     "@storybook/addon-actions": "^5.0.1",
     "@storybook/addon-links": "^5.0.1",
     "@storybook/react": "^5.0.1",
-    "@types/storybook__react": "^4.0.1"
+    "@types/storybook__react": "^4.0.1",
+    "bootstrap": "^4.3.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.10.0",
+    "prop-types": "^15.7.2"
   }
 }

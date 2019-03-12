@@ -1,5 +1,5 @@
-import Card from './components/Card';
+import CenterContent from './components/CenterContent/CenterContent';
 
 export default {
-    Card,
+  CenterContent,
 }
