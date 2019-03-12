@@ -1,0 +1,29 @@
+{
+  "extends": "tslint-config-airbnb",
+  "rules": {
+    "import-name": [
+      true,
+      {
+        "react": "React",
+        "axios": "Axios",
+        "enzymeAdapterReact16": "Adapter",
+        "enzyme": "Enzyme",
+        "createBrowserHistory": "createHistory",
+        "reduxMockStore": "createMockStore",
+        "reduxThunk": "thunk",
+        "reactBootstrapTableNext": "BootstrapTable",
+        "reactBootstrapTable2Paginator": "paginationFactory",
+        "axiosMockAdapter": "MockAdapter",
+        "propTypes": "PropTypes"
+      }
+    ],
+    "variable-name": false,
+    "no-console": true,
+    "typedef": [
+      true,
+      "call-signature",
+      "parameter",
+      "member-variable-declaration"
+    ]
+  }
+}
