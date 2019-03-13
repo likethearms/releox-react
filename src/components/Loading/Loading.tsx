@@ -20,7 +20,12 @@ const Loading = ({ centeredVertical, type, color }: LoadingProps) => {
 };
 
 Loading.propTypes = {
+  /** Center indicator vertically and horizontally */
   centeredVertical: PropTypes.bool,
+  /** Color of loading indicator */
+  color: PropTypes.string,
+  /** Type of loading indicator */
+  type: PropTypes.string,
 };
 
 Loading.defaultProps = {
