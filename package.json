@@ -2,22 +2,7 @@
   "name": "releox-react-v2",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@types/enzyme": "^3.9.0",
-    "@types/enzyme-adapter-react-16": "^1.0.5",
-    "@types/jest": "24.0.11",
-    "@types/node": "11.11.2",
-    "@types/react": "16.8.8",
-    "@types/react-dom": "16.8.2",
-    "@types/storybook__addon-actions": "^3.4.2",
-    "@types/storybook__addon-links": "^3.3.4",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-loading": "^2.0.3",
-    "react-scripts": "2.1.8",
-    "tslint": "^5.13.1",
-    "typescript": "3.3.3333"
-  },
+  "dependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -41,6 +26,20 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@types/enzyme": "^3.9.0",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/jest": "24.0.11",
+    "@types/node": "11.11.2",
+    "@types/react": "16.8.8",
+    "@types/react-dom": "16.8.2",
+    "@types/storybook__addon-actions": "^3.4.2",
+    "@types/storybook__addon-links": "^3.3.4",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-loading": "^2.0.3",
+    "react-scripts": "2.1.8",
+    "tslint": "^5.13.1",
+    "typescript": "3.3.3333",
     "@storybook/addon-actions": "^5.0.1",
     "@storybook/addon-info": "^5.0.1",
     "@storybook/addon-links": "^5.0.1",
@@ -49,6 +48,7 @@
     "bootstrap": "^4.3.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.10.0",
+    "formik": "^1.5.1",
     "prop-types": "^15.7.2"
   }
 }
