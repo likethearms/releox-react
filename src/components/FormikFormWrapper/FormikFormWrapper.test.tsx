@@ -17,7 +17,13 @@ it('should call onSubmit', () => {
   expect(onSubmit).toBeCalledTimes(1);
 });
 
-it('should call onSubmit', () => {
+it('should have form onSubmit', () => {
   const onSubmitMethod = wrapper.find('form').prop('onSubmit');
   expect(typeof onSubmitMethod).toBe('function');
 });
+
+it('should implement initValues', () => {
+  const initialValues = wrapper.find('Formik').prop('initialValues');
+  expect(initialValues).toEqual({ name: '' });
+});
+
