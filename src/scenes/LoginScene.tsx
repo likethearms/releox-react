@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Axios, { AxiosPromise, AxiosResponse } from 'axios';
+import Axios, { AxiosResponse } from 'axios';
 import CenterContent from '../components/CenterContent/CenterContent';
 import Card from '../components/Card/Card';
 import CardTitle from '../components/CardTitle/CardTitle';
@@ -95,7 +95,7 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
     const url = this.props.postUrl as string;
     const redirect = this.props.redirectUrl as string;
     if (onSubmit) return onSubmit(body);
-    Axios
+    return Axios
       .post(url, body)
       .then((r: AxiosResponse) => saveAccessInformation(r.data.id, r.data.userId))
       .then(() => this.setState({ redirect }))
@@ -143,7 +143,7 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
                 </Button>
                 <Link to="/forgot" id={`${CONTEXT}-forgot-link`}>{forgotPasswordText || translation[locale].forgotPasswordText}</Link>
                 {registerUrl ? (
-                  <Link to="/register" id={`${CONTEXT}-register-link`}>{registerText || translation[locale].registerText}</Link>
+                  <Link to={registerUrl} id={`${CONTEXT}-register-link`}>{registerText || translation[locale].registerText}</Link>
                 ) : undefined}
                 <div className="text-center">{message}</div>
               </div>
