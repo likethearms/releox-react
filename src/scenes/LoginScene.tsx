@@ -28,8 +28,8 @@ export interface LoginSceneProps {
   onError?: (err: Error) => void;
   redirectUrl?: string;
   forgotPasswordUrl?: string;
-  email?: string,
-  password?: string,
+  email?: string;
+  password?: string;
   locale: ReleoxLocale;
 }
 
@@ -57,7 +57,7 @@ const translation: { [key: string]: any } = {
     registerText: 'New? Create new account!',
     loginButtonText: 'Login',
   },
-}
+};
 
 interface LoginSceneDefaultProps {
   email: string;
@@ -88,9 +88,9 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
   state: LoginSceneState = {
     redirect: '',
     message: '',
-  }
+  };
 
-  onSubmit(body: LoginBody) {
+  onSubmit(body: LoginBody): Promise<void> | void {
     const { onSubmit, onError } = this.props;
     const url = this.props.postUrl as string;
     const redirect = this.props.redirectUrl as string;
@@ -105,7 +105,7 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
       });
   }
 
-  render() {
+  render(): JSX.Element {
     const {
       titleText, locale, subTitleText, emailPlaceholder, passwordPlaceholder, loginButtonText,
       forgotPasswordText, registerText, registerUrl,
@@ -141,9 +141,16 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
                   id={`${CONTEXT}-login-button`}>
                   {loginButtonText || translation[locale].loginButtonText}
                 </Button>
-                <Link to="/forgot" id={`${CONTEXT}-forgot-link`}>{forgotPasswordText || translation[locale].forgotPasswordText}</Link>
+                <Link
+                  to="/forgot"
+                  id={`${CONTEXT}-forgot-link`}>
+                  {forgotPasswordText || translation[locale].forgotPasswordText}
+                </Link>
                 {registerUrl ? (
-                  <Link to={registerUrl} id={`${CONTEXT}-register-link`}>{registerText || translation[locale].registerText}</Link>
+                  <Link
+                    to={registerUrl}
+                    id={`${CONTEXT}-register-link`}>
+                    {registerText || translation[locale].registerText}</Link>
                 ) : undefined}
                 <div className="text-center">{message}</div>
               </div>

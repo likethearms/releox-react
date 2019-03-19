@@ -11,7 +11,6 @@ import LoginScene from '../scenes/LoginScene';
 import Button from '../components/Button/Button';
 import { MemoryRouter } from 'react-router';
 
-
 storiesOf('Components', module)
   .add('CenterContent', () => (
     <CenterContent>

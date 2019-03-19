@@ -1,6 +1,8 @@
 import React from 'react';
 import { Field } from 'formik';
-import AbstractInputGroup, { AbstractInputGroupProps } from '../AbstractInputGroup/AbstractInputGroup';
+import AbstractInputGroup, {
+  AbstractInputGroupProps,
+} from '../AbstractInputGroup/AbstractInputGroup';
 
 export enum InputTypes {
   TEXT = 'text',

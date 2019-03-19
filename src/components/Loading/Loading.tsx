@@ -5,7 +5,7 @@ import CenterContent from '../CenterContent/CenterContent';
 
 export interface LoadingProps extends LP {
   centeredVertical: boolean;
-  color?: string,
+  color?: string;
   type?: LoadingType;
 }
 

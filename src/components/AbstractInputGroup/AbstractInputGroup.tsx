@@ -9,7 +9,7 @@ export interface AbstractInputGroupProps {
 abstract class AbstractInputGroup<T> extends Component<T & AbstractInputGroupProps> {
   abstract getElement(name: string, id: string): JSX.Element;
 
-  render() {
+  render(): JSX.Element {
     const { id, label, name } = this.props;
     return (
       <div className="form-group">

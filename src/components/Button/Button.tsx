@@ -23,7 +23,7 @@ export interface ButtonProps {
   type?: ButtonType;
   className?: string;
   children: string;
-  color?: ButtonColor,
+  color?: ButtonColor;
 }
 
 const Button = ({ type, id, children, color, className }: ButtonProps) => (
