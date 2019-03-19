@@ -1,6 +1,6 @@
 import React from 'react';
-import { mount } from "enzyme";
-import FormikFormWrapper from "./FormikFormWrapper";
+import { mount } from 'enzyme';
+import FormikFormWrapper from './FormikFormWrapper';
 
 const onSubmit = jest.fn();
 const wrapper = mount((
@@ -26,4 +26,3 @@ it('should implement initValues', () => {
   const initialValues = wrapper.find('Formik').prop('initialValues');
   expect(initialValues).toEqual({ name: '' });
 });
-

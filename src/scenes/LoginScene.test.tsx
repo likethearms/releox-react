@@ -37,7 +37,6 @@ describe('Props', () => {
   });
 });
 
-
 describe('onSubmit', () => {
   it('should call onSubmit', () => {
     const onSubmit = jest.fn();
