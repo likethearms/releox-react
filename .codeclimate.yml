@@ -5,5 +5,5 @@ plugins:
 exclude_patterns:
 - "node_modules/"
 - "coverage/"
-- "*.test.tsx"
-- "*.test.ts"
+- "**/*.test.tsx"
+- "**/*.test.ts"
