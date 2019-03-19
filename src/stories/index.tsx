@@ -7,6 +7,9 @@ import Loading from '../components/Loading/Loading';
 import FormikFormWrapper from '../components/FormikFormWrapper/FormikFormWrapper';
 import { Field } from 'formik';
 import { action } from '@storybook/addon-actions';
+import LoginScene from '../scenes/LoginScene';
+import Button from '../components/Button/Button';
+import { MemoryRouter } from 'react-router';
 
 
 storiesOf('Components', module)
@@ -16,6 +19,7 @@ storiesOf('Components', module)
     </CenterContent>
   ))
   .add('Loading', () => <Loading />)
+  .add('Button', () => <Button id="save-button">Save</Button>)
 
 storiesOf('Form', module)
   .add('FormikFormWrapper', () => (
@@ -25,3 +29,7 @@ storiesOf('Form', module)
       <Field name="name" type="input" />
     </FormikFormWrapper>
   ));
+
+storiesOf('Scenes', module)
+  .addDecorator((c) => <MemoryRouter>{c()}</MemoryRouter>)
+  .add('LoginScene', () => <LoginScene />);
