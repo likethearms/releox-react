@@ -32,4 +32,5 @@ storiesOf('Form', module)
 
 storiesOf('Scenes', module)
   .addDecorator((c) => <MemoryRouter>{c()}</MemoryRouter>)
-  .add('LoginScene', () => <LoginScene />);
+  .add('Login', () => <LoginScene />)
+  .add('Login with register', () => <LoginScene registerUrl="/register" />);

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
+import Axios, { AxiosPromise, AxiosResponse } from 'axios';
 import CenterContent from '../components/CenterContent/CenterContent';
 import Card from '../components/Card/Card';
 import CardTitle from '../components/CardTitle/CardTitle';
 import FormikFormWrapper from '../components/FormikFormWrapper/FormikFormWrapper';
 import Input, { InputTypes } from '../components/Input/Input';
 import Button, { ButtonType } from '../components/Button/Button';
-import { action } from '@storybook/addon-actions';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { getApiUrl, saveAccessInformation, getErrorMessage } from '../config';
 
 export enum ReleoxLocale {
   FI = 'fi',
@@ -19,13 +19,23 @@ export interface LoginSceneProps {
   subTitleText?: string;
   forgotPasswordText?: string;
   registerText?: string;
+  registerUrl?: string;
   emailPlaceholder?: string;
   passwordPlaceholder?: string;
   loginButtonText?: string;
   postUrl?: string;
+  onSubmit?: (body: LoginBody) => void;
+  onError?: (err: Error) => void;
+  redirectUrl?: string;
+  forgotPasswordUrl?: string;
   email?: string,
   password?: string,
   locale: ReleoxLocale;
+}
+
+interface LoginSceneState {
+  redirect: string;
+  message: string;
 }
 
 const translation: { [key: string]: any } = {
@@ -53,6 +63,8 @@ interface LoginSceneDefaultProps {
   email: string;
   password: string;
   postUrl: string;
+  redirectUrl: string;
+  forgotPasswordUrl: string;
   locale: ReleoxLocale;
 }
 
@@ -63,26 +75,45 @@ interface LoginBody {
 
 const CONTEXT = 'LoginScene';
 
-class LoginScene extends Component<LoginSceneProps> {
+class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
   public static defaultProps: LoginSceneDefaultProps = {
     locale: ReleoxLocale.FI,
-    postUrl: '',
+    postUrl: `${getApiUrl()}/Member/login`,
+    redirectUrl: '/',
+    forgotPasswordUrl: '/forgot',
     email: '',
     password: '',
   };
 
+  state: LoginSceneState = {
+    redirect: '',
+    message: '',
+  }
+
   onSubmit(body: LoginBody) {
+    const { onSubmit, onError } = this.props;
     const url = this.props.postUrl as string;
-    Axios.post(url, body);
+    const redirect = this.props.redirectUrl as string;
+    if (onSubmit) return onSubmit(body);
+    Axios
+      .post(url, body)
+      .then((r: AxiosResponse) => saveAccessInformation(r.data.id, r.data.userId))
+      .then(() => this.setState({ redirect }))
+      .catch((e) => {
+        if (onError) return onError(e);
+        this.setState({ message: getErrorMessage(e) });
+      });
   }
 
   render() {
     const {
       titleText, locale, subTitleText, emailPlaceholder, passwordPlaceholder, loginButtonText,
-      forgotPasswordText, registerText,
+      forgotPasswordText, registerText, registerUrl,
     } = this.props;
+    const { redirect, message } = this.state;
     const email = this.props.email as string;
     const password = this.props.password as string;
+    if (redirect) return <Redirect to={redirect} />;
     return (
       <CenterContent>
         <div className="col-6" id={CONTEXT}>
@@ -91,7 +122,7 @@ class LoginScene extends Component<LoginSceneProps> {
             <p className="text-muted">{subTitleText || translation[locale].subTitle}</p>
             <FormikFormWrapper<LoginBody>
               initialValues={{ email, password }}
-              onSubmit={action('onSubmit')}>
+              onSubmit={this.onSubmit.bind(this)}>
               <div>
                 <Input
                   name="email"
@@ -111,8 +142,10 @@ class LoginScene extends Component<LoginSceneProps> {
                   {loginButtonText || translation[locale].loginButtonText}
                 </Button>
                 <Link to="/forgot" id={`${CONTEXT}-forgot-link`}>{forgotPasswordText || translation[locale].forgotPasswordText}</Link>
-                <br />
-                <Link to="/register" id={`${CONTEXT}-register-link`}>{registerText || translation[locale].registerText}</Link>
+                {registerUrl ? (
+                  <Link to="/register" id={`${CONTEXT}-register-link`}>{registerText || translation[locale].registerText}</Link>
+                ) : undefined}
+                <div className="text-center">{message}</div>
               </div>
             </FormikFormWrapper>
           </Card>
