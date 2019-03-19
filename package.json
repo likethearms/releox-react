@@ -52,6 +52,7 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "tslint": "^5.14.0",
+    "tslint-config-airbnb": "^5.11.1",
     "typescript": "3.3.3333"
   }
 }

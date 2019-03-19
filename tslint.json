@@ -9,6 +9,7 @@
         "enzymeAdapterReact16": "Adapter",
         "enzyme": "Enzyme",
         "createBrowserHistory": "createHistory",
+        "reactLoading": "ReactLoading",
         "reduxMockStore": "createMockStore",
         "reduxThunk": "thunk",
         "reactBootstrapTableNext": "BootstrapTable",

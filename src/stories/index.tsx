@@ -19,7 +19,7 @@ storiesOf('Components', module)
     </CenterContent>
   ))
   .add('Loading', () => <Loading />)
-  .add('Button', () => <Button id="save-button">Save</Button>)
+  .add('Button', () => <Button id="save-button">Save</Button>);
 
 storiesOf('Form', module)
   .add('FormikFormWrapper', () => (
@@ -31,6 +31,6 @@ storiesOf('Form', module)
   ));
 
 storiesOf('Scenes', module)
-  .addDecorator((c) => <MemoryRouter>{c()}</MemoryRouter>)
+  .addDecorator(c => <MemoryRouter>{c()}</MemoryRouter>)
   .add('Login', () => <LoginScene />)
   .add('Login with register', () => <LoginScene registerUrl="/register" />);

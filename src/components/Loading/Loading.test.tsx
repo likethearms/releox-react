@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from "enzyme";
+import { shallow } from 'enzyme';
 import Loading from './Loading';
 import ReactLoading from 'react-loading';
 import CenterContent from '../CenterContent/CenterContent';
