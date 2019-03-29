@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Axios, { AxiosResponse } from 'axios';
-import CenterContent from '../components/CenterContent/CenterContent';
-import Card from '../components/Card/Card';
-import CardTitle from '../components/CardTitle/CardTitle';
-import FormikFormWrapper from '../components/FormikFormWrapper/FormikFormWrapper';
-import Input, { InputTypes } from '../components/Input/Input';
-import Button, { ButtonType } from '../components/Button/Button';
+import CenterContent from '../../components/CenterContent/CenterContent';
+import Card from '../../components/Card/Card';
+import CardTitle from '../../components/CardTitle/CardTitle';
+import FormikFormWrapper from '../../components/FormikFormWrapper/FormikFormWrapper';
+import Input, { InputTypes } from '../../components/Input/Input';
+import Button, { ButtonType } from '../../components/Button/Button';
 import { Link, Redirect } from 'react-router-dom';
-import { getApiUrl, saveAccessInformation, getErrorMessage } from '../config';
+import { getApiUrl, saveAccessInformation, getErrorMessage } from '../../config';
 
 export enum ReleoxLocale {
   FI = 'fi',

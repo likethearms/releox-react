@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import LoginScene from './LoginScene';
-import FormikFormWrapper from '../components/FormikFormWrapper/FormikFormWrapper';
+import FormikFormWrapper from '../../components/FormikFormWrapper/FormikFormWrapper';
 
 describe('Props', () => {
   const props = {

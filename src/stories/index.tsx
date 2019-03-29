@@ -7,7 +7,7 @@ import Loading from '../components/Loading/Loading';
 import FormikFormWrapper from '../components/FormikFormWrapper/FormikFormWrapper';
 import { Field } from 'formik';
 import { action } from '@storybook/addon-actions';
-import LoginScene from '../scenes/LoginScene';
+import LoginScene from '../scenes/LoginScene/LoginScene';
 import Button from '../components/Button/Button';
 import { MemoryRouter } from 'react-router';
 

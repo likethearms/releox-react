@@ -4,4 +4,4 @@ body,html,#root {
 }
 
 @import './components/CenterContent/CenterContent.css';
-@import './scenes/LoginScene.css';
+@import './scenes/LoginScene/LoginScene.css';
