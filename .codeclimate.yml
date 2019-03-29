@@ -1,7 +1,4 @@
 version: 2
-plugins:
-  tslint:
-    enabled: true
 exclude_patterns:
 - "node_modules/"
 - "coverage/"
