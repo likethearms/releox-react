@@ -8,6 +8,7 @@ import Input, { InputTypes } from '../../components/Input/Input';
 import Button, { ButtonType } from '../../components/Button/Button';
 import { Link, Redirect } from 'react-router-dom';
 import { getApiUrl, saveAccessInformation, getErrorMessage } from '../../config';
+import { URL } from '../../routes';
 
 export enum ReleoxLocale {
   FI = 'fi',
@@ -30,7 +31,7 @@ export interface LoginSceneProps {
   forgotPasswordUrl?: string;
   email?: string;
   password?: string;
-  locale: ReleoxLocale;
+  locale?: ReleoxLocale;
 }
 
 interface LoginSceneState {
@@ -79,8 +80,8 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
   public static defaultProps: LoginSceneDefaultProps = {
     locale: ReleoxLocale.FI,
     postUrl: `${getApiUrl()}/Member/login`,
-    redirectUrl: '/',
-    forgotPasswordUrl: '/forgot',
+    redirectUrl: URL.HOME,
+    forgotPasswordUrl: URL.FORGOT,
     email: '',
     password: '',
   };
@@ -107,12 +108,13 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
 
   render(): JSX.Element {
     const {
-      titleText, locale, subTitleText, emailPlaceholder, passwordPlaceholder, loginButtonText,
-      forgotPasswordText, registerText, registerUrl,
+      titleText, subTitleText, emailPlaceholder, passwordPlaceholder, loginButtonText,
+      forgotPasswordText, registerText, registerUrl, forgotPasswordUrl,
     } = this.props;
     const { redirect, message } = this.state;
     const email = this.props.email as string;
     const password = this.props.password as string;
+    const locale = this.props.locale as ReleoxLocale;
     if (redirect) return <Redirect to={redirect} />;
     return (
       <CenterContent>
@@ -142,7 +144,7 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
                   {loginButtonText || translation[locale].loginButtonText}
                 </Button>
                 <Link
-                  to="/forgot"
+                  to={forgotPasswordUrl as string}
                   id={`${CONTEXT}-forgot-link`}>
                   {forgotPasswordText || translation[locale].forgotPasswordText}
                 </Link>

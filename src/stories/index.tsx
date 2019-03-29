@@ -10,6 +10,7 @@ import { action } from '@storybook/addon-actions';
 import LoginScene from '../scenes/LoginScene/LoginScene';
 import Button from '../components/Button/Button';
 import { MemoryRouter } from 'react-router';
+import ForgotScene from '../scenes/ForgotScene/ForgotScene';
 
 storiesOf('Components', module)
   .add('CenterContent', () => (
@@ -32,4 +33,5 @@ storiesOf('Form', module)
 storiesOf('Scenes', module)
   .addDecorator(c => <MemoryRouter>{c()}</MemoryRouter>)
   .add('Login', () => <LoginScene />)
-  .add('Login with register', () => <LoginScene registerUrl="/register" />);
+  .add('Login with register', () => <LoginScene registerUrl="/register" />)
+  .add('Forgot', () => <ForgotScene />);
