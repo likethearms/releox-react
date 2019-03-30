@@ -2,5 +2,6 @@ version: 2
 exclude_patterns:
 - "node_modules/"
 - "coverage/"
+- "src/translations.ts"
 - "**/*.test.tsx"
 - "**/*.test.ts"
