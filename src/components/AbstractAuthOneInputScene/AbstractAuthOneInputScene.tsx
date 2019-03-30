@@ -4,7 +4,9 @@ import { Redirect } from 'react-router-dom';
 import { InputTypes } from '../Input/Input';
 import AuthLayout, { AuthLayoutLinkItem } from '../AuthLayout/AuthLayout';
 import AuthForm from '../AuthForm/AuthForm';
-import { ct } from '../../I18N';
+import { ct, ReleoxLocale } from '../../I18N';
+import Axios, { AxiosError } from 'axios';
+import { getErrorMessage } from '../../config';
 
 interface State {
   loading: boolean;
@@ -20,8 +22,8 @@ export interface AbstractAuthOneInputSceneInputProps {
 export interface AbstractAuthOneInputSceneProps {
   buttonText?: string;
   title?: string;
-  locale?: string;
-  onError?: (error: Error) => void;
+  locale?: ReleoxLocale;
+  onError?: (error: AxiosError) => void;
 }
 
 export interface AbstractAuthOneInputSceneTranslation {
@@ -32,7 +34,7 @@ export interface AbstractAuthOneInputSceneTranslation {
 }
 
 abstract class AbstractAuthOneInputScene<Data, Prop>
-  extends Component<Prop & { [key: string]: string }, State> {
+  extends Component<Prop & AbstractAuthOneInputSceneProps, State> {
   state: State = {
     loading: true,
     message: '',
@@ -49,6 +51,18 @@ abstract class AbstractAuthOneInputScene<Data, Prop>
   getT(): (key: string) => string {
     const { locale } = this.props;
     return ct(this.getTPrefix(), locale);
+  }
+
+  onErrorMethod(error: AxiosError): any {
+    const { onError } = this.props;
+    if (onError) return onError(error);
+    this.setState({ message: getErrorMessage(error) });
+  }
+
+  onSubmitMethod<T>(url: string, body: T, redirect: string): void {
+    Axios.post(url, body)
+      .then(() => this.setState({ redirect }))
+      .catch(this.onErrorMethod.bind(this));
   }
 
   getForm(): JSX.Element {

@@ -1,14 +1,11 @@
 import { URL } from '../../routes';
 import { InputTypes } from '../../components/Input/Input';
 import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
-import Axios from 'axios';
-import { getErrorMessage } from '../../config';
 import AbstractAuthOneInputScene, {
   AbstractAuthOneInputSceneProps,
   AbstractAuthOneInputSceneInputProps,
 } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 import apis from '../../apis';
-import { forgotPasswordRequest } from '../../requests';
 
 interface BodyData {
   email: string;
@@ -18,9 +15,13 @@ interface DefaultProps {
   forgotAPIUrl: string;
 }
 
+interface ForgotSceneProps extends AbstractAuthOneInputSceneProps {
+  forgotAPIUrl: string;
+}
+
 const CONTEXT = 'ForgotScene';
 
-class ForgotScene extends AbstractAuthOneInputScene<BodyData, AbstractAuthOneInputSceneProps>{
+class ForgotScene extends AbstractAuthOneInputScene<BodyData, ForgotSceneProps>{
   public static defaultProps: DefaultProps = {
     forgotAPIUrl: apis.FORGOT,
   };
@@ -30,13 +31,8 @@ class ForgotScene extends AbstractAuthOneInputScene<BodyData, AbstractAuthOneInp
   }
 
   onSubmit(body: BodyData): void {
-    const { onError, forgotAPIUrl } = this.props;
-    forgotPasswordRequest(forgotAPIUrl, body)
-      .then(() => this.setState({ redirect: URL.FORGOT_SUCCESS }))
-      .catch((e) => {
-        if (onError) return onError(e);
-        this.setState({ message: getErrorMessage(e) });
-      });
+    const { forgotAPIUrl } = this.props;
+    this.onSubmitMethod<BodyData>(forgotAPIUrl, body, URL.FORGOT_SUCCESS);
   }
 
   getInitValues(): BodyData {

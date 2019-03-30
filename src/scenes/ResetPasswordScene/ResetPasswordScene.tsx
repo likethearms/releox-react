@@ -1,13 +1,12 @@
 import { URL } from '../../routes';
 import { InputTypes } from '../../components/Input/Input';
 import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
-import { getErrorMessage } from '../../config';
 import AbstractAuthOneInputScene, {
   AbstractAuthOneInputSceneProps,
   AbstractAuthOneInputSceneInputProps,
 } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 import apis from '../../apis';
-import { validateTokenRequest, resetPasswordRequest } from '../../requests';
+import { validateTokenRequest } from '../../requests';
 import parseParams from '../../parse-params';
 
 interface BodyData {
@@ -19,10 +18,14 @@ interface DefaultProps {
   removeAccessTokenUrl: string;
 }
 
+interface ResetPasswordSceneProps extends AbstractAuthOneInputSceneProps {
+  resetPasswordAPIUrl: string;
+}
+
 const CONTEXT = 'ForgotScene';
 
 class ResetPasswordScene
-  extends AbstractAuthOneInputScene<BodyData, AbstractAuthOneInputSceneProps>{
+  extends AbstractAuthOneInputScene<BodyData, ResetPasswordSceneProps>{
   public static defaultProps: DefaultProps = {
     resetPasswordAPIUrl: apis.PASSWORD_RESET,
     removeAccessTokenUrl: apis.LOGOUT,
@@ -36,13 +39,8 @@ class ResetPasswordScene
   }
 
   onSubmit(body: BodyData): void {
-    const { onError, resetPasswordAPIUrl } = this.props;
-    resetPasswordRequest(resetPasswordAPIUrl, body)
-      .then(() => this.setState({ redirect: URL.RESET_SUCCESS }))
-      .catch((e) => {
-        if (onError) return onError(e);
-        this.setState({ message: getErrorMessage(e) });
-      });
+    const { resetPasswordAPIUrl } = this.props;
+    this.onSubmitMethod<BodyData>(resetPasswordAPIUrl, body, URL.RESET_SUCCESS);
   }
 
   getInitValues(): BodyData {
