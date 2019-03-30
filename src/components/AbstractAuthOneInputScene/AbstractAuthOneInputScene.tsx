@@ -44,7 +44,8 @@ abstract class AbstractAuthOneInputScene<Data, Prop>
   abstract getContext(): string;
   abstract getInputProps(): AbstractAuthOneInputSceneInputProps;
   abstract getInitValues(): Data;
-  abstract onSubmit(body: Data): void;
+  abstract getPostUrl(): string;
+  abstract getRedirectUrl(): string;
   abstract getTPrefix(): string;
   abstract getLinks(): AuthLayoutLinkItem[];
 
@@ -59,10 +60,14 @@ abstract class AbstractAuthOneInputScene<Data, Prop>
     this.setState({ message: getErrorMessage(error) });
   }
 
-  onSubmitMethod<T>(url: string, body: T, redirect: string): void {
+  onSubmitMethod(url: string, body: Data, redirect: string): void {
     Axios.post(url, body)
       .then(() => this.setState({ redirect }))
       .catch(this.onErrorMethod.bind(this));
+  }
+
+  onSubmit(body: Data): void {
+    this.onSubmitMethod(this.getPostUrl(), body, this.getRedirectUrl());
   }
 
   getForm(): JSX.Element {

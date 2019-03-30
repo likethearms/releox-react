@@ -32,7 +32,16 @@ class ForgotScene extends AbstractAuthOneInputScene<BodyData, ForgotSceneProps>{
 
   onSubmit(body: BodyData): void {
     const { forgotAPIUrl } = this.props;
-    this.onSubmitMethod<BodyData>(forgotAPIUrl, body, URL.FORGOT_SUCCESS);
+    this.onSubmitMethod(forgotAPIUrl, body, URL.FORGOT_SUCCESS);
+  }
+
+  getPostUrl(): string {
+    const { forgotAPIUrl } = this.props;
+    return forgotAPIUrl;
+  }
+
+  getRedirectUrl(): string {
+    return URL.FORGOT_SUCCESS;
   }
 
   getInitValues(): BodyData {

@@ -38,9 +38,13 @@ class ResetPasswordScene
       .catch(() => this.setState({ redirect: URL.ERROR }));
   }
 
-  onSubmit(body: BodyData): void {
+  getPostUrl(): string {
     const { resetPasswordAPIUrl } = this.props;
-    this.onSubmitMethod<BodyData>(resetPasswordAPIUrl, body, URL.RESET_SUCCESS);
+    return resetPasswordAPIUrl;
+  }
+
+  getRedirectUrl(): string {
+    return URL.RESET_SUCCESS;
   }
 
   getInitValues(): BodyData {
