@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { InputTypes } from '../Input/Input';
 import AuthLayout, { AuthLayoutLinkItem } from '../AuthLayout/AuthLayout';
 import AuthForm from '../AuthForm/AuthForm';
+import { ct } from '../../I18N';
 
 interface State {
   loading: boolean;
@@ -42,22 +43,21 @@ abstract class AbstractAuthOneInputScene<Data, Prop>
   abstract getInputProps(): AbstractAuthOneInputSceneInputProps;
   abstract getInitValues(): Data;
   abstract onSubmit(body: Data): void;
-  abstract getTranslation(): any;
+  abstract getTPrefix(): string;
   abstract getLinks(): AuthLayoutLinkItem[];
 
-  getText(key: string): string {
-    const locale = this.props.locale;
-    const trans = this.getTranslation()[locale][key];
-    const prop = this.props[key];
-    return prop || trans;
+  getT(): (key: string) => string {
+    const { locale } = this.props;
+    return ct(this.getTPrefix(), locale);
   }
 
   getForm(): JSX.Element {
+    const t = this.getT();
     return (
       <AuthForm<Data>
-        placeholder={this.getText('placeholder')}
+        placeholder={t('placeholder')}
         initialValues={this.getInitValues()}
-        buttonText={this.getText('buttonText')}
+        buttonText={t('buttonText')}
         context={this.getContext()}
         onSubmit={this.onSubmit.bind(this)}
         inputProps={this.getInputProps()}
@@ -69,13 +69,14 @@ abstract class AbstractAuthOneInputScene<Data, Prop>
     const { loading, redirect, message } = this.state;
     if (loading) return <Loading centeredVertical />;
     if (redirect) return <Redirect to={redirect} />;
+    const t = this.getT();
     return (
       <AuthLayout
         context={this.getContext()}
         message={message}
         links={this.getLinks()}
-        title={this.getText('title')}
-        subTitle={this.getText('subTitle')}>
+        title={t('title')}
+        subTitle={t('subTitle')}>
         {this.getForm()}
       </AuthLayout>
     );

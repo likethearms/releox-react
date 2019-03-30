@@ -5,5 +5,6 @@ export const URL = {
   RESET_SUCCESS: '/reset-password-success',
   HOME: '/home',
   LOGIN: '/login',
+  REGISTER: '/register',
   ERROR: '/auth-error',
 };

@@ -1,72 +1,25 @@
 import React, { Component } from 'react';
 import Axios, { AxiosResponse } from 'axios';
-import CenterContent from '../../components/CenterContent/CenterContent';
-import Card from '../../components/Card/Card';
-import CardTitle from '../../components/CardTitle/CardTitle';
 import FormikFormWrapper from '../../components/FormikFormWrapper/FormikFormWrapper';
 import Input, { InputTypes } from '../../components/Input/Input';
 import Button, { ButtonType } from '../../components/Button/Button';
-import { Link, Redirect } from 'react-router-dom';
-import { getApiUrl, saveAccessInformation, getErrorMessage } from '../../config';
+import { Redirect } from 'react-router-dom';
+import { saveAccessInformation, getErrorMessage } from '../../config';
 import { URL } from '../../routes';
-
-export enum ReleoxLocale {
-  FI = 'fi',
-  EN = 'en',
-}
+import { ct, ReleoxLocale } from '../../I18N';
+import AuthLayout, { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
+import apis from '../../apis';
 
 export interface LoginSceneProps {
-  titleText?: string;
-  subTitleText?: string;
-  forgotPasswordText?: string;
-  registerText?: string;
-  registerUrl?: string;
-  emailPlaceholder?: string;
-  passwordPlaceholder?: string;
-  loginButtonText?: string;
-  postUrl?: string;
   onSubmit?: (body: LoginBody) => void;
   onError?: (err: Error) => void;
-  redirectUrl?: string;
-  forgotPasswordUrl?: string;
-  email?: string;
-  password?: string;
+  showRegisterLink?: boolean;
   locale?: ReleoxLocale;
 }
 
 interface LoginSceneState {
   redirect: string;
   message: string;
-}
-
-const translation: { [key: string]: any } = {
-  fi: {
-    title: 'Kirjaudu',
-    subTitle: 'Täytä tiedot ja kirjaudu sisään',
-    emailPlaceholder: 'Sähköposti',
-    passwordPlaceholder: 'Salasana',
-    forgotPasswordText: 'Unohditko salasanasi?',
-    registerText: 'Oletko uusi? Luo tunnus!',
-    loginButtonText: 'Kirjaudu',
-  },
-  en: {
-    title: 'Login',
-    subTitle: 'Fill form and login',
-    emailPlaceholder: 'Email',
-    passwordPlaceholder: 'Password',
-    forgotPasswordText: 'Forgot password?',
-    registerText: 'New? Create new account!',
-    loginButtonText: 'Login',
-  },
-};
-
-interface LoginSceneDefaultProps {
-  email: string;
-  password: string;
-  postUrl: string;
-  redirectUrl: string;
-  forgotPasswordUrl: string;
-  locale: ReleoxLocale;
 }
 
 interface LoginBody {
@@ -77,15 +30,6 @@ interface LoginBody {
 const CONTEXT = 'LoginScene';
 
 class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
-  public static defaultProps: LoginSceneDefaultProps = {
-    locale: ReleoxLocale.FI,
-    postUrl: `${getApiUrl()}/Member/login`,
-    redirectUrl: URL.HOME,
-    forgotPasswordUrl: URL.FORGOT,
-    email: '',
-    password: '',
-  };
-
   state: LoginSceneState = {
     redirect: '',
     message: '',
@@ -93,73 +37,73 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
 
   onSubmit(body: LoginBody): Promise<void> | void {
     const { onSubmit, onError } = this.props;
-    const url = this.props.postUrl as string;
-    const redirect = this.props.redirectUrl as string;
     if (onSubmit) return onSubmit(body);
     return Axios
-      .post(url, body)
+      .post(apis.LOGIN, body)
       .then((r: AxiosResponse) => saveAccessInformation(r.data.id, r.data.userId))
-      .then(() => this.setState({ redirect }))
+      .then(() => this.setState({ redirect: URL.HOME }))
       .catch((e) => {
         if (onError) return onError(e);
         this.setState({ message: getErrorMessage(e) });
       });
   }
 
+  getLinks(): AuthLayoutLinkItem[] {
+    const { locale, showRegisterLink } = this.props;
+    const t = ct('login', locale);
+    const links = [
+      {
+        to: URL.FORGOT,
+        id: `${CONTEXT}-forgot-link`,
+        text: t('forgotPasswordText'),
+      },
+    ];
+    if (showRegisterLink) {
+      links.push({
+        to: URL.REGISTER,
+        id: `${CONTEXT}-register-link`,
+        text: t('registerText'),
+      });
+    }
+    return links;
+  }
+
   render(): JSX.Element {
-    const {
-      titleText, subTitleText, emailPlaceholder, passwordPlaceholder, loginButtonText,
-      forgotPasswordText, registerText, registerUrl, forgotPasswordUrl,
-    } = this.props;
+    const { locale } = this.props;
     const { redirect, message } = this.state;
-    const email = this.props.email as string;
-    const password = this.props.password as string;
-    const locale = this.props.locale as ReleoxLocale;
     if (redirect) return <Redirect to={redirect} />;
+    const t = ct('login', locale);
     return (
-      <CenterContent>
-        <div className="col-6" id={CONTEXT}>
-          <Card>
-            <CardTitle>{titleText || translation[locale].title}</CardTitle>
-            <p className="text-muted">{subTitleText || translation[locale].subTitle}</p>
-            <FormikFormWrapper<LoginBody>
-              initialValues={{ email, password }}
-              onSubmit={this.onSubmit.bind(this)}>
-              <div>
-                <Input
-                  name="email"
-                  label={emailPlaceholder || translation[locale].emailPlaceholder}
-                  id={`${CONTEXT}-email-input`}
-                />
-                <Input
-                  name="password"
-                  type={InputTypes.PASSWORD}
-                  label={passwordPlaceholder || translation[locale].passwordPlaceholder}
-                  id={`${CONTEXT}-password-input`}
-                />
-                <Button
-                  className="float-right"
-                  type={ButtonType.SUBMIT}
-                  id={`${CONTEXT}-login-button`}>
-                  {loginButtonText || translation[locale].loginButtonText}
-                </Button>
-                <Link
-                  to={forgotPasswordUrl as string}
-                  id={`${CONTEXT}-forgot-link`}>
-                  {forgotPasswordText || translation[locale].forgotPasswordText}
-                </Link>
-                {registerUrl ? (
-                  <Link
-                    to={registerUrl}
-                    id={`${CONTEXT}-register-link`}>
-                    {registerText || translation[locale].registerText}</Link>
-                ) : undefined}
-                <div className="text-center">{message}</div>
-              </div>
-            </FormikFormWrapper>
-          </Card>
-        </div>
-      </CenterContent>
+      <AuthLayout
+        title={t('title')}
+        subTitle={t('subTitle')}
+        context={CONTEXT}
+        links={this.getLinks()}>
+        <FormikFormWrapper<LoginBody>
+          initialValues={{ email: '', password: '' }}
+          onSubmit={this.onSubmit.bind(this)}>
+          <div>
+            <Input
+              name="email"
+              label={t('emailPlaceholder')}
+              id={`${CONTEXT}-email-input`}
+            />
+            <Input
+              name="password"
+              type={InputTypes.PASSWORD}
+              label={t('passwordPlaceholder')}
+              id={`${CONTEXT}-password-input`}
+            />
+            <Button
+              className="float-right"
+              type={ButtonType.SUBMIT}
+              id={`${CONTEXT}-login-button`}>
+              {t('loginButtonText')}
+            </Button>
+            <div className="text-center">{message}</div>
+          </div>
+        </FormikFormWrapper>
+      </AuthLayout>
     );
   }
 }
