@@ -1,16 +1,22 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import Loading from '../../components/Loading/Loading';
-import { Redirect } from 'react-router-dom';
+import React from 'react';
 import { URL } from '../../routes';
-import { getErrorMessage } from '../../config';
 import { InputTypes } from '../../components/Input/Input';
-import AuthLayout, { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
-import AuthForm from '../../components/AuthForm/AuthForm';
+import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
+import Axios from 'axios';
+import { getErrorMessage } from '../../config';
+import AbstractAuthOneInputScene, {
+  AbstractAuthOneInputSceneTranslation,
+  AbstractAuthOneInputSceneProps,
+  AbstractAuthOneInputSceneInputProps,
+} from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 
-const translation: { [key: string]: any } = {
+interface Translation {
+  [key: string]: AbstractAuthOneInputSceneTranslation & { backLinkText: string };
+}
+
+const translation: Translation = {
   fi: {
-    submitText: 'Nollaa',
+    buttonText: 'Nollaa',
     backLinkText: 'Takaisin kirjautumissivulle',
     title: 'Nolla salasana',
     subTitle: 'Kirjoita sähköpostiosoitteesi niin '
@@ -26,53 +32,27 @@ const translation: { [key: string]: any } = {
   },
 };
 
-export interface ForgotSceneProps {
-  passwordResetAPIUrl?: string;
-  locale?: string;
-  onError?: (err: Error) => void;
-  title?: string;
-  subTitle?: string;
-  backLinkText?: string;
-  backLink?: string;
-  submitText?: string;
-  placeholder?: string;
-}
-
-interface FormBody {
+interface BodyData {
   email: string;
 }
 
 interface DefaultProps {
   locale: string;
-  backLink: string;
   passwordResetAPIUrl: string;
-}
-
-interface State {
-  loading: boolean;
-  message: string;
-  redirect: string;
 }
 
 const CONTEXT = 'ForgotScene';
 
-class ForgotScene extends Component<ForgotSceneProps, State> {
-  state: State = {
-    loading: false,
-    message: '',
-    redirect: '',
-  };
-
+class ForgotScene extends AbstractAuthOneInputScene<BodyData, AbstractAuthOneInputSceneProps>{
   public static defaultProps: DefaultProps = {
     locale: 'fi',
-    backLink: URL.LOGIN,
     passwordResetAPIUrl: `${window.API_ENDPOINT}/Members/reset`,
   };
 
-  onSubmit(body: FormBody): void {
+  onSubmit(body: BodyData): void {
     const passwordResetAPIUrl = this.props.passwordResetAPIUrl as string;
     const { onError } = this.props;
-    axios
+    Axios
       .post(passwordResetAPIUrl, body)
       .then(() => this.setState({ redirect: URL.FORGOT_SUCCESS }))
       .catch((e) => {
@@ -81,52 +61,35 @@ class ForgotScene extends Component<ForgotSceneProps, State> {
       });
   }
 
+  getInitValues(): BodyData {
+    return { email: '' };
+  }
+
+  getInputProps(): AbstractAuthOneInputSceneInputProps {
+    return {
+      name: 'email',
+      type: InputTypes.EMAIL,
+    };
+  }
+
   getLinks(): AuthLayoutLinkItem[] {
-    const { backLinkText, backLink } = this.props;
+    const { backLinkText } = this.props;
     const locale = this.props.locale as string;
     return [
       {
         id: 'back-link',
-        to: backLink as string,
+        to: URL.LOGIN,
         text: backLinkText || translation[locale].backLinkText,
       },
     ];
   }
 
-  getForm(): JSX.Element {
-    const locale = this.props.locale as string;
-    const { placeholder, submitText } = this.props;
-    return (
-      <AuthForm<FormBody>
-        placeholder={placeholder || translation[locale].placeholder}
-        initialValues={{ email: '' }}
-        buttonText={submitText || translation[locale].submitText}
-        context={CONTEXT}
-        onSubmit={this.onSubmit.bind(this)}
-        inputProps={{
-          name: 'email',
-          type: InputTypes.EMAIL,
-        }}
-      />
-    );
+  getContext(): string {
+    return CONTEXT;
   }
 
-  render(): JSX.Element {
-    const { loading, redirect, message } = this.state;
-    const { title, subTitle } = this.props;
-    const locale = this.props.locale as string;
-    if (loading) return <Loading centeredVertical />;
-    if (redirect) return <Redirect to={redirect} />;
-    return (
-      <AuthLayout
-        context={CONTEXT}
-        message={message}
-        links={this.getLinks()}
-        title={title || translation[locale].title}
-        subTitle={subTitle || translation[locale].subTitle}>
-        {this.getForm()}
-      </AuthLayout>
-    );
+  getTranslation(): any {
+    return translation;
   }
 }
 
