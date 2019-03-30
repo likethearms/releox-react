@@ -13,6 +13,8 @@ import { MemoryRouter } from 'react-router';
 import ForgotScene from '../scenes/ForgotScene/ForgotScene';
 import ResetPasswordScene from '../scenes/ResetPasswordScene/ResetPasswordScene';
 import moxios from 'moxios';
+import ResetPasswordSuccessScene
+  from '../scenes/ResetPasswordSuccessScene/ResetPasswordSuccessScene';
 
 moxios.install();
 moxios.stubRequest(/undefined.Members.user*/, {
@@ -50,4 +52,5 @@ storiesOf('Scenes', module)
   .add('Login', () => <LoginScene />)
   .add('Login with register', () => <LoginScene registerUrl="/register" />)
   .add('Forgot', () => <ForgotScene />)
-  .add('ResetPassword', () => <ResetPasswordScene />);
+  .add('ResetPassword', () => <ResetPasswordScene />)
+  .add('ResetPasswordSuccess', () => <ResetPasswordSuccessScene />);

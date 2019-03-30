@@ -62,7 +62,7 @@ class ResetPasswordScene
     const { onError, resetPasswordAPIUrl } = this.props;
     Axios
       .post(resetPasswordAPIUrl, body)
-      .then(() => this.setState({ redirect: URL.FORGOT_SUCCESS }))
+      .then(() => this.setState({ redirect: URL.RESET_SUCCESS }))
       .catch((e) => {
         if (onError) return onError(e);
         this.setState({ message: getErrorMessage(e) });

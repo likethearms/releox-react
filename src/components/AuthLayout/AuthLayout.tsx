@@ -14,8 +14,8 @@ interface AuthLayoutProps {
   context: string;
   title: string;
   subTitle: string;
-  message: string;
-  children: JSX.Element | JSX.Element[] | string;
+  message?: string;
+  children?: JSX.Element | JSX.Element[] | string;
   links: AuthLayoutLinkItem[];
 }
 
