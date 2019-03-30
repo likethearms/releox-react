@@ -1,9 +1,9 @@
 import React from 'react';
 import AuthLayout from '../components/AuthLayout/AuthLayout';
-import { ct } from '../I18N';
+import { ct, ReleoxLocale } from '../I18N';
 
 export interface ForgotSuccessSceneProps {
-  locale?: string;
+  locale?: ReleoxLocale;
 }
 
 export default (context: string, translationPrefix: string, linkUrl: string) =>

@@ -10,27 +10,29 @@ import { validateTokenRequest } from '../../requests';
 import parseParams from '../../parse-params';
 
 interface BodyData {
-  newPassword: string;
+  password: string;
 }
 
 interface DefaultProps {
   resetPasswordAPIUrl: string;
+  removeAccessTokenUrl: string;
 }
 
-interface ResetPasswordSceneProps extends AbstractAuthOneInputSceneProps {
+interface AcceptInvitationSceneProps extends AbstractAuthOneInputSceneProps {
   resetPasswordAPIUrl: string;
 }
 
 const CONTEXT = 'ForgotScene';
 
-class ResetPasswordScene
-  extends AbstractAuthOneInputScene<BodyData, ResetPasswordSceneProps>{
+class AcceptInvitationScene
+  extends AbstractAuthOneInputScene<BodyData, AcceptInvitationSceneProps>{
   public static defaultProps: DefaultProps = {
     resetPasswordAPIUrl: apis.PASSWORD_RESET,
+    removeAccessTokenUrl: apis.LOGOUT,
   };
 
   componentWillMount(): void {
-    parseParams(true)
+    parseParams()
       .then(({ user, access_token }) => validateTokenRequest(access_token, user))
       .then(() => this.setState({ loading: false }))
       .catch(() => this.setState({ redirect: URL.ERROR }));
@@ -45,17 +47,13 @@ class ResetPasswordScene
     return URL.RESET_SUCCESS;
   }
 
-  shouldDestroyToken(): boolean {
-    return true;
-  }
-
   getInitValues(): BodyData {
-    return { newPassword: '' };
+    return { password: '' };
   }
 
   getInputProps(): AbstractAuthOneInputSceneInputProps {
     return {
-      name: 'newPassword',
+      name: 'password',
       type: InputTypes.PASSWORD,
     };
   }
@@ -73,4 +71,4 @@ class ResetPasswordScene
   }
 }
 
-export default ResetPasswordScene;
+export default AcceptInvitationScene;

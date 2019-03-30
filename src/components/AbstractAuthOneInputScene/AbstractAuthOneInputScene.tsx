@@ -7,6 +7,9 @@ import AuthForm from '../AuthForm/AuthForm';
 import { ct, ReleoxLocale } from '../../I18N';
 import Axios, { AxiosError } from 'axios';
 import { getErrorMessage } from '../../config';
+import { URL } from '../../routes';
+import apis from '../../apis';
+import parseParams from '../../parse-params';
 
 interface State {
   loading: boolean;
@@ -60,10 +63,29 @@ abstract class AbstractAuthOneInputScene<Data, Prop>
     this.setState({ message: getErrorMessage(error) });
   }
 
-  onSubmitMethod(url: string, body: Data, redirect: string): void {
-    Axios.post(url, body)
+  shouldDestroyToken(): boolean {
+    return false;
+  }
+
+  destroyToken(redirect: string): void {
+    parseParams()
+      .then(({ access_token }) => Axios.post(`${apis.LOGOUT}?access_token=${access_token}`))
       .then(() => this.setState({ redirect }))
       .catch(this.onErrorMethod.bind(this));
+  }
+
+  onSubmitMethod(url: string, body: Data, redirect: string): void {
+    let u = url;
+    parseParams()
+      .then(({ access_token }) => {
+        if (access_token) u = `${url}?access_token=${access_token}`;
+        Axios.post(u, body)
+          .then(() => {
+            if (!this.shouldDestroyToken()) return this.setState({ redirect });
+            this.destroyToken(redirect);
+          })
+          .catch(this.onErrorMethod.bind(this));
+      });
   }
 
   onSubmit(body: Data): void {
@@ -86,8 +108,8 @@ abstract class AbstractAuthOneInputScene<Data, Prop>
 
   render(): JSX.Element {
     const { loading, redirect, message } = this.state;
-    if (loading) return <Loading centeredVertical />;
     if (redirect) return <Redirect to={redirect} />;
+    if (loading) return <Loading centeredVertical />;
     const t = this.getT();
     return (
       <AuthLayout
