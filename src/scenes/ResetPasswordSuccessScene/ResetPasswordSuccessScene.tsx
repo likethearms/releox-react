@@ -1,12 +1,14 @@
 import React from 'react';
 import AuthLayout from '../../components/AuthLayout/AuthLayout';
 import { URL } from '../../routes';
+import Translation from '../../interfaces/Translation';
+import SuccessSceneTranslationObject from '../../interfaces/SuccessSceneTranslationObject';
 
 export interface ResetPasswordSuccessSceneProps {
   locale?: string;
 }
 
-const translation: { [key: string]: any } = {
+const translation: Translation<SuccessSceneTranslationObject> = {
   fi: {
     title: 'Salasanasi on vaihdettu',
     link: 'Kirjautumissivulle',
