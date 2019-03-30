@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import CenterContent from '../../components/CenterContent/CenterContent';
 import Loading from '../../components/Loading/Loading';
-import FormikFormWrapper from '../../components/FormikFormWrapper/FormikFormWrapper';
-import Card from '../../components/Card/Card';
-import CardTitle from '../../components/CardTitle/CardTitle';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { URL } from '../../routes';
 import { getErrorMessage } from '../../config';
-import Input from '../../components/Input/Input';
-import Button, { ButtonType } from '../../components/Button/Button';
-import AuthLayout from '../../components/AuthLayout/AuthLayout';
+import { InputTypes } from '../../components/Input/Input';
+import AuthLayout, { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
+import AuthForm from '../../components/AuthForm/AuthForm';
 
 const translation: { [key: string]: any } = {
   fi: {
@@ -73,7 +69,6 @@ class ForgotScene extends Component<ForgotSceneProps, State> {
     passwordResetAPIUrl: `${window.API_ENDPOINT}/Members/reset`,
   };
 
-
   onSubmit(body: FormBody): void {
     const passwordResetAPIUrl = this.props.passwordResetAPIUrl as string;
     const { onError } = this.props;
@@ -86,31 +81,50 @@ class ForgotScene extends Component<ForgotSceneProps, State> {
       });
   }
 
-  render(): JSX.Element {
-    const { loading, redirect, message } = this.state;
-    const {
-      title, subTitle, placeholder, backLinkText, submitText, backLink,
-    } = this.props;
+  getLinks(): AuthLayoutLinkItem[] {
+    const { backLinkText, backLink } = this.props;
     const locale = this.props.locale as string;
-    if (loading) return <Loading centeredVertical />;
-    if (redirect) return <Redirect to={redirect} />;
-
-    const links = [
+    return [
       {
         id: 'back-link',
         to: backLink as string,
         text: backLinkText || translation[locale].backLinkText,
       },
     ];
+  }
 
+  getForm(): JSX.Element {
+    const locale = this.props.locale as string;
+    const { placeholder, submitText } = this.props;
+    return (
+      <AuthForm<FormBody>
+        placeholder={placeholder || translation[locale].placeholder}
+        initialValues={{ email: '' }}
+        buttonText={submitText || translation[locale].submitText}
+        context={CONTEXT}
+        onSubmit={this.onSubmit.bind(this)}
+        inputProps={{
+          name: 'email',
+          type: InputTypes.EMAIL,
+        }}
+      />
+    );
+  }
+
+  render(): JSX.Element {
+    const { loading, redirect, message } = this.state;
+    const { title, subTitle } = this.props;
+    const locale = this.props.locale as string;
+    if (loading) return <Loading centeredVertical />;
+    if (redirect) return <Redirect to={redirect} />;
     return (
       <AuthLayout
         context={CONTEXT}
         message={message}
-        links={links}
+        links={this.getLinks()}
         title={title || translation[locale].title}
         subTitle={subTitle || translation[locale].subTitle}>
-
+        {this.getForm()}
       </AuthLayout>
     );
   }
