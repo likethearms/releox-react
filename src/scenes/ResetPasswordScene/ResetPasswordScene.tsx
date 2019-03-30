@@ -1,18 +1,17 @@
 import { URL } from '../../routes';
 import { InputTypes } from '../../components/Input/Input';
 import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
-import Axios from 'axios';
 import { getErrorMessage } from '../../config';
 import AbstractAuthOneInputScene, {
   AbstractAuthOneInputSceneProps,
   AbstractAuthOneInputSceneInputProps,
 } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 import apis from '../../apis';
-import { validateTokenRequest } from '../../requests';
+import { validateTokenRequest, resetPasswordRequest } from '../../requests';
 import parseParams from '../../parse-params';
 
 interface BodyData {
-  password: string;
+  newPassword: string;
 }
 
 interface DefaultProps {
@@ -38,8 +37,7 @@ class ResetPasswordScene
 
   onSubmit(body: BodyData): void {
     const { onError, resetPasswordAPIUrl } = this.props;
-    Axios
-      .post(resetPasswordAPIUrl, body)
+    resetPasswordRequest(resetPasswordAPIUrl, body)
       .then(() => this.setState({ redirect: URL.RESET_SUCCESS }))
       .catch((e) => {
         if (onError) return onError(e);
@@ -48,12 +46,12 @@ class ResetPasswordScene
   }
 
   getInitValues(): BodyData {
-    return { password: '' };
+    return { newPassword: '' };
   }
 
   getInputProps(): AbstractAuthOneInputSceneInputProps {
     return {
-      name: 'password',
+      name: 'newPassword',
       type: InputTypes.PASSWORD,
     };
   }

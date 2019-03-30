@@ -8,6 +8,7 @@ import AbstractAuthOneInputScene, {
   AbstractAuthOneInputSceneInputProps,
 } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 import apis from '../../apis';
+import { forgotPasswordRequest } from '../../requests';
 
 interface BodyData {
   email: string;
@@ -30,8 +31,7 @@ class ForgotScene extends AbstractAuthOneInputScene<BodyData, AbstractAuthOneInp
 
   onSubmit(body: BodyData): void {
     const { onError, forgotAPIUrl } = this.props;
-    Axios
-      .post(forgotAPIUrl, body)
+    forgotPasswordRequest(forgotAPIUrl, body)
       .then(() => this.setState({ redirect: URL.FORGOT_SUCCESS }))
       .catch((e) => {
         if (onError) return onError(e);
