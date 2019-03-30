@@ -15,6 +15,7 @@ import ResetPasswordScene from '../scenes/ResetPasswordScene/ResetPasswordScene'
 import moxios from 'moxios';
 import ResetPasswordSuccessScene
   from '../scenes/ResetPasswordSuccessScene/ResetPasswordSuccessScene';
+import ForgotSuccessScene from '../scenes/ForgotSuccessScene/ForgotSuccessScene';
 
 moxios.install();
 moxios.stubRequest(/undefined.Members.user*/, {
@@ -52,5 +53,6 @@ storiesOf('Scenes', module)
   .add('Login', () => <LoginScene />)
   .add('Login with register', () => <LoginScene registerUrl="/register" />)
   .add('Forgot', () => <ForgotScene />)
+  .add('ForgotSuccess', () => <ForgotSuccessScene />)
   .add('ResetPassword', () => <ResetPasswordScene />)
   .add('ResetPasswordSuccess', () => <ResetPasswordSuccessScene />);
