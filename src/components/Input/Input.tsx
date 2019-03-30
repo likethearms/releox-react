@@ -10,7 +10,7 @@ export enum InputTypes {
   PASSWORD = 'password',
 }
 
-interface InputProps extends AbstractInputGroupProps {
+export interface InputProps extends AbstractInputGroupProps {
   type?: InputTypes;
   placeholder?: string;
   className?: string;
