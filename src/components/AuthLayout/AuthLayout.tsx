@@ -28,7 +28,7 @@ const AuthLayout = (props: AuthLayoutProps) => (
           <p className="text-muted">{props.subTitle}</p>
           {props.children}
           {props.links.map(l => (
-            <Link to={l.to} id={`${props.context}-${l.id}`}>
+            <Link to={l.to} key={l.to} id={`${props.context}-${l.id}`}>
               {l.text}
             </Link>
           ))}

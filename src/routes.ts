@@ -3,4 +3,5 @@ export const URL = {
   FORGOT_SUCCESS: '/forgot-success',
   HOME: '/home',
   LOGIN: '/login',
+  ERROR: '/auth-error',
 };

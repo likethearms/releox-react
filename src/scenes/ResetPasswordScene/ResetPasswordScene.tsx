@@ -9,54 +9,59 @@ import AbstractAuthOneInputScene, {
   AbstractAuthOneInputSceneInputProps,
 } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 import apis from '../../apis';
+import { validateTokenRequest } from '../../requests';
+import parseParams from '../../parse-params';
 
 interface Translation {
-  [key: string]: AbstractAuthOneInputSceneTranslation & { backLinkText: string };
+  [key: string]: AbstractAuthOneInputSceneTranslation;
 }
 
 const translation: Translation = {
   fi: {
-    buttonText: 'Nollaa',
-    backLinkText: 'Takaisin kirjautumissivulle',
-    title: 'Nolla salasana',
-    subTitle: 'Kirjoita sähköpostiosoitteesi niin '
-      + 'lähetämme sinulle linkin jolla voit vaihtaa salasanasi.',
-    placeholder: 'Sähköposti',
+    title: 'Aseta uusi salasana',
+    subTitle: 'Kirjoita uusi salasana ja paina tallenna',
+    placeholder: 'Salasana',
+    buttonText: 'Tallenna',
   },
   en: {
-    buttonText: 'Reset',
-    backLinkText: 'Back to login',
-    title: 'Reset your password',
-    subTitle: 'Please write your email and we send you password reset link.',
-    placeholder: 'Email',
+    title: 'Set new password',
+    subTitle: 'Write new password and click save!',
+    placeholder: 'Password',
+    buttonText: 'Save',
   },
 };
 
 interface BodyData {
-  email: string;
+  password: string;
 }
 
 interface DefaultProps {
   locale: string;
-  forgotAPIUrl: string;
+  resetPasswordAPIUrl: string;
+  removeAccessTokenUrl: string;
 }
 
 const CONTEXT = 'ForgotScene';
 
-class ForgotScene extends AbstractAuthOneInputScene<BodyData, AbstractAuthOneInputSceneProps>{
+class ResetPasswordScene
+  extends AbstractAuthOneInputScene<BodyData, AbstractAuthOneInputSceneProps>{
   public static defaultProps: DefaultProps = {
     locale: 'fi',
-    forgotAPIUrl: apis.FORGOT,
+    resetPasswordAPIUrl: apis.PASSWORD_RESET,
+    removeAccessTokenUrl: apis.LOGOUT,
   };
 
   componentWillMount(): void {
-    this.setState({ loading: false });
+    parseParams()
+      .then(({ user, access_token }) => validateTokenRequest(access_token, user))
+      .then(() => this.setState({ loading: false }))
+      .catch(() => this.setState({ redirect: URL.ERROR }));
   }
 
   onSubmit(body: BodyData): void {
-    const { onError, forgotAPIUrl } = this.props;
+    const { onError, resetPasswordAPIUrl } = this.props;
     Axios
-      .post(forgotAPIUrl, body)
+      .post(resetPasswordAPIUrl, body)
       .then(() => this.setState({ redirect: URL.FORGOT_SUCCESS }))
       .catch((e) => {
         if (onError) return onError(e);
@@ -65,26 +70,18 @@ class ForgotScene extends AbstractAuthOneInputScene<BodyData, AbstractAuthOneInp
   }
 
   getInitValues(): BodyData {
-    return { email: '' };
+    return { password: '' };
   }
 
   getInputProps(): AbstractAuthOneInputSceneInputProps {
     return {
-      name: 'email',
-      type: InputTypes.EMAIL,
+      name: 'password',
+      type: InputTypes.PASSWORD,
     };
   }
 
   getLinks(): AuthLayoutLinkItem[] {
-    const { backLinkText } = this.props;
-    const locale = this.props.locale as string;
-    return [
-      {
-        id: 'back-link',
-        to: URL.LOGIN,
-        text: backLinkText || translation[locale].backLinkText,
-      },
-    ];
+    return [];
   }
 
   getContext(): string {
@@ -96,4 +93,4 @@ class ForgotScene extends AbstractAuthOneInputScene<BodyData, AbstractAuthOneInp
   }
 }
 
-export default ForgotScene;
+export default ResetPasswordScene;

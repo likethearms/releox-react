@@ -11,6 +11,21 @@ import LoginScene from '../scenes/LoginScene/LoginScene';
 import Button from '../components/Button/Button';
 import { MemoryRouter } from 'react-router';
 import ForgotScene from '../scenes/ForgotScene/ForgotScene';
+import ResetPasswordScene from '../scenes/ResetPasswordScene/ResetPasswordScene';
+import moxios from 'moxios';
+
+moxios.install();
+moxios.stubRequest(/undefined.Members.user*/, {
+  status: 200,
+});
+moxios.stubRequest(/.*/, {
+  status: 400,
+  response: {
+    error: {
+      message: 'Something went wrong',
+    },
+  },
+});
 
 storiesOf('Components', module)
   .add('CenterContent', () => (
@@ -34,4 +49,5 @@ storiesOf('Scenes', module)
   .addDecorator(c => <MemoryRouter>{c()}</MemoryRouter>)
   .add('Login', () => <LoginScene />)
   .add('Login with register', () => <LoginScene registerUrl="/register" />)
-  .add('Forgot', () => <ForgotScene />);
+  .add('Forgot', () => <ForgotScene />)
+  .add('ResetPassword', () => <ResetPasswordScene />);

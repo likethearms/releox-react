@@ -2,7 +2,11 @@
   "name": "releox-react-v2",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "@types/moxios": "^0.4.8",
+    "moxios": "^0.4.0",
+    "query-string": "^6.4.2"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

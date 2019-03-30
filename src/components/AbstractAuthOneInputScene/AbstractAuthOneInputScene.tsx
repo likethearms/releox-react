@@ -33,7 +33,7 @@ export interface AbstractAuthOneInputSceneTranslation {
 abstract class AbstractAuthOneInputScene<Data, Prop>
   extends Component<Prop & { [key: string]: string }, State> {
   state: State = {
-    loading: false,
+    loading: true,
     message: '',
     redirect: '',
   };
