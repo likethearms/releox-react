@@ -1,6 +1,5 @@
 .storybook
 .vscode
-src
 node_modules
 stories
 public
