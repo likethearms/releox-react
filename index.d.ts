@@ -1,10 +1,4 @@
 import React from 'react';
-
-interface LoginSceneProps {
-  onSubmit?: (body: any) => void;
-  onError?: (err: Error) => void;
-  showRegisterLink?: boolean;
-  locale?: any;
-}
+import { LoginSceneProps } from './src/scenes/LoginScene/LoginScene';
 
 export class LoginScene extends React.Component<LoginSceneProps, any> { }
