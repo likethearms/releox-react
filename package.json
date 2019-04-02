@@ -1,6 +1,6 @@
 {
   "name": "releox-react",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0-beta.2",
   "typings": "index.d.ts",
   "main": "lib/index.js",
   "author": "Henrik Salmela",
