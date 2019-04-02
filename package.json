@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "./scripts/pre-build.sh && tsc -p ./build-configs/tsconfig.json && ./scripts/post-build.sh",
     "test": "react-scripts test",
     "tslint": "tslint -p tslint.json",
     "eject": "react-scripts eject",
