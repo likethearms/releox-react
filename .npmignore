@@ -1,0 +1,11 @@
+.storybook
+.vscode
+src
+node_modules
+stories
+public
+.gitignore
+.editorconfig
+scripts
+builds-configs
+.babelrc
