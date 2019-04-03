@@ -54,6 +54,11 @@ interface TranslationObject {
   'acceptInvitationSuccess.title': string;
   'acceptInvitationSuccess.link': string;
   'acceptInvitationSuccess.subTitle': string;
+
+  // Validate Model
+  'validateModel.title': string;
+  'validateModel.subTitle': string;
+  'validateModel.button': string;
 }
 
 interface Translation<T> {
@@ -114,6 +119,11 @@ const translations: Translation<TranslationObject> = {
     'acceptInvitationSuccess.title': 'Salasanasi on tallennettu',
     'acceptInvitationSuccess.link': 'Takaisin',
     'acceptInvitationSuccess.subTitle': 'Tunnuksesi on valmis. Voit nyt kirjautua ohjelmaan.',
+
+    // Validate Model
+    'validateModel.title': 'Viimeistele tarvittavat tiedot',
+    'validateModel.subTitle': 'Viimeistele tarvittavat tiedot ja paina tallenna',
+    'validateModel.button': 'Tallenna',
   },
   en: {
     // Login
@@ -168,6 +178,11 @@ const translations: Translation<TranslationObject> = {
     'acceptInvitationSuccess.title': 'You password is saved',
     'acceptInvitationSuccess.link': 'To Login',
     'acceptInvitationSuccess.subTitle': 'You password is saved. You can now login.',
+
+    // Validate Model
+    'validateModel.title': 'Complete your account',
+    'validateModel.subTitle': 'Complete missing information and click save',
+    'validateModel.button': 'Save',
   },
 };
 

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Loading } from '../package-index';
-import { getAccessInformation, destroyAccessInformation } from '../config';
+import { getAccessInformation, destroyAccessInformation, AccessInformation } from '../config';
 import { validateTokenRequest } from '../requests';
 import { Redirect } from 'react-router';
 import { URL } from '../routes';
-import { AxiosResponse } from 'axios';
+import Axios, { AxiosResponse } from 'axios';
 
 interface MiddlewareState<U> {
   loading: boolean;
@@ -21,9 +21,17 @@ const authMiddleware = function <U>(WrapperComponent: any): any {
     };
 
     componentWillMount(): void {
+      let i: AccessInformation;
       getAccessInformation()
-        .then(info => validateTokenRequest(info.accessToken, info.userId))
-        .then((r: AxiosResponse) => this.setState({ loading: false, user: r.data }))
+        .then((info) => {
+          i = info;
+          return validateTokenRequest(info.accessToken, info.userId);
+        })
+        .then((r: AxiosResponse) => this.setState({ user: r.data }))
+        .then(() => {
+          Axios.defaults.headers.common.Authorization = i.accessToken;
+          this.setState({ loading: false });
+        })
         .catch(() => {
           destroyAccessInformation()
             .then(() => this.setState({ redirect: URL.LOGIN }));

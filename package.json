@@ -5,9 +5,6 @@
   "main": "lib/index.js",
   "author": "Henrik Salmela",
   "dependencies": {
-    "@coreui/coreui": "^2.1.9",
-    "@types/moxios": "^0.4.8",
-    "moxios": "^0.4.0",
     "query-string": "^6.4.2"
   },
   "scripts": {
@@ -66,6 +63,9 @@
     "sass": "^1.17.3",
     "tslint": "^5.14.0",
     "tslint-config-airbnb": "^5.11.1",
-    "typescript": "^3.4.1"
+    "typescript": "^3.4.1",
+    "@coreui/coreui": "^2.1.9",
+    "@types/moxios": "^0.4.8",
+    "moxios": "^0.4.0"
   }
 }
