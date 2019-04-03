@@ -1,30 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-export enum ButtonColor {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  SUCCESS = 'success',
-  DANGER = 'danger',
-  WARNING = 'warning',
-  INFO = 'info',
-  LIGHT = 'light',
-  DARK = 'dark',
-  LINK = 'link',
-}
-
-export enum ButtonType {
-  SUBMIT = 'submit',
-  BUTTON = 'button',
-}
-
-export interface ButtonProps {
-  id: string;
-  type?: ButtonType;
-  className?: string;
-  children: string;
-  color?: ButtonColor;
-}
+import { ButtonProps, ButtonColor } from '../../typings';
 
 const Button = ({ type, id, children, color, className }: ButtonProps) => (
   <button

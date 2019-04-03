@@ -10,3 +10,7 @@ export { default as Loading } from './components/Loading/Loading';
 export { default as routeMapper } from './routeMapper';
 export { URL } from './routes';
 export { getErrorMessage } from './config';
+export { default as authRoutes } from './auth-routes';
+export { default as authMiddleware } from './HOC/auth-middleware';
+export { default as guestMiddleware } from './HOC/guest-middleware';
+export { default as validateModel } from './HOC/validate-model';

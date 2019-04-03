@@ -15,7 +15,8 @@
         "reactBootstrapTableNext": "BootstrapTable",
         "reactBootstrapTable2Paginator": "paginationFactory",
         "axiosMockAdapter": "MockAdapter",
-        "propTypes": "PropTypes"
+        "propTypes": "PropTypes",
+        "reactDom": "ReactDom"
       }
     ],
     "variable-name": false,

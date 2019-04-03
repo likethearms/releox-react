@@ -1,12 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-
-interface FormikFormWrapperProps<R> {
-  onSubmit(data: R): void;
-  initialValues: R;
-  children: JSX.Element;
-}
+import { FormikFormWrapperProps } from '../../typings';
 
 const FormikFormWrapper = function <R>(props: FormikFormWrapperProps<R>): JSX.Element {
   const { onSubmit, initialValues, children } = props;

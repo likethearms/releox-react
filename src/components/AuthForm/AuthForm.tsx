@@ -1,7 +1,8 @@
 import React from 'react';
 import FormikFormWrapper from '../FormikFormWrapper/FormikFormWrapper';
-import Input, { InputTypes } from '../Input/Input';
-import Button, { ButtonType } from '../Button/Button';
+import Input from '../Input/Input';
+import Button from '../Button/Button';
+import { InputTypes, ButtonType } from '../../typings';
 
 interface InputProps {
   name: string;

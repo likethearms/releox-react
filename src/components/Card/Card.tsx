@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-export interface CardProps {
-  children: JSX.Element[] | string[]| string | JSX.Element;
-}
+import { CardProps } from '../../typings';
 
 const Card = ({ children }: CardProps) => (
   <div className="card">

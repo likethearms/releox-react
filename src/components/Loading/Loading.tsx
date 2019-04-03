@@ -1,13 +1,8 @@
 import React from 'react';
-import ReactLoading, { LoadingProps as LP, LoadingType } from 'react-loading';
+import ReactLoading from 'react-loading';
 import PropTypes from 'prop-types';
 import CenterContent from '../CenterContent/CenterContent';
-
-export interface LoadingProps extends LP {
-  centeredVertical: boolean;
-  color?: string;
-  type?: LoadingType;
-}
+import { LoadingProps } from '../../typings';
 
 const Loading = ({ centeredVertical, type, color }: LoadingProps) => {
   const loader = (

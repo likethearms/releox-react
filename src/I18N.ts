@@ -1,9 +1,5 @@
 import translations from './translations';
-
-export enum ReleoxLocale {
-  FI = 'fi',
-  EN = 'en',
-}
+import { ReleoxLocale } from './typings';
 
 declare global {
   interface Window { LOCALE: ReleoxLocale; }

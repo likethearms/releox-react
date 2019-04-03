@@ -1,5 +1,4 @@
 import { URL } from '../../routes';
-import { InputTypes } from '../../components/Input/Input';
 import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
 import AbstractAuthOneInputScene, {
   AbstractAuthOneInputSceneProps,
@@ -10,6 +9,7 @@ import { validateTokenRequest } from '../../requests';
 import parseParams from '../../parse-params';
 import { getErrorMessage } from '../../config';
 import { AxiosError } from 'axios';
+import { InputTypes } from '../../typings';
 
 interface BodyData {
   newPassword: string;

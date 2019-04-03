@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Button, { ButtonType, ButtonColor } from './Button';
+import Button from './Button';
+import { ButtonType, ButtonColor } from '../../typings';
 
 it('should show input', () => {
   const wrapper = shallow(<Button id="foo-id">Foo</Button>);

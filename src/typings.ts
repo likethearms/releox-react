@@ -2,7 +2,6 @@ import { Component } from 'react';
 import { Route } from 'react-router';
 import { LoadingProps as LP, LoadingType } from 'react-loading';
 
-
 export enum ReleoxLocale {
   FI = 'fi',
   EN = 'en',
@@ -126,8 +125,3 @@ export class CenterContent extends Component<CenterContentProps> { }
 export class FormikFormWrapper<R> extends Component<FormikFormWrapperProps<R>> { }
 export class Input extends Component<InputProps> { }
 export class Loading extends Component<LoadingProps> { }
-export const routeMapper: (r: ReleoxRoutes) => Route;
-export const authMiddleware: (wrapperComponent: any) => any;
-export const guestMiddleware: (wrapperComponent: any) => any;
-export const validateModel: (requiredFields: string[], Form: () => JSX.Element, WrapperElement: any) => any;
-export const authRoutes: ReleoxRoutes[];

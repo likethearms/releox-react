@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import Loading from '../Loading/Loading';
 import { Redirect } from 'react-router-dom';
-import { InputTypes } from '../Input/Input';
 import AuthLayout, { AuthLayoutLinkItem } from '../AuthLayout/AuthLayout';
 import AuthForm from '../AuthForm/AuthForm';
-import { ct, ReleoxLocale } from '../../I18N';
+import { ct } from '../../I18N';
 import Axios, { AxiosError } from 'axios';
 import { getErrorMessage } from '../../config';
-import { URL } from '../../routes';
 import apis from '../../apis';
 import parseParams from '../../parse-params';
+import { InputTypes, ReleoxLocale } from '../../typings';
 
 interface State {
   loading: boolean;

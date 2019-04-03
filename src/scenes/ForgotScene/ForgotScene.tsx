@@ -1,11 +1,11 @@
 import { URL } from '../../routes';
-import { InputTypes } from '../../components/Input/Input';
 import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
 import AbstractAuthOneInputScene, {
   AbstractAuthOneInputSceneProps,
   AbstractAuthOneInputSceneInputProps,
 } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 import apis from '../../apis';
+import { InputTypes } from '../../typings';
 
 interface BodyData {
   email: string;

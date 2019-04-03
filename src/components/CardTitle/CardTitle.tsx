@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-export interface CardTitleProps {
-  children: string | JSX.Element;
-}
+import { CardTitleProps } from '../../typings';
 
 const CardTitle = ({ children }: CardTitleProps) => (
   <h5 className="card-title">

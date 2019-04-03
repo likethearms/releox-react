@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-
-export interface AbstractInputGroupProps {
-  label: string;
-  name: string;
-  id: string;
-}
+import { AbstractInputGroupProps } from '../../typings';
 
 abstract class AbstractInputGroup<T> extends Component<T & AbstractInputGroupProps> {
   abstract getElement(name: string, id: string): JSX.Element;

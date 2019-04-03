@@ -12,11 +12,7 @@ import AcceptInvitationScene from './scenes/AcceptInvitationScene/AcceptInvitati
 import AcceptInvitationSuccessScene
   from './scenes/AcceptInvitationSuccessScene/AcceptInvitationSuccessScene';
 import LogoutScene from './scenes/LogoutScene/LogoutScene';
-
-export interface ReleoxRoutes {
-  component: any;
-  url: string;
-}
+import { ReleoxRoutes } from './typings';
 
 const authRoutes: ReleoxRoutes[] = [
   {

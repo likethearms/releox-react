@@ -1,30 +1,19 @@
 import React, { Component } from 'react';
 import Axios, { AxiosResponse } from 'axios';
 import FormikFormWrapper from '../../components/FormikFormWrapper/FormikFormWrapper';
-import Input, { InputTypes } from '../../components/Input/Input';
-import Button, { ButtonType } from '../../components/Button/Button';
+import Input from '../../components/Input/Input';
+import Button from '../../components/Button/Button';
 import { Redirect } from 'react-router-dom';
 import { saveAccessInformation, getErrorMessage } from '../../config';
 import { URL } from '../../routes';
-import { ct, ReleoxLocale } from '../../I18N';
+import { ct } from '../../I18N';
 import AuthLayout, { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
 import apis from '../../apis';
-
-export interface LoginSceneProps {
-  onSubmit?: (body: LoginBody) => void;
-  onError?: (err: Error) => void;
-  showRegisterLink?: boolean;
-  locale?: ReleoxLocale;
-}
+import { LoginSceneProps, LoginBody, InputTypes, ButtonType } from '../../typings';
 
 interface LoginSceneState {
   redirect: string;
   message: string;
-}
-
-interface LoginBody {
-  password: string;
-  email: string;
 }
 
 const CONTEXT = 'LoginScene';

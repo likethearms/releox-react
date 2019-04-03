@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-export interface CenterContentProps {
-  children: JSX.Element | string;
-}
+import { CenterContentProps } from '../../typings';
 
 const CenterContent = ({ children }: CenterContentProps) => (
   <div className="flex-row align-items-center CenterContent">

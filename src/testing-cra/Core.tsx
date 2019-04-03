@@ -15,7 +15,7 @@ const CUI = (props: any) => (
   </CoreuiLayout>
 );
 
-const Form = (
+const Form = () => (
   <div>
     <Input label="Name" name="name" id="name" />
   </div>

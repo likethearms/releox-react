@@ -1,20 +1,7 @@
 import React from 'react';
 import { Field } from 'formik';
-import AbstractInputGroup, {
-  AbstractInputGroupProps,
-} from '../AbstractInputGroup/AbstractInputGroup';
-
-export enum InputTypes {
-  TEXT = 'text',
-  EMAIL = 'email',
-  PASSWORD = 'password',
-}
-
-export interface InputProps extends AbstractInputGroupProps {
-  type?: InputTypes;
-  placeholder?: string;
-  className?: string;
-}
+import AbstractInputGroup from '../AbstractInputGroup/AbstractInputGroup';
+import { InputProps, InputTypes } from '../../typings';
 
 class Input extends AbstractInputGroup<InputProps> {
   getElement(name: string, id: string): JSX.Element {

@@ -1,11 +1,13 @@
 {
   "name": "releox-react",
-  "version": "0.1.0-beta.8",
+  "version": "0.1.0-beta.26",
   "typings": "./index.d.ts",
   "main": "lib/index.js",
   "author": "Henrik Salmela",
   "dependencies": {
-    "query-string": "^6.4.2"
+    "prop-types": "^15.7.2",
+    "query-string": "^6.4.2",
+    "react-loading": "^2.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -54,10 +56,8 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "formik": "^1.5.1",
-    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-loading": "^2.0.3",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "sass": "^1.17.3",

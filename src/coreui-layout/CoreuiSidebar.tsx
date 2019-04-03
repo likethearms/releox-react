@@ -2,23 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CoreuiSidebarItem from './CoreuiSidebarItem';
 import CoreuiSidebarDropdown from './CoreuiSidebarDropdown';
-
-interface CoreuiSidebarMenuBase {
-  type?: string;
-  text: string;
-  url: string;
-  icon?: string;
-  onClick(): void;
-  exact?: boolean;
-}
-
-export interface CoreuiSidebarMenu extends CoreuiSidebarMenuBase {
-  children?: CoreuiSidebarMenuBase[];
-}
-
-export interface CoreuiSidebarProps {
-  menu: CoreuiSidebarMenu[];
-}
+import { CoreuiSidebarProps } from '../typings';
 
 const CoreuiSidebar = ({ menu }: CoreuiSidebarProps) => {
   const clickHandler = (e: any) => {

@@ -1,7 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Input, { InputTypes } from './Input';
+import Input from './Input';
 import { Field } from 'formik';
+import { InputTypes } from '../../typings';
 
 it('should show input', () => {
   const wrapper = shallow(<Input label="Test" id="test" name="test-name" />);
