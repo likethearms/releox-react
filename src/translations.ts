@@ -33,6 +33,11 @@ interface TranslationObject {
   'resetPasswordSuccess.title': string;
   'resetPasswordSuccess.link': string;
   'resetPasswordSuccess.subTitle': string;
+
+  // AuthError
+  'authError.title': string;
+  'authError.link': string;
+  'authError.subTitle': string;
 }
 
 interface Translation<T> {
@@ -72,6 +77,11 @@ const translations: Translation<TranslationObject> = {
     'resetPasswordSuccess.title': 'Salasanasi on vaihdettu',
     'resetPasswordSuccess.link': 'Kirjautumissivulle',
     'resetPasswordSuccess.subTitle': 'Salasanasi on vaihdettu onnistuneesti. Voit nyt palata kirjautumissivulle ja kirjautua uudella salasanalla',
+
+    // AuthError
+    'authError.title': 'Oops... Tapahtui virhe',
+    'authError.link': 'Kirjautumissivulle',
+    'authError.subTitle': 'Emme kyenneet löytämään virheen syytä.',
   },
   en: {
     // Login
@@ -105,6 +115,11 @@ const translations: Translation<TranslationObject> = {
     'resetPasswordSuccess.title': 'You password is changed',
     'resetPasswordSuccess.link': 'Back to login',
     'resetPasswordSuccess.subTitle': 'Your password is now changed. Go back to login page and log in with new password.',
+
+    // AuthError
+    'authError.title': 'Oops... There was an error',
+    'authError.link': 'Back to login',
+    'authError.subTitle': 'We couldn\'t find reason for an error.',
   },
 };
 

@@ -8,6 +8,8 @@ import AbstractAuthOneInputScene, {
 import apis from '../../apis';
 import { validateTokenRequest } from '../../requests';
 import parseParams from '../../parse-params';
+import { getErrorMessage } from '../../config';
+import { AxiosError } from 'axios';
 
 interface BodyData {
   password: string;
@@ -35,7 +37,10 @@ class AcceptInvitationScene
     parseParams()
       .then(({ user, access_token }) => validateTokenRequest(access_token, user))
       .then(() => this.setState({ loading: false }))
-      .catch(() => this.setState({ redirect: URL.ERROR }));
+      .catch((e: AxiosError) =>
+        this.setState({
+          redirect: `${URL.ERROR}?message=${getErrorMessage(e)}`,
+        }));
   }
 
   getPostUrl(): string {
