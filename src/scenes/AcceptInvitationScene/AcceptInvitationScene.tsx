@@ -6,10 +6,9 @@ import AbstractAuthOneInputScene, {
   AbstractAuthOneInputSceneInputProps,
 } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 import apis from '../../apis';
-import { validateTokenRequest } from '../../requests';
-import parseParams from '../../parse-params';
+import queryString from 'query-string';
 import { getErrorMessage } from '../../config';
-import { AxiosError } from 'axios';
+import Axios, { AxiosError } from 'axios';
 
 interface BodyData {
   password: string;
@@ -24,7 +23,7 @@ interface AcceptInvitationSceneProps extends AbstractAuthOneInputSceneProps {
   resetPasswordAPIUrl: string;
 }
 
-const CONTEXT = 'ForgotScene';
+const CONTEXT = 'AcceptInvitation';
 
 class AcceptInvitationScene
   extends AbstractAuthOneInputScene<BodyData, AcceptInvitationSceneProps>{
@@ -34,8 +33,9 @@ class AcceptInvitationScene
   };
 
   componentWillMount(): void {
-    parseParams()
-      .then(({ user, access_token }) => validateTokenRequest(access_token, user))
+    const q = queryString.parse(window.location.search);
+    Axios
+      .get(`${apis.VALIDATE_INVITATION_TOKEN}?uid=${q.uid}&invitation_token=${q.invitation_token}`)
       .then(() => this.setState({ loading: false }))
       .catch((e: AxiosError) =>
         this.setState({
@@ -44,12 +44,12 @@ class AcceptInvitationScene
   }
 
   getPostUrl(): string {
-    const { resetPasswordAPIUrl } = this.props;
-    return resetPasswordAPIUrl;
+    const q = queryString.parse(window.location.search);
+    return `${apis.ACCEPT_INVITATION}?invitation_token=${q.invitation_token}&uid=${q.uid}`;
   }
 
   getRedirectUrl(): string {
-    return URL.RESET_SUCCESS;
+    return URL.ACCEPT_INVITATION_SUCCESS;
   }
 
   getInitValues(): BodyData {
@@ -72,7 +72,7 @@ class AcceptInvitationScene
   }
 
   getTPrefix(): any {
-    return 'resetPassword';
+    return 'acceptInvitation';
   }
 }
 

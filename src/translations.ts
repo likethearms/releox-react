@@ -43,6 +43,17 @@ interface TranslationObject {
   'confirm.title': string;
   'confirm.link': string;
   'confirm.subTitle': string;
+
+  // Accept Invitation
+  'acceptInvitation.buttonText': string;
+  'acceptInvitation.title': string;
+  'acceptInvitation.subTitle': string;
+  'acceptInvitation.placeholder': string;
+
+  // Accept Invitation Success
+  'acceptInvitationSuccess.title': string;
+  'acceptInvitationSuccess.link': string;
+  'acceptInvitationSuccess.subTitle': string;
 }
 
 interface Translation<T> {
@@ -92,6 +103,17 @@ const translations: Translation<TranslationObject> = {
     'confirm.title': 'Tunnuksesi on nyt aktivoitu',
     'confirm.link': 'Takaisin',
     'confirm.subTitle': 'Tunnuksesi on nyt aktivoitu. Voit jatkaa ohjelman käyttöä',
+
+    // Accept Invitation
+    'acceptInvitation.buttonText': 'Tallenna',
+    'acceptInvitation.title': 'Viimeistele tunnuksesi',
+    'acceptInvitation.subTitle': 'Anna salasanasi niin pääset kirjautumaan.',
+    'acceptInvitation.placeholder': 'Salasana',
+
+    // Accept Invitation Success
+    'acceptInvitationSuccess.title': 'Salasanasi on tallennettu',
+    'acceptInvitationSuccess.link': 'Takaisin',
+    'acceptInvitationSuccess.subTitle': 'Tunnuksesi on valmis. Voit nyt kirjautua ohjelmaan.',
   },
   en: {
     // Login
@@ -135,6 +157,17 @@ const translations: Translation<TranslationObject> = {
     'confirm.title': 'You account is now activated.',
     'confirm.link': 'Back',
     'confirm.subTitle': 'You account is now activated. You can now continue using application.',
+
+    // Accept Invitation
+    'acceptInvitation.buttonText': 'Save',
+    'acceptInvitation.title': 'Setup your password',
+    'acceptInvitation.subTitle': 'Setup your password and start using application.',
+    'acceptInvitation.placeholder': 'Password',
+
+    // Accept Invitation Success
+    'acceptInvitationSuccess.title': 'You password is saved',
+    'acceptInvitationSuccess.link': 'To Login',
+    'acceptInvitationSuccess.subTitle': 'You password is saved. You can now login.',
   },
 };
 

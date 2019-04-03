@@ -8,4 +8,6 @@ export const URL = {
   LOGIN: '/login',
   REGISTER: '/register',
   ERROR: '/auth-error',
+  ACCEPT_INVITATION: '/accept-invitation',
+  ACCEPT_INVITATION_SUCCESS: '/accept-invitation-success',
 };
