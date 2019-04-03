@@ -4,7 +4,7 @@ export const URL = {
   CONFIRM: '/confirm',
   RESET: '/reset-password',
   RESET_SUCCESS: '/reset-password-success',
-  HOME: '/home',
+  HOME: '/',
   LOGIN: '/login',
   REGISTER: '/register',
   ERROR: '/auth-error',

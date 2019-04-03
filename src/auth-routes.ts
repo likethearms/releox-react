@@ -21,19 +21,19 @@ const authRoutes: ReleoxRoutes[] = [
   },
   {
     url: URL.FORGOT,
-    component: ForgotScene,
+    component: guestMiddleware(ForgotScene),
   },
   {
     url: URL.FORGOT_SUCCESS,
-    component: ForgotSuccessScene,
+    component: guestMiddleware(ForgotSuccessScene),
   },
   {
     url: URL.RESET,
-    component: ResetPasswordScene,
+    component: guestMiddleware(ResetPasswordScene),
   },
   {
     url: URL.RESET_SUCCESS,
-    component: ResetPasswordSuccessScene,
+    component: guestMiddleware(ResetPasswordSuccessScene),
   },
   {
     url: URL.ERROR,
