@@ -38,6 +38,11 @@ interface TranslationObject {
   'authError.title': string;
   'authError.link': string;
   'authError.subTitle': string;
+
+  // Confirm
+  'confirm.title': string;
+  'confirm.link': string;
+  'confirm.subTitle': string;
 }
 
 interface Translation<T> {
@@ -82,6 +87,11 @@ const translations: Translation<TranslationObject> = {
     'authError.title': 'Oops... Tapahtui virhe',
     'authError.link': 'Kirjautumissivulle',
     'authError.subTitle': 'Emme kyenneet löytämään virheen syytä.',
+
+    // Confirm
+    'confirm.title': 'Tunnuksesi on nyt aktivoitu',
+    'confirm.link': 'Takaisin',
+    'confirm.subTitle': 'Tunnuksesi on nyt aktivoitu. Voit jatkaa ohjelman käyttöä',
   },
   en: {
     // Login
@@ -120,6 +130,11 @@ const translations: Translation<TranslationObject> = {
     'authError.title': 'Oops... There was an error',
     'authError.link': 'Back to login',
     'authError.subTitle': 'We couldn\'t find reason for an error.',
+
+    // Confirm
+    'confirm.title': 'You account is now activated.',
+    'confirm.link': 'Back',
+    'confirm.subTitle': 'You account is now activated. You can now continue using application.',
   },
 };
 

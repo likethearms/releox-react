@@ -7,6 +7,7 @@ import ResetPasswordSuccessScene
 import ResetPasswordScene from './scenes/ResetPasswordScene/ResetPasswordScene';
 import AuthErrorScene from './scenes/AuthErrorScene/AuthErrorScene';
 import guestMiddleware from './HOC/guest-middleware';
+import ConfirmScene from './scenes/ConfirmScene/ConfirmScene';
 
 export interface ReleoxRoutes {
   component: any;
@@ -37,6 +38,10 @@ const authRoutes: ReleoxRoutes[] = [
   {
     url: URL.ERROR,
     component: AuthErrorScene,
+  },
+  {
+    url: URL.CONFIRM,
+    component: ConfirmScene,
   },
 ];
 

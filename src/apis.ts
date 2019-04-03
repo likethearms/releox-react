@@ -4,4 +4,5 @@ export default {
   FORGOT: `${window.API_ENDPOINT}/Members/reset`,
   PASSWORD_RESET: `${window.API_ENDPOINT}/Members/reset-password`,
   LOGOUT: `${window.API_ENDPOINT}/Members/logout`,
+  CONFIRM: `${window.API_ENDPOINT}/Members/confirm`,
 };
