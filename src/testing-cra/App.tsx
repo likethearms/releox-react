@@ -3,12 +3,13 @@ import { Switch, Route } from 'react-router';
 import CoreuiLayout from '../coreui-layout/CoreuiLayout';
 import authRoutes from '../auth-routes';
 import routeMapper from '../routeMapper';
+import authMiddleware from '../HOC/auth-middleware';
 
-const CUI = () => (
+const CUI = (props: any) => (
   <CoreuiLayout
     sidebarMenu={[]}
-    menuTitle={'Another'}
-    brandUrl="/coreui"
+    menuTitle={props.user.name}
+    brandUrl="/home"
     brand={'Testi'}
   >
     Foo Bar
@@ -18,7 +19,7 @@ const CUI = () => (
 const App = () => (
   <Switch>
     {authRoutes.map(routeMapper)}
-    <Route path={'/coreui'} component={CUI} />
+    <Route path={'/home'} component={authMiddleware(CUI)} />
   </Switch>
 );
 
