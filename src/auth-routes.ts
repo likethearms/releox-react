@@ -11,6 +11,7 @@ import ConfirmScene from './scenes/ConfirmScene/ConfirmScene';
 import AcceptInvitationScene from './scenes/AcceptInvitationScene/AcceptInvitationScene';
 import AcceptInvitationSuccessScene
   from './scenes/AcceptInvitationSuccessScene/AcceptInvitationSuccessScene';
+import LogoutScene from './scenes/LogoutScene/LogoutScene';
 
 export interface ReleoxRoutes {
   component: any;
@@ -53,6 +54,10 @@ const authRoutes: ReleoxRoutes[] = [
   {
     url: URL.CONFIRM,
     component: ConfirmScene,
+  },
+  {
+    url: URL.LOGOUT,
+    component: LogoutScene,
   },
 ];
 
