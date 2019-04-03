@@ -7,12 +7,25 @@ import ForgotSuccessScene from '../scenes/ForgotSuccessScene/ForgotSuccessScene'
 import ResetPasswordScene from '../scenes/ResetPasswordScene/ResetPasswordScene';
 import ResetPasswordSuccessScene
   from '../scenes/ResetPasswordSuccessScene/ResetPasswordSuccessScene';
+import CoreuiLayout from '../coreui-layout/CoreuiLayout';
+
+const CUI = () => (
+  <CoreuiLayout
+    sidebarMenu={[]}
+    menuTitle={'Another'}
+    brandUrl="/coreui"
+    brand={'Testi'}
+  >
+    Foo Bar
+  </CoreuiLayout>
+);
 
 const App = () => (
   <Switch>
     <Route path={URL.LOGIN} component={LoginScene} />
     <Route path={URL.RESET} component={ResetPasswordScene} />
     <Route path={URL.RESET_SUCCESS} component={ResetPasswordSuccessScene} />
+    <Route path={'/coreui'} component={CUI} />
     <Route path={URL.FORGOT} component={ForgotScene} />
     <Route path={URL.FORGOT_SUCCESS} component={ForgotSuccessScene} />
   </Switch>
