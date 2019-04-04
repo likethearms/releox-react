@@ -4,7 +4,7 @@ import FormikFormWrapper from '../../components/FormikFormWrapper/FormikFormWrap
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import { Redirect } from 'react-router-dom';
-import { saveAccessInformation, getErrorMessage } from '../../config';
+import { saveAccessInformation, getErrorMessage, getReleoxOptions } from '../../config';
 import { URL } from '../../routes';
 import { ct } from '../../I18N';
 import AuthLayout, { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
@@ -38,7 +38,7 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
   }
 
   getLinks(): AuthLayoutLinkItem[] {
-    const { locale, showRegisterLink } = this.props;
+    const { locale } = this.props;
     const t = ct('login', locale);
     const links = [
       {
@@ -47,7 +47,7 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
         text: t('forgotPasswordText'),
       },
     ];
-    if (showRegisterLink) {
+    if (getReleoxOptions().showRegisterLink) {
       links.push({
         to: URL.REGISTER,
         id: `${CONTEXT}-register-link`,

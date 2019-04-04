@@ -1,10 +1,13 @@
 import { Component } from 'react';
-import { Route } from 'react-router';
 import { LoadingProps as LP, LoadingType } from 'react-loading';
 
 export enum ReleoxLocale {
   FI = 'fi',
   EN = 'en',
+}
+
+export interface ReleoxOptions {
+  showRegisterLink: boolean;
 }
 
 interface CoreuiSidebarMenuBase {
@@ -40,7 +43,6 @@ export interface LoginBody {
 export interface LoginSceneProps {
   onSubmit?: (body: LoginBody) => void;
   onError?: (err: Error) => void;
-  showRegisterLink?: boolean;
   locale?: ReleoxLocale;
 }
 

@@ -1,10 +1,12 @@
 import { AxiosError } from 'axios';
+import { ReleoxOptions } from './typings';
 
 declare global {
   interface Window {
     API_ENDPOINT: string;
     TOKEN_KEY: string;
     USER_ID_KEY: string;
+    RELEOX_OPTIONS: ReleoxOptions;
   }
 }
 
@@ -13,6 +15,7 @@ export interface AccessInformation {
   accessToken: string;
 }
 
+export const getReleoxOptions = (): ReleoxOptions => window.RELEOX_OPTIONS;
 export const getApiUrl = (): string => window.API_ENDPOINT;
 export const getTokenKey = (): string => window.TOKEN_KEY || 'accessToken';
 export const getUserIdKey = (): string => window.USER_ID_KEY || 'userId';
