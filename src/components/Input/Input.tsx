@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'formik';
 import AbstractInputGroup from '../AbstractInputGroup/AbstractInputGroup';
-import { InputProps, InputTypes } from '../../typings';
+import { InputProps } from '../../typings';
 
 class Input extends AbstractInputGroup<InputProps> {
   getElement(name: string, id: string): JSX.Element {
@@ -10,8 +10,8 @@ class Input extends AbstractInputGroup<InputProps> {
       <Field
         name={name}
         component="input"
-        id={id}
-        type={type || InputTypes.TEXT}
+        id={id || `${name}-input`}
+        type={type || 'text'}
         placeholder={placeholder || label}
         className={className || 'form-control'}
       />

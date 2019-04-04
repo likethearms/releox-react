@@ -3,21 +3,7 @@ import { Link } from 'react-router-dom';
 import CenterContent from '../CenterContent/CenterContent';
 import Card from '../Card/Card';
 import CardTitle from '../CardTitle/CardTitle';
-
-export interface AuthLayoutLinkItem {
-  to: string;
-  id: string;
-  text: string;
-}
-
-interface AuthLayoutProps {
-  context: string;
-  title: string;
-  subTitle: string;
-  message?: string;
-  children?: JSX.Element | JSX.Element[] | string;
-  links: AuthLayoutLinkItem[];
-}
+import { AuthLayoutProps } from '../../typings';
 
 const AuthLayout = (props: AuthLayoutProps) => (
   <CenterContent>

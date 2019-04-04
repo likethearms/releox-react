@@ -7,9 +7,15 @@ import { Redirect } from 'react-router-dom';
 import { saveAccessInformation, getErrorMessage, getReleoxOptions } from '../../config';
 import { URL } from '../../routes';
 import { ct } from '../../I18N';
-import AuthLayout, { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
+import AuthLayout from '../../components/AuthLayout/AuthLayout';
 import apis from '../../apis';
-import { LoginSceneProps, LoginBody, InputTypes, ButtonType } from '../../typings';
+import {
+  LoginSceneProps,
+  LoginBody,
+  InputTypes,
+  ButtonType,
+  AuthLayoutLinkItem,
+} from '../../typings';
 
 interface LoginSceneState {
   redirect: string;
@@ -79,13 +85,13 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
             />
             <Input
               name="password"
-              type={InputTypes.PASSWORD}
+              type="password"
               label={t('passwordPlaceholder')}
               id={`${CONTEXT}-password-input`}
             />
             <Button
               className="float-right"
-              type={ButtonType.SUBMIT}
+              type="submit"
               id={`${CONTEXT}-login-button`}>
               {t('loginButtonText')}
             </Button>

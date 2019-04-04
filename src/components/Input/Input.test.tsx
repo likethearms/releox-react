@@ -23,7 +23,7 @@ it('should implement custom props', () => {
       label="Test"
       id="test"
       name="test-name"
-      type={InputTypes.EMAIL}
+      type="email"
       placeholder="test placeholder"
       className="custom-class"
     />

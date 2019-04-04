@@ -32,7 +32,7 @@ const AuthForm = function <T>(props: Props<T>): JSX.Element {
         />
         <Button
           className="float-right"
-          type={ButtonType.SUBMIT}
+          type="submit"
           id={`${props.context}-submit-button`}>
           {props.buttonText}
         </Button>

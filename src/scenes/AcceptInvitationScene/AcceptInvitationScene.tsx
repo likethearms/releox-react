@@ -1,5 +1,4 @@
 import { URL } from '../../routes';
-import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
 import AbstractAuthOneInputScene, {
   AbstractAuthOneInputSceneProps,
   AbstractAuthOneInputSceneInputProps,
@@ -8,7 +7,7 @@ import apis from '../../apis';
 import queryString from 'query-string';
 import { getErrorMessage } from '../../config';
 import Axios, { AxiosError } from 'axios';
-import { InputTypes } from '../../typings';
+import { InputTypes, AuthLayoutLinkItem } from '../../typings';
 
 interface BodyData {
   password: string;
@@ -59,7 +58,7 @@ class AcceptInvitationScene
   getInputProps(): AbstractAuthOneInputSceneInputProps {
     return {
       name: 'password',
-      type: InputTypes.PASSWORD,
+      type: 'password',
     };
   }
 

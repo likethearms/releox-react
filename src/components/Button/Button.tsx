@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ButtonProps, ButtonColor } from '../../typings';
+import { ButtonProps } from '../../typings';
 
-const Button = ({ type, id, children, color, className }: ButtonProps) => (
+const Button = ({ type, id, children, color, className, onClick }: ButtonProps) => (
   <button
     type={type || 'button'}
     id={id}
-    className={`btn btn-${color || ButtonColor.PRIMARY} ${className}`}>
+    onClick={onClick}
+    className={`btn btn-${color || 'primary'} ${className}`}>
     {children}
   </button>
 );

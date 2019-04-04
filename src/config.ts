@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import Axios, { AxiosError } from 'axios';
 import { ReleoxOptions } from './typings';
 
 declare global {
@@ -15,7 +15,7 @@ export interface AccessInformation {
   accessToken: string;
 }
 
-export const getReleoxOptions = (): ReleoxOptions => window.RELEOX_OPTIONS;
+export const getReleoxOptions = (): ReleoxOptions => window.RELEOX_OPTIONS || {};
 export const getApiUrl = (): string => window.API_ENDPOINT;
 export const getTokenKey = (): string => window.TOKEN_KEY || 'accessToken';
 export const getUserIdKey = (): string => window.USER_ID_KEY || 'userId';
@@ -41,7 +41,7 @@ export const destroyAccessInformation = (): Promise<void> =>
     return resolve();
   });
 
-export const getErrorMessage = (error: AxiosError) => {
+export const getErrorMessage = (error: any) => {
   let errorMessage = error.message;
   const res = error.response;
   if (res &&

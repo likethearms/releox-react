@@ -76,7 +76,7 @@ export default (
               <FormikFormWrapper onSubmit={this.submit.bind(this)} initialValues={user}>
                 <div>
                   {Form}
-                  <Button type={ButtonType.SUBMIT} id="submit" className="float-right">
+                  <Button type="submit" id="submit" className="float-right">
                     {t('button')}
                   </Button>
                 </div>

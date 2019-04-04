@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Route } from 'react-router';
 import { LoadingProps as LP, LoadingType } from 'react-loading';
 
 export enum ReleoxLocale {
@@ -46,37 +47,27 @@ export interface LoginSceneProps {
   locale?: ReleoxLocale;
 }
 
-export enum ButtonColor {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  SUCCESS = 'success',
-  DANGER = 'danger',
-  WARNING = 'warning',
-  INFO = 'info',
-  LIGHT = 'light',
-  DARK = 'dark',
-  LINK = 'link',
-}
-
-export enum ButtonType {
-  SUBMIT = 'submit',
-  BUTTON = 'button',
-}
+export type ButtonColor = 'primary' | 'secondary' | 'success' | 'danger' |
+  'warning' | 'info' | 'light' | 'dark' | 'link';
+export type ButtonType = 'submit' | 'button';
 
 export interface ButtonProps {
   id: string;
   type?: ButtonType;
+  onClick?: () => any;
   className?: string;
   children: string;
   color?: ButtonColor;
 }
 
 export interface CardProps {
-  children: JSX.Element[] | string[]| string | JSX.Element;
+  children: JSX.Element[] | string[] | string | JSX.Element;
 }
 
 export interface CardTitleProps {
   children: string | JSX.Element;
+  lg?: boolean;
+  xl?: boolean;
 }
 
 export interface CenterContentProps {
@@ -89,11 +80,7 @@ export interface FormikFormWrapperProps<R> {
   children: JSX.Element;
 }
 
-export enum InputTypes {
-  TEXT = 'text',
-  EMAIL = 'email',
-  PASSWORD = 'password',
-}
+export type InputTypes = 'text' | 'email' | 'password';
 
 export interface InputProps extends AbstractInputGroupProps {
   type?: InputTypes;
@@ -104,7 +91,7 @@ export interface InputProps extends AbstractInputGroupProps {
 export interface AbstractInputGroupProps {
   label: string;
   name: string;
-  id: string;
+  id?: string;
 }
 
 export interface LoadingProps extends LP {
@@ -118,6 +105,22 @@ export interface ReleoxRoutes {
   url: string;
 }
 
+export interface AuthLayoutLinkItem {
+  to: string;
+  id: string;
+  text: string;
+}
+
+export interface AuthLayoutProps {
+  context: string;
+  title: string;
+  subTitle: string;
+  message?: string;
+  children?: JSX.Element | JSX.Element[] | string;
+  links: AuthLayoutLinkItem[];
+}
+
+export class AuthLayout extends Component<AuthLayoutProps> { }
 export class LoginScene extends Component<LoginSceneProps> { }
 export class CoreuiLayout extends Component<CoreuiLayoutProps> { }
 export class Button extends Component<ButtonProps> { }

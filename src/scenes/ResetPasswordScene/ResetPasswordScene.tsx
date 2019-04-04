@@ -1,5 +1,4 @@
 import { URL } from '../../routes';
-import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
 import AbstractAuthOneInputScene, {
   AbstractAuthOneInputSceneProps,
   AbstractAuthOneInputSceneInputProps,
@@ -9,7 +8,7 @@ import { validateTokenRequest } from '../../requests';
 import parseParams from '../../parse-params';
 import { getErrorMessage } from '../../config';
 import { AxiosError } from 'axios';
-import { InputTypes } from '../../typings';
+import { InputTypes, AuthLayoutLinkItem } from '../../typings';
 
 interface BodyData {
   newPassword: string;
@@ -61,7 +60,7 @@ class ResetPasswordScene
   getInputProps(): AbstractAuthOneInputSceneInputProps {
     return {
       name: 'newPassword',
-      type: InputTypes.PASSWORD,
+      type: 'password',
     };
   }
 

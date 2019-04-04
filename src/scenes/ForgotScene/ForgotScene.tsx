@@ -1,11 +1,10 @@
 import { URL } from '../../routes';
-import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
 import AbstractAuthOneInputScene, {
   AbstractAuthOneInputSceneProps,
   AbstractAuthOneInputSceneInputProps,
 } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 import apis from '../../apis';
-import { InputTypes } from '../../typings';
+import { InputTypes, AuthLayoutLinkItem } from '../../typings';
 
 interface BodyData {
   email: string;
@@ -51,7 +50,7 @@ class ForgotScene extends AbstractAuthOneInputScene<BodyData, ForgotSceneProps>{
   getInputProps(): AbstractAuthOneInputSceneInputProps {
     return {
       name: 'email',
-      type: InputTypes.EMAIL,
+      type: 'email',
     };
   }
 

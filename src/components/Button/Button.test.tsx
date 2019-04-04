@@ -13,9 +13,9 @@ it('should implement props', () => {
   const wrapper = shallow((
     <Button
       id="foo-id"
-      type={ButtonType.SUBMIT}
+      type="submit"
       className="test-class"
-      color={ButtonColor.LIGHT}
+      color="light"
     >Foo</Button>
   ));
   expect(wrapper.find('button').prop('type')).toBe('submit');
