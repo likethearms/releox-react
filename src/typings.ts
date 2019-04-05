@@ -1,6 +1,54 @@
 import { Component } from 'react';
 import { Route } from 'react-router';
 import { LoadingProps as LP, LoadingType } from 'react-loading';
+import { FormikValues } from 'formik';
+
+export interface AsyncSelectFormikProps extends AbstractInputGroupProps {
+  getUrl: string;
+}
+
+export interface AsyncSelectInputDefaultProps {
+  onError?(e: Error): void;
+  placeholder: undefined;
+  value: undefined;
+  fixedValue: undefined;
+  mapValue: string;
+  mapLabel: string;
+}
+
+export interface AsyncSelectInputProps {
+  onChange(value: string | number | null): void;
+  onError(e: Error): void;
+  placeholder?: string;
+  fixedValue?: string;
+  value?: string;
+  getUrl: string;
+  mapValue: string;
+  mapLabel: string;
+  searchFields: string[];
+}
+
+export interface AsyncSelectInputState {
+  defaultValue: any;
+  loading: boolean;
+}
+
+export interface AsyncSelectFormikWrapperProps {
+  field: FormikValues;
+  getUrl: string;
+  placeholder?: string;
+  searchFields: string[];
+  form: { setFieldValue: Function };
+}
+
+export interface AsyncSelectWrapperDefaultProps {
+  searchFields: string[];
+}
+
+export interface AbstractFormikInputWrapperProps {
+  field: FormikValues;
+  form: { setFieldValue: Function };
+}
 
 export enum ReleoxLocale {
   FI = 'fi',

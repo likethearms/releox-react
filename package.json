@@ -1,13 +1,15 @@
 {
   "name": "releox-react",
-  "version": "0.1.0-beta.38",
+  "version": "0.1.0-beta.40",
   "typings": "./index.d.ts",
   "main": "lib/index.js",
   "author": "Henrik Salmela",
   "dependencies": {
+    "@types/react-select": "^2.0.15",
     "prop-types": "^15.7.2",
     "query-string": "^6.4.2",
-    "react-loading": "^2.0.3"
+    "react-loading": "^2.0.3",
+    "react-select": "^2.4.2"
   },
   "scripts": {
     "start": "react-scripts start",

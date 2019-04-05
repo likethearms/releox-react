@@ -1,5 +1,6 @@
 export { default as LoginScene } from './scenes/LoginScene/LoginScene';
 export { default as CoreuiLayout } from './coreui-layout/CoreuiLayout';
+export { default as AsyncSelectFormik } from './components/AsyncSelect/AsyncSelectFormik';
 export { default as Button } from './components/Button/Button';
 export { default as Card } from './components/Card/Card';
 export { default as CardTitle } from './components/CardTitle/CardTitle';
