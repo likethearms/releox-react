@@ -143,7 +143,7 @@ export interface AbstractInputGroupProps {
 }
 
 export interface LoadingProps extends LP {
-  centeredVertical: boolean;
+  centeredVertical?: boolean;
   color?: string;
   type?: LoadingType;
 }
