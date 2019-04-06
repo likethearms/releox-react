@@ -7,7 +7,6 @@ import Loading from '../components/Loading/Loading';
 import FormikFormWrapper from '../components/FormikFormWrapper/FormikFormWrapper';
 import Button from '../components/Button/Button';
 import { ct } from '../I18N';
-import { ButtonType } from '../typings';
 
 interface State {
   user: any;
@@ -24,7 +23,7 @@ const CONTEXT = 'ValidateModelMiddleware';
 
 export default (
   requiredFields: string[],
-  Form: () => JSX.Element,
+  form: () => JSX.Element,
   WrapperElement: any) => (
     class ValidateModelMiddleware extends Component<Props, State> {
       state: State = {
@@ -75,7 +74,7 @@ export default (
             >
               <FormikFormWrapper onSubmit={this.submit.bind(this)} initialValues={user}>
                 <div>
-                  {Form}
+                  {form()}
                   <Button type="submit" id="submit" className="float-right">
                     {t('button')}
                   </Button>

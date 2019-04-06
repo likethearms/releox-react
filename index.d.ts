@@ -4,6 +4,16 @@ import { LoadingProps as LP, LoadingType } from 'react-loading';
 import { AxiosError } from 'axios';
 import { FormikValues } from 'formik';
 
+export interface CheckBoxProps {
+  id?: string;
+  className?: string;
+  name: string;
+}
+
+export interface CoreuiCheckBoxProps extends CheckBoxProps {
+  label: string;
+}
+
 export interface AsyncSelectFormikProps extends AbstractInputGroupProps {
   getUrl: string;
 }
@@ -179,10 +189,12 @@ export class FormikFormWrapper<R> extends Component<FormikFormWrapperProps<R>> {
 export class Input extends Component<InputProps> { }
 export class Loading extends Component<LoadingProps> { }
 export class AsyncSelectFormik extends Component<AsyncSelectFormikProps> { }
+export class CheckBox extends Component<CheckBoxProps> { }
+export class CoreuiCheckBox extends Component<CoreuiCheckBoxProps> { }
 export const routeMapper: (r: ReleoxRoutes) => Route;
 export const authMiddleware: (wrapperComponent: any) => any;
 export const guestMiddleware: (wrapperComponent: any) => any;
-export const validateModel: (requiredFields: string[], Form: () => JSX.Element, WrapperElement: any) => any;
+export const validateModel: (requiredFields: string[], form: () => JSX.Element, WrapperElement: any) => any;
 export const authRoutes: ReleoxRoutes[];
 export const saveAccessInformation: (accessToken: string, userId: string) => Promise<void>;
 export const getErrorMessage: (error: AxiosError | Error) => string;

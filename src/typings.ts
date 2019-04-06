@@ -3,6 +3,16 @@ import { Route } from 'react-router';
 import { LoadingProps as LP, LoadingType } from 'react-loading';
 import { FormikValues } from 'formik';
 
+export interface CheckBoxProps {
+  id?: string;
+  className?: string;
+  name: string;
+}
+
+export interface CoreuiCheckBoxProps extends CheckBoxProps {
+  label: string;
+}
+
 export interface AsyncSelectFormikProps extends AbstractInputGroupProps {
   getUrl: string;
 }
@@ -167,14 +177,3 @@ export interface AuthLayoutProps {
   children?: JSX.Element | JSX.Element[] | string;
   links: AuthLayoutLinkItem[];
 }
-
-export class AuthLayout extends Component<AuthLayoutProps> { }
-export class LoginScene extends Component<LoginSceneProps> { }
-export class CoreuiLayout extends Component<CoreuiLayoutProps> { }
-export class Button extends Component<ButtonProps> { }
-export class Card extends Component<CardProps> { }
-export class CardTitle extends Component<CardTitleProps> { }
-export class CenterContent extends Component<CenterContentProps> { }
-export class FormikFormWrapper<R> extends Component<FormikFormWrapperProps<R>> { }
-export class Input extends Component<InputProps> { }
-export class Loading extends Component<LoadingProps> { }
