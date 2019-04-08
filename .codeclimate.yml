@@ -5,3 +5,4 @@ exclude_patterns:
 - "src/translations.ts"
 - "**/*.test.tsx"
 - "**/*.test.ts"
+- "index.d.ts"
