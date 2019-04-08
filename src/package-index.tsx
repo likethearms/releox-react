@@ -5,6 +5,7 @@ export { default as CoreuiLayout } from './coreui-layout/CoreuiLayout';
 export { default as AsyncSelectFormik } from './components/AsyncSelect/AsyncSelectFormik';
 export { default as Button } from './components/Button/Button';
 export { default as Card } from './components/Card/Card';
+export { default as TextArea } from './components/TextArea/TextArea';
 export { default as CardTitle } from './components/CardTitle/CardTitle';
 export { default as CenterContent } from './components/CenterContent/CenterContent';
 export { default as FormikFormWrapper } from './components/FormikFormWrapper/FormikFormWrapper';

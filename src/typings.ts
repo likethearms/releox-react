@@ -146,6 +146,12 @@ export interface InputProps extends AbstractInputGroupProps {
   className?: string;
 }
 
+export interface TextAreaProps extends AbstractInputGroupProps {
+  rows?: number;
+  placeholder?: string;
+  className?: string;
+}
+
 export interface AbstractInputGroupProps {
   label: string;
   name: string;

@@ -146,6 +146,12 @@ export interface InputProps extends AbstractInputGroupProps {
   className?: string;
 }
 
+export interface TextAreaProps extends AbstractInputGroupProps {
+  rows?: number;
+  placeholder?: string;
+  className?: string;
+}
+
 export interface AbstractInputGroupProps {
   label: string;
   name: string;
@@ -191,6 +197,7 @@ export class Loading extends Component<LoadingProps> { }
 export class AsyncSelectFormik extends Component<AsyncSelectFormikProps> { }
 export class CheckBox extends Component<CheckBoxProps> { }
 export class CoreuiCheckBox extends Component<CoreuiCheckBoxProps> { }
+export class TextArea extends Component<TextAreaProps> { }
 export const routeMapper: (r: ReleoxRoutes) => Route;
 export const authMiddleware: (wrapperComponent: any) => any;
 export const guestMiddleware: (wrapperComponent: any) => any;
