@@ -2,6 +2,7 @@ export { default as CheckBox } from './components/Checkbox/CheckBox';
 export { default as CoreuiCheckBox } from './components/Checkbox/CoreuiCheckBox';
 export { default as LoginScene } from './scenes/LoginScene/LoginScene';
 export { default as CoreuiLayout } from './coreui-layout/CoreuiLayout';
+export { default as AsyncSelect } from './components/AsyncSelect/AsyncSelect';
 export { default as AsyncSelectFormik } from './components/AsyncSelect/AsyncSelectFormik';
 export { default as Button } from './components/Button/Button';
 export { default as Card } from './components/Card/Card';

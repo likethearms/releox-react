@@ -198,6 +198,7 @@ export class AsyncSelectFormik extends Component<AsyncSelectFormikProps> { }
 export class CheckBox extends Component<CheckBoxProps> { }
 export class CoreuiCheckBox extends Component<CoreuiCheckBoxProps> { }
 export class TextArea extends Component<TextAreaProps> { }
+export class AsyncSelect extends Component<AsyncSelectInputProps> { }
 export const routeMapper: (r: ReleoxRoutes) => Route;
 export const authMiddleware: (wrapperComponent: any) => any;
 export const guestMiddleware: (wrapperComponent: any) => any;
