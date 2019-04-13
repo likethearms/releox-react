@@ -10,11 +10,12 @@ class AsyncSelectFormikWrapper
   };
 
   render(): JSX.Element {
-    const { field, getUrl, searchFields, placeholder } = this.props;
+    const { field, getUrl, searchFields, placeholder, queryFormat } = this.props;
     return (
       <AsyncSelect
         value={field.value}
         getUrl={getUrl}
+        queryFormat={queryFormat}
         onChange={this.onChange.bind(this)}
         placeholder={placeholder}
         searchFields={searchFields}

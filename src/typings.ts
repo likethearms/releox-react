@@ -15,6 +15,7 @@ export interface CoreuiCheckBoxProps extends CheckBoxProps {
 
 export interface AsyncSelectFormikProps extends AbstractInputGroupProps {
   getUrl: string;
+  queryFormat: AsyncSelectQueryFormat;
 }
 
 export interface AsyncSelectInputDefaultProps {
@@ -26,9 +27,12 @@ export interface AsyncSelectInputDefaultProps {
   mapLabel: string;
 }
 
+export type AsyncSelectQueryFormat = 'mongodb' | 'postgresql';
+
 export interface AsyncSelectInputProps {
   onChange(value: string | number | null): void;
   onError(e: Error): void;
+  queryFormat: AsyncSelectQueryFormat;
   placeholder?: string;
   fixedValue?: string;
   value?: string;
@@ -45,6 +49,7 @@ export interface AsyncSelectInputState {
 
 export interface AsyncSelectFormikWrapperProps {
   field: FormikValues;
+  queryFormat: AsyncSelectQueryFormat;
   getUrl: string;
   placeholder?: string;
   searchFields: string[];
