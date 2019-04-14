@@ -119,7 +119,7 @@ export interface ButtonProps {
   type?: ButtonType;
   onClick?: () => any;
   className?: string;
-  children: string;
+  children: string | JSX.Element;
   color?: ButtonColor;
 }
 
@@ -143,7 +143,7 @@ export interface FormikFormWrapperProps<R> {
   children: JSX.Element;
 }
 
-export type InputTypes = 'text' | 'email' | 'password';
+export type InputTypes = 'text' | 'email' | 'password' | 'date';
 
 export interface InputProps extends AbstractInputGroupProps {
   type?: InputTypes;
