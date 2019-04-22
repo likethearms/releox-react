@@ -21,7 +21,12 @@ const SidebarItem = (props: SidebarItemProps) => {
           {children}
         </button>
       ) : (
-          <NavLink exact={exact} to={url || ''} className="nav-link">
+          <NavLink
+            exact={exact}
+            to={url || ''}
+            className="nav-link"
+            onClick={() =>
+              document.getElementsByClassName('app')[0].classList.toggle('sidebar-show')}>
             {icon ? <i className={icon} /> : ''}
             {` ${children}`}
           </NavLink>
