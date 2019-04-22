@@ -7,7 +7,7 @@ import { AuthLayoutProps } from '../../typings';
 
 const AuthLayout = (props: AuthLayoutProps) => (
   <CenterContent>
-    <div className="col-6" id={props.context}>
+    <div className="col-lg-6" id={props.context}>
       <Card>
         <div>
           <CardTitle>{props.title}</CardTitle>
