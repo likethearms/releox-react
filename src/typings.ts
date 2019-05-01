@@ -143,7 +143,7 @@ export interface FormikFormWrapperProps<R> {
   children: JSX.Element;
 }
 
-export type InputTypes = 'text' | 'email' | 'password' | 'date';
+export type InputTypes = 'text' | 'email' | 'password' | 'date' | 'number';
 
 export interface InputProps extends AbstractInputGroupProps {
   type?: InputTypes;
