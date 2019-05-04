@@ -100,9 +100,13 @@ class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInputState
 
   buildQuery(inputValue: string): { [key: string]: { ilike: string } } {
     const { searchFields, queryFormat } = this.props;
-    let input = inputValue;
-    if (queryFormat === 'postgresql') input = `%${inputValue}%`;
-    return { [searchFields[0]]: { ilike: input } };
+    let query: any;
+    if (queryFormat === 'postgresql') {
+      query = { ilike: `%${inputValue}%` };
+    } else {
+      query = { like: inputValue, options: 'i' };
+    }
+    return { [searchFields[0]]: query };
   }
 
   loadOptions(inputValue: string): Promise<{ value: string, label: string }[]> {
