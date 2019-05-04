@@ -5,11 +5,11 @@
   "main": "lib/index.js",
   "author": "Henrik Salmela",
   "dependencies": {
-    "@types/react-select": "^2.0.15",
+    "@types/react-select": "^2.0.17",
     "prop-types": "^15.7.2",
     "query-string": "^6.4.2",
     "react-loading": "^2.0.3",
-    "react-select": "^2.4.2"
+    "react-select": "^2.4.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,17 +39,19 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@storybook/addon-actions": "^5.0.5",
-    "@storybook/addon-info": "^5.0.5",
-    "@storybook/addon-links": "^5.0.5",
-    "@storybook/react": "^5.0.5",
+    "@coreui/coreui": "^2.1.9",
+    "@storybook/addon-actions": "^5.0.11",
+    "@storybook/addon-info": "^5.0.11",
+    "@storybook/addon-links": "^5.0.11",
+    "@storybook/react": "^5.0.11",
     "@types/enzyme": "^3.9.1",
     "@types/enzyme-adapter-react-16": "^1.0.5",
-    "@types/jest": "24.0.11",
+    "@types/jest": "^24.0.12",
+    "@types/moxios": "^0.4.8",
     "@types/node": "^11.12.1",
-    "@types/react": "^16.8.10",
-    "@types/react-dom": "^16.8.3",
-    "@types/react-router-dom": "^4.3.1",
+    "@types/react": "^16.8.16",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-router-dom": "^4.3.2",
     "@types/storybook__addon-actions": "^3.4.2",
     "@types/storybook__addon-links": "^3.3.4",
     "@types/storybook__react": "^4.0.1",
@@ -57,7 +59,8 @@
     "bootstrap": "^4.3.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
-    "formik": "^1.5.1",
+    "formik": "^1.5.4",
+    "moxios": "^0.4.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
@@ -65,9 +68,6 @@
     "sass": "^1.17.3",
     "tslint": "^5.14.0",
     "tslint-config-airbnb": "^5.11.1",
-    "typescript": "^3.4.1",
-    "@coreui/coreui": "^2.1.9",
-    "@types/moxios": "^0.4.8",
-    "moxios": "^0.4.0"
+    "typescript": "^3.4.5"
   }
 }
