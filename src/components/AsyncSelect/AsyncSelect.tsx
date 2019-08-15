@@ -53,7 +53,7 @@ class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInputState
     };
   }
 
-  componentWillMount(): void {
+  componentDidMount(): void {
     const { value } = this.props;
     if (value) {
       this.setupDefaultValue();

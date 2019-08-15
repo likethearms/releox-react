@@ -33,7 +33,7 @@ export default (
         message: '',
       };
 
-      componentWillMount(): void {
+      componentDidMount(): void {
         const { user } = this.props;
         const isValid = this.validateModel(user);
         this.setState({

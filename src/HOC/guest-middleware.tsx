@@ -16,7 +16,7 @@ const guestMiddleware = function (WrapperComponent: any): any {
       redirect: '',
     };
 
-    componentWillMount(): void {
+    componentDidMount(): void {
       getAccessInformation()
         .then(() => this.setState({ loading: false, redirect: URL.HOME }))
         .catch(() => this.setState({ loading: false }));

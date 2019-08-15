@@ -20,7 +20,7 @@ class ConfirmScene extends Component<ConfirmSceneProps, State> {
     loading: true,
   };
 
-  componentWillMount(): void {
+  componentDidMount(): void {
     const query = queryString.parse(window.location.search);
     Axios.get(`${apis.CONFIRM}?uid=${query.uid}&token=${query.token}`)
       .then(() => this.setState({ loading: false }))

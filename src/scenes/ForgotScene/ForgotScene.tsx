@@ -25,7 +25,7 @@ class ForgotScene extends AbstractAuthOneInputScene<BodyData, ForgotSceneProps>{
     forgotAPIUrl: apis.FORGOT,
   };
 
-  componentWillMount(): void {
+  componentDidMount(): void {
     this.setState({ loading: false });
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "releox-react",
-  "version": "0.1.0-beta.56",
+  "version": "0.1.0-beta.57",
   "typings": "./index.d.ts",
   "main": "lib/index.js",
   "author": "Henrik Salmela",
@@ -56,7 +56,7 @@
     "@types/storybook__addon-actions": "^3.4.2",
     "@types/storybook__addon-links": "^3.3.4",
     "@types/storybook__react": "^4.0.1",
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",

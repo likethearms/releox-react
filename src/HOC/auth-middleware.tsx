@@ -20,7 +20,7 @@ const authMiddleware = function <U>(WrapperComponent: any): any {
       user: {} as U,
     };
 
-    componentWillMount(): void {
+    componentDidMount(): void {
       let i: AccessInformation;
       getAccessInformation()
         .then((info) => {

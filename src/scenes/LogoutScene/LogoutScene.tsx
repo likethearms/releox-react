@@ -15,7 +15,7 @@ class LogoutScene extends Component {
     redirect: '',
   };
 
-  componentWillMount(): void {
+  componentDidMount(): void {
     getAccessInformation()
       .then(({ accessToken }) =>
         Axios.post(apis.LOGOUT, undefined, { params: { access_token: accessToken } }))

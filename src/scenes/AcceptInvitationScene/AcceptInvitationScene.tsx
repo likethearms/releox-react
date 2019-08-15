@@ -31,7 +31,7 @@ class AcceptInvitationScene
     removeAccessTokenUrl: apis.LOGOUT,
   };
 
-  componentWillMount(): void {
+  componentDidMount(): void {
     const q = queryString.parse(window.location.search);
     Axios
       .get(`${apis.VALIDATE_INVITATION_TOKEN}?uid=${q.uid}&invitation_token=${q.invitation_token}`)

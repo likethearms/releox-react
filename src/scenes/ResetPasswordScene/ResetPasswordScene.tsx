@@ -30,7 +30,7 @@ class ResetPasswordScene
     resetPasswordAPIUrl: apis.PASSWORD_RESET,
   };
 
-  componentWillMount(): void {
+  componentDidMount(): void {
     parseParams(true)
       .then(({ user, access_token }) => validateTokenRequest(access_token, user))
       .then(() => this.setState({ loading: false }))
