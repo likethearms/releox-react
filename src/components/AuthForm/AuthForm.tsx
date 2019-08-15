@@ -2,7 +2,7 @@ import React from 'react';
 import FormikFormWrapper from '../FormikFormWrapper/FormikFormWrapper';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import { InputTypes, ButtonType } from '../../typings';
+import { InputTypes } from '../../typings';
 
 interface InputProps {
   name: string;
@@ -20,9 +20,9 @@ interface Props<T> {
 
 const AuthForm = function <T>(props: Props<T>): JSX.Element {
   return (
-    <FormikFormWrapper<T>
+    <FormikFormWrapper
       onSubmit={props.onSubmit}
-      initialValues={props.initialValues as any}>
+      initialValues={props.initialValues}>
       <div>
         <Input
           name={props.inputProps.name}

@@ -19,7 +19,7 @@ export interface AsyncSelectFormikProps extends AbstractInputGroupProps {
 }
 
 export interface AsyncSelectInputDefaultProps {
-  onError?(e: Error): void;
+  onError?: (e: Error) => void;
   placeholder: undefined;
   value: undefined;
   fixedValue: undefined;
