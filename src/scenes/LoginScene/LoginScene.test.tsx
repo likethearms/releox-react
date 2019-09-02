@@ -53,27 +53,27 @@ describe('UI tests', () => {
       wrapper = shallow<LoginScene>(<LoginScene locale={ReleoxLocale.EN} />);
     });
 
-    it('should have finnish title', () => {
+    it('should have english title', () => {
       const word = wrapper.find('AuthLayout').prop('title');
       expect(word).toBe('Login');
     });
 
-    it('should have finnish subtitle', () => {
+    it('should have english subtitle', () => {
       const word = wrapper.find('AuthLayout').prop('subTitle');
       expect(word).toBe('Fill form and login');
     });
 
-    it('should have finnish email placeholder', () => {
+    it('should have english email placeholder', () => {
       const word = wrapper.find('[name="email"]').prop('label');
       expect(word).toBe('Email');
     });
 
-    it('should have finnish password placeholder', () => {
+    it('should have english password placeholder', () => {
       const word = wrapper.find('[name="password"]').prop('label');
       expect(word).toBe('Password');
     });
 
-    it('should have finnish button text', () => {
+    it('should have english button text', () => {
       const word = wrapper.find('Button').prop('children');
       expect(word).toBe('Login');
     });
