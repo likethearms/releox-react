@@ -30,7 +30,7 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
     message: '',
   };
 
-  onSubmit(body: LoginBody): Promise<void> | void {
+  onSubmit(body: LoginBody): Promise<void> {
     const { onSubmit, onError } = this.props;
     if (onSubmit) return onSubmit(body);
     return Axios
