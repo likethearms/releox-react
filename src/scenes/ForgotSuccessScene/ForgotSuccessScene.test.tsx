@@ -17,7 +17,7 @@ describe('UI tests', () => {
 
     it('should have finnish subtitle', () => {
       const word = wrapper.find('AuthLayout').prop('subTitle');
-      expect(word).toBe('Salasanan nollauslinkki on lähetetty sähköpostiisi! Avaa sähköpostissa oleva linkki ja vaihda salasana.'); // tslint:disable-line:max-line-length
+      expect(word).toBe('Salasanan nollauslinkki on lähetetty sähköpostiisi! Avaa sähköpostissa oleva linkki ja vaihda salasana.');
     });
   });
 

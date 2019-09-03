@@ -1,5 +1,3 @@
-/* tslint:disable:max-line-length  */
-
 interface TranslationObject {
   [key: string]: string;
   // Login
