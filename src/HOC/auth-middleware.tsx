@@ -14,9 +14,9 @@ interface MiddlewareState<U> {
 
 /* eslint-disable react/jsx-props-no-spreading */
 const authMiddleware = <U extends {}>(WrapperComponent: ElementType) => (
-  class AuthMiddleware extends Component<void, MiddlewareState<U>> {
-    constructor() {
-      super();
+  class AuthMiddleware extends Component<any, MiddlewareState<U>> {
+    constructor(props: any) {
+      super(props);
       this.state = {
         loading: true,
         redirect: '',
