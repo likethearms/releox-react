@@ -22,7 +22,7 @@ describe('UI tests', () => {
   describe('Finnish translations', () => {
     let wrapper: ShallowWrapper;
     beforeAll(() => {
-      wrapper = shallow<ForgotScene>(<ForgotScene />);
+      wrapper = shallow(<ForgotScene />);
     });
 
     it('should have finnish title', () => {
@@ -49,7 +49,7 @@ describe('UI tests', () => {
   describe('English translations', () => {
     let wrapper: ShallowWrapper;
     beforeAll(() => {
-      wrapper = shallow<ForgotScene>(<ForgotScene locale={ReleoxLocale.EN} />);
+      wrapper = shallow(<ForgotScene locale="en" />);
     });
 
     it('should have english title', () => {
@@ -87,7 +87,7 @@ describe('UI tests', () => {
     });
 
     it('should have default links in english if locale is set to EN', () => {
-      const wrapper = shallow<ForgotScene>(<ForgotScene locale={ReleoxLocale.EN} />);
+      const wrapper = shallow<ForgotScene>(<ForgotScene locale="en" />);
       const links = wrapper.find('AuthLayout').prop('links');
       expect(links).toEqual([
         {

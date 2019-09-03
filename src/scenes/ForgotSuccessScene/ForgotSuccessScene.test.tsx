@@ -24,7 +24,7 @@ describe('UI tests', () => {
   describe('English translations', () => {
     let wrapper: ShallowWrapper;
     beforeAll(() => {
-      wrapper = shallow(<ForgotSuccessScene locale={ReleoxLocale.EN} />);
+      wrapper = shallow(<ForgotSuccessScene locale="en" />);
     });
 
     it('should have english title', () => {
@@ -52,7 +52,7 @@ describe('UI tests', () => {
     });
 
     it('should have default links in english if locale is set to EN', () => {
-      const wrapper = shallow(<ForgotSuccessScene locale={ReleoxLocale.EN} />);
+      const wrapper = shallow(<ForgotSuccessScene locale="en" />);
       const links = wrapper.find('AuthLayout').prop('links');
       expect(links).toEqual([
         {
