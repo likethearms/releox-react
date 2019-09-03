@@ -14,6 +14,7 @@ interface AsyncSelectInputPropTypes {
   getUrl: Validator<NonNullable<string>>;
   fixedValue: Requireable<string>;
   mapValue: Requireable<string>;
+  onError: Requireable<Function>;
   mapLabel: Requireable<string>;
   value: Requireable<string>;
   searchFields: Validator<NonNullable<(string | null)[]>>;
@@ -25,6 +26,7 @@ class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInputState
     onChange: PropTypes.func.isRequired,
     getUrl: PropTypes.string.isRequired,
     fixedValue: PropTypes.string,
+    onError: PropTypes.func,
     mapValue: PropTypes.string,
     mapLabel: PropTypes.string,
     value: PropTypes.string,
@@ -35,18 +37,14 @@ class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInputState
     placeholder: undefined,
     value: undefined,
     fixedValue: undefined,
-    onError: () => { },
+    onError: (e: Error) => e,
     mapValue: 'id',
     mapLabel: 'name',
   };
 
-  state: AsyncSelectInputState = {
-    defaultValue: undefined,
-    loading: false,
-  };
-
   constructor(props: AsyncSelectInputProps) {
     super(props);
+    this.loadOptions = this.loadOptions.bind(this);
     this.state = {
       loading: true,
       defaultValue: undefined,
@@ -71,12 +69,12 @@ class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInputState
     if (fixedValue) compProps.value = fixedValue;
     return (
       <Async
-        {...compProps}
+        {...compProps} /* eslint-disable-line react/jsx-props-no-spreading */
         cacheOptions
         placeholder={placeholder}
         defaultOptions
         isClearable
-        loadOptions={this.loadOptions.bind(this)}
+        loadOptions={this.loadOptions}
         onChange={(o: any) => onChange(o === null ? '' : o.value)}
         defaultValue={defaultValue}
       />
@@ -89,7 +87,7 @@ class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInputState
     } = this.props;
     return Axios
       .get(getUrl, { params: { filter: { where: { [mapValue]: value } } } })
-      .then(r => this.setState({
+      .then((r) => this.setState({
         defaultValue: {
           value: r.data[0][mapValue],
           label: r.data[0][mapLabel],
@@ -110,11 +108,13 @@ class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInputState
   }
 
   loadOptions(inputValue: string): Promise<{ value: string, label: string }[]> {
-    const { getUrl, mapValue, mapLabel, onError } = this.props;
+    const {
+      getUrl, mapValue, mapLabel, onError,
+    } = this.props;
     return new Promise((resolve) => {
       Axios
         .get(getUrl, { params: { filter: { where: this.buildQuery(inputValue) }, limit: 10 } })
-        .then(r => resolve(r.data.map((c: any) => ({ value: c[mapValue], label: c[mapLabel] }))))
+        .then((r) => resolve(r.data.map((c: any) => ({ value: c[mapValue], label: c[mapLabel] }))))
         .catch(onError);
     });
   }

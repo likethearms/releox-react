@@ -1,10 +1,10 @@
-import { URL } from '../../routes';
+import URL from '../../routes';
 import AbstractAuthOneInputScene, {
   AbstractAuthOneInputSceneProps,
   AbstractAuthOneInputSceneInputProps,
 } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 import apis from '../../apis';
-import { InputTypes, AuthLayoutLinkItem } from '../../typings';
+import { AuthLayoutLinkItem } from '../../typings';
 
 interface BodyData {
   email: string;
@@ -20,10 +20,9 @@ interface ForgotSceneProps extends AbstractAuthOneInputSceneProps {
 
 const CONTEXT = 'ForgotScene';
 
-class ForgotScene extends AbstractAuthOneInputScene<BodyData, ForgotSceneProps>{
-  public static defaultProps: DefaultProps = {
-    forgotAPIUrl: apis.FORGOT,
-  };
+/* eslint-disable class-methods-use-this */
+class ForgotScene extends AbstractAuthOneInputScene<BodyData, ForgotSceneProps> {
+  static defaultProps: DefaultProps;
 
   componentDidMount(): void {
     this.setState({ loading: false });
@@ -73,5 +72,9 @@ class ForgotScene extends AbstractAuthOneInputScene<BodyData, ForgotSceneProps>{
     return 'forgot';
   }
 }
+
+ForgotScene.defaultProps = {
+  forgotAPIUrl: apis.FORGOT,
+};
 
 export default ForgotScene;

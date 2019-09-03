@@ -1,4 +1,4 @@
-import { URL } from './routes';
+import URL from './routes';
 import LoginScene from './scenes/LoginScene/LoginScene';
 import ForgotScene from './scenes/ForgotScene/ForgotScene';
 import ForgotSuccessScene from './scenes/ForgotSuccessScene/ForgotSuccessScene';

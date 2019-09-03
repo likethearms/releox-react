@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Loading } from '../package-index';
-import { getAccessInformation, destroyAccessInformation, AccessInformation } from '../config';
-import { validateTokenRequest } from '../requests';
+import React, { Component, ElementType } from 'react';
 import { Redirect } from 'react-router';
-import { URL } from '../routes';
 import Axios, { AxiosResponse } from 'axios';
+import { getAccessInformation, destroyAccessInformation, AccessInformation } from '../config';
+import validateTokenRequest from '../requests';
+import URL from '../routes';
+import Loading from '../components/Loading/Loading';
 
 interface MiddlewareState<U> {
   loading: boolean;
@@ -12,13 +12,17 @@ interface MiddlewareState<U> {
   user: U;
 }
 
-const authMiddleware = function <U>(WrapperComponent: any): any {
-  return class Middleware extends Component<void, MiddlewareState<U>> {
-    state: MiddlewareState<U> = {
-      loading: true,
-      redirect: '',
-      user: {} as U,
-    };
+/* eslint-disable react/jsx-props-no-spreading */
+const authMiddleware = <U extends {}>(WrapperComponent: ElementType) => (
+  class AuthMiddleware extends Component<void, MiddlewareState<U>> {
+    constructor() {
+      super();
+      this.state = {
+        loading: true,
+        redirect: '',
+        user: {} as U,
+      };
+    }
 
     componentDidMount(): void {
       let i: AccessInformation;
@@ -44,7 +48,6 @@ const authMiddleware = function <U>(WrapperComponent: any): any {
       if (loading) return <Loading centeredVertical />;
       return <WrapperComponent {...this.props} user={user} />;
     }
-  };
-};
+  });
 
 export default authMiddleware;

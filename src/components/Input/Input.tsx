@@ -5,7 +5,9 @@ import { InputProps } from '../../typings';
 
 class Input extends AbstractInputGroup<InputProps> {
   getElement(name: string, id: string): JSX.Element {
-    const { type, placeholder, label, className } = this.props;
+    const {
+      type, placeholder, label, className,
+    } = this.props;
     return (
       <Field
         name={name}
