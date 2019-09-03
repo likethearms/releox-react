@@ -2,12 +2,11 @@ import queryString from 'query-string';
 
 interface ParseParams {
   user: string;
-  access_token: string;
+  access_token: string; // eslint-disable-line camelcase
 }
 
 export default (strict: boolean = false): Promise<ParseParams> => new Promise((resolve, reject) => {
-  let query;
-  query = queryString.parse(window.location.search);
+  const query = queryString.parse(window.location.search);
   const params = {
     access_token: query.access_token as string,
     user: query.user as string,

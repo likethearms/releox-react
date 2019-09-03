@@ -1,24 +1,29 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import Axios from 'axios';
 import { getAccessInformation } from '../../config';
 import apis from '../../apis';
-import Axios from 'axios';
 import Loading from '../../components/Loading/Loading';
-import { URL } from '../../routes';
+import URL from '../../routes';
 
 interface State {
   redirect: string;
 }
 
-class LogoutScene extends Component {
-  state: State = {
-    redirect: '',
-  };
+interface Props { }
+
+class LogoutScene extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      redirect: '',
+    };
+  }
 
   componentDidMount(): void {
     getAccessInformation()
-      .then(({ accessToken }) =>
-        Axios.post(apis.LOGOUT, undefined, { params: { access_token: accessToken } }))
+      .then(({ accessToken }) => Axios
+        .post(apis.LOGOUT, undefined, { params: { access_token: accessToken } }))
       .then(this.afterRequest.bind(this))
       .catch(this.afterRequest.bind(this));
   }

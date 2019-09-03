@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Button from './Button';
-import { ButtonType, ButtonColor } from '../../typings';
 
 it('should show input', () => {
   const wrapper = shallow(<Button id="foo-id">Foo</Button>);
@@ -16,7 +15,9 @@ it('should implement props', () => {
       type="submit"
       className="test-class"
       color="light"
-    >Foo</Button>
+    >
+      Foo
+    </Button>
   ));
   expect(wrapper.find('button').prop('type')).toBe('submit');
   expect(wrapper.find('button').prop('className')).toContain('test-class');

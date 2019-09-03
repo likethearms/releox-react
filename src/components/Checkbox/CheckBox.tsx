@@ -7,8 +7,7 @@ const CheckBox = ({ id, className, name }: CheckBoxProps) => (
     name={name}
     id={id || `${name}-input`}
     className={className || 'form-control'}
-    render={({ field, form }: any) =>
-      (<input type="checkbox" checked={field.value} {...field} />)}
+    render={({ field }: any) => (<input type="checkbox" checked={field.value} {...field} />)} /* eslint-disable-line react/jsx-props-no-spreading */
   />
 );
 

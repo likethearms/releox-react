@@ -1,20 +1,24 @@
-import React, { Component } from 'react';
-import { Loading } from '../package-index';
-import { getAccessInformation } from '../config';
+import React, { Component, ElementType } from 'react';
 import { Redirect } from 'react-router';
-import { URL } from '../routes';
+import { getAccessInformation } from '../config';
+import URL from '../routes';
+import Loading from '../components/Loading/Loading';
 
 interface MiddlewareState {
   loading: boolean;
   redirect: string;
 }
 
-const guestMiddleware = function (WrapperComponent: any): any {
-  return class Middleware extends Component<void, MiddlewareState> {
-    state: MiddlewareState = {
-      loading: true,
-      redirect: '',
-    };
+/* eslint-disable react/jsx-props-no-spreading */
+const guestMiddleware = (WrapperComponent: ElementType) => (
+  class Middleware extends Component<void, MiddlewareState> {
+    constructor() {
+      super();
+      this.state = {
+        loading: true,
+        redirect: '',
+      };
+    }
 
     componentDidMount(): void {
       getAccessInformation()
@@ -28,7 +32,7 @@ const guestMiddleware = function (WrapperComponent: any): any {
       if (loading) return <Loading centeredVertical />;
       return <WrapperComponent {...this.props} />;
     }
-  };
-};
+  });
+
 
 export default guestMiddleware;

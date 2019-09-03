@@ -1,18 +1,18 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import moxios from 'moxios';
+import { Field } from 'formik';
+import { MemoryRouter } from 'react-router';
+import { action } from '@storybook/addon-actions';
 import '../releox.css';
 import { storiesOf } from '@storybook/react';
 import CenterContent from '../components/CenterContent/CenterContent';
 import Loading from '../components/Loading/Loading';
 import FormikFormWrapper from '../components/FormikFormWrapper/FormikFormWrapper';
-import { Field } from 'formik';
-import { action } from '@storybook/addon-actions';
 import LoginScene from '../scenes/LoginScene/LoginScene';
 import Button from '../components/Button/Button';
-import { MemoryRouter } from 'react-router';
 import ForgotScene from '../scenes/ForgotScene/ForgotScene';
 import ResetPasswordScene from '../scenes/ResetPasswordScene/ResetPasswordScene';
-import moxios from 'moxios';
 import ResetPasswordSuccessScene
   from '../scenes/ResetPasswordSuccessScene/ResetPasswordSuccessScene';
 import ForgotSuccessScene from '../scenes/ForgotSuccessScene/ForgotSuccessScene';
@@ -43,13 +43,14 @@ storiesOf('Form', module)
   .add('FormikFormWrapper', () => (
     <FormikFormWrapper<any>
       onSubmit={action('onSubmit')}
-      initialValues={{ name: '' }}>
+      initialValues={{ name: '' }}
+    >
       <Field name="name" type="input" />
     </FormikFormWrapper>
   ));
 
 storiesOf('Scenes', module)
-  .addDecorator(c => <MemoryRouter>{c()}</MemoryRouter>)
+  .addDecorator((c) => <MemoryRouter>{c()}</MemoryRouter>)
   .add('Login', () => <LoginScene />)
   .add('Forgot', () => <ForgotScene />)
   .add('ForgotSuccess', () => <ForgotSuccessScene />)

@@ -63,7 +63,7 @@ abstract class AbstractAuthOneInputScene<Data, Prop>
       })
       .then(() => {
         if (this.shouldDestroyToken()) return this.destroyToken(redirect);
-        return new Promise(resolve => this.setState({ redirect }, resolve));
+        return new Promise((resolve) => this.setState({ redirect }, resolve));
       })
       .catch(this.onErrorMethod.bind(this));
   }
@@ -108,7 +108,7 @@ abstract class AbstractAuthOneInputScene<Data, Prop>
   private destroyToken(redirect: string): Promise<any> {
     return parseParams()
       .then(({ access_token }) => Axios.post(`${apis.LOGOUT}?access_token=${access_token}`))
-      .then(() => new Promise(resolve => this.setState({ redirect }, resolve)));
+      .then(() => new Promise((resolve) => this.setState({ redirect }, resolve)));
   }
 
   /* eslint-disable class-methods-use-this */

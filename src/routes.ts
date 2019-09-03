@@ -1,4 +1,4 @@
-export const URL = {
+export default {
   FORGOT: '/forgot',
   FORGOT_SUCCESS: '/forgot-success',
   CONFIRM: '/confirm',

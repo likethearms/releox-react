@@ -2,14 +2,13 @@ import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import moxios from 'moxios';
 import LoginScene from './LoginScene';
-import FormikFormWrapper from '../../components/FormikFormWrapper/FormikFormWrapper';
-import { ReleoxLocale } from '../../typings';
 
 describe('onSubmit', () => {
   it('should call onSubmit', () => {
     const onSubmit = jest.fn();
-    const wrapper = shallow<LoginScene>(<LoginScene onSubmit={onSubmit} />);
-    wrapper.find<FormikFormWrapper>(FormikFormWrapper).props().onSubmit();
+    const wrapper = shallow(<LoginScene onSubmit={onSubmit} />);
+    const onSubmitProp = wrapper.find('FormikFormWrapper').props().onSubmit as Function;
+    onSubmitProp();
     expect(onSubmit).toBeCalledTimes(1);
   });
 });
@@ -50,7 +49,7 @@ describe('UI tests', () => {
   describe('English translations', () => {
     let wrapper: ShallowWrapper;
     beforeAll(() => {
-      wrapper = shallow<LoginScene>(<LoginScene locale={ReleoxLocale.EN} />);
+      wrapper = shallow<LoginScene>(<LoginScene locale="en" />);
     });
 
     it('should have english title', () => {
@@ -88,20 +87,20 @@ describe('UI tests', () => {
           to: '/forgot',
           id: 'LoginScene-forgot-link',
           text: 'Unohditko salasanasi?',
-        }],
-      );
+        },
+      ]);
     });
 
     it('should have default links in english', () => {
-      const wrapper = shallow<LoginScene>(<LoginScene locale={ReleoxLocale.EN} />);
+      const wrapper = shallow<LoginScene>(<LoginScene locale="en" />);
       const links = wrapper.find('AuthLayout').prop('links');
       expect(links).toEqual([
         {
           to: '/forgot',
           id: 'LoginScene-forgot-link',
           text: 'Forgot password?',
-        }],
-      );
+        },
+      ]);
     });
 
     it('should show register link if showRegisterLink is set to true', () => {
@@ -118,13 +117,13 @@ describe('UI tests', () => {
           to: '/register',
           id: 'LoginScene-register-link',
           text: 'Oletko uusi? Luo tunnus!',
-        }],
-      );
+        },
+      ]);
     });
 
     it('should show register link in english if showRegisterLink is set to true and locale is set to EN', () => {
       window.RELEOX_OPTIONS = { showRegisterLink: true };
-      const wrapper = shallow<LoginScene>(<LoginScene locale={ReleoxLocale.EN} />);
+      const wrapper = shallow<LoginScene>(<LoginScene locale="en" />);
       const links = wrapper.find('AuthLayout').prop('links');
       expect(links).toEqual([
         {
@@ -136,8 +135,8 @@ describe('UI tests', () => {
           to: '/register',
           id: 'LoginScene-register-link',
           text: 'New? Create new account!',
-        }],
-      );
+        },
+      ]);
     });
   });
 });
@@ -175,9 +174,9 @@ describe('moxios tests', () => {
       response: { error: { message: 'Foo bar' } },
     });
 
-    const wrapper = shallow<LoginScene>(<LoginScene />);
-    wrapper.instance().onSubmit(body).then(() => {
-      expect(wrapper.state().message).toBe('Foo bar');
+    const w = shallow<LoginScene>(<LoginScene />);
+    w.instance().onSubmit(body).then(() => {
+      expect(w.state().message).toBe('Foo bar');
       done();
     });
   });
@@ -189,8 +188,8 @@ describe('moxios tests', () => {
       response: { error: { message: 'Foo bar' } },
     });
 
-    const wrapper = shallow<LoginScene>(<LoginScene onError={onError} />);
-    wrapper.instance().onSubmit(body).then(() => {
+    const w = shallow<LoginScene>(<LoginScene onError={onError} />);
+    w.instance().onSubmit(body).then(() => {
       expect(onError).toBeCalledTimes(1);
       done();
     });

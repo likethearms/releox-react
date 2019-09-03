@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import Axios, { AxiosResponse } from 'axios';
+import { Redirect } from 'react-router-dom';
 import FormikFormWrapper from '../../components/FormikFormWrapper/FormikFormWrapper';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
-import { Redirect } from 'react-router-dom';
 import { saveAccessInformation, getErrorMessage, getReleoxOptions } from '../../config';
-import { URL } from '../../routes';
+import URL from '../../routes';
 import { ct } from '../../I18N';
 import AuthLayout from '../../components/AuthLayout/AuthLayout';
 import apis from '../../apis';
 import {
   LoginSceneProps,
   LoginBody,
-  InputTypes,
-  ButtonType,
   AuthLayoutLinkItem,
 } from '../../typings';
 
@@ -25,10 +23,14 @@ interface LoginSceneState {
 const CONTEXT = 'LoginScene';
 
 class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
-  state: LoginSceneState = {
-    redirect: '',
-    message: '',
-  };
+  constructor(props: LoginSceneProps) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      redirect: '',
+      message: '',
+    };
+  }
 
   onSubmit(body: LoginBody): Promise<void> {
     const { onSubmit, onError } = this.props;
@@ -39,7 +41,7 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
       .then(() => this.setState({ redirect: URL.HOME }))
       .catch((e) => {
         if (onError) return onError(e);
-        this.setState({ message: getErrorMessage(e) });
+        return this.setState({ message: getErrorMessage(e) });
       });
   }
 
@@ -73,10 +75,12 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
         title={t('title')}
         subTitle={t('subTitle')}
         context={CONTEXT}
-        links={this.getLinks()}>
+        links={this.getLinks()}
+      >
         <FormikFormWrapper<LoginBody>
           initialValues={{ email: '', password: '' }}
-          onSubmit={this.onSubmit.bind(this)}>
+          onSubmit={this.onSubmit}
+        >
           <div>
             <Input
               name="email"
@@ -92,7 +96,8 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
             <Button
               className="float-right"
               type="submit"
-              id={`${CONTEXT}-login-button`}>
+              id={`${CONTEXT}-login-button`}
+            >
               {t('loginButtonText')}
             </Button>
             <div className="text-center">{message}</div>

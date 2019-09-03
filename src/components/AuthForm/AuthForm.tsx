@@ -18,23 +18,28 @@ interface Props<T> {
   onSubmit(body: T): void;
 }
 
-const AuthForm = function <T>(props: Props<T>): JSX.Element {
+const AuthForm = <T extends {}>(props: Props<T>): JSX.Element => {
+  const {
+    onSubmit, initialValues, inputProps, placeholder, context, buttonText,
+  } = props;
   return (
     <FormikFormWrapper
-      onSubmit={props.onSubmit}
-      initialValues={props.initialValues}>
+      onSubmit={onSubmit}
+      initialValues={initialValues}
+    >
       <div>
         <Input
-          name={props.inputProps.name}
-          type={props.inputProps.type}
-          label={props.placeholder}
-          id={`${props.context}-${props.inputProps.type}-input`}
+          name={inputProps.name}
+          type={inputProps.type}
+          label={placeholder}
+          id={`${context}-${inputProps.type}-input`}
         />
         <Button
           className="float-right"
           type="submit"
-          id={`${props.context}-submit-button`}>
-          {props.buttonText}
+          id={`${context}-submit-button`}
+        >
+          {buttonText}
         </Button>
       </div>
     </FormikFormWrapper>

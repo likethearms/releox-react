@@ -9,6 +9,7 @@ export interface SidebarDropdownProps {
   url: string;
 }
 
+/* eslint-disable jsx-a11y/anchor-is-valid */
 const SidebarDropdown = (props: SidebarDropdownProps) => {
   const {
     icon, text, clickHandler, children, url,
