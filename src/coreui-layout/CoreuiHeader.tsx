@@ -9,24 +9,22 @@ export interface CoreuiHeaderProps {
   menuTitle: string;
 }
 
-const CoreuiHeader = ({ title, menuTitle, brandUrl }: CoreuiHeaderProps) => {
-  return (
-    <div className="app-header navbar" style={{ paddingRight: '20px' }}>
-      <CoreuiHeaderSideBarToggle
-        buttonClass="navbar-toggler mobile-sidebar-toggler d-md-none mr-auto"
-        toggleClass="sidebar-show"
-      />
-      <Link to={brandUrl || '/'} className="navbar-brand">
-        {title}
-      </Link>
-      <ul className="nav navbar-nav ml-auto d-none d-sm-block">
-        <li className="nav-item px-3">
-          {menuTitle}
-        </li>
-      </ul>
-    </div>
-  );
-};
+const CoreuiHeader = ({ title, menuTitle, brandUrl }: CoreuiHeaderProps) => (
+  <div className="app-header navbar" style={{ paddingRight: '20px' }}>
+    <CoreuiHeaderSideBarToggle
+      buttonClass="navbar-toggler mobile-sidebar-toggler d-md-none mr-auto"
+      toggleClass="sidebar-show"
+    />
+    <Link to={brandUrl || '/'} className="navbar-brand">
+      {title}
+    </Link>
+    <ul className="nav navbar-nav ml-auto d-none d-sm-block">
+      <li className="nav-item px-3">
+        {menuTitle}
+      </li>
+    </ul>
+  </div>
+);
 
 CoreuiHeader.propTypes = {
   title: PropTypes.node.isRequired,

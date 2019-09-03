@@ -13,7 +13,8 @@ class AsyncSelectFormik extends AbstractInputGroup<AsyncSelectFormikProps> {
         id={id}
         getUrl={getUrl}
         queryFormat={queryFormat}
-        component={AsyncSelectFormikWrapper} />
+        component={AsyncSelectFormikWrapper}
+      />
     );
   }
 }

@@ -1,5 +1,3 @@
-import { Component } from 'react';
-import { Route } from 'react-router';
 import { LoadingProps as LP, LoadingType } from 'react-loading';
 import { FormikValues } from 'formik';
 
@@ -19,7 +17,7 @@ export interface AsyncSelectFormikProps extends AbstractInputGroupProps {
 }
 
 export interface AsyncSelectInputDefaultProps {
-  onError?: (e: Error) => void;
+  onError?: (e: Error) => any;
   placeholder: undefined;
   value: undefined;
   fixedValue: undefined;
@@ -31,7 +29,7 @@ export type AsyncSelectQueryFormat = 'mongodb' | 'postgresql';
 
 export interface AsyncSelectInputProps {
   onChange(value: string | number | null): void;
-  onError(e: Error): void;
+  onError(e: Error): any;
   queryFormat: AsyncSelectQueryFormat;
   placeholder?: string;
   fixedValue?: string;
@@ -65,10 +63,7 @@ export interface AbstractFormikInputWrapperProps {
   form: { setFieldValue: Function };
 }
 
-export enum ReleoxLocale {
-  FI = 'fi',
-  EN = 'en',
-}
+export type ReleoxLocale = 'fi' | 'en';
 
 export interface ReleoxOptions {
   showRegisterLink: boolean;

@@ -1,3 +1,3 @@
-export default interface Translation<T> {
+export interface Translation<T> {
   [key: string]: T;
 }

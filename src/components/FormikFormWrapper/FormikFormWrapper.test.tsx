@@ -6,7 +6,8 @@ const onSubmit = jest.fn();
 const wrapper = mount((
   <FormikFormWrapper<any>
     onSubmit={onSubmit}
-    initialValues={{ name: '' }}>
+    initialValues={{ name: '' }}
+  >
     <p>Test</p>
   </FormikFormWrapper>
 ));

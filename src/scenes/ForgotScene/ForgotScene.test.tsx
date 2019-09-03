@@ -86,7 +86,7 @@ describe('UI tests', () => {
       );
     });
 
-    it('should have default links in english', () => {
+    it('should have default links in english if locale is set to EN', () => {
       const wrapper = shallow<ForgotScene>(<ForgotScene locale={ReleoxLocale.EN} />);
       const links = wrapper.find('AuthLayout').prop('links');
       expect(links).toEqual([
@@ -127,7 +127,7 @@ describe('moxios tests', () => {
     });
   });
 
-  it('should set error message', (done) => {
+  it('should set error message to message state', (done) => {
     moxios.stubRequest(`${window.API_ENDPOINT}/Members/reset`, {
       status: 404,
       response: { error: { message: 'Email not found' } },

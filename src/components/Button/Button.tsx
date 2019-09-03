@@ -2,15 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ButtonProps } from '../../typings';
 
-const Button = ({ type, id, children, color, className, onClick }: ButtonProps) => (
-  <button
-    type={type || 'button'}
-    id={id}
-    onClick={onClick}
-    className={`btn btn-${color || 'primary'} ${className}`}>
-    {children}
-  </button>
-);
+/* eslint-disable react/button-has-type */
+const Button = (props: ButtonProps) => {
+  const {
+    id, children, color, className, onClick, type,
+  } = props;
+  return (
+    <button
+      type={type}
+      id={id}
+      onClick={onClick}
+      className={`btn btn-${color} ${className}`}
+    >
+      {children}
+    </button>
+  );
+};
 
 Button.propTypes = {
   id: PropTypes.string.isRequired,
@@ -18,6 +25,12 @@ Button.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string,
   color: PropTypes.string,
+};
+
+Button.defaultProps = {
+  type: 'button',
+  color: 'primary',
+  className: '',
 };
 
 export default Button;

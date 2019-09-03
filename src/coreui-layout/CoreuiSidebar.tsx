@@ -20,7 +20,7 @@ const CoreuiSidebar = ({ menu }: CoreuiSidebarProps) => {
           clickHandler={clickHandler}
           url={m.url}
         >
-          {m.children.map(c => (
+          {m.children.map((c) => (
             <CoreuiSidebarItem
               key={`Dropown#SidebarItem#${c.text}`}
               icon={c.icon}
