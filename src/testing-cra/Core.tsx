@@ -2,14 +2,14 @@ import React from 'react';
 import CoreuiLayout from '../coreui-layout/CoreuiLayout';
 import authMiddleware from '../HOC/auth-middleware';
 import validateModel from '../HOC/validate-model';
-import { Input } from '../package-index';
+import Input from '../components/Input/Input';
 
-const CUI = (props: any) => (
+const CUI = ({ user }: any) => (
   <CoreuiLayout
     sidebarMenu={[]}
-    menuTitle={props.user.name}
+    menuTitle={user.name}
     brandUrl="/"
-    brand={'Testi'}
+    brand="Testi"
   >
     Foo Bar
   </CoreuiLayout>

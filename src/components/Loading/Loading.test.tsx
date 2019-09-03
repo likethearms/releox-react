@@ -1,7 +1,7 @@
 import React from 'react';
+import ReactLoading from 'react-loading';
 import { shallow } from 'enzyme';
 import Loading from './Loading';
-import ReactLoading from 'react-loading';
 import CenterContent from '../CenterContent/CenterContent';
 
 it('should have blue color by default', () => {

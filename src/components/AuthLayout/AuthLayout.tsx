@@ -5,24 +5,29 @@ import Card from '../Card/Card';
 import CardTitle from '../CardTitle/CardTitle';
 import { AuthLayoutProps } from '../../typings';
 
-const AuthLayout = (props: AuthLayoutProps) => (
-  <CenterContent>
-    <div className="col-lg-6" id={props.context}>
-      <Card>
-        <div>
-          <CardTitle>{props.title}</CardTitle>
-          <p className="text-muted">{props.subTitle}</p>
-          {props.children}
-          {props.links.map(l => (
-            <Link to={l.to} key={l.to} id={`${props.context}-${l.id}`}>
-              {l.text}
-            </Link>
-          ))}
-          <div className="text-center">{props.message}</div>
-        </div>
-      </Card>
-    </div>
-  </CenterContent>
-);
+const AuthLayout = (props: AuthLayoutProps) => {
+  const {
+    context, title, subTitle, children, links, message,
+  } = props;
+  return (
+    <CenterContent>
+      <div className="col-lg-6" id={context}>
+        <Card>
+          <div>
+            <CardTitle>{title}</CardTitle>
+            <p className="text-muted">{subTitle}</p>
+            {children}
+            {links.map((l) => (
+              <Link to={l.to} key={l.to} id={`${context}-${l.id}`}>
+                {l.text}
+              </Link>
+            ))}
+            <div className="text-center">{message}</div>
+          </div>
+        </Card>
+      </div>
+    </CenterContent>
+  );
+};
 
 export default AuthLayout;

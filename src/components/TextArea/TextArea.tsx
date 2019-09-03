@@ -5,7 +5,9 @@ import { TextAreaProps } from '../../typings';
 
 class TextArea extends AbstractInputGroup<TextAreaProps> {
   getElement(name: string, id: string): JSX.Element {
-    const { rows, placeholder, label, className } = this.props;
+    const {
+      rows, placeholder, label, className,
+    } = this.props;
     return (
       <Field
         name={name}

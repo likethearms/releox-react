@@ -8,7 +8,7 @@ declare global {
 const getLocale = (locale?: ReleoxLocale): ReleoxLocale => {
   if (locale) return locale;
   if (window.LOCALE) return window.LOCALE;
-  return ReleoxLocale.FI;
+  return 'fi';
 };
 
 export const t = (key: string, locale?: ReleoxLocale): string => {
@@ -16,6 +16,4 @@ export const t = (key: string, locale?: ReleoxLocale): string => {
   return translations[l][key];
 };
 
-export const ct = (prefix: string, locale?: ReleoxLocale) => (key: string): string => {
-  return t(`${prefix}.${key}`, locale);
-};
+export const ct = (prefix: string, locale?: ReleoxLocale) => (key: string): string => t(`${prefix}.${key}`, locale);

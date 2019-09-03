@@ -14,7 +14,7 @@ export { default as Input } from './components/Input/Input';
 export { default as Loading } from './components/Loading/Loading';
 export { default as routeMapper } from './routeMapper';
 export { default as AuthLayout } from './components/AuthLayout/AuthLayout';
-export { URL } from './routes';
+export { default as URL } from './routes';
 export { default as authRoutes } from './auth-routes';
 export { default as authMiddleware } from './HOC/auth-middleware';
 export { default as guestMiddleware } from './HOC/guest-middleware';
