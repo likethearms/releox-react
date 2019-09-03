@@ -79,7 +79,7 @@ const translations: Translation<TranslationObject> = {
     // Forgot
     'forgot.buttonText': 'Nollaa',
     'forgot.linkText': 'Takaisin kirjautumissivulle',
-    'forgot.title': 'Nolla salasana',
+    'forgot.title': 'Nollaa salasana',
     'forgot.subTitle': 'Kirjoita sähköpostiosoitteesi niin lähetämme sinulle linkin jolla voit vaihtaa salasanasi.',
     'forgot.placeholder': 'Sähköposti',
 
