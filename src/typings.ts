@@ -105,7 +105,7 @@ export interface LoginBody {
 }
 
 export interface LoginSceneProps {
-  onSubmit?: (body: LoginBody) => void;
+  onSubmit?: (body: LoginBody) => Promise<void>;
   onError?: (err: Error) => void;
   locale?: ReleoxLocale;
 }

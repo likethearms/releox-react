@@ -80,16 +80,16 @@ const translations: Translation<TranslationObject> = {
     'forgot.buttonText': 'Nollaa',
     'forgot.linkText': 'Takaisin kirjautumissivulle',
     'forgot.title': 'Nollaa salasana',
-    'forgot.subTitle': 'Kirjoita sähköpostiosoitteesi niin lähetämme sinulle linkin jolla voit vaihtaa salasanasi.',
+    'forgot.subTitle': 'Kirjoita sähköpostiosoitteesi, niin lähetämme sinulle linkin jolla voit vaihtaa salasanasi.',
     'forgot.placeholder': 'Sähköposti',
 
     // ForgotSuccess
-    'forgotSuccess.title': 'Salasannan nollaus pyyntö lähetetty!',
+    'forgotSuccess.title': 'Salasanan nollauspyyntö lähetetty!',
     'forgotSuccess.link': 'Kirjautumissivulle',
-    'forgotSuccess.subTitle': 'Salasanan nollaus linkki on lähetetty sähköpostiisi! Avaa sähköpostissa oleva linkki ja vaihda salasana.',
+    'forgotSuccess.subTitle': 'Salasanan nollauslinkki on lähetetty sähköpostiisi! Avaa sähköpostissa oleva linkki ja vaihda salasana.',
 
     // ResetPassword
-    'resetPassword.title': 'Aseta uusi salasana',
+    'resetPassword.title': 'Kirjoita uusi salasana',
     'resetPassword.subTitle': 'Kirjoita uusi salasana ja paina tallenna',
     'resetPassword.placeholder': 'Salasana',
     'resetPassword.buttonText': 'Tallenna',
@@ -107,12 +107,12 @@ const translations: Translation<TranslationObject> = {
     // Confirm
     'confirm.title': 'Tunnuksesi on nyt aktivoitu',
     'confirm.link': 'Takaisin',
-    'confirm.subTitle': 'Tunnuksesi on nyt aktivoitu. Voit jatkaa ohjelman käyttöä',
+    'confirm.subTitle': 'Tunnuksesi on aktivoitu. Voit nyt jatkaa ohjelman käyttöä',
 
     // Accept Invitation
     'acceptInvitation.buttonText': 'Tallenna',
     'acceptInvitation.title': 'Viimeistele tunnuksesi',
-    'acceptInvitation.subTitle': 'Anna salasanasi niin pääset kirjautumaan.',
+    'acceptInvitation.subTitle': 'Anna salasanasi, niin pääset kirjautumaan.',
     'acceptInvitation.placeholder': 'Salasana',
 
     // Accept Invitation Success
@@ -154,7 +154,7 @@ const translations: Translation<TranslationObject> = {
     'resetPassword.buttonText': 'Save',
 
     // ResetPasswordSuccess
-    'resetPasswordSuccess.title': 'You password is changed',
+    'resetPasswordSuccess.title': 'Your password is changed',
     'resetPasswordSuccess.link': 'Back to login',
     'resetPasswordSuccess.subTitle': 'Your password is now changed. Go back to login page and log in with new password.',
 
@@ -177,7 +177,7 @@ const translations: Translation<TranslationObject> = {
     // Accept Invitation Success
     'acceptInvitationSuccess.title': 'You password is saved',
     'acceptInvitationSuccess.link': 'To Login',
-    'acceptInvitationSuccess.subTitle': 'You password is saved. You can now login.',
+    'acceptInvitationSuccess.subTitle': 'Your password is saved. You can now login.',
 
     // Validate Model
     'validateModel.title': 'Complete your account',
