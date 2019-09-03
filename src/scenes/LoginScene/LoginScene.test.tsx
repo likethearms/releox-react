@@ -104,7 +104,7 @@ describe('UI tests', () => {
       );
     });
 
-    it('should have register links also', () => {
+    it('should show register link if showRegisterLink is set to true', () => {
       window.RELEOX_OPTIONS = { showRegisterLink: true };
       const wrapper = shallow<LoginScene>(<LoginScene />);
       const links = wrapper.find('AuthLayout').prop('links');
@@ -122,7 +122,7 @@ describe('UI tests', () => {
       );
     });
 
-    it('should have register links also in english', () => {
+    it('should show register link in english if showRegisterLink is set to true and locale is set to EN', () => {
       window.RELEOX_OPTIONS = { showRegisterLink: true };
       const wrapper = shallow<LoginScene>(<LoginScene locale={ReleoxLocale.EN} />);
       const links = wrapper.find('AuthLayout').prop('links');
@@ -169,7 +169,7 @@ describe('moxios tests', () => {
     });
   });
 
-  it('should set error message', (done) => {
+  it('should set error message to message state', (done) => {
     moxios.stubRequest(`${window.API_ENDPOINT}/Members/login`, {
       status: 400,
       response: { error: { message: 'Foo bar' } },
@@ -182,7 +182,7 @@ describe('moxios tests', () => {
     });
   });
 
-  it('should call custom error handler', (done) => {
+  it('should call custom error handler if errorHander is passed to component', (done) => {
     const onError = jest.fn();
     moxios.stubRequest(`${window.API_ENDPOINT}/Members/login`, {
       status: 400,
