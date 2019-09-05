@@ -32,7 +32,10 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.{ts,tsx,js,jsx}"
+      "src/**/*.{ts,tsx,js,jsx}",
+      "!src/testing-cra/*",
+      "!src/stories/*",
+      "!src/cra-index.tsx"
     ]
   },
   "browserslist": [
