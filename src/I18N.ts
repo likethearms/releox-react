@@ -13,7 +13,6 @@ const getLocale = (locale?: ReleoxLocale): ReleoxLocale => {
   return 'fi';
 };
 
-
 /**
  * Translation
  *

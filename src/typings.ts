@@ -66,8 +66,8 @@ export interface AbstractFormikInputWrapperProps {
 export type ReleoxLocale = 'fi' | 'en';
 
 export interface ReleoxOptions {
-  showRegisterLink: boolean;
-  locale: ReleoxLocale;
+  showRegisterLink?: boolean;
+  locale?: ReleoxLocale;
 }
 
 interface CoreuiSidebarMenuBase {
