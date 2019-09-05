@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import ForgotSuccessScene from './ForgotSuccessScene';
-import { ReleoxLocale } from '../../typings';
 
 describe('UI tests', () => {
   describe('Finnish translations', () => {
@@ -47,8 +46,8 @@ describe('UI tests', () => {
           to: '/login',
           id: 'login-link',
           text: 'Kirjautumissivulle',
-        }],
-      );
+        },
+      ]);
     });
 
     it('should have default links in english if locale is set to EN', () => {
@@ -59,8 +58,8 @@ describe('UI tests', () => {
           to: '/login',
           id: 'login-link',
           text: 'Back to login',
-        }],
-      );
+        },
+      ]);
     });
   });
 });
