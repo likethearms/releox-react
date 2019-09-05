@@ -65,11 +65,14 @@ abstract class AbstractAuthOneInputScene<Data, Prop>
         if (this.shouldDestroyToken()) return this.destroyToken(redirect);
         return new Promise((resolve) => this.setState({ redirect }, resolve));
       })
-      .catch(this.onErrorMethod.bind(this));
+      .catch((e) => {
+        this.onErrorMethod(e);
+        return Promise.resolve();
+      });
   }
 
-  onSubmit(body: Data): void {
-    this.onSubmitMethod(this.getPostUrl(), body, this.getRedirectUrl());
+  onSubmit(body: Data): Promise<any> {
+    return this.onSubmitMethod(this.getPostUrl(), body, this.getRedirectUrl());
   }
 
   abstract getContext(): string;

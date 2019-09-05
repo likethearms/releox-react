@@ -2,7 +2,6 @@ import React from 'react';
 import moxios from 'moxios';
 import { shallow, ShallowWrapper } from 'enzyme';
 import ForgotScene from './ForgotScene';
-import { ReleoxLocale } from '../../typings';
 
 describe('Instance function call tests', () => {
   it('should call getPostUrl', () => {
@@ -82,8 +81,8 @@ describe('UI tests', () => {
           to: '/login',
           id: 'back-link',
           text: 'Takaisin kirjautumissivulle',
-        }],
-      );
+        },
+      ]);
     });
 
     it('should have default links in english if locale is set to EN', () => {
@@ -94,8 +93,8 @@ describe('UI tests', () => {
           to: '/login',
           id: 'back-link',
           text: 'Back to login',
-        }],
-      );
+        },
+      ]);
     });
   });
 });
@@ -109,7 +108,6 @@ describe('moxios tests', () => {
     moxios.uninstall();
   });
 
-  const wrapper = shallow<ForgotScene>(<ForgotScene />);
   const body = {
     email: 'email@email.com',
   };
@@ -120,6 +118,7 @@ describe('moxios tests', () => {
     moxios.stubRequest(`${window.API_ENDPOINT}/Members/reset`, {
       status: 204,
     });
+    const wrapper = shallow<ForgotScene>(<ForgotScene />);
     const onSubmit = wrapper.find('AuthForm').prop('onSubmit') as Function;
     onSubmit(body).then(() => {
       expect(wrapper.state().redirect).toBe('/forgot-success');

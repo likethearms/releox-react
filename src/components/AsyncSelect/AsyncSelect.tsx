@@ -17,7 +17,7 @@ interface AsyncSelectInputPropTypes {
   onError: Requireable<Function>;
   mapLabel: Requireable<string>;
   value: Requireable<string>;
-  searchFields: Validator<NonNullable<(string | null)[]>>;
+  searchFields: Validator<NonNullable<(string | undefined | null)[]>>;
 }
 
 class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInputState> {
