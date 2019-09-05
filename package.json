@@ -10,7 +10,7 @@
     "query-string": "^6.8.3",
     "react-loading": "^2.0.3",
     "react-select": "^2.4.3",
-    "webpack": "^4.28.3"
+    "webpack": "4.39.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -64,7 +64,8 @@
     "bootstrap": "^4.3.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
-    "eslint": "5.12.0",
+    "enzyme-wait": "^1.0.9",
+    "eslint": "^6.3.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
@@ -75,7 +76,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "2.1.8",
+    "react-scripts": "^3.1.1",
     "sass": "^1.22.10",
     "typescript": "^3.5.0"
   }

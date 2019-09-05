@@ -30,7 +30,6 @@ class ResetPasswordScene extends AbstractAuthOneInputScene<BodyData, ResetPasswo
 
   componentDidMount(): void {
     /* eslint-disable camelcase */
-    console.log(window.location)
     parseParams(true)
       .then(({ user, access_token }) => validateTokenRequest(access_token, user))
       .then(() => this.setState({ loading: false }))

@@ -1,42 +1,81 @@
 import React from 'react';
 import moxios from 'moxios';
+import { createWaitForElement } from 'enzyme-wait';
 import { shallow, ShallowWrapper } from 'enzyme';
 import ResetPasswordScene from './ResetPasswordScene';
+import { AbstractAuthOneInputSceneProps } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 
-describe('Instance function call tests', () => {
-  it('should call getPostUrl', () => {
-    const wrapper = shallow<ResetPasswordScene>(<ResetPasswordScene />);
+window = Object.create(window);
+Object.defineProperty(window, 'location', { value: { search: '' }, writable: true });
+
+describe('Abstract methods', () => {
+  let wrapper: ShallowWrapper<AbstractAuthOneInputSceneProps, any, ResetPasswordScene>;
+  beforeAll(() => {
+    wrapper = shallow(<ResetPasswordScene />);
+  });
+
+  test('getPostUrl should return correct value', () => {
     const url = wrapper.instance().getPostUrl();
     expect(url).toBe('undefined/Members/reset-password');
   });
 
-  it('should call getRedirectUrl', () => {
-    const wrapper = shallow<ResetPasswordScene>(<ResetPasswordScene />);
+  test('getRedirectUrl should return correct value', () => {
     const url = wrapper.instance().getRedirectUrl();
     expect(url).toBe('/reset-password-success');
   });
 });
 
+describe('Errors', () => {
+  let wrapper: ShallowWrapper<AbstractAuthOneInputSceneProps, any, ResetPasswordScene>;
+
+  beforeAll(() => {
+    wrapper = shallow(<ResetPasswordScene />);
+  });
+
+  afterAll(() => {
+    Object.defineProperty(window, 'location', { value: { search: '' } });
+  });
+
+  it('should return error when no user object or access token is not present', () => {
+    expect(wrapper.state().redirect).toBe('/auth-error?message=Missing User Object or Access Token');
+  });
+
+  it('should return error when no user object is not present', () => {
+    const url = "?user=xx";
+    Object.defineProperty(window, 'location', { value: { search: url } });
+    expect(wrapper.state().redirect).toBe('/auth-error?message=Missing User Object or Access Token');
+  });
+
+  it('should return error when no access token is not present', () => {
+    const url = "?access_token=xxx";
+    Object.defineProperty(window, 'location', { value: { search: url } });
+    window.location.search = url;
+    expect(wrapper.state().redirect).toBe('/auth-error?message=Missing User Object or Access Token');
+  });
+});
+
 describe('UI tests', () => {
-  describe('Error check', () => {
-    let wrapper: ShallowWrapper;
-    beforeAll(() => {
-      wrapper = shallow(<ResetPasswordScene />);
-    });
-    // minkä takia tämä tuottaa stateem tuon virhe redirectin
-    // mutta suoraan wrapperin luonti ei tee tätä
-    it('should return error when no user object or access token is not present', () => {
-      expect(wrapper.state().redirect).toBe('/auth-error?message=Missing User Object or Access Token');
+  beforeAll(() => {
+    const url = "?user=xx&access_token=xxx";
+    Object.defineProperty(window, 'location', { value: { search: url } });
+    moxios.install();
+    moxios.stubRequest(/./, {
+      status: 200,
+      response: { error: { message: 'Email not found' } },
     });
   });
 
+  afterAll(() => {
+    moxios.uninstall();
+  });
+
   describe('Finnish translations', () => {
-    window.location = {
-      search: '?access_token=Qs1XAHvAUVnKelnz4xk0WUWweAhU92yLqCzVUGSjEpFEjJBagS73GWsoPz3ldkfq&user=1',
-    } as any;
     let wrapper: ShallowWrapper;
-    beforeAll(() => {
+
+    beforeAll(async () => {
+      const waitForSample = createWaitForElement('AuthLayout');
       wrapper = shallow(<ResetPasswordScene />);
+      await waitForSample(wrapper);
     });
 
     it('should have finnish title', () => {
@@ -62,8 +101,11 @@ describe('UI tests', () => {
 
   describe('English translations', () => {
     let wrapper: ShallowWrapper;
-    beforeAll(() => {
+
+    beforeAll(async () => {
+      const waitForSample = createWaitForElement('AuthLayout');
       wrapper = shallow(<ResetPasswordScene locale="en" />);
+      await waitForSample(wrapper);
     });
 
     it('should have english title', () => {
@@ -89,42 +131,46 @@ describe('UI tests', () => {
 });
 
 describe('moxios tests', () => {
-  beforeEach(() => {
+  let wrapper: ShallowWrapper<AbstractAuthOneInputSceneProps, any, ResetPasswordScene>;
+  const body = {
+    email: 'email@email.com',
+  };
+
+  beforeEach(async () => {
     moxios.install();
+    moxios.stubRequest(/undefined\/Members\/xx/, {
+      status: 200,
+      response: {},
+    });
+    const waitForSample = createWaitForElement('AuthLayout');
+    wrapper = shallow(<ResetPasswordScene />);
+    await waitForSample(wrapper);
   });
 
   afterEach(() => {
     moxios.uninstall();
   });
 
-  const wrapper = shallow<ResetPasswordScene>(<ResetPasswordScene />);
-  const body = {
-    email: 'email@email.com',
-  };
-  const url = `${window.API_ENDPOINT}/Members/reset`;
-  const redirect = '/forgot-success';
-
   it('should redirect when submit success', (done) => {
-    moxios.stubRequest(`${window.API_ENDPOINT}/Members/reset`, {
-      status: 204,
+    moxios.stubRequest(/undefined\/Members\/(reset|logout)/, {
+      status: 200,
     });
     const onSubmit = wrapper.find('AuthForm').prop('onSubmit') as Function;
     onSubmit(body).then(() => {
-      expect(wrapper.state().redirect).toBe('/forgot-success');
+      expect(wrapper.state().redirect).toBe('/reset-password-success');
       done();
     });
   });
 
   it('should set error message to message state', (done) => {
-    moxios.stubRequest(`${window.API_ENDPOINT}/Members/reset`, {
+    moxios.stubRequest(/undefined\/Members\/(reset|logout)/, {
       status: 404,
       response: { error: { message: 'Email not found' } },
     });
-
-    const wrapper = shallow<ResetPasswordScene>(<ResetPasswordScene />);
-    wrapper.instance().onSubmitMethod(url, body, redirect).then(() => {
+    const onSubmit = wrapper.find('AuthForm').prop('onSubmit') as Function;
+    onSubmit(body).then(() => {
       expect(wrapper.find('AuthLayout').prop('message')).toBe('Email not found');
-      done();
+      done()
     });
   });
 });
