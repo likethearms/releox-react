@@ -9,7 +9,7 @@ import Loading from '../components/Loading/Loading';
 interface MiddlewareState<U> {
   loading: boolean;
   redirect: string;
-  user: U;
+  authenticatedUse: U;
 }
 
 /* eslint-disable react/jsx-props-no-spreading */
@@ -20,7 +20,7 @@ const authMiddleware = <U extends {}>(WrapperComponent: ElementType) => (
       this.state = {
         loading: true,
         redirect: '',
-        user: {} as U,
+        authenticatedUse: {} as U,
       };
     }
 
@@ -31,7 +31,7 @@ const authMiddleware = <U extends {}>(WrapperComponent: ElementType) => (
           i = info;
           return validateTokenRequest(info.accessToken, info.userId);
         })
-        .then((r: AxiosResponse) => this.setState({ user: r.data }))
+        .then((r: AxiosResponse) => this.setState({ authenticatedUse: r.data }))
         .then(() => {
           Axios.defaults.headers.common.Authorization = i.accessToken;
           this.setState({ loading: false });
@@ -43,10 +43,10 @@ const authMiddleware = <U extends {}>(WrapperComponent: ElementType) => (
     }
 
     render(): JSX.Element {
-      const { loading, redirect, user } = this.state;
+      const { loading, redirect, authenticatedUse } = this.state;
       if (redirect) return <Redirect to={redirect} />;
       if (loading) return <Loading centeredVertical />;
-      return <WrapperComponent {...this.props} user={user} />;
+      return <WrapperComponent {...this.props} authenticatedUse={authenticatedUse} />;
     }
   });
 
