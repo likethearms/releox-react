@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
-import authRoutes from '../auth-routes';
-import routeMapper from '../routeMapper';
 import Core from './Core';
+import { authRoutes } from '../auth-routes';
+import { routeMapper } from '../routeMapper';
 
 const App = () => (
   <Switch>

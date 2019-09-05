@@ -1,17 +1,22 @@
 import React from 'react';
 import moxios from 'moxios';
 import { shallow, ShallowWrapper } from 'enzyme';
-import ForgotScene from './ForgotScene';
+import { ForgotScene } from './ForgotScene';
+import { AbstractAuthOneInputScene } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
+
+let wrapper: ShallowWrapper<{}, {}, AbstractAuthOneInputScene<{}, {}>>;
 
 describe('Instance function call tests', () => {
+  beforeAll(() => {
+    wrapper = shallow(<ForgotScene />);
+  });
+
   it('should call getPostUrl', () => {
-    const wrapper = shallow<ForgotScene>(<ForgotScene />);
     const url = wrapper.instance().getPostUrl();
     expect(url).toBe('undefined/Members/reset');
   });
 
   it('should call getRedirectUrl', () => {
-    const wrapper = shallow<ForgotScene>(<ForgotScene />);
     const url = wrapper.instance().getRedirectUrl();
     expect(url).toBe('/forgot-success');
   });
@@ -19,7 +24,6 @@ describe('Instance function call tests', () => {
 
 describe('UI tests', () => {
   describe('Finnish translations', () => {
-    let wrapper: ShallowWrapper;
     beforeAll(() => {
       wrapper = shallow(<ForgotScene />);
     });
@@ -46,7 +50,6 @@ describe('UI tests', () => {
   });
 
   describe('English translations', () => {
-    let wrapper: ShallowWrapper;
     beforeAll(() => {
       wrapper = shallow(<ForgotScene locale="en" />);
     });
@@ -74,7 +77,7 @@ describe('UI tests', () => {
 
   describe('getLinks test', () => {
     it('should have default links', () => {
-      const wrapper = shallow<ForgotScene>(<ForgotScene />);
+      wrapper = shallow(<ForgotScene />);
       const links = wrapper.find('AuthLayout').prop('links');
       expect(links).toEqual([
         {
@@ -86,7 +89,7 @@ describe('UI tests', () => {
     });
 
     it('should have default links in english if locale is set to EN', () => {
-      const wrapper = shallow<ForgotScene>(<ForgotScene locale="en" />);
+      wrapper = shallow(<ForgotScene locale="en" />);
       const links = wrapper.find('AuthLayout').prop('links');
       expect(links).toEqual([
         {
@@ -118,10 +121,10 @@ describe('moxios tests', () => {
     moxios.stubRequest(`${window.API_ENDPOINT}/Members/reset`, {
       status: 204,
     });
-    const wrapper = shallow<ForgotScene>(<ForgotScene />);
+    wrapper = shallow(<ForgotScene />);
     const onSubmit = wrapper.find('AuthForm').prop('onSubmit') as Function;
     onSubmit(body).then(() => {
-      expect(wrapper.state().redirect).toBe('/forgot-success');
+      expect(wrapper.state('redirect')).toBe('/forgot-success');
       done();
     });
   });
@@ -132,7 +135,7 @@ describe('moxios tests', () => {
       response: { error: { message: 'Email not found' } },
     });
 
-    const wrapper = shallow<ForgotScene>(<ForgotScene />);
+    wrapper = shallow(<ForgotScene />);
     wrapper.instance().onSubmitMethod(url, body, redirect).then(() => {
       expect(wrapper.find('AuthLayout').prop('message')).toBe('Email not found');
       done();

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import CoreuiHeaderSideBarToggle from './CoreuiHeaderSideBarToggle';
+import { CoreuiHeaderSideBarToggle } from './CoreuiHeaderSideBarToggle';
 
 export interface CoreuiHeaderProps {
   title: string | JSX.Element;
@@ -9,7 +9,7 @@ export interface CoreuiHeaderProps {
   menuTitle: string;
 }
 
-const CoreuiHeader = ({ title, menuTitle, brandUrl }: CoreuiHeaderProps) => (
+const CoreuiHeaderComponent = ({ title, menuTitle, brandUrl }: CoreuiHeaderProps) => (
   <div className="app-header navbar" style={{ paddingRight: '20px' }}>
     <CoreuiHeaderSideBarToggle
       buttonClass="navbar-toggler mobile-sidebar-toggler d-md-none mr-auto"
@@ -26,13 +26,13 @@ const CoreuiHeader = ({ title, menuTitle, brandUrl }: CoreuiHeaderProps) => (
   </div>
 );
 
-CoreuiHeader.propTypes = {
+CoreuiHeaderComponent.propTypes = {
   title: PropTypes.node.isRequired,
   menuTitle: PropTypes.node,
 };
 
-CoreuiHeader.defaultProps = {
+CoreuiHeaderComponent.defaultProps = {
   menuTitle: '',
 };
 
-export default CoreuiHeader;
+export const CoreuiHeader = CoreuiHeaderComponent;

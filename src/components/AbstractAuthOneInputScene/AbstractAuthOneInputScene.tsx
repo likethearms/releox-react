@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Axios, { AxiosError } from 'axios';
-import Loading from '../Loading/Loading';
-import AuthLayout from '../AuthLayout/AuthLayout';
-import AuthForm from '../AuthForm/AuthForm';
-import { ct } from '../../I18N';
+import { AuthLayoutLinkItem, AuthLayout } from '../AuthLayout/AuthLayout';
+import { ct, ReleoxLocale } from '../../I18N';
 import { getErrorMessage } from '../../config';
-import apis from '../../apis';
-import parseParams from '../../parse-params';
-import { InputTypes, ReleoxLocale, AuthLayoutLinkItem } from '../../typings';
+import { apis } from '../../apis';
+import { InputTypes } from '../Input/Input';
+import { parseParams } from '../../parse-params';
+import { AuthForm } from '../AuthForm/AuthForm';
+import { Loading } from '../Loading/Loading';
 
 interface State {
   loading: boolean;
@@ -36,7 +36,7 @@ export interface AbstractAuthOneInputSceneTranslation {
 }
 
 /* eslint-disable camelcase */
-abstract class AbstractAuthOneInputScene<Data, Prop>
+export abstract class AbstractAuthOneInputScene<Data, Prop>
   extends Component<Prop & AbstractAuthOneInputSceneProps, State> {
   constructor(props: Prop) {
     super(props);
@@ -138,5 +138,3 @@ abstract class AbstractAuthOneInputScene<Data, Prop>
     );
   }
 }
-
-export default AbstractAuthOneInputScene;

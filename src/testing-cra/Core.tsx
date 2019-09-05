@@ -1,8 +1,8 @@
 import React from 'react';
-import CoreuiLayout from '../coreui-layout/CoreuiLayout';
-import authMiddleware from '../HOC/auth-middleware';
-import validateModel from '../HOC/validate-model';
-import Input from '../components/Input/Input';
+import { CoreuiLayout } from '../coreui-layout/CoreuiLayout';
+import { Input } from '../components/Input/Input';
+import { validateModel } from '../HOC/validate-model';
+import { authMiddleware } from '../HOC/auth-middleware';
 
 const CUI = ({ user }: any) => (
   <CoreuiLayout
@@ -21,5 +21,4 @@ const Form = () => (
   </div>
 );
 
-const Core = authMiddleware(validateModel(['name'], Form, CUI));
-export default Core;
+export default authMiddleware(validateModel(['name'], Form, CUI));

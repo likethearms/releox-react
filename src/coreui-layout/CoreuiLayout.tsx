@@ -1,10 +1,17 @@
 import React from 'react';
-import CoreuiMainLayout from './CoreuiMainLayout';
-import CoreuiSidebar from './CoreuiSidebar';
-import CoreuiHeader from './CoreuiHeader';
-import { CoreuiLayoutProps } from '../typings';
+import { CoreuiMainLayout } from './CoreuiMainLayout';
+import { CoreuiSidebarMenu, CoreuiSidebar } from './CoreuiSidebar';
+import { CoreuiHeader } from './CoreuiHeader';
 
-const CoreuiLayout = (props: CoreuiLayoutProps) => {
+export interface CoreuiLayoutProps {
+  children: JSX.Element | string;
+  sidebarMenu: CoreuiSidebarMenu[];
+  menuTitle: string;
+  brand: JSX.Element | string;
+  brandUrl?: string;
+}
+
+export const CoreuiLayout = (props: CoreuiLayoutProps) => {
   const {
     children, sidebarMenu, menuTitle, brand, brandUrl,
   } = props;
@@ -23,5 +30,3 @@ const CoreuiLayout = (props: CoreuiLayoutProps) => {
     </CoreuiMainLayout>
   );
 };
-
-export default CoreuiLayout;

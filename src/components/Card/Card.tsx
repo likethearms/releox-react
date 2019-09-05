@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CardProps } from '../../typings';
 
-const Card = ({ children }: CardProps) => (
+export interface CardProps {
+  children: JSX.Element[] | string[] | string | JSX.Element;
+}
+
+const CardComponent = ({ children }: CardProps) => (
   <div className="card">
     <div className="card-body">
       {children}
@@ -10,8 +13,8 @@ const Card = ({ children }: CardProps) => (
   </div>
 );
 
-Card.propTypes = {
+CardComponent.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default Card;
+export const Card = CardComponent;

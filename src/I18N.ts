@@ -1,5 +1,6 @@
-import translations from './translations';
-import { ReleoxLocale } from './typings';
+import { translations } from './translations';
+
+export type ReleoxLocale = 'fi' | 'en';
 
 /**
  * Get releox locale

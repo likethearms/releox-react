@@ -1,10 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CoreuiSidebarItem from './CoreuiSidebarItem';
-import CoreuiSidebarDropdown from './CoreuiSidebarDropdown';
-import { CoreuiSidebarProps } from '../typings';
+import { CoreuiSidebarDropdown } from './CoreuiSidebarDropdown';
+import { CoreuiSidebarItem } from './CoreuiSidebarItem';
 
-const CoreuiSidebar = ({ menu }: CoreuiSidebarProps) => {
+interface CoreuiSidebarMenuBase {
+  type?: string;
+  text: string;
+  url: string;
+  icon?: string;
+  onClick?: () => void;
+  exact?: boolean;
+}
+
+export interface CoreuiSidebarMenu extends CoreuiSidebarMenuBase {
+  children?: CoreuiSidebarMenuBase[];
+}
+
+export interface CoreuiSidebarProps {
+  menu: CoreuiSidebarMenu[];
+}
+
+const CoreuiSidebarComponent = ({ menu }: CoreuiSidebarProps) => {
   const clickHandler = (e: any) => {
     e.preventDefault();
     e.target.parentElement.classList.toggle('open');
@@ -60,10 +76,10 @@ const CoreuiSidebar = ({ menu }: CoreuiSidebarProps) => {
   );
 };
 
-CoreuiSidebar.propTypes = {
+CoreuiSidebarComponent.propTypes = {
   menu: PropTypes.arrayOf(PropTypes.shape({
     text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   })).isRequired,
 };
 
-export default CoreuiSidebar;
+export const CoreuiSidebar = CoreuiSidebarComponent;

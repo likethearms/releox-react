@@ -1,8 +1,13 @@
 import React from 'react';
 import { Field } from 'formik';
-import { CheckBoxProps } from '../../typings';
 
-const CheckBox = ({ id, className, name }: CheckBoxProps) => (
+export interface CheckBoxProps {
+  id?: string;
+  className?: string;
+  name: string;
+}
+
+export const CheckBox = ({ id, className, name }: CheckBoxProps) => (
   <Field
     name={name}
     id={id || `${name}-input`}
@@ -10,5 +15,3 @@ const CheckBox = ({ id, className, name }: CheckBoxProps) => (
     render={({ field }: any) => (<input type="checkbox" checked={field.value} {...field} />)} /* eslint-disable-line react/jsx-props-no-spreading */
   />
 );
-
-export default CheckBox;

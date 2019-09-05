@@ -1,10 +1,15 @@
 import React from 'react';
 import { Field } from 'formik';
-import AsyncSelectFormikWrapper from './AsyncSelectFormikWrapper';
-import AbstractInputGroup from '../AbstractInputGroup/AbstractInputGroup';
-import { AsyncSelectFormikProps } from '../../typings';
+import { AsyncSelectFormikWrapper } from './AsyncSelectFormikWrapper';
+import { AbstractInputGroup, AbstractInputGroupProps } from '../AbstractInputGroup/AbstractInputGroup';
+import { AsyncSelectQueryFormat } from './AsyncSelect';
 
-class AsyncSelectFormik extends AbstractInputGroup<AsyncSelectFormikProps> {
+export interface AsyncSelectFormikProps extends AbstractInputGroupProps {
+  getUrl: string;
+  queryFormat: AsyncSelectQueryFormat;
+}
+
+export class AsyncSelectFormik extends AbstractInputGroup<AsyncSelectFormikProps> {
   getElement(name: string, id: string): JSX.Element {
     const { getUrl, queryFormat } = this.props;
     return (
@@ -18,5 +23,3 @@ class AsyncSelectFormik extends AbstractInputGroup<AsyncSelectFormikProps> {
     );
   }
 }
-
-export default AsyncSelectFormik;

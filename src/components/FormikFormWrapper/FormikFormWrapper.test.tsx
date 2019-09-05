@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import FormikFormWrapper from './FormikFormWrapper';
+import { FormikFormWrapper } from './FormikFormWrapper';
 
 const onSubmit = jest.fn();
 const wrapper = mount((

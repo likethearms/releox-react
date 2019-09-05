@@ -1,9 +1,16 @@
 import React from 'react';
 import { Field } from 'formik';
-import AbstractInputGroup from '../AbstractInputGroup/AbstractInputGroup';
-import { InputProps } from '../../typings';
+import { AbstractInputGroupProps, AbstractInputGroup } from '../AbstractInputGroup/AbstractInputGroup';
 
-class Input extends AbstractInputGroup<InputProps> {
+export type InputTypes = 'text' | 'email' | 'password' | 'date' | 'number';
+
+export interface InputProps extends AbstractInputGroupProps {
+  type?: InputTypes;
+  placeholder?: string;
+  className?: string;
+}
+
+export class Input extends AbstractInputGroup<InputProps> {
   getElement(name: string, id: string): JSX.Element {
     const {
       type, placeholder, label, className,
@@ -20,5 +27,3 @@ class Input extends AbstractInputGroup<InputProps> {
     );
   }
 }
-
-export default Input;

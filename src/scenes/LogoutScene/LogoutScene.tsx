@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Axios from 'axios';
 import { getAccessInformation } from '../../config';
-import apis from '../../apis';
-import Loading from '../../components/Loading/Loading';
-import URL from '../../routes';
+import { apis } from '../../apis';
+import { routes } from '../../routes';
+import { Loading } from '../../components/Loading/Loading';
 
 interface State {
   redirect: string;
@@ -12,7 +12,7 @@ interface State {
 
 interface Props { }
 
-class LogoutScene extends Component<Props, State> {
+export class LogoutScene extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -30,7 +30,7 @@ class LogoutScene extends Component<Props, State> {
 
   afterRequest(): void {
     localStorage.clear();
-    this.setState({ redirect: URL.LOGIN });
+    this.setState({ redirect: routes.LOGIN });
   }
 
   render(): JSX.Element {
@@ -39,5 +39,3 @@ class LogoutScene extends Component<Props, State> {
     return <Loading centeredVertical />;
   }
 }
-
-export default LogoutScene;

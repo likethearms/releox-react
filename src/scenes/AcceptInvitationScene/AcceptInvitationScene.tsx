@@ -1,13 +1,14 @@
 import queryString from 'query-string';
 import Axios, { AxiosError } from 'axios';
-import URL from '../../routes';
-import AbstractAuthOneInputScene, {
+import {
   AbstractAuthOneInputSceneProps,
   AbstractAuthOneInputSceneInputProps,
+  AbstractAuthOneInputScene,
 } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
-import apis from '../../apis';
 import { getErrorMessage } from '../../config';
-import { AuthLayoutLinkItem } from '../../typings';
+import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
+import { apis } from '../../apis';
+import { routes } from '../../routes';
 
 interface BodyData {
   password: string;
@@ -25,7 +26,7 @@ interface AcceptInvitationSceneProps extends AbstractAuthOneInputSceneProps {
 const CONTEXT = 'AcceptInvitation';
 
 /* eslint-disable class-methods-use-this */
-class AcceptInvitationScene
+export class AcceptInvitationScene
   extends AbstractAuthOneInputScene<BodyData, AcceptInvitationSceneProps> {
   static defaultProps: DefaultProps = {
     resetPasswordAPIUrl: apis.PASSWORD_RESET,
@@ -38,7 +39,7 @@ class AcceptInvitationScene
       .get(`${apis.VALIDATE_INVITATION_TOKEN}?uid=${q.uid}&invitation_token=${q.invitation_token}`)
       .then(() => this.setState({ loading: false }))
       .catch((e: AxiosError) => this.setState({
-        redirect: `${URL.ERROR}?message=${getErrorMessage(e)}`,
+        redirect: `${routes.ERROR}?message=${getErrorMessage(e)}`,
       }));
   }
 
@@ -48,7 +49,7 @@ class AcceptInvitationScene
   }
 
   getRedirectUrl(): string {
-    return URL.ACCEPT_INVITATION_SUCCESS;
+    return routes.ACCEPT_INVITATION_SUCCESS;
   }
 
   getInitValues(): BodyData {
@@ -74,5 +75,3 @@ class AcceptInvitationScene
     return 'acceptInvitation';
   }
 }
-
-export default AcceptInvitationScene;

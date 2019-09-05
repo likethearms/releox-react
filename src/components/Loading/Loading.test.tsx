@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 import { shallow } from 'enzyme';
-import Loading from './Loading';
-import CenterContent from '../CenterContent/CenterContent';
+import { Loading } from './Loading';
+import { CenterContent } from '../CenterContent/CenterContent';
 
 it('should have blue color by default', () => {
   const wrapper = shallow(<Loading />);

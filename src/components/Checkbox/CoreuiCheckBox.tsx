@@ -1,8 +1,13 @@
 import React from 'react';
 import { Field } from 'formik';
-import { CoreuiCheckBoxProps } from '../../typings';
+import { CheckBoxProps } from './CheckBox';
 
-const CoreuiCheckBox = (props: CoreuiCheckBoxProps) => {
+
+export interface CoreuiCheckBoxProps extends CheckBoxProps {
+  label: string;
+}
+
+export const CoreuiCheckBox = (props: CoreuiCheckBoxProps) => {
   const {
     id, className, name, label,
   } = props;
@@ -31,5 +36,3 @@ const CoreuiCheckBox = (props: CoreuiCheckBoxProps) => {
     </div>
   );
 };
-
-export default CoreuiCheckBox;

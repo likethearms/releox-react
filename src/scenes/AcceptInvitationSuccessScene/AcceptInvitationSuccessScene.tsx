@@ -1,4 +1,4 @@
-import successScene from '../../HOC/success-scene';
-import URL from '../../routes';
+import { successScene } from '../../HOC/success-scene';
+import { routes } from '../../routes';
 
-export default successScene('AcceptInvitationSuccessScene', 'acceptInvitationSuccess', URL.LOGIN);
+export const AcceptInvitationSuccessScene = successScene('AcceptInvitationSuccessScene', 'acceptInvitationSuccess', routes.LOGIN);

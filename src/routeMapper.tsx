@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
-import { ReleoxRoutes } from './typings';
+import { ReleoxRoutes } from './routes';
 
-export default (r: ReleoxRoutes) => (
+export const routeMapper = (r: ReleoxRoutes) => (
   <Route exact key={r.url} path={r.url} component={r.component} />
 );

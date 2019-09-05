@@ -1,4 +1,4 @@
-import { ReleoxOptions } from './typings';
+import { ReleoxLocale } from './I18N';
 
 declare global {
   interface Window {
@@ -12,6 +12,11 @@ declare global {
 export interface AccessInformation {
   userId: string;
   accessToken: string;
+}
+
+export interface ReleoxOptions {
+  showRegisterLink?: boolean;
+  locale?: ReleoxLocale;
 }
 
 export const getReleoxOptions = (): ReleoxOptions => window.RELEOX_OPTIONS || {};

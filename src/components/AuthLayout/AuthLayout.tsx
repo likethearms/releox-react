@@ -1,11 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import CenterContent from '../CenterContent/CenterContent';
-import Card from '../Card/Card';
-import CardTitle from '../CardTitle/CardTitle';
-import { AuthLayoutProps } from '../../typings';
+import { CenterContent } from '../CenterContent/CenterContent';
+import { Card } from '../Card/Card';
+import { CardTitle } from '../CardTitle/CardTitle';
 
-const AuthLayout = (props: AuthLayoutProps) => {
+export interface AuthLayoutLinkItem {
+  to: string;
+  id: string;
+  text: string;
+}
+
+export interface AuthLayoutProps {
+  context: string;
+  title: string;
+  subTitle: string;
+  message?: string;
+  children?: JSX.Element | JSX.Element[] | string;
+  links: AuthLayoutLinkItem[];
+}
+
+export const AuthLayout = (props: AuthLayoutProps) => {
   const {
     context, title, subTitle, children, links, message,
   } = props;
@@ -29,5 +43,3 @@ const AuthLayout = (props: AuthLayoutProps) => {
     </CenterContent>
   );
 };
-
-export default AuthLayout;

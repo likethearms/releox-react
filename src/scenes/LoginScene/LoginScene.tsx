@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import Axios, { AxiosResponse } from 'axios';
 import { Redirect } from 'react-router-dom';
-import FormikFormWrapper from '../../components/FormikFormWrapper/FormikFormWrapper';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Button';
 import { saveAccessInformation, getErrorMessage, getReleoxOptions } from '../../config';
-import URL from '../../routes';
-import { ct } from '../../I18N';
-import AuthLayout from '../../components/AuthLayout/AuthLayout';
-import apis from '../../apis';
-import {
-  LoginSceneProps,
-  LoginBody,
-  AuthLayoutLinkItem,
-} from '../../typings';
+import { ct, ReleoxLocale } from '../../I18N';
+import { routes } from '../../routes';
+import { apis } from '../../apis';
+import { AuthLayoutLinkItem, AuthLayout } from '../../components/AuthLayout/AuthLayout';
+import { FormikFormWrapper } from '../../components/FormikFormWrapper/FormikFormWrapper';
+import { Input } from '../../components/Input/Input';
+import { Button } from '../../components/Button/Button';
 
 interface LoginSceneState {
   redirect: string;
@@ -22,7 +17,18 @@ interface LoginSceneState {
 
 const CONTEXT = 'LoginScene';
 
-class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
+export interface LoginSceneProps {
+  onSubmit?: (body: LoginBody) => Promise<void>;
+  onError?: (err: Error) => void;
+  locale?: ReleoxLocale;
+}
+
+export interface LoginBody {
+  password: string;
+  email: string;
+}
+
+export class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
   constructor(props: LoginSceneProps) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
@@ -38,7 +44,7 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
     return Axios
       .post(apis.LOGIN, body)
       .then((r: AxiosResponse) => saveAccessInformation(r.data.id, r.data.userId))
-      .then(() => this.setState({ redirect: URL.HOME }))
+      .then(() => this.setState({ redirect: routes.HOME }))
       .catch((e) => {
         if (onError) return onError(e);
         return this.setState({ message: getErrorMessage(e) });
@@ -50,14 +56,14 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
     const t = ct('login', locale);
     const links = [
       {
-        to: URL.FORGOT,
+        to: routes.FORGOT,
         id: `${CONTEXT}-forgot-link`,
         text: t('forgotPasswordText'),
       },
     ];
     if (getReleoxOptions().showRegisterLink) {
       links.push({
-        to: URL.REGISTER,
+        to: routes.REGISTER,
         id: `${CONTEXT}-register-link`,
         text: t('registerText'),
       });
@@ -107,5 +113,3 @@ class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
     );
   }
 }
-
-export default LoginScene;

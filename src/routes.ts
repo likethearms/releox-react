@@ -1,4 +1,9 @@
-export default {
+export interface ReleoxRoutes {
+  component: any;
+  url: string;
+}
+
+export const routes = {
   FORGOT: '/forgot',
   FORGOT_SUCCESS: '/forgot-success',
   CONFIRM: '/confirm',

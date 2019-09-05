@@ -2,11 +2,35 @@ import React, { Component } from 'react';
 import Async from 'react-select/lib/Async';
 import Axios from 'axios';
 import PropTypes, { Requireable, Validator } from 'prop-types';
-import {
-  AsyncSelectInputState,
-  AsyncSelectInputProps,
-  AsyncSelectInputDefaultProps,
-} from '../../typings';
+
+export interface AsyncSelectInputDefaultProps {
+  onError?: (e: Error) => any;
+  placeholder: undefined;
+  value: undefined;
+  fixedValue: undefined;
+  mapValue: string;
+  mapLabel: string;
+}
+
+export type AsyncSelectQueryFormat = 'mongodb' | 'postgresql';
+
+export interface AsyncSelectInputProps {
+  onChange(value: string | number | null): void;
+  onError(e: Error): any;
+  queryFormat: AsyncSelectQueryFormat;
+  placeholder?: string;
+  fixedValue?: string;
+  value?: string;
+  getUrl: string;
+  mapValue: string;
+  mapLabel: string;
+  searchFields: string[];
+}
+
+export interface AsyncSelectInputState {
+  defaultValue: any;
+  loading: boolean;
+}
 
 interface AsyncSelectInputPropTypes {
   placeholder: Requireable<string>;
@@ -20,7 +44,7 @@ interface AsyncSelectInputPropTypes {
   searchFields: Validator<NonNullable<(string | undefined | null)[]>>;
 }
 
-class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInputState> {
+export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInputState> {
   static propTypes: AsyncSelectInputPropTypes = {
     placeholder: PropTypes.string,
     onChange: PropTypes.func.isRequired,
@@ -125,5 +149,3 @@ class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInputState
     return this.getAsyncSelectElement();
   }
 }
-
-export default AsyncSelect;
