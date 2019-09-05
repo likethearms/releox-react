@@ -17,9 +17,9 @@ node {
           sh './test-reporter-latest-linux-amd64 before-build'
           sh 'npm --version'
           sh 'npm install'
+          sh 'npm run build'
           sh 'npm run lint'
           sh 'CI=true npm run test -- --coverage'
-          sh 'npm run build'
           sh 'GIT_COMMIT=$(git log | grep -m1 -oE "[^ ]+$")'
           sh "./test-reporter-latest-linux-amd64 after-build -r ${TOKEN} -t lcov"
         }
