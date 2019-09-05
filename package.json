@@ -15,8 +15,8 @@
   "scripts": {
     "start": "react-scripts start",
     "sass": "sass src/releox.scss:src/releox.css",
-    "sass:watch": "sass src/releox.scss:src/releox.css --watch",
-    "build": "./scripts/pre-build.sh && tsc -p ./build-configs/tsconfig.json && sass src/releox.scss:lib/releox.css && ./scripts/post-build.sh",
+    "sass:watch": "npm run sass -- --watch",
+    "build": "./scripts/pre-build.sh && npm run sass && mkdir lib && cp src/releox.css lib/releox.css && tsc -p ./build-configs/tsconfig.json && ./scripts/post-build.sh",
     "prepublish": "npm run build",
     "postpublish": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags",
     "publish-beta": "npm publish --tag beta",
