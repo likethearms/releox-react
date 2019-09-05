@@ -1,13 +1,15 @@
 import translations from './translations';
 import { ReleoxLocale } from './typings';
 
-declare global {
-  interface Window { LOCALE: ReleoxLocale; }
-}
-
+/**
+ * Get releox locale
+ * @param locale ReleoxLocale
+ */
 const getLocale = (locale?: ReleoxLocale): ReleoxLocale => {
   if (locale) return locale;
-  if (window.LOCALE) return window.LOCALE;
+  if (window.RELEOX_OPTIONS && window.RELEOX_OPTIONS.locale) {
+    return window.RELEOX_OPTIONS.locale;
+  }
   return 'fi';
 };
 
