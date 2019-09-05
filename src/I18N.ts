@@ -1,6 +1,10 @@
 import translations from './translations';
 import { ReleoxLocale } from './typings';
 
+/**
+ * Get releox locale
+ * @param locale ReleoxLocale
+ */
 const getLocale = (locale?: ReleoxLocale): ReleoxLocale => {
   if (locale) return locale;
   if (window.RELEOX_OPTIONS && window.RELEOX_OPTIONS.locale) {
