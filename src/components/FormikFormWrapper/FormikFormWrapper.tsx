@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 export interface FormikFormWrapperProps<R> {
   onSubmit(data: R): void;
   initialValues: R;
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 }
 
 const FormikFormWrapperComponent = <R extends {}>(
