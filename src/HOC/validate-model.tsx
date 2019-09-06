@@ -27,15 +27,13 @@ export const validateModel = (fields: string[], form: ElementType) => (WrapperEl
   class extends Component<Props, State> {
     constructor(props: Props) {
       super(props);
-
-      this.submit = this.submit.bind(this);
-
       this.state = {
         user: {},
         validationFail: false,
         loading: true,
         message: '',
       };
+      this.submit = this.submit.bind(this);
     }
 
     componentDidMount(): void {
