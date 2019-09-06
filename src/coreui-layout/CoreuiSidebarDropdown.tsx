@@ -14,7 +14,7 @@ const CoreuiSidebarDropdownComponent = (props: SidebarDropdownProps) => {
   const {
     icon, text, clickHandler, children, url,
   } = props;
-  const isActive = window.location.pathname.split('/')[1] === url;
+  const isActive = window.location.pathname.includes(url);
   return (
     <li className={`nav-item nav-dropdown ${isActive ? 'open' : ''}`}>
       <a className="nav-link nav-dropdown-toggle" href="#" onClick={clickHandler}>
