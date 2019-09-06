@@ -20,9 +20,9 @@ export interface CoreuiSidebarProps {
   menu: CoreuiSidebarMenu[];
 }
 
-const getSideBarItem = (context?: string) => (item: CoreuiSidebarMenuBase) => (
+const getSideBarItem = (context: string = '') => (item: CoreuiSidebarMenuBase) => (
   <CoreuiSidebarItem
-    key={`${context}#SidebarItem#${item.text}`}
+    key={`${context}SidebarItem#${item.text}`}
     icon={item.icon}
     exact={item.exact}
     url={item.url}
@@ -40,7 +40,7 @@ const getSidebarDropdown = (menu: CoreuiSidebarMenu, clickHandler: (e: any) => v
     clickHandler={clickHandler}
     url={menu.url}
   >
-    {menu.children ? menu.children.map(getSideBarItem('Dropown')) : undefined}
+    {menu.children ? menu.children.map(getSideBarItem('Dropdown#')) : undefined}
   </CoreuiSidebarDropdown>
 );
 
