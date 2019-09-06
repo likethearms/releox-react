@@ -32,17 +32,20 @@ const getSideBarItem = (context: string = '') => (item: CoreuiSidebarMenuBase) =
   </CoreuiSidebarItem>
 );
 
-const getSidebarDropdown = (menu: CoreuiSidebarMenu, clickHandler: (e: any) => void) => (
-  <CoreuiSidebarDropdown
-    key={`Dropown#${menu.text}`}
-    icon={menu.icon}
-    text={menu.text}
-    clickHandler={clickHandler}
-    url={menu.url}
-  >
-    {menu.children ? menu.children.map(getSideBarItem('Dropdown#')) : undefined}
-  </CoreuiSidebarDropdown>
-);
+const getSidebarDropdown = (menu: CoreuiSidebarMenu, clickHandler: (e: any) => void) => {
+  const child = menu.children as CoreuiSidebarMenuBase[];
+  return (
+    <CoreuiSidebarDropdown
+      key={`Dropown#${menu.text}`}
+      icon={menu.icon}
+      text={menu.text}
+      clickHandler={clickHandler}
+      url={menu.url}
+    >
+      {child.map(getSideBarItem('Dropdown#'))}
+    </CoreuiSidebarDropdown>
+  );
+};
 
 const getMenuTitle = (m: CoreuiSidebarMenu) => <li key={`title#${m.text}`} className="nav-title">{m.text}</li>;
 
