@@ -5,7 +5,9 @@ interface ParseParams {
   access_token: string; // eslint-disable-line camelcase
 }
 
-export const parseParams = (strict: boolean = false) => new Promise((resolve, reject) => {
+export const parseParams = (
+  strict: boolean = false,
+): Promise<ParseParams> => new Promise((resolve, reject) => {
   const query = queryString.parse(window.location.search);
 
   const params = {
