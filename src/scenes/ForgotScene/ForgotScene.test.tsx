@@ -69,7 +69,7 @@ describe('UI tests', () => {
       expect(word).toBe('Email');
     });
 
-    it('should have finnish buttonText', () => {
+    it('should have english buttonText', () => {
       const word = wrapper.find('AuthForm').prop('buttonText');
       expect(word).toBe('Reset');
     });

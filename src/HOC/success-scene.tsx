@@ -2,7 +2,7 @@ import React from 'react';
 import { ct, ReleoxLocale } from '../I18N';
 import { AuthLayout } from '../components/AuthLayout/AuthLayout';
 
-export interface ForgotSuccessSceneProps {
+export interface SuccessSceneProps {
   locale?: ReleoxLocale;
 }
 
@@ -11,7 +11,7 @@ export const successScene = (
   translationPrefix: string,
   linkUrl: string,
   getText?: () => string,
-) => ({ locale }: ForgotSuccessSceneProps) => {
+) => ({ locale }: SuccessSceneProps) => {
   const t = ct(translationPrefix, locale);
   return (
     <AuthLayout

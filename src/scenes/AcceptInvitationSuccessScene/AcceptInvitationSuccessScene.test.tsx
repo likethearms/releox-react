@@ -34,7 +34,7 @@ describe('UI', () => {
     });
 
     it('should have english title', () => {
-      expect(authLayout.prop('title')).toBe('You password is saved');
+      expect(authLayout.prop('title')).toBe('Your password is saved');
     });
 
     it('should have english subTitle', () => {
