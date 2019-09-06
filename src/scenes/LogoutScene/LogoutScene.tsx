@@ -10,10 +10,8 @@ interface State {
   redirect: string;
 }
 
-interface Props { }
-
-export class LogoutScene extends Component<Props, State> {
-  constructor(props: Props) {
+export class LogoutScene extends Component<{}, State> {
+  constructor(props: {}) {
     super(props);
     this.state = {
       redirect: '',

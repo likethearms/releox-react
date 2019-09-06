@@ -75,6 +75,7 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "formik": "^1.5.8",
+    "jest-localstorage-mock": "^2.4.0",
     "moxios": "^0.4.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
