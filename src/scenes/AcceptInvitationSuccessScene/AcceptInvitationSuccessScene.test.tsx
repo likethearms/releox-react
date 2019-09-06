@@ -33,15 +33,15 @@ describe('UI', () => {
       authLayout = wrapper.find('AuthLayout');
     });
 
-    it('should have finnish title', () => {
+    it('should have english title', () => {
       expect(authLayout.prop('title')).toBe('You password is saved');
     });
 
-    it('should have finnish subTitle', () => {
+    it('should have english subTitle', () => {
       expect(authLayout.prop('subTitle')).toBe('Your password is saved. You can now login.');
     });
 
-    it('should have finnish login link', () => {
+    it('should have english login link', () => {
       const arr = authLayout.prop('links') as AuthLayoutLinkItem[];
       expect(arr[0].text).toBe('To Login');
     });
