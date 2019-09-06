@@ -162,9 +162,9 @@ export const translations: Translation<TranslationObject> = {
     'authError.subTitle': 'We couldn\'t find reason for an error.',
 
     // Confirm
-    'confirm.title': 'You account is now activated.',
+    'confirm.title': 'Your account is now activated.',
     'confirm.link': 'Back',
-    'confirm.subTitle': 'You account is now activated. You can now continue using application.',
+    'confirm.subTitle': 'Your account is now activated. You can now continue using application.',
 
     // Accept Invitation
     'acceptInvitation.buttonText': 'Save',
@@ -173,7 +173,7 @@ export const translations: Translation<TranslationObject> = {
     'acceptInvitation.placeholder': 'Password',
 
     // Accept Invitation Success
-    'acceptInvitationSuccess.title': 'You password is saved',
+    'acceptInvitationSuccess.title': 'Your password is saved',
     'acceptInvitationSuccess.link': 'To Login',
     'acceptInvitationSuccess.subTitle': 'Your password is saved. You can now login.',
 
