@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import ResetPasswordSuccessScene from './ResetPasswordSuccessScene';
+import { ResetPasswordSuccessScene } from './ResetPasswordSuccessScene';
 
 describe('UI tests', () => {
   describe('Finnish translations', () => {

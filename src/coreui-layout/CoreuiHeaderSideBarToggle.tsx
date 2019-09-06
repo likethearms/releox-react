@@ -6,22 +6,21 @@ export interface CoreuiHeaderSideBarToggleProps {
   buttonClass: string;
 }
 
-const CoreuiHeaderSideBarToggle = ({
+const CoreuiHeaderSideBarToggleComponent = ({
   toggleClass,
   buttonClass,
-}: CoreuiHeaderSideBarToggleProps) => (
-  <button
-    className={buttonClass}
-    type="button"
-    onClick={() => document.getElementsByClassName('app')[0].classList.toggle(toggleClass)}
-  >
-    <span className="navbar-toggler-icon" />
-  </button>
-);
+}: CoreuiHeaderSideBarToggleProps) => {
+  const onClick = () => document.getElementsByClassName('app')[0].classList.toggle(toggleClass);
+  return (
+    <button className={buttonClass} type="button" onClick={onClick}>
+      <span className="navbar-toggler-icon" />
+    </button>
+  );
+};
 
-CoreuiHeaderSideBarToggle.propTypes = {
+CoreuiHeaderSideBarToggleComponent.propTypes = {
   toggleClass: PropTypes.string.isRequired,
   buttonClass: PropTypes.string.isRequired,
 };
 
-export default CoreuiHeaderSideBarToggle;
+export const CoreuiHeaderSideBarToggle = CoreuiHeaderSideBarToggleComponent;

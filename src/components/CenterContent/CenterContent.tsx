@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CenterContentProps } from '../../typings';
 
-const CenterContent = ({ children }: CenterContentProps) => (
+export interface CenterContentProps {
+  children: JSX.Element | string;
+}
+
+const CenterContentComponent = ({ children }: CenterContentProps) => (
   <div className="flex-row align-items-center CenterContent">
     <div className="container">
       <div className="row justify-content-center CenterContent-row">
@@ -12,8 +15,8 @@ const CenterContent = ({ children }: CenterContentProps) => (
   </div>
 );
 
-CenterContent.propTypes = {
+CenterContentComponent.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default CenterContent;
+export const CenterContent = CenterContentComponent;

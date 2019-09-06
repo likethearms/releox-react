@@ -1,9 +1,22 @@
 import React from 'react';
-import AbstractFormikInputWrapper from '../AbstractFormikInputWrapper/AbstractFormikInputWrapper';
-import AsyncSelect from './AsyncSelect';
-import { AsyncSelectFormikWrapperProps, AsyncSelectWrapperDefaultProps } from '../../typings';
+import { FormikValues } from 'formik';
+import { AsyncSelectQueryFormat, AsyncSelect } from './AsyncSelect';
+import { AbstractFormikInputWrapper } from '../AbstractFormikInputWrapper/AbstractFormikInputWrapper';
 
-class AsyncSelectFormikWrapper
+export interface AsyncSelectFormikWrapperProps {
+  field: FormikValues;
+  queryFormat: AsyncSelectQueryFormat;
+  getUrl: string;
+  placeholder?: string;
+  searchFields: string[];
+  form: { setFieldValue: Function };
+}
+
+export interface AsyncSelectWrapperDefaultProps {
+  searchFields: string[];
+}
+
+export class AsyncSelectFormikWrapper
   extends AbstractFormikInputWrapper<string, AsyncSelectFormikWrapperProps> {
   public static defaultProps: AsyncSelectWrapperDefaultProps = {
     searchFields: ['name'],
@@ -30,5 +43,3 @@ class AsyncSelectFormikWrapper
     );
   }
 }
-
-export default AsyncSelectFormikWrapper;

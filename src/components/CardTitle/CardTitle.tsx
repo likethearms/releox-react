@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CardTitleProps } from '../../typings';
 
-const CardTitle = ({ children, lg, xl }: CardTitleProps) => {
+export interface CardTitleProps {
+  children: string | JSX.Element;
+  lg?: boolean;
+  xl?: boolean;
+}
+
+const CardTitleComponent = ({ children, lg, xl }: CardTitleProps) => {
   if (xl) {
     return (
       <h1 className="card-title">
@@ -24,8 +29,8 @@ const CardTitle = ({ children, lg, xl }: CardTitleProps) => {
   );
 };
 
-CardTitle.propTypes = {
+CardTitleComponent.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default CardTitle;
+export const CardTitle = CardTitleComponent;

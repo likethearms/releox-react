@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import CardTitle from './CardTitle';
+import { CardTitle } from './CardTitle';
 
 it('should show input', () => {
   const wrapper = shallow(<CardTitle>Foo</CardTitle>);

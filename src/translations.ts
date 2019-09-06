@@ -63,7 +63,7 @@ interface Translation<T> {
   [key: string]: T;
 }
 
-const translations: Translation<TranslationObject> = {
+export const translations: Translation<TranslationObject> = {
   fi: {
     // Login
     'login.title': 'Kirjaudu',
@@ -183,5 +183,3 @@ const translations: Translation<TranslationObject> = {
     'validateModel.button': 'Save',
   },
 };
-
-export default translations;

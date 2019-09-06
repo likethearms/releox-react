@@ -1,4 +1,4 @@
-import successScene from '../../HOC/success-scene';
-import URL from '../../routes';
+import { successScene } from '../../HOC/success-scene';
+import { routes } from '../../routes';
 
-export default successScene('ResetPasswordSuccessScene', 'resetPasswordSuccess', URL.LOGIN);
+export const ResetPasswordSuccessScene = successScene('ResetPasswordSuccessScene', 'resetPasswordSuccess', routes.LOGIN);

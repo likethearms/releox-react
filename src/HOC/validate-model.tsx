@@ -1,12 +1,12 @@
 import React, { Component, ElementType } from 'react';
 import Axios from 'axios';
-import AuthLayout from '../components/AuthLayout/AuthLayout';
-import apis from '../apis';
 import { getErrorMessage } from '../config';
-import Loading from '../components/Loading/Loading';
-import FormikFormWrapper from '../components/FormikFormWrapper/FormikFormWrapper';
-import Button from '../components/Button/Button';
 import { ct } from '../I18N';
+import { apis } from '../apis';
+import { Loading } from '../components/Loading/Loading';
+import { AuthLayout } from '../components/AuthLayout/AuthLayout';
+import { FormikFormWrapper } from '../components/FormikFormWrapper/FormikFormWrapper';
+import { Button } from '../components/Button/Button';
 
 interface State {
   user: any;
@@ -22,7 +22,7 @@ interface Props {
 const CONTEXT = 'ValidateModelMiddleware';
 
 /* eslint-disable react/jsx-props-no-spreading */
-export default (requiredFields: string[], form: ElementType, WrapperElement: any) => (
+export const validateModel = (requiredFields: string[], form: ElementType, WrapperElement: any) => (
   class ValidateModelMiddleware extends Component<Props, State> {
     static validateModel(user: any): boolean {
       let valid = true;

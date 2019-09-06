@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import { AbstractInputGroupProps } from '../../typings';
 
-abstract class AbstractInputGroup<T> extends Component<T & AbstractInputGroupProps> {
+export interface AbstractInputGroupProps {
+  label: string;
+  name: string;
+  id?: string;
+}
+
+export abstract class AbstractInputGroup<T> extends Component<T & AbstractInputGroupProps> {
   abstract getElement(name: string, id?: string): JSX.Element;
 
   render(): JSX.Element {
@@ -14,5 +19,3 @@ abstract class AbstractInputGroup<T> extends Component<T & AbstractInputGroupPro
     );
   }
 }
-
-export default AbstractInputGroup;

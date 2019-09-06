@@ -1,9 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import { FormikFormWrapperProps } from '../../typings';
 
-const FormikFormWrapper = <R extends {}>(props: FormikFormWrapperProps<R>): JSX.Element => {
+export interface FormikFormWrapperProps<R> {
+  onSubmit(data: R): void;
+  initialValues: R;
+  children: JSX.Element;
+}
+
+const FormikFormWrapperComponent = <R extends {}>(
+  props: FormikFormWrapperProps<R>,
+): JSX.Element => {
   const { onSubmit, initialValues, children } = props;
   return (
     <Formik onSubmit={onSubmit} initialValues={initialValues}>
@@ -16,10 +23,10 @@ const FormikFormWrapper = <R extends {}>(props: FormikFormWrapperProps<R>): JSX.
   );
 };
 
-FormikFormWrapper.propTypes = {
+FormikFormWrapperComponent.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   initialValues: PropTypes.shape({}).isRequired,
   children: PropTypes.node.isRequired,
 };
 
-export default FormikFormWrapper;
+export const FormikFormWrapper = FormikFormWrapperComponent;

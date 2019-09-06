@@ -1,60 +1,55 @@
-import URL from './routes';
-import LoginScene from './scenes/LoginScene/LoginScene';
-import ForgotScene from './scenes/ForgotScene/ForgotScene';
-import ForgotSuccessScene from './scenes/ForgotSuccessScene/ForgotSuccessScene';
-import ResetPasswordSuccessScene
-  from './scenes/ResetPasswordSuccessScene/ResetPasswordSuccessScene';
-import ResetPasswordScene from './scenes/ResetPasswordScene/ResetPasswordScene';
-import AuthErrorScene from './scenes/AuthErrorScene/AuthErrorScene';
-import guestMiddleware from './HOC/guest-middleware';
-import ConfirmScene from './scenes/ConfirmScene/ConfirmScene';
-import AcceptInvitationScene from './scenes/AcceptInvitationScene/AcceptInvitationScene';
-import AcceptInvitationSuccessScene
-  from './scenes/AcceptInvitationSuccessScene/AcceptInvitationSuccessScene';
-import LogoutScene from './scenes/LogoutScene/LogoutScene';
-import { ReleoxRoutes } from './typings';
+import { ReleoxRoutes, routes } from './routes';
+import { guestMiddleware } from './HOC/guest-middleware';
+import { LoginScene } from './scenes/LoginScene/LoginScene';
+import { ForgotScene } from './scenes/ForgotScene/ForgotScene';
+import { ForgotSuccessScene } from './scenes/ForgotSuccessScene/ForgotSuccessScene';
+import { ResetPasswordScene } from './scenes/ResetPasswordScene/ResetPasswordScene';
+import { ResetPasswordSuccessScene } from './scenes/ResetPasswordSuccessScene/ResetPasswordSuccessScene';
+import { AcceptInvitationScene } from './scenes/AcceptInvitationScene/AcceptInvitationScene';
+import { AcceptInvitationSuccessScene } from './scenes/AcceptInvitationSuccessScene/AcceptInvitationSuccessScene';
+import { AuthErrorScene } from './scenes/AuthErrorScene/AuthErrorScene';
+import { ConfirmScene } from './scenes/ConfirmScene/ConfirmScene';
+import { LogoutScene } from './scenes/LogoutScene/LogoutScene';
 
-const authRoutes: ReleoxRoutes[] = [
+export const authRoutes: ReleoxRoutes[] = [
   {
-    url: URL.LOGIN,
+    url: routes.LOGIN,
     component: guestMiddleware(LoginScene),
   },
   {
-    url: URL.FORGOT,
+    url: routes.FORGOT,
     component: guestMiddleware(ForgotScene),
   },
   {
-    url: URL.FORGOT_SUCCESS,
+    url: routes.FORGOT_SUCCESS,
     component: guestMiddleware(ForgotSuccessScene),
   },
   {
-    url: URL.RESET,
+    url: routes.RESET,
     component: guestMiddleware(ResetPasswordScene),
   },
   {
-    url: URL.RESET_SUCCESS,
+    url: routes.RESET_SUCCESS,
     component: guestMiddleware(ResetPasswordSuccessScene),
   },
   {
-    url: URL.ACCEPT_INVITATION,
+    url: routes.ACCEPT_INVITATION,
     component: guestMiddleware(AcceptInvitationScene),
   },
   {
-    url: URL.ACCEPT_INVITATION_SUCCESS,
+    url: routes.ACCEPT_INVITATION_SUCCESS,
     component: guestMiddleware(AcceptInvitationSuccessScene),
   },
   {
-    url: URL.ERROR,
+    url: routes.ERROR,
     component: AuthErrorScene,
   },
   {
-    url: URL.CONFIRM,
+    url: routes.CONFIRM,
     component: ConfirmScene,
   },
   {
-    url: URL.LOGOUT,
+    url: routes.LOGOUT,
     component: LogoutScene,
   },
 ];
-
-export default authRoutes;

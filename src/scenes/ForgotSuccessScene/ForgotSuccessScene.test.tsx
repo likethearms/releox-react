@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import ForgotSuccessScene from './ForgotSuccessScene';
+import { ForgotSuccessScene } from './ForgotSuccessScene';
 
 describe('UI tests', () => {
   describe('Finnish translations', () => {

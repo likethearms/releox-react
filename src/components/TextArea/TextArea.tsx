@@ -1,9 +1,15 @@
 import React from 'react';
 import { Field } from 'formik';
-import AbstractInputGroup from '../AbstractInputGroup/AbstractInputGroup';
-import { TextAreaProps } from '../../typings';
+import { AbstractInputGroupProps, AbstractInputGroup } from '../AbstractInputGroup/AbstractInputGroup';
 
-class TextArea extends AbstractInputGroup<TextAreaProps> {
+
+export interface TextAreaProps extends AbstractInputGroupProps {
+  rows?: number;
+  placeholder?: string;
+  className?: string;
+}
+
+export class TextArea extends AbstractInputGroup<TextAreaProps> {
   getElement(name: string, id: string): JSX.Element {
     const {
       rows, placeholder, label, className,
@@ -20,5 +26,3 @@ class TextArea extends AbstractInputGroup<TextAreaProps> {
     );
   }
 }
-
-export default TextArea;

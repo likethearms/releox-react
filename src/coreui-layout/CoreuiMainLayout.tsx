@@ -7,7 +7,7 @@ export interface CoreuiMainLayoutProps {
   sidebar: JSX.Element | string;
 }
 
-const CoreuiMainLayout = ({ children, header, sidebar }: CoreuiMainLayoutProps) => (
+const CoreuiMainLayoutComponent = ({ children, header, sidebar }: CoreuiMainLayoutProps) => (
   <div className="app sidebar-md-show sidebar-fixed header-fixed">
     {header}
     <div className="app-body">
@@ -21,10 +21,10 @@ const CoreuiMainLayout = ({ children, header, sidebar }: CoreuiMainLayoutProps) 
   </div>
 );
 
-CoreuiMainLayout.propTypes = {
+CoreuiMainLayoutComponent.propTypes = {
   children: PropTypes.node.isRequired,
   header: PropTypes.node.isRequired,
   sidebar: PropTypes.node.isRequired,
 };
 
-export default CoreuiMainLayout;
+export const CoreuiMainLayout = CoreuiMainLayoutComponent;

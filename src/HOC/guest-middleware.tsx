@@ -1,17 +1,17 @@
 import React, { Component, ElementType } from 'react';
 import { Redirect } from 'react-router';
 import { getAccessInformation } from '../config';
-import URL from '../routes';
-import Loading from '../components/Loading/Loading';
+import { routes } from '../routes';
+import { Loading } from '../components/Loading/Loading';
 
-interface MiddlewareState {
+export interface GuestMiddlewareState {
   loading: boolean;
   redirect: string;
 }
 
 /* eslint-disable react/jsx-props-no-spreading */
-const guestMiddleware = (WrapperComponent: ElementType) => (
-  class Middleware extends Component<void, MiddlewareState> {
+export const guestMiddleware = (WrapperComponent: ElementType) => (
+  class Middleware extends Component<void, GuestMiddlewareState> {
     constructor() {
       super();
       this.state = {
@@ -22,7 +22,7 @@ const guestMiddleware = (WrapperComponent: ElementType) => (
 
     componentDidMount(): void {
       getAccessInformation()
-        .then(() => this.setState({ loading: false, redirect: URL.HOME }))
+        .then(() => this.setState({ loading: false, redirect: routes.HOME }))
         .catch(() => this.setState({ loading: false }));
     }
 
@@ -33,6 +33,3 @@ const guestMiddleware = (WrapperComponent: ElementType) => (
       return <WrapperComponent {...this.props} />;
     }
   });
-
-
-export default guestMiddleware;

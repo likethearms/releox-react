@@ -1,14 +1,15 @@
 import { AxiosError } from 'axios';
-import URL from '../../routes';
-import AbstractAuthOneInputScene, {
+import { routes } from '../../routes';
+import {
   AbstractAuthOneInputSceneProps,
   AbstractAuthOneInputSceneInputProps,
+  AbstractAuthOneInputScene,
 } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
-import apis from '../../apis';
-import validateTokenRequest from '../../requests';
-import parseParams from '../../parse-params';
+import { apis } from '../../apis';
 import { getErrorMessage } from '../../config';
-import { AuthLayoutLinkItem } from '../../typings';
+import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
+import { parseParams } from '../../parse-params';
+import { validateTokenRequest } from '../../requests';
 
 interface BodyData {
   newPassword: string;
@@ -18,15 +19,18 @@ interface DefaultProps {
   resetPasswordAPIUrl: string;
 }
 
-interface ResetPasswordSceneProps extends AbstractAuthOneInputSceneProps {
+export interface ResetPasswordSceneProps extends AbstractAuthOneInputSceneProps {
   resetPasswordAPIUrl: string;
 }
 
 const CONTEXT = 'ForgotScene';
 
 /* eslint-disable class-methods-use-this */
-class ResetPasswordScene extends AbstractAuthOneInputScene<BodyData, ResetPasswordSceneProps> {
-  static defaultProps: DefaultProps;
+export class ResetPasswordScene
+  extends AbstractAuthOneInputScene<BodyData, ResetPasswordSceneProps> {
+  static defaultProps: DefaultProps = {
+    resetPasswordAPIUrl: apis.PASSWORD_RESET,
+  };
 
   componentDidMount(): void {
     /* eslint-disable camelcase */
@@ -34,7 +38,7 @@ class ResetPasswordScene extends AbstractAuthOneInputScene<BodyData, ResetPasswo
       .then(({ user, access_token }) => validateTokenRequest(access_token, user))
       .then(() => this.setState({ loading: false }))
       .catch((e: AxiosError) => this.setState({
-        redirect: `${URL.ERROR}?message=${getErrorMessage(e)}`,
+        redirect: `${routes.ERROR}?message=${getErrorMessage(e)}`,
       }));
     /* eslint-enable camelcase */
   }
@@ -45,7 +49,7 @@ class ResetPasswordScene extends AbstractAuthOneInputScene<BodyData, ResetPasswo
   }
 
   getRedirectUrl(): string {
-    return URL.RESET_SUCCESS;
+    return routes.RESET_SUCCESS;
   }
 
   shouldDestroyToken(): boolean {
@@ -75,9 +79,3 @@ class ResetPasswordScene extends AbstractAuthOneInputScene<BodyData, ResetPasswo
     return 'resetPassword';
   }
 }
-
-ResetPasswordScene.defaultProps = {
-  resetPasswordAPIUrl: apis.PASSWORD_RESET,
-};
-
-export default ResetPasswordScene;

@@ -1,13 +1,13 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import moxios from 'moxios';
-import LoginScene from './LoginScene';
+import { LoginScene } from './LoginScene';
 
 describe('onSubmit', () => {
   it('should call onSubmit', () => {
     const onSubmit = jest.fn();
     const wrapper = shallow(<LoginScene onSubmit={onSubmit} />);
-    const onSubmitProp = wrapper.find('FormikFormWrapper').props().onSubmit as Function;
+    const onSubmitProp = wrapper.find('FormikFormWrapperComponent').props().onSubmit as Function;
     onSubmitProp();
     expect(onSubmit).toBeCalledTimes(1);
   });
@@ -41,7 +41,7 @@ describe('UI tests', () => {
     });
 
     it('should have finnish button text', () => {
-      const word = wrapper.find('Button').prop('children');
+      const word = wrapper.find('ButtonComponent').prop('children');
       expect(word).toBe('Kirjaudu');
     });
   });
@@ -73,7 +73,7 @@ describe('UI tests', () => {
     });
 
     it('should have english button text', () => {
-      const word = wrapper.find('Button').prop('children');
+      const word = wrapper.find('ButtonComponent').prop('children');
       expect(word).toBe('Login');
     });
   });

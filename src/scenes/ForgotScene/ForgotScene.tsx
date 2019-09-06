@@ -1,10 +1,11 @@
-import URL from '../../routes';
-import AbstractAuthOneInputScene, {
+import { routes } from '../../routes';
+import {
   AbstractAuthOneInputSceneProps,
   AbstractAuthOneInputSceneInputProps,
+  AbstractAuthOneInputScene,
 } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
-import apis from '../../apis';
-import { AuthLayoutLinkItem } from '../../typings';
+import { apis } from '../../apis';
+import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
 
 interface BodyData {
   email: string;
@@ -14,14 +15,14 @@ interface DefaultProps {
   forgotAPIUrl: string;
 }
 
-interface ForgotSceneProps extends AbstractAuthOneInputSceneProps {
+export interface ForgotSceneProps extends AbstractAuthOneInputSceneProps {
   forgotAPIUrl: string;
 }
 
 const CONTEXT = 'ForgotScene';
 
 /* eslint-disable class-methods-use-this */
-class ForgotScene extends AbstractAuthOneInputScene<BodyData, ForgotSceneProps> {
+class ForgotSceneComponent extends AbstractAuthOneInputScene<BodyData, ForgotSceneProps> {
   static defaultProps: DefaultProps;
 
   componentDidMount(): void {
@@ -30,7 +31,7 @@ class ForgotScene extends AbstractAuthOneInputScene<BodyData, ForgotSceneProps> 
 
   onSubmit(body: BodyData): Promise<void> {
     const { forgotAPIUrl } = this.props;
-    return this.onSubmitMethod(forgotAPIUrl, body, URL.FORGOT_SUCCESS);
+    return this.onSubmitMethod(forgotAPIUrl, body, routes.FORGOT_SUCCESS);
   }
 
   getPostUrl(): string {
@@ -39,7 +40,7 @@ class ForgotScene extends AbstractAuthOneInputScene<BodyData, ForgotSceneProps> 
   }
 
   getRedirectUrl(): string {
-    return URL.FORGOT_SUCCESS;
+    return routes.FORGOT_SUCCESS;
   }
 
   getInitValues(): BodyData {
@@ -58,7 +59,7 @@ class ForgotScene extends AbstractAuthOneInputScene<BodyData, ForgotSceneProps> 
     return [
       {
         id: 'back-link',
-        to: URL.LOGIN,
+        to: routes.LOGIN,
         text: t('linkText'),
       },
     ];
@@ -73,8 +74,8 @@ class ForgotScene extends AbstractAuthOneInputScene<BodyData, ForgotSceneProps> 
   }
 }
 
-ForgotScene.defaultProps = {
+ForgotSceneComponent.defaultProps = {
   forgotAPIUrl: apis.FORGOT,
 };
 
-export default ForgotScene;
+export const ForgotScene = ForgotSceneComponent;

@@ -6,16 +6,15 @@ import { MemoryRouter } from 'react-router';
 import { action } from '@storybook/addon-actions';
 import '../releox.css';
 import { storiesOf } from '@storybook/react';
-import CenterContent from '../components/CenterContent/CenterContent';
-import Loading from '../components/Loading/Loading';
-import FormikFormWrapper from '../components/FormikFormWrapper/FormikFormWrapper';
-import LoginScene from '../scenes/LoginScene/LoginScene';
-import Button from '../components/Button/Button';
-import ForgotScene from '../scenes/ForgotScene/ForgotScene';
-import ResetPasswordScene from '../scenes/ResetPasswordScene/ResetPasswordScene';
-import ResetPasswordSuccessScene
-  from '../scenes/ResetPasswordSuccessScene/ResetPasswordSuccessScene';
-import ForgotSuccessScene from '../scenes/ForgotSuccessScene/ForgotSuccessScene';
+import { CenterContent } from '../components/CenterContent/CenterContent';
+import { Loading } from '../components/Loading/Loading';
+import { Button } from '../components/Button/Button';
+import { FormikFormWrapper } from '../components/FormikFormWrapper/FormikFormWrapper';
+import { LoginScene } from '../scenes/LoginScene/LoginScene';
+import { ForgotScene } from '../scenes/ForgotScene/ForgotScene';
+import { ForgotSuccessScene } from '../scenes/ForgotSuccessScene/ForgotSuccessScene';
+import { ResetPasswordScene } from '../scenes/ResetPasswordScene/ResetPasswordScene';
+import { ResetPasswordSuccessScene } from '../scenes/ResetPasswordSuccessScene/ResetPasswordSuccessScene';
 
 moxios.install();
 moxios.stubRequest(/undefined.Members.user*/, {

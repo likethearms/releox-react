@@ -2,19 +2,19 @@ import React, { Component, ElementType } from 'react';
 import { Redirect } from 'react-router';
 import Axios, { AxiosResponse } from 'axios';
 import { getAccessInformation, destroyAccessInformation, AccessInformation } from '../config';
-import validateTokenRequest from '../requests';
-import URL from '../routes';
-import Loading from '../components/Loading/Loading';
+import { validateTokenRequest } from '../requests';
+import { routes } from '../routes';
+import { Loading } from '../components/Loading/Loading';
 
-interface MiddlewareState<U> {
+export interface AuthMiddlewareState<U> {
   loading: boolean;
   redirect: string;
   authenticatedUser: U;
 }
 
 /* eslint-disable react/jsx-props-no-spreading */
-const authMiddleware = <U extends {}>(WrapperComponent: ElementType) => (
-  class AuthMiddleware extends Component<any, MiddlewareState<U>> {
+export const authMiddleware = <U extends {}>(WrapperComponent: ElementType) => (
+  class AuthMiddleware extends Component<any, AuthMiddlewareState<U>> {
     constructor(props: any) {
       super(props);
       this.state = {
@@ -38,7 +38,7 @@ const authMiddleware = <U extends {}>(WrapperComponent: ElementType) => (
         })
         .catch(() => {
           destroyAccessInformation()
-            .then(() => this.setState({ redirect: URL.LOGIN }));
+            .then(() => this.setState({ redirect: routes.LOGIN }));
         });
     }
 
@@ -49,5 +49,3 @@ const authMiddleware = <U extends {}>(WrapperComponent: ElementType) => (
       return <WrapperComponent {...this.props} authenticatedUser={authenticatedUser} />;
     }
   });
-
-export default authMiddleware;

@@ -10,7 +10,7 @@ export interface SidebarItemProps {
   exact?: boolean;
 }
 
-const SidebarItem = (props: SidebarItemProps) => {
+const CoreuiSidebarItemComponent = (props: SidebarItemProps) => {
   const {
     icon, children, url, onClick, exact,
   } = props;
@@ -35,7 +35,7 @@ const SidebarItem = (props: SidebarItemProps) => {
   );
 };
 
-SidebarItem.propTypes = {
+CoreuiSidebarItemComponent.propTypes = {
   children: PropTypes.node.isRequired,
   url: PropTypes.string,
   icon: PropTypes.string,
@@ -43,11 +43,11 @@ SidebarItem.propTypes = {
   exact: PropTypes.bool,
 };
 
-SidebarItem.defaultProps = {
+CoreuiSidebarItemComponent.defaultProps = {
   exact: false,
   url: undefined,
   onClick: undefined,
   icon: '',
 };
 
-export default SidebarItem;
+export const CoreuiSidebarItem = CoreuiSidebarItemComponent;

@@ -2,14 +2,15 @@ import React from 'react';
 import moxios from 'moxios';
 import { createWaitForElement } from 'enzyme-wait';
 import { shallow, ShallowWrapper } from 'enzyme';
-import ResetPasswordScene from './ResetPasswordScene';
-import { AbstractAuthOneInputSceneProps } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
+import { ResetPasswordScene } from './ResetPasswordScene';
+import { AbstractAuthOneInputScene } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 
 window = Object.create(window); // eslint-disable-line
 Object.defineProperty(window, 'location', { value: { search: '' }, writable: true });
 
+let wrapper: ShallowWrapper<{}, {}, AbstractAuthOneInputScene<{}, {}>>;
+
 describe('Abstract methods', () => {
-  let wrapper: ShallowWrapper<AbstractAuthOneInputSceneProps, any, ResetPasswordScene>;
   beforeAll(() => {
     wrapper = shallow(<ResetPasswordScene />);
   });
@@ -26,8 +27,6 @@ describe('Abstract methods', () => {
 });
 
 describe('Errors', () => {
-  let wrapper: ShallowWrapper<AbstractAuthOneInputSceneProps, any, ResetPasswordScene>;
-
   beforeAll(() => {
     wrapper = shallow(<ResetPasswordScene />);
   });
@@ -37,20 +36,20 @@ describe('Errors', () => {
   });
 
   it('should return error when no user object or access token is not present', () => {
-    expect(wrapper.state().redirect).toBe('/auth-error?message=Missing User Object or Access Token');
+    expect(wrapper.state('redirect')).toBe('/auth-error?message=Missing User Object or Access Token');
   });
 
   it('should return error when no user object is not present', () => {
     const url = '?user=xx';
     Object.defineProperty(window, 'location', { value: { search: url } });
-    expect(wrapper.state().redirect).toBe('/auth-error?message=Missing User Object or Access Token');
+    expect(wrapper.state('redirect')).toBe('/auth-error?message=Missing User Object or Access Token');
   });
 
   it('should return error when no access token is not present', () => {
     const url = '?access_token=xxx';
     Object.defineProperty(window, 'location', { value: { search: url } });
     window.location.search = url;
-    expect(wrapper.state().redirect).toBe('/auth-error?message=Missing User Object or Access Token');
+    expect(wrapper.state('redirect')).toBe('/auth-error?message=Missing User Object or Access Token');
   });
 });
 
@@ -70,8 +69,6 @@ describe('UI tests', () => {
   });
 
   describe('Finnish translations', () => {
-    let wrapper: ShallowWrapper;
-
     beforeAll(async () => {
       const waitForSample = createWaitForElement('AuthLayout');
       wrapper = shallow(<ResetPasswordScene />);
@@ -100,8 +97,6 @@ describe('UI tests', () => {
   });
 
   describe('English translations', () => {
-    let wrapper: ShallowWrapper;
-
     beforeAll(async () => {
       const waitForSample = createWaitForElement('AuthLayout');
       wrapper = shallow(<ResetPasswordScene locale="en" />);
@@ -131,7 +126,6 @@ describe('UI tests', () => {
 });
 
 describe('moxios tests', () => {
-  let wrapper: ShallowWrapper<AbstractAuthOneInputSceneProps, any, ResetPasswordScene>;
   const body = {
     email: 'email@email.com',
   };
@@ -157,7 +151,7 @@ describe('moxios tests', () => {
     });
     const onSubmit = wrapper.find('AuthForm').prop('onSubmit') as Function;
     onSubmit(body).then(() => {
-      expect(wrapper.state().redirect).toBe('/reset-password-success');
+      expect(wrapper.state('redirect')).toBe('/reset-password-success');
       done();
     });
   });

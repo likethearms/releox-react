@@ -10,7 +10,7 @@ export interface SidebarDropdownProps {
 }
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
-const SidebarDropdown = (props: SidebarDropdownProps) => {
+const CoreuiSidebarDropdownComponent = (props: SidebarDropdownProps) => {
   const {
     icon, text, clickHandler, children, url,
   } = props;
@@ -28,7 +28,7 @@ const SidebarDropdown = (props: SidebarDropdownProps) => {
   );
 };
 
-SidebarDropdown.propTypes = {
+CoreuiSidebarDropdownComponent.propTypes = {
   children: PropTypes.node.isRequired,
   url: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
@@ -36,8 +36,8 @@ SidebarDropdown.propTypes = {
   icon: PropTypes.string,
 };
 
-SidebarDropdown.defaultProps = {
+CoreuiSidebarDropdownComponent.defaultProps = {
   icon: '',
 };
 
-export default SidebarDropdown;
+export const CoreuiSidebarDropdown = CoreuiSidebarDropdownComponent;

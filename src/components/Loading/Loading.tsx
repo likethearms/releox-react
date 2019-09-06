@@ -1,10 +1,15 @@
 import React from 'react';
-import ReactLoading from 'react-loading';
+import ReactLoading, { LoadingProps as LP, LoadingType } from 'react-loading';
 import PropTypes from 'prop-types';
-import CenterContent from '../CenterContent/CenterContent';
-import { LoadingProps } from '../../typings';
+import { CenterContent } from '../CenterContent/CenterContent';
 
-const Loading = ({ centeredVertical, type, color }: LoadingProps) => {
+export interface LoadingProps extends LP {
+  centeredVertical?: boolean;
+  color?: string;
+  type?: LoadingType;
+}
+
+const LoadingComponent = ({ centeredVertical, type, color }: LoadingProps) => {
   const loader = (
     <div className="loading">
       <ReactLoading color={color} delay={0} type={type} />
@@ -14,7 +19,7 @@ const Loading = ({ centeredVertical, type, color }: LoadingProps) => {
   return loader;
 };
 
-Loading.propTypes = {
+LoadingComponent.propTypes = {
   /** Center indicator vertically and horizontally */
   centeredVertical: PropTypes.bool,
   /** Color of loading indicator */
@@ -23,10 +28,10 @@ Loading.propTypes = {
   type: PropTypes.string,
 };
 
-Loading.defaultProps = {
+LoadingComponent.defaultProps = {
   centeredVertical: true,
   color: '#20A8D8',
   type: 'spin',
 };
 
-export default Loading;
+export const Loading = LoadingComponent;

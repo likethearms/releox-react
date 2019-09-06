@@ -1,8 +1,7 @@
 import React from 'react';
-import FormikFormWrapper from '../FormikFormWrapper/FormikFormWrapper';
-import Input from '../Input/Input';
-import Button from '../Button/Button';
-import { InputTypes } from '../../typings';
+import { FormikFormWrapper } from '../FormikFormWrapper/FormikFormWrapper';
+import { Input, InputTypes } from '../Input/Input';
+import { Button } from '../Button/Button';
 
 interface InputProps {
   name: string;
@@ -18,7 +17,7 @@ interface Props<T> {
   onSubmit(body: T): void;
 }
 
-const AuthForm = <T extends {}>(props: Props<T>): JSX.Element => {
+export const AuthForm = <T extends {}>(props: Props<T>): JSX.Element => {
   const {
     onSubmit, initialValues, inputProps, placeholder, context, buttonText,
   } = props;
@@ -45,5 +44,3 @@ const AuthForm = <T extends {}>(props: Props<T>): JSX.Element => {
     </FormikFormWrapper>
   );
 };
-
-export default AuthForm;

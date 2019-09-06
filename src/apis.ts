@@ -1,4 +1,4 @@
-export default {
+export const apis = {
   MEMBER: `${window.API_ENDPOINT}/Members`,
   LOGIN: `${window.API_ENDPOINT}/Members/login`,
   FORGOT: `${window.API_ENDPOINT}/Members/reset`,
