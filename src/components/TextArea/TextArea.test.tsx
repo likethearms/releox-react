@@ -15,7 +15,7 @@ it('should implement props', () => {
       id="id-foo"
       label="foo bar"
       className="classname-foo"
-    />
+    />,
   );
 
   expect(wrapper.find('#id-foo').length).toBe(1);
@@ -23,5 +23,3 @@ it('should implement props', () => {
   expect(wrapper.find('[name="bar"]').length).toBe(1);
   expect(wrapper.find('[placeholder="foo bar"]').length).toBe(1);
 });
-
-
