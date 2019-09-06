@@ -8,6 +8,8 @@ import { AuthLayout } from '../components/AuthLayout/AuthLayout';
 import { FormikFormWrapper } from '../components/FormikFormWrapper/FormikFormWrapper';
 import { Button } from '../components/Button/Button';
 
+/* eslint-disable react/jsx-props-no-spreading */
+
 interface State {
   user: any;
   validationFail: boolean;
@@ -21,7 +23,6 @@ interface Props {
 
 const CONTEXT = 'ValidateModelMiddleware';
 
-/* eslint-disable react/jsx-props-no-spreading */
 export const validateModel = (fields: string[], form: ElementType) => (WrapperElement: any) => (
   class extends Component<Props, State> {
     constructor(props: Props) {
