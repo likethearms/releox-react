@@ -23,9 +23,8 @@ const CoreuiSidebarItemComponent = (props: SidebarItemProps) => {
       ) : (
         <NavLink
           exact={exact}
-          to={url || ''}
+          to={url as string}
           className="nav-link"
-          onClick={() => document.getElementsByClassName('app')[0].classList.toggle('sidebar-show')}
         >
           {icon ? <i className={icon} /> : ''}
           {` ${children}`}
