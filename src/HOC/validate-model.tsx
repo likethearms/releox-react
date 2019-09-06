@@ -22,27 +22,13 @@ interface Props {
 const CONTEXT = 'ValidateModelMiddleware';
 
 /* eslint-disable react/jsx-props-no-spreading */
-export const validateModel = (requiredFields: string[], form: ElementType, WrapperElement: any) => (
-
-  class ValidateModelMiddleware extends Component<Props, State> {
-    /**
-     * Validate model
-     * Validate model method run through all given requiredFields
-     * and check that user model has every one of them.
-     */
-    static validateModel(user: any): boolean {
-      let valid = true;
-      requiredFields.forEach((field) => {
-        if (!user[field]) {
-          valid = false;
-        }
-      });
-      return valid;
-    }
-
+export const validateModel = (fields: string[], form: ElementType) => (WrapperElement: any) => (
+  class extends Component<Props, State> {
     constructor(props: Props) {
       super(props);
+
       this.submit = this.submit.bind(this);
+
       this.state = {
         user: {},
         validationFail: false,
@@ -53,7 +39,7 @@ export const validateModel = (requiredFields: string[], form: ElementType, Wrapp
 
     componentDidMount(): void {
       const { user } = this.props;
-      const isValid = ValidateModelMiddleware.validateModel(user);
+      const isValid = this.validateModel(user);
       this.setState({
         validationFail: !isValid,
         loading: false,
@@ -90,6 +76,21 @@ export const validateModel = (requiredFields: string[], form: ElementType, Wrapp
         .patch(`${apis.PATCH}/${user.id}`, body)
         .then(() => window.location.reload())
         .catch((error: Error) => this.setState({ message: getErrorMessage(error) }));
+    }
+
+    /**
+     * Validate model
+     * Validate model method run through all given requiredFields
+     * and check that user model has every one of them.
+     */
+    validateModel(user: any): boolean {
+      let valid = true;
+      fields.forEach((field) => {
+        if (!user[field]) {
+          valid = false;
+        }
+      });
+      return valid;
     }
 
     render(): JSX.Element {

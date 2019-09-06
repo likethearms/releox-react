@@ -21,4 +21,4 @@ const Form = () => (
   </div>
 );
 
-export default authMiddleware(validateModel(['name'], Form, CUI));
+export default authMiddleware(validateModel(['name'], Form)(CUI));
