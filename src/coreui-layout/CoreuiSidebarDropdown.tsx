@@ -5,7 +5,7 @@ export interface SidebarDropdownProps {
   icon?: string;
   text: string;
   clickHandler(e: any): void;
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[] | string | undefined;
   url: string;
 }
 

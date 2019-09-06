@@ -20,51 +20,49 @@ export interface CoreuiSidebarProps {
   menu: CoreuiSidebarMenu[];
 }
 
-const CoreuiSidebarComponent = ({ menu }: CoreuiSidebarProps) => {
+const getSideBarItem = (context: string = '') => (item: CoreuiSidebarMenuBase) => (
+  <CoreuiSidebarItem
+    key={`${context}SidebarItem#${item.text}`}
+    icon={item.icon}
+    exact={item.exact}
+    url={item.url}
+    onClick={item.onClick}
+  >
+    {item.text}
+  </CoreuiSidebarItem>
+);
+
+const getSidebarDropdown = (menu: CoreuiSidebarMenu, clickHandler: (e: any) => void) => {
+  const child = menu.children as CoreuiSidebarMenuBase[];
+  return (
+    <CoreuiSidebarDropdown
+      key={`Dropown#${menu.text}`}
+      icon={menu.icon}
+      text={menu.text}
+      clickHandler={clickHandler}
+      url={menu.url}
+    >
+      {child.map(getSideBarItem('Dropdown#'))}
+    </CoreuiSidebarDropdown>
+  );
+};
+
+const getMenuTitle = (m: CoreuiSidebarMenu) => <li key={`title#${m.text}`} className="nav-title">{m.text}</li>;
+
+const generateMenuArray = (m: CoreuiSidebarMenu) => {
   const clickHandler = (e: any) => {
     e.preventDefault();
     e.target.parentElement.classList.toggle('open');
   };
+  if (m.type === 'title') return getMenuTitle(m);
+  if (m.type === 'dropdown' && m.children) {
+    return getSidebarDropdown(m, clickHandler);
+  }
+  return getSideBarItem()(m);
+};
 
-  const menuJsx = menu.map((m) => {
-    if (m.type === 'dropdown' && m.children) {
-      return (
-        <CoreuiSidebarDropdown
-          key={`Dropown#${m.text}`}
-          icon={m.icon}
-          text={m.text}
-          clickHandler={clickHandler}
-          url={m.url}
-        >
-          {m.children.map((c) => (
-            <CoreuiSidebarItem
-              key={`Dropown#SidebarItem#${c.text}`}
-              icon={c.icon}
-              exact={c.exact}
-              url={c.url}
-            >
-              {c.text}
-            </CoreuiSidebarItem>
-          ))}
-        </CoreuiSidebarDropdown>
-      );
-    }
-    if (m.type === 'title') {
-      return <li key={`title#${m.text}`} className="nav-title">{m.text}</li>;
-    }
-    return (
-      <CoreuiSidebarItem
-        key={`SidebarItem#${m.text}`}
-        icon={m.icon}
-        exact={m.exact}
-        url={m.url}
-        onClick={m.onClick}
-      >
-        {m.text}
-      </CoreuiSidebarItem>
-    );
-  });
-
+const CoreuiSidebarComponent = ({ menu }: CoreuiSidebarProps) => {
+  const menuJsx = menu.map(generateMenuArray);
   return (
     <div className="sidebar pt-2">
       <div className="sidebar-nav">
