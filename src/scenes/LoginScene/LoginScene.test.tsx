@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
+import 'jest-localstorage-mock';
 import moxios from 'moxios';
 import { LoginScene } from './LoginScene';
 
@@ -159,11 +160,13 @@ describe('moxios tests', () => {
   it('should redirect when submit success', (done) => {
     moxios.stubRequest(`${window.API_ENDPOINT}/Members/login`, {
       status: 200,
-      response: { data: { id: 1, userId: 1 } },
+      response: { id: 2, userId: 1 },
     });
 
     wrapper.instance().onSubmit(body).then(() => {
       expect(wrapper.state().redirect).toBe('/');
+      expect(localStorage.__STORE__.userId).toBe('1'); // eslint-disable-line no-underscore-dangle
+      expect(localStorage.__STORE__.accessToken).toBe('2'); // eslint-disable-line no-underscore-dangle
       done();
     });
   });

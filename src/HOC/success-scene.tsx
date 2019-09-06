@@ -13,11 +13,10 @@ export const successScene = (
   getText?: () => string,
 ) => ({ locale }: SuccessSceneProps) => {
   const t = ct(translationPrefix, locale);
-  const callText = getText as Function;
   return (
     <AuthLayout
       title={t('title')}
-      subTitle={callText ? callText() : t('subTitle')}
+      subTitle={getText ? getText() : t('subTitle')}
       context={context}
       links={[
         {

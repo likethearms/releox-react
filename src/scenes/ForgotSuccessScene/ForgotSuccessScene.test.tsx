@@ -2,9 +2,10 @@ import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { ForgotSuccessScene } from './ForgotSuccessScene';
 
+let wrapper: ShallowWrapper;
+
 describe('UI tests', () => {
   describe('Finnish translations', () => {
-    let wrapper: ShallowWrapper;
     beforeAll(() => {
       wrapper = shallow(<ForgotSuccessScene />);
     });
@@ -21,7 +22,6 @@ describe('UI tests', () => {
   });
 
   describe('English translations', () => {
-    let wrapper: ShallowWrapper;
     beforeAll(() => {
       wrapper = shallow(<ForgotSuccessScene locale="en" />);
     });
@@ -39,7 +39,7 @@ describe('UI tests', () => {
 
   describe('getLinks test', () => {
     it('should have default links', () => {
-      const wrapper = shallow(<ForgotSuccessScene />);
+      wrapper = shallow(<ForgotSuccessScene />);
       const links = wrapper.find('AuthLayout').prop('links');
       expect(links).toEqual([
         {
@@ -51,7 +51,7 @@ describe('UI tests', () => {
     });
 
     it('should have default links in english if locale is set to EN', () => {
-      const wrapper = shallow(<ForgotSuccessScene locale="en" />);
+      wrapper = shallow(<ForgotSuccessScene locale="en" />);
       const links = wrapper.find('AuthLayout').prop('links');
       expect(links).toEqual([
         {

@@ -25,7 +25,6 @@ export interface AbstractAuthOneInputSceneProps {
   buttonText?: string;
   title?: string;
   locale?: ReleoxLocale;
-  onError?: (error: AxiosError) => void;
 }
 
 export interface AbstractAuthOneInputSceneTranslation {
@@ -49,8 +48,6 @@ export abstract class AbstractAuthOneInputScene<Data, Prop>
   }
 
   onErrorMethod(error: AxiosError): any {
-    const { onError } = this.props;
-    if (onError) return onError(error);
     return this.setState({ message: getErrorMessage(error) });
   }
 
