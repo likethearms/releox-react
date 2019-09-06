@@ -23,11 +23,19 @@ const CONTEXT = 'ValidateModelMiddleware';
 
 /* eslint-disable react/jsx-props-no-spreading */
 export const validateModel = (requiredFields: string[], form: ElementType, WrapperElement: any) => (
+
   class ValidateModelMiddleware extends Component<Props, State> {
+    /**
+     * Validate model
+     * Validate model method run through all given requiredFields
+     * and check that user model has every one of them.
+     */
     static validateModel(user: any): boolean {
       let valid = true;
       requiredFields.forEach((field) => {
-        if (!user[field]) valid = false;
+        if (!user[field]) {
+          valid = false;
+        }
       });
       return valid;
     }
@@ -52,6 +60,30 @@ export const validateModel = (requiredFields: string[], form: ElementType, Wrapp
       });
     }
 
+    getValidationForm(): JSX.Element {
+      const { user } = this.props;
+      const { message } = this.state;
+      const t = ct('validateModel');
+      return (
+        <AuthLayout
+          context={CONTEXT}
+          message={message}
+          title={t('title')}
+          subTitle={t('subTitle')}
+          links={[]}
+        >
+          <FormikFormWrapper onSubmit={this.submit} initialValues={user}>
+            <div>
+              {form}
+              <Button type="submit" id="submit" className="float-right">
+                {t('button')}
+              </Button>
+            </div>
+          </FormikFormWrapper>
+        </AuthLayout>
+      );
+    }
+
     submit(body: any): void {
       const { user } = this.props;
       Axios
@@ -61,30 +93,9 @@ export const validateModel = (requiredFields: string[], form: ElementType, Wrapp
     }
 
     render(): JSX.Element {
-      const { message, loading, validationFail } = this.state;
-      const { user } = this.props;
-      const t = ct('validateModel');
+      const { loading, validationFail } = this.state;
       if (loading) return <Loading centeredVertical />;
-      if (validationFail) {
-        return (
-          <AuthLayout
-            context={CONTEXT}
-            message={message}
-            title={t('title')}
-            subTitle={t('subTitle')}
-            links={[]}
-          >
-            <FormikFormWrapper onSubmit={this.submit} initialValues={user}>
-              <div>
-                {form}
-                <Button type="submit" id="submit" className="float-right">
-                  {t('button')}
-                </Button>
-              </div>
-            </FormikFormWrapper>
-          </AuthLayout>
-        );
-      }
+      if (validationFail) return this.getValidationForm();
       if (loading) return <Loading centeredVertical />;
       return <WrapperElement {...this.props} />;
     }

@@ -88,22 +88,9 @@ export class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
           onSubmit={this.onSubmit}
         >
           <div>
-            <Input
-              name="email"
-              label={t('emailPlaceholder')}
-              id={`${CONTEXT}-email-input`}
-            />
-            <Input
-              name="password"
-              type="password"
-              label={t('passwordPlaceholder')}
-              id={`${CONTEXT}-password-input`}
-            />
-            <Button
-              className="float-right"
-              type="submit"
-              id={`${CONTEXT}-login-button`}
-            >
+            <Input name="email" label={t('emailPlaceholder')} id={`${CONTEXT}-email-input`} />
+            <Input name="password" type="password" label={t('passwordPlaceholder')} id={`${CONTEXT}-password-input`} />
+            <Button className="float-right" type="submit" id={`${CONTEXT}-login-button`}>
               {t('loginButtonText')}
             </Button>
             <div className="text-center">{message}</div>
