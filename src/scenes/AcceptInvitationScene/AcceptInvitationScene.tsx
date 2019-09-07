@@ -47,9 +47,7 @@ export class AcceptInvitationScene
 
     return validateInvitationTokenRequest(query.uid, query.invitation_token)
       .then(() => this.setState({ loading: false }))
-      .catch((e: AxiosError) => this.setState({
-        redirect: `${routes.ERROR}?message=${getErrorMessage(e)}`,
-      }));
+      .catch((e: AxiosError) => this.redirectToAuthErrorPage(getErrorMessage(e)));
   }
 
   redirectToAuthErrorPage(message: string): void {

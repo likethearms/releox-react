@@ -3,9 +3,22 @@ import { apis } from './apis';
 
 const get = (url: string) => Axios.get(url);
 
-export const validateTokenRequest = (accessToken: string, user: string) => get(`${apis.MEMBER}/${user}?access_token=${accessToken}`);
-export const validateInvitationTokenRequest = (userId: string, invitationToken: string) => get(`${apis.VALIDATE_INVITATION_TOKEN}?uid=${userId}&invitation_token=${invitationToken}`);
-export const confirmUserRequest = (userId: string, confirmationToken: string) => get(`${apis.CONFIRM}?uid=${userId}&token=${confirmationToken}`);
+const injectUserId = (url: string, userId: string) => url.replace(':userId', userId);
+
+export const validateTokenRequest = (userId: string, accessToken: string) => {
+  const url = injectUserId(apis.VALIDATE_ACCESS_TOKEN, userId).replace(':accessToken', accessToken);
+  return get(url);
+};
+
+export const validateInvitationTokenRequest = (userId: string, invitationToken: string) => {
+  const url = injectUserId(apis.VALIDATE_INVITATION_TOKEN, userId).replace(':invitationToken', invitationToken);
+  return get(url);
+};
+
+export const confirmUserRequest = (userId: string, confirmationToken: string) => {
+  const url = injectUserId(apis.CONFIRM, userId).replace(':confirmationToken', confirmationToken);
+  return get(url);
+};
 
 export const patchUserRequest = (userId: string, body: any) => Axios
   .patch(`${apis.PATCH}/${userId}`, body);
