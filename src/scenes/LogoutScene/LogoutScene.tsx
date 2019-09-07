@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Axios from 'axios';
-import { getAccessInformation } from '../../config';
+import { getAccessInformation, destroyAccessInformation } from '../../config';
 import { apis } from '../../apis';
 import { routes } from '../../routes';
 import { Loading } from '../../components/Loading/Loading';
@@ -27,8 +27,8 @@ export class LogoutScene extends Component<{}, State> {
   }
 
   afterRequest(): void {
-    localStorage.clear();
-    this.setState({ redirect: routes.LOGIN });
+    destroyAccessInformation()
+      .then(() => this.setState({ redirect: routes.LOGIN }));
   }
 
   render(): JSX.Element {

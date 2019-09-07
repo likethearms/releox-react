@@ -17,7 +17,7 @@ describe('Abstract methods', () => {
 
   test('getPostUrl should return correct value', () => {
     const url = wrapper.instance().getPostUrl();
-    expect(url).toBe('undefined/Members/reset-password');
+    expect(url).toBe('/Members/reset-password');
   });
 
   test('getRedirectUrl should return correct value', () => {
@@ -132,7 +132,7 @@ describe('moxios tests', () => {
 
   beforeEach(async () => {
     moxios.install();
-    moxios.stubRequest(/undefined\/Members\/xx/, {
+    moxios.stubRequest(/\/Members\/xx/, {
       status: 200,
       response: {},
     });
@@ -146,7 +146,7 @@ describe('moxios tests', () => {
   });
 
   it('should redirect when submit success', (done) => {
-    moxios.stubRequest(/undefined\/Members\/(reset|logout)/, {
+    moxios.stubRequest(/\/Members\/(reset|logout)/, {
       status: 200,
     });
     const onSubmit = wrapper.find('AuthForm').prop('onSubmit') as Function;
@@ -157,7 +157,7 @@ describe('moxios tests', () => {
   });
 
   it('should set error message to message state', (done) => {
-    moxios.stubRequest(/undefined\/Members\/(reset|logout)/, {
+    moxios.stubRequest(/\/Members\/(reset|logout)/, {
       status: 404,
       response: { error: { message: 'Email not found' } },
     });

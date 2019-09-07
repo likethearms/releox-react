@@ -1,11 +1,13 @@
+import { getApiUrl } from './config';
+
 export const apis = {
-  MEMBER: `${window.API_ENDPOINT}/Members`,
-  LOGIN: `${window.API_ENDPOINT}/Members/login`,
-  FORGOT: `${window.API_ENDPOINT}/Members/reset`,
-  PASSWORD_RESET: `${window.API_ENDPOINT}/Members/reset-password`,
-  LOGOUT: `${window.API_ENDPOINT}/Members/logout`,
-  PATCH: `${window.API_ENDPOINT}/Members`,
-  CONFIRM: `${window.API_ENDPOINT}/Members/confirm`,
-  ACCEPT_INVITATION: `${window.API_ENDPOINT}/Members/accept-invitation`,
-  VALIDATE_INVITATION_TOKEN: `${window.API_ENDPOINT}/Members/validate-invitation-token`,
+  MEMBER: `${getApiUrl()}/Members`,
+  LOGIN: `${getApiUrl()}/Members/login`,
+  FORGOT: `${getApiUrl()}/Members/reset`,
+  PASSWORD_RESET: `${getApiUrl()}/Members/reset-password`,
+  LOGOUT: `${getApiUrl()}/Members/logout`,
+  PATCH: `${getApiUrl()}/Members`,
+  CONFIRM: `${getApiUrl()}/Members/confirm`,
+  ACCEPT_INVITATION: `${getApiUrl()}/Members/accept-invitation`,
+  VALIDATE_INVITATION_TOKEN: `${getApiUrl()}/Members/validate-invitation-token`,
 };

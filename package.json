@@ -35,6 +35,7 @@
       "src/**/*.{ts,tsx,js,jsx}",
       "!src/testing-cra/*",
       "!src/stories/*",
+      "!src/index.tsx",
       "!src/cra-index.tsx"
     ]
   },

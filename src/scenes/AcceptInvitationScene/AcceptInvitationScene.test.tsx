@@ -6,7 +6,7 @@ import { AbstractAuthOneInputScene } from '../../components/AbstractAuthOneInput
 import { AcceptInvitationScene } from './AcceptInvitationScene';
 
 let wrapper: ShallowWrapper<{}, {}, AbstractAuthOneInputScene<{}, {}>>;
-const validateTokenUrl = 'undefined/Members/validate-invitation-token?uid=undefined&invitation_token=undefined';
+const validateTokenUrl = '/Members/validate-invitation-token?uid=undefined&invitation_token=undefined';
 
 describe('componentDidMount', () => {
   beforeEach(() => {
@@ -42,7 +42,7 @@ describe('componentDidMount', () => {
 
 describe('Submit', () => {
   let onSubmit: Function;
-  const acceptInvitationUrl = 'undefined/Members/accept-invitation?invitation_token=undefined&uid=undefined';
+  const acceptInvitationUrl = '/Members/accept-invitation?invitation_token=undefined&uid=undefined';
 
   beforeEach(async () => {
     moxios.install();

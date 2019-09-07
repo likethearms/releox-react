@@ -5,7 +5,7 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import { ConfirmScene } from './ConfirmScene';
 import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
 
-const validateTokenUrl = 'undefined/Members/confirm?uid=undefined&token=undefined';
+const validateTokenUrl = '/Members/confirm?uid=undefined&token=undefined';
 
 let wrapper: ShallowWrapper;
 
