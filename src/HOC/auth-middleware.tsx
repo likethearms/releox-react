@@ -1,7 +1,7 @@
 import React, { Component, ElementType } from 'react';
 import { Redirect } from 'react-router';
 import Axios, { AxiosResponse } from 'axios';
-import { getAccessInformation, destroyAccessInformation, AccessInformation } from '../config';
+import { getAccessInformation, destroyAccessInformation } from '../config';
 import { validateTokenRequest } from '../requests';
 import { routes } from '../routes';
 import { Loading } from '../components/Loading/Loading';
@@ -24,16 +24,16 @@ export const authMiddleware = <U extends {}>(WrapperComponent: ElementType) => (
       };
     }
 
-    componentDidMount(): void {
-      let i: AccessInformation;
-      getAccessInformation()
-        .then((info) => {
-          i = info;
-          return validateTokenRequest(info.accessToken, info.userId);
+    componentDidMount(): Promise<any> {
+      let localAccessToken: string;
+      return getAccessInformation()
+        .then(({ accessToken, userId }) => {
+          localAccessToken = accessToken;
+          return validateTokenRequest(userId, accessToken);
         })
         .then((r: AxiosResponse) => this.setState({ authenticatedUser: r.data }))
         .then(() => {
-          Axios.defaults.headers.common.Authorization = i.accessToken;
+          Axios.defaults.headers.common.Authorization = localAccessToken;
           this.setState({ loading: false });
         })
         .catch(() => {

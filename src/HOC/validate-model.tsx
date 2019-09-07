@@ -17,13 +17,16 @@ interface State {
 }
 
 interface Props {
-  user: any;
+  authenticatedUser: any;
 }
 
 const CONTEXT = 'ValidateModelMiddleware';
 
-export const validateModel = (fields: string[], form: ElementType) => (WrapperElement: any) => (
-  class extends Component<Props, State> {
+export const validateModel = (
+  fields: string[],
+  FormComponent: ElementType,
+) => (WrapperElement: any) => (
+  class ValidateModel extends Component<Props, State> {
     constructor(props: Props) {
       super(props);
       this.state = {
@@ -36,8 +39,8 @@ export const validateModel = (fields: string[], form: ElementType) => (WrapperEl
     }
 
     componentDidMount(): void {
-      const { user } = this.props;
-      const isValid = this.validateModel(user);
+      const { authenticatedUser } = this.props;
+      const isValid = this.validateModel(authenticatedUser);
       this.setState({
         validationFail: !isValid,
         loading: false,
@@ -45,7 +48,7 @@ export const validateModel = (fields: string[], form: ElementType) => (WrapperEl
     }
 
     getValidationForm(): JSX.Element {
-      const { user } = this.props;
+      const { authenticatedUser } = this.props;
       const { message } = this.state;
       const t = ct('validateModel');
       return (
@@ -56,9 +59,9 @@ export const validateModel = (fields: string[], form: ElementType) => (WrapperEl
           subTitle={t('subTitle')}
           links={[]}
         >
-          <FormikFormWrapper onSubmit={this.submit} initialValues={user}>
+          <FormikFormWrapper onSubmit={this.submit} initialValues={authenticatedUser}>
             <div>
-              {form}
+              <FormComponent />
               <Button type="submit" id="submit" className="float-right">
                 {t('button')}
               </Button>
@@ -68,9 +71,9 @@ export const validateModel = (fields: string[], form: ElementType) => (WrapperEl
       );
     }
 
-    submit(body: any): void {
-      const { user } = this.props;
-      patchUserRequest(user.id, body)
+    submit(body: any): Promise<any> {
+      const { authenticatedUser } = this.props;
+      return patchUserRequest(authenticatedUser.id, body)
         .then(() => window.location.reload())
         .catch((error: Error) => this.setState({ message: getErrorMessage(error) }));
     }
@@ -94,7 +97,6 @@ export const validateModel = (fields: string[], form: ElementType) => (WrapperEl
       const { loading, validationFail } = this.state;
       if (loading) return <Loading centeredVertical />;
       if (validationFail) return this.getValidationForm();
-      if (loading) return <Loading centeredVertical />;
       return <WrapperElement {...this.props} />;
     }
   }

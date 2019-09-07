@@ -1,4 +1,4 @@
-import React, { Component, ElementType } from 'react';
+import React, { Component, ComponentType } from 'react';
 import { Redirect } from 'react-router';
 import { getAccessInformation } from '../config';
 import { routes } from '../routes';
@@ -10,18 +10,18 @@ export interface GuestMiddlewareState {
 }
 
 /* eslint-disable react/jsx-props-no-spreading */
-export const guestMiddleware = (WrapperComponent: ElementType) => (
-  class Middleware extends Component<void, GuestMiddlewareState> {
-    constructor() {
-      super();
+export const guestMiddleware = <P extends object>(WrapperComponent: ComponentType<P>) => (
+  class GuestMiddleware extends Component<P, GuestMiddlewareState> {
+    constructor(props: P) {
+      super(props);
       this.state = {
         loading: true,
         redirect: '',
       };
     }
 
-    componentDidMount(): void {
-      getAccessInformation()
+    componentDidMount(): Promise<any> {
+      return getAccessInformation()
         .then(() => this.setState({ loading: false, redirect: routes.HOME }))
         .catch(() => this.setState({ loading: false }));
     }
