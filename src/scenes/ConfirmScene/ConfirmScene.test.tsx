@@ -10,7 +10,8 @@ const validateTokenUrl = '/Members/confirm?uid=1&token=2';
 let wrapper: ShallowWrapper;
 
 window = Object.create(window); // eslint-disable-line
-Object.defineProperty(window, 'location', { value: { search: '?uid=1&token=2' } });
+const search = '?uid=1&token=2';
+Object.defineProperty(window, 'location', { value: { search }, writable: true });
 
 describe('componentDidMount', () => {
   beforeEach(() => {
@@ -41,6 +42,44 @@ describe('componentDidMount', () => {
     wrapper = shallow(<ConfirmScene />);
     await waitForSample(wrapper);
     expect(wrapper.find('[to="/auth-error?message=Error message"]').length).toBe(1);
+  });
+});
+
+describe('Test information errors', () => {
+  afterAll(() => {
+    Object.defineProperty(window, 'location', { value: { search } });
+  });
+
+  test('error shown if missing uid', async () => {
+    Object.defineProperty(window, 'location', { value: { search: '?token=2' } });
+    const waitForSample = createWaitForElement('Redirect');
+    wrapper = shallow(<ConfirmScene />);
+    await waitForSample(wrapper);
+    expect(wrapper.find('[to="/auth-error?message=Missing information"]').length).toBe(1);
+  });
+
+  test('error shown if missing token', async () => {
+    Object.defineProperty(window, 'location', { value: { search: '?uid=1' } });
+    const waitForSample = createWaitForElement('Redirect');
+    wrapper = shallow(<ConfirmScene />);
+    await waitForSample(wrapper);
+    expect(wrapper.find('[to="/auth-error?message=Missing information"]').length).toBe(1);
+  });
+
+  test('error shown if uid is array ', async () => {
+    Object.defineProperty(window, 'location', { value: { search: '?uid=1&uid=3&token=2' } });
+    const waitForSample = createWaitForElement('Redirect');
+    wrapper = shallow(<ConfirmScene />);
+    await waitForSample(wrapper);
+    expect(wrapper.find('[to="/auth-error?message=Information is on wrong format"]').length).toBe(1);
+  });
+
+  test('error shown if token is array ', async () => {
+    Object.defineProperty(window, 'location', { value: { search: '?uid=1&token=3&token=2' } });
+    const waitForSample = createWaitForElement('Redirect');
+    wrapper = shallow(<ConfirmScene />);
+    await waitForSample(wrapper);
+    expect(wrapper.find('[to="/auth-error?message=Information is on wrong format"]').length).toBe(1);
   });
 });
 
