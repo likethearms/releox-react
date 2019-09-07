@@ -1,12 +1,11 @@
 import React, { Component, ElementType } from 'react';
-import Axios from 'axios';
 import { getErrorMessage } from '../config';
 import { ct } from '../I18N';
-import { apis } from '../apis';
 import { Loading } from '../components/Loading/Loading';
 import { AuthLayout } from '../components/AuthLayout/AuthLayout';
 import { FormikFormWrapper } from '../components/FormikFormWrapper/FormikFormWrapper';
 import { Button } from '../components/Button/Button';
+import { patchUserRequest } from '../requests';
 
 interface State {
   user: any;
@@ -86,8 +85,7 @@ export const validateModel = (requiredFields: string[], form: ElementType, Wrapp
 
     submit(body: any): void {
       const { user } = this.props;
-      Axios
-        .patch(`${apis.PATCH}/${user.id}`, body)
+      patchUserRequest(user.id, body)
         .then(() => window.location.reload())
         .catch((error: Error) => this.setState({ message: getErrorMessage(error) }));
     }

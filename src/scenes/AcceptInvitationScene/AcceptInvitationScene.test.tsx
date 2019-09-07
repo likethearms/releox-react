@@ -6,7 +6,10 @@ import { AbstractAuthOneInputScene } from '../../components/AbstractAuthOneInput
 import { AcceptInvitationScene } from './AcceptInvitationScene';
 
 let wrapper: ShallowWrapper<{}, {}, AbstractAuthOneInputScene<{}, {}>>;
-const validateTokenUrl = '/Members/validate-invitation-token?uid=undefined&invitation_token=undefined';
+const validateTokenUrl = '/Members/validate-invitation-token?uid=1&invitation_token=2';
+
+window = Object.create(window); // eslint-disable-line
+Object.defineProperty(window, 'location', { value: { search: '?uid=1&invitation_token=2' } });
 
 describe('componentDidMount', () => {
   beforeEach(() => {
@@ -42,7 +45,7 @@ describe('componentDidMount', () => {
 
 describe('Submit', () => {
   let onSubmit: Function;
-  const acceptInvitationUrl = '/Members/accept-invitation?invitation_token=undefined&uid=undefined';
+  const acceptInvitationUrl = '/Members/accept-invitation?invitation_token=2&uid=1';
 
   beforeEach(async () => {
     moxios.install();

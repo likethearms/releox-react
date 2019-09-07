@@ -5,9 +5,12 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import { ConfirmScene } from './ConfirmScene';
 import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
 
-const validateTokenUrl = '/Members/confirm?uid=undefined&token=undefined';
+const validateTokenUrl = '/Members/confirm?uid=1&token=2';
 
 let wrapper: ShallowWrapper;
+
+window = Object.create(window); // eslint-disable-line
+Object.defineProperty(window, 'location', { value: { search: '?uid=1&token=2' } });
 
 describe('componentDidMount', () => {
   beforeEach(() => {
