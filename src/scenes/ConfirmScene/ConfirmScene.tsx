@@ -4,7 +4,7 @@ import { AxiosError } from 'axios';
 import { Redirect } from 'react-router';
 import { successScene, SuccessSceneProps } from '../../HOC/success-scene';
 import { routes } from '../../routes';
-import { getErrorMessage } from '../../config';
+import { getErrorMessage, getAuthErrorUrl } from '../../config';
 import { Loading } from '../../components/Loading/Loading';
 import { confirmUserRequest } from '../../requests';
 
@@ -35,9 +35,7 @@ export class ConfirmScene extends Component<ConfirmSceneProps & SuccessSceneProp
   }
 
   redirectError(message: string): void {
-    this.setState({
-      redirect: `${routes.ERROR}?message=${message}`,
-    });
+    this.setState({ redirect: getAuthErrorUrl(message) });
   }
 
   render(): JSX.Element {
