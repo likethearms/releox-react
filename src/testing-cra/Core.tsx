@@ -7,7 +7,7 @@ import { authMiddleware } from '../HOC/auth-middleware';
 const CUI = ({ user }: any) => (
   <CoreuiLayout
     sidebarMenu={[]}
-    menuTitle={user.name}
+    headerRightText={user.name}
     brandUrl="/"
     brand="Testi"
   >
