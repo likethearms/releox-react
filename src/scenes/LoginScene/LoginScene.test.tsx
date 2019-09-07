@@ -158,7 +158,7 @@ describe('moxios tests', () => {
   };
 
   it('should redirect when submit success', (done) => {
-    moxios.stubRequest(`${window.API_ENDPOINT}/Members/login`, {
+    moxios.stubRequest('/Members/login', {
       status: 200,
       response: { id: 2, userId: 1 },
     });
@@ -172,7 +172,7 @@ describe('moxios tests', () => {
   });
 
   it('should set error message to message state', (done) => {
-    moxios.stubRequest(`${window.API_ENDPOINT}/Members/login`, {
+    moxios.stubRequest('/Members/login', {
       status: 400,
       response: { error: { message: 'Foo bar' } },
     });
@@ -186,7 +186,7 @@ describe('moxios tests', () => {
 
   it('should call custom error handler if errorHander is passed to component', (done) => {
     const onError = jest.fn();
-    moxios.stubRequest(`${window.API_ENDPOINT}/Members/login`, {
+    moxios.stubRequest('/Members/login', {
       status: 400,
       response: { error: { message: 'Foo bar' } },
     });
