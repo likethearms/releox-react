@@ -1,4 +1,5 @@
 import { ReleoxLocale } from './I18N';
+import { routes } from './routes';
 
 declare global {
   interface Window {
@@ -53,3 +54,5 @@ export const getErrorMessage = (error: any) => {
   if (res && typeof res.data !== 'string' && res.data.error.message) errorMessage = res.data.error.message;
   return errorMessage;
 };
+
+export const getAuthErrorUrl = (message:string) => `${routes.ERROR}?message=${message}`;
