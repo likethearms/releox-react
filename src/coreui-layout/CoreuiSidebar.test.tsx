@@ -9,7 +9,7 @@ const routerWrapper = (c: any) => (<MemoryRouter>{c}</MemoryRouter>);
 window = Object.create(window); // eslint-disable-line
 Object.defineProperty(window, 'location', { value: { pathname: '' }, writable: true });
 
-describe('CoreuiSidebar', () => {
+xdescribe('CoreuiSidebar', () => {
   it('should render sidebar items correctly', () => {
     const menu = [{ text: 'Foo', url: '/foo' }, { text: 'Bar', url: '/bar' }];
     wrapper = mount(routerWrapper(<CoreuiSidebar menu={menu} />));
