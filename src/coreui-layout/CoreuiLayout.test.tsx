@@ -24,7 +24,7 @@ describe('CoreuiLayout', () => {
     });
 
     it('should menu notification', () => {
-      wrapper = mount(routerWrapper(<CoreuiLayout brand="Foo Baz" sidebarMenu={[]} headerNotification="Baz">MainContent</CoreuiLayout>));
+      wrapper = mount(routerWrapper(<CoreuiLayout brand="Foo Baz" sidebarMenu={[]} headerRightText="Baz">MainContent</CoreuiLayout>));
       expect(wrapper.find('li.nav-item').text()).toBe('Baz');
     });
 

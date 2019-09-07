@@ -6,14 +6,14 @@ import { CoreuiHeader } from './CoreuiHeader';
 export interface CoreuiLayoutProps {
   children: JSX.Element | string;
   sidebarMenu: CoreuiSidebarMenu[];
-  headerNotification?: string;
+  headerRightText?: string;
   brand: JSX.Element | string;
   brandUrl?: string;
 }
 
 export const CoreuiLayout = (props: CoreuiLayoutProps) => {
   const {
-    children, sidebarMenu, headerNotification, brand, brandUrl,
+    children, sidebarMenu, headerRightText, brand, brandUrl,
   } = props;
   return (
     <CoreuiMainLayout
@@ -21,7 +21,7 @@ export const CoreuiLayout = (props: CoreuiLayoutProps) => {
       header={(
         <CoreuiHeader
           brandUrl={brandUrl}
-          headerNotification={headerNotification}
+          headerRightText={headerRightText}
           title={brand}
         />
       )}

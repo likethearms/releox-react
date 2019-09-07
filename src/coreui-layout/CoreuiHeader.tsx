@@ -6,10 +6,10 @@ import { CoreuiHeaderSideBarToggle } from './CoreuiHeaderSideBarToggle';
 export interface CoreuiHeaderProps {
   title: string | JSX.Element;
   brandUrl: string;
-  headerNotification: string;
+  headerRightText: string;
 }
 
-const CoreuiHeaderComponent = ({ title, headerNotification, brandUrl }: CoreuiHeaderProps) => (
+const CoreuiHeaderComponent = ({ title, headerRightText, brandUrl }: CoreuiHeaderProps) => (
   <div className="app-header navbar" style={{ paddingRight: '20px' }}>
     <CoreuiHeaderSideBarToggle
       buttonClass="navbar-toggler mobile-sidebar-toggler d-md-none mr-auto"
@@ -20,7 +20,7 @@ const CoreuiHeaderComponent = ({ title, headerNotification, brandUrl }: CoreuiHe
     </Link>
     <ul className="nav navbar-nav ml-auto d-none d-sm-block">
       <li className="nav-item px-3">
-        {headerNotification}
+        {headerRightText}
       </li>
     </ul>
   </div>
@@ -29,12 +29,12 @@ const CoreuiHeaderComponent = ({ title, headerNotification, brandUrl }: CoreuiHe
 CoreuiHeaderComponent.propTypes = {
   title: PropTypes.node.isRequired,
   brandUrl: PropTypes.string,
-  headerNotification: PropTypes.node,
+  headerRightText: PropTypes.node,
 };
 
 CoreuiHeaderComponent.defaultProps = {
   brandUrl: '/',
-  headerNotification: '',
+  headerRightText: '',
 };
 
 export const CoreuiHeader = CoreuiHeaderComponent;
