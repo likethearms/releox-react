@@ -21,20 +21,30 @@ export class ConfirmScene extends Component<ConfirmSceneProps & SuccessSceneProp
       redirect: '',
       loading: true,
     };
+    this.handleAxiosError = this.handleAxiosError.bind(this);
+    this.turnLoadingOff = this.turnLoadingOff.bind(this);
   }
 
   componentDidMount(): any {
     const query = queryString.parse(window.location.search);
 
-    if (!query.uid || !query.token) return this.redirectError('Missing information');
-    if (Array.isArray(query.uid) || Array.isArray(query.token)) return this.redirectError('Information is on wrong format');
+    if (!query.uid || !query.token) return this.redirectToAuthErrorPage('Missing information');
+    if (Array.isArray(query.uid) || Array.isArray(query.token)) return this.redirectToAuthErrorPage('Information is on wrong format');
 
     return confirmUserRequest(query.uid, query.token)
-      .then(() => this.setState({ loading: false }))
-      .catch((e: AxiosError) => this.redirectError(getErrorMessage(e)));
+      .then(this.turnLoadingOff)
+      .catch(this.handleAxiosError);
   }
 
-  redirectError(message: string): void {
+  turnLoadingOff(): void {
+    this.setState({ loading: false });
+  }
+
+  handleAxiosError(e: AxiosError): void {
+    this.redirectToAuthErrorPage(getErrorMessage(e));
+  }
+
+  redirectToAuthErrorPage(message: string): void {
     this.setState({ redirect: getAuthErrorUrl(message) });
   }
 
