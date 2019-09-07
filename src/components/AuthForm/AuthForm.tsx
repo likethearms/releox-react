@@ -26,21 +26,19 @@ export const AuthForm = <T extends {}>(props: Props<T>): JSX.Element => {
       onSubmit={onSubmit}
       initialValues={initialValues}
     >
-      <div>
-        <Input
-          name={inputProps.name}
-          type={inputProps.type}
-          label={placeholder}
-          id={`${context}-${inputProps.type}-input`}
-        />
-        <Button
-          className="float-right"
-          type="submit"
-          id={`${context}-submit-button`}
-        >
-          {buttonText}
-        </Button>
-      </div>
+      <Input
+        name={inputProps.name}
+        type={inputProps.type}
+        label={placeholder}
+        id={`${context}-${inputProps.type}-input`}
+      />
+      <Button
+        className="float-right"
+        type="submit"
+        id={`${context}-submit-button`}
+      >
+        {buttonText}
+      </Button>
     </FormikFormWrapper>
   );
 };

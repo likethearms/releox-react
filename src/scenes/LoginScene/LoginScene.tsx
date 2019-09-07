@@ -70,11 +70,33 @@ export class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
     return links;
   }
 
-  render(): JSX.Element {
+  getT() {
     const { locale } = this.props;
-    const { redirect, message } = this.state;
+    return ct('login', locale);
+  }
+
+  getLoginForm() {
+    const { message } = this.state;
+    const t = this.getT();
+    return (
+      <FormikFormWrapper<LoginBody>
+        initialValues={{ email: '', password: '' }}
+        onSubmit={this.onSubmit}
+      >
+        <Input name="email" label={t('emailPlaceholder')} id={`${CONTEXT}-email-input`} />
+        <Input name="password" type="password" label={t('passwordPlaceholder')} id={`${CONTEXT}-password-input`} />
+        <Button className="float-right" type="submit" id={`${CONTEXT}-login-button`}>
+          {t('loginButtonText')}
+        </Button>
+        <div className="text-center">{message}</div>
+      </FormikFormWrapper>
+    );
+  }
+
+  render(): JSX.Element {
+    const { redirect } = this.state;
     if (redirect) return <Redirect to={redirect} />;
-    const t = ct('login', locale);
+    const t = this.getT();
     return (
       <AuthLayout
         title={t('title')}
@@ -82,19 +104,7 @@ export class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
         context={CONTEXT}
         links={this.getLinks()}
       >
-        <FormikFormWrapper<LoginBody>
-          initialValues={{ email: '', password: '' }}
-          onSubmit={this.onSubmit}
-        >
-          <div>
-            <Input name="email" label={t('emailPlaceholder')} id={`${CONTEXT}-email-input`} />
-            <Input name="password" type="password" label={t('passwordPlaceholder')} id={`${CONTEXT}-password-input`} />
-            <Button className="float-right" type="submit" id={`${CONTEXT}-login-button`}>
-              {t('loginButtonText')}
-            </Button>
-            <div className="text-center">{message}</div>
-          </div>
-        </FormikFormWrapper>
+        {this.getLoginForm()}
       </AuthLayout>
     );
   }

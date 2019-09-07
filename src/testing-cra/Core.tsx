@@ -7,7 +7,7 @@ import { authMiddleware } from '../HOC/auth-middleware';
 const CUI = ({ user }: any) => (
   <CoreuiLayout
     sidebarMenu={[]}
-    menuTitle={user.name}
+    headerRightText={user.name}
     brandUrl="/"
     brand="Testi"
   >
@@ -21,4 +21,4 @@ const Form = () => (
   </div>
 );
 
-export default authMiddleware(validateModel(['name'], Form, CUI));
+export default authMiddleware(validateModel(['name'], Form)(CUI));
