@@ -1,24 +1,17 @@
 import Axios from 'axios';
 import { apis } from './apis';
 
-const get = (url: string) => Axios.get(url);
+const injectUrl = (url: string, userId: string, tokenName: string, token: string) => url.replace(':userId', userId).replace(tokenName, token);
 
-const injectUserId = (url: string, userId: string) => url.replace(':userId', userId);
+export const validateTokenRequest = (userId: string, accessToken: string) => Axios
+  .get(injectUrl(apis.VALIDATE_ACCESS_TOKEN, userId, ':accessToken', accessToken));
 
-export const validateTokenRequest = (userId: string, accessToken: string) => {
-  const url = injectUserId(apis.VALIDATE_ACCESS_TOKEN, userId).replace(':accessToken', accessToken);
-  return get(url);
-};
 
-export const validateInvitationTokenRequest = (userId: string, invitationToken: string) => {
-  const url = injectUserId(apis.VALIDATE_INVITATION_TOKEN, userId).replace(':invitationToken', invitationToken);
-  return get(url);
-};
+export const validateInvitationTokenRequest = (userId: string, invitationToken: string) => Axios
+  .get(injectUrl(apis.VALIDATE_INVITATION_TOKEN, userId, ':invitationToken', invitationToken));
 
-export const confirmUserRequest = (userId: string, confirmationToken: string) => {
-  const url = injectUserId(apis.CONFIRM, userId).replace(':confirmationToken', confirmationToken);
-  return get(url);
-};
+export const confirmUserRequest = (userId: string, confirmationToken: string) => Axios
+  .get(injectUrl(apis.CONFIRM, userId, ':confirmationToken', confirmationToken));
 
 export const patchUserRequest = (userId: string, body: any) => Axios
   .patch(`${apis.PATCH}/${userId}`, body);
