@@ -39,6 +39,6 @@ it('should change initial prop', () => {
   const onC = wrapper.find('input').prop('onChange') as Function;
   onC();
 
-  // Test for checked prop to have changed from initial
+  // Test for checked prop to have changed from initial prop
   wrapper.find('input').props();
 });
