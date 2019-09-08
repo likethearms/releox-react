@@ -1,19 +1,20 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { CheckBox } from './CheckBox';
+import { CoreuiCheckBox } from './CoreuiCheckBox';
 import { FormikFormWrapper } from '../FormikFormWrapper/FormikFormWrapper';
 
-it('should show CheckBox', () => {
-  const wrapper = shallow(<CheckBox name="bar" id="id-foo" />);
+it('should show CoreuiCheckBox', () => {
+  const wrapper = shallow(<CoreuiCheckBox name="bar" id="id-foo" label="foo" />);
   expect(wrapper.find('#id-foo').length).toBe(1);
   expect(wrapper.find('.form-control').length).toBe(1);
 });
 
 it('should implement props', () => {
   const wrapper = shallow(
-    <CheckBox
+    <CoreuiCheckBox
       name="bar"
       className="classname-foo"
+      label="foo"
     />,
   );
   expect(wrapper.find('#bar-input').length).toBe(1);
@@ -21,18 +22,23 @@ it('should implement props', () => {
   expect(wrapper.find('[name="bar"]').length).toBe(1);
 });
 
-it('should call render', () => {
+it('should change initial prop', () => {
   const wrapper = mount(
     <FormikFormWrapper
       onSubmit={() => {}}
-      initialValues={{}}
+      initialValues={{ field: { value: false } }}
     >
-      <CheckBox
+      <CoreuiCheckBox
         name="bar"
         id="id-foo"
+        label="foo"
         className="classname-foo"
       />
     </FormikFormWrapper>,
   );
-  expect(wrapper.find('input').prop('type')).toBe('checkbox');
+  const onC = wrapper.find('input').prop('onChange') as Function;
+  onC();
+
+  // Test for checked prop to have changed from initial
+  wrapper.find('input').props();
 });
