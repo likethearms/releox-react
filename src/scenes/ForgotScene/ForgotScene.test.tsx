@@ -13,7 +13,7 @@ describe('Instance function call tests', () => {
 
   it('should call getPostUrl', () => {
     const url = wrapper.instance().getPostUrl();
-    expect(url).toBe('undefined/Members/reset');
+    expect(url).toBe('/Members/reset');
   });
 
   it('should call getRedirectUrl', () => {
@@ -114,11 +114,11 @@ describe('moxios tests', () => {
   const body = {
     email: 'email@email.com',
   };
-  const url = `${window.API_ENDPOINT}/Members/reset`;
+  const url = '/Members/reset';
   const redirect = '/forgot-success';
 
   it('should redirect when submit success', (done) => {
-    moxios.stubRequest(`${window.API_ENDPOINT}/Members/reset`, {
+    moxios.stubRequest('/Members/reset', {
       status: 204,
     });
     wrapper = shallow(<ForgotScene />);
@@ -130,7 +130,7 @@ describe('moxios tests', () => {
   });
 
   it('should set error message to message state', (done) => {
-    moxios.stubRequest(`${window.API_ENDPOINT}/Members/reset`, {
+    moxios.stubRequest('/Members/reset', {
       status: 404,
       response: { error: { message: 'Email not found' } },
     });

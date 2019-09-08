@@ -1,12 +1,13 @@
 import React, { Component, ElementType } from 'react';
-import Axios from 'axios';
 import { getErrorMessage } from '../config';
 import { ct } from '../I18N';
-import { apis } from '../apis';
 import { Loading } from '../components/Loading/Loading';
 import { AuthLayout } from '../components/AuthLayout/AuthLayout';
 import { FormikFormWrapper } from '../components/FormikFormWrapper/FormikFormWrapper';
 import { Button } from '../components/Button/Button';
+import { patchUserRequest } from '../requests';
+
+/* eslint-disable react/jsx-props-no-spreading */
 
 interface State {
   user: any;
@@ -16,76 +17,86 @@ interface State {
 }
 
 interface Props {
-  user: any;
+  authenticatedUser: any;
 }
 
 const CONTEXT = 'ValidateModelMiddleware';
 
-/* eslint-disable react/jsx-props-no-spreading */
-export const validateModel = (requiredFields: string[], form: ElementType, WrapperElement: any) => (
-  class ValidateModelMiddleware extends Component<Props, State> {
-    static validateModel(user: any): boolean {
-      let valid = true;
-      requiredFields.forEach((field) => {
-        if (!user[field]) valid = false;
-      });
-      return valid;
-    }
-
+export const validateModel = (
+  fields: string[],
+  FormComponent: ElementType,
+) => (WrapperElement: any) => (
+  class ValidateModel extends Component<Props, State> {
     constructor(props: Props) {
       super(props);
-      this.submit = this.submit.bind(this);
       this.state = {
         user: {},
         validationFail: false,
         loading: true,
         message: '',
       };
+      this.submit = this.submit.bind(this);
     }
 
     componentDidMount(): void {
-      const { user } = this.props;
-      const isValid = ValidateModelMiddleware.validateModel(user);
+      const { authenticatedUser } = this.props;
+      const isValid = this.validateModel(authenticatedUser);
       this.setState({
         validationFail: !isValid,
         loading: false,
       });
     }
 
-    submit(body: any): void {
-      const { user } = this.props;
-      Axios
-        .patch(`${apis.PATCH}/${user.id}`, body)
+    getValidationForm(): JSX.Element {
+      const { authenticatedUser } = this.props;
+      const { message } = this.state;
+      const t = ct('validateModel');
+      return (
+        <AuthLayout
+          context={CONTEXT}
+          message={message}
+          title={t('title')}
+          subTitle={t('subTitle')}
+          links={[]}
+        >
+          <FormikFormWrapper onSubmit={this.submit} initialValues={authenticatedUser}>
+            <div>
+              <FormComponent />
+              <Button type="submit" id="submit" className="float-right">
+                {t('button')}
+              </Button>
+            </div>
+          </FormikFormWrapper>
+        </AuthLayout>
+      );
+    }
+
+    submit(body: any): Promise<any> {
+      const { authenticatedUser } = this.props;
+      return patchUserRequest(authenticatedUser.id, body)
         .then(() => window.location.reload())
         .catch((error: Error) => this.setState({ message: getErrorMessage(error) }));
     }
 
+    /**
+     * Validate model
+     * Validate model method run through all given requiredFields
+     * and check that user model has every one of them.
+     */
+    validateModel(user: any): boolean {
+      let valid = true;
+      fields.forEach((field) => {
+        if (!user[field]) {
+          valid = false;
+        }
+      });
+      return valid;
+    }
+
     render(): JSX.Element {
-      const { message, loading, validationFail } = this.state;
-      const { user } = this.props;
-      const t = ct('validateModel');
+      const { loading, validationFail } = this.state;
       if (loading) return <Loading centeredVertical />;
-      if (validationFail) {
-        return (
-          <AuthLayout
-            context={CONTEXT}
-            message={message}
-            title={t('title')}
-            subTitle={t('subTitle')}
-            links={[]}
-          >
-            <FormikFormWrapper onSubmit={this.submit} initialValues={user}>
-              <div>
-                {form}
-                <Button type="submit" id="submit" className="float-right">
-                  {t('button')}
-                </Button>
-              </div>
-            </FormikFormWrapper>
-          </AuthLayout>
-        );
-      }
-      if (loading) return <Loading centeredVertical />;
+      if (validationFail) return this.getValidationForm();
       return <WrapperElement {...this.props} />;
     }
   }

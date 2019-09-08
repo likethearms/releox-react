@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
-import Axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { Redirect } from 'react-router';
 import { successScene, SuccessSceneProps } from '../../HOC/success-scene';
 import { routes } from '../../routes';
-import { apis } from '../../apis';
-import { getErrorMessage } from '../../config';
+import { getErrorMessage, getAuthErrorUrl } from '../../config';
 import { Loading } from '../../components/Loading/Loading';
+import { confirmUserRequest } from '../../requests';
 
 export interface ConfirmSceneProps { }
 interface State {
@@ -21,15 +21,31 @@ export class ConfirmScene extends Component<ConfirmSceneProps & SuccessSceneProp
       redirect: '',
       loading: true,
     };
+    this.handleAxiosError = this.handleAxiosError.bind(this);
+    this.turnLoadingOff = this.turnLoadingOff.bind(this);
   }
 
-  componentDidMount(): void {
+  componentDidMount(): any {
     const query = queryString.parse(window.location.search);
-    Axios.get(`${apis.CONFIRM}?uid=${query.uid}&token=${query.token}`)
-      .then(() => this.setState({ loading: false }))
-      .catch((e: AxiosError) => this.setState({
-        redirect: `${routes.ERROR}?message=${getErrorMessage(e)}`,
-      }));
+
+    if (!query.uid || !query.token) return this.redirectToAuthErrorPage('Missing information');
+    if (Array.isArray(query.uid) || Array.isArray(query.token)) return this.redirectToAuthErrorPage('Information is on wrong format');
+
+    return confirmUserRequest(query.uid, query.token)
+      .then(this.turnLoadingOff)
+      .catch(this.handleAxiosError);
+  }
+
+  turnLoadingOff(): void {
+    this.setState({ loading: false });
+  }
+
+  handleAxiosError(e: AxiosError): void {
+    this.redirectToAuthErrorPage(getErrorMessage(e));
+  }
+
+  redirectToAuthErrorPage(message: string): void {
+    this.setState({ redirect: getAuthErrorUrl(message) });
   }
 
   render(): JSX.Element {

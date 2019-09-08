@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import Axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { Redirect } from 'react-router-dom';
 import { saveAccessInformation, getErrorMessage, getReleoxOptions } from '../../config';
 import { ct, ReleoxLocale } from '../../I18N';
 import { routes } from '../../routes';
-import { apis } from '../../apis';
 import { AuthLayoutLinkItem, AuthLayout } from '../../components/AuthLayout/AuthLayout';
 import { FormikFormWrapper } from '../../components/FormikFormWrapper/FormikFormWrapper';
 import { Input } from '../../components/Input/Input';
 import { Button } from '../../components/Button/Button';
+import { loginRequest } from '../../requests';
 
 interface LoginSceneState {
   redirect: string;
@@ -41,8 +41,7 @@ export class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
   onSubmit(body: LoginBody): Promise<void> {
     const { onSubmit, onError } = this.props;
     if (onSubmit) return onSubmit(body);
-    return Axios
-      .post(apis.LOGIN, body)
+    return loginRequest(body)
       .then((r: AxiosResponse) => saveAccessInformation(r.data.id, r.data.userId))
       .then(() => this.setState({ redirect: routes.HOME }))
       .catch((e) => {
@@ -71,11 +70,33 @@ export class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
     return links;
   }
 
-  render(): JSX.Element {
+  getT() {
     const { locale } = this.props;
-    const { redirect, message } = this.state;
+    return ct('login', locale);
+  }
+
+  getLoginForm() {
+    const { message } = this.state;
+    const t = this.getT();
+    return (
+      <FormikFormWrapper<LoginBody>
+        initialValues={{ email: '', password: '' }}
+        onSubmit={this.onSubmit}
+      >
+        <Input name="email" label={t('emailPlaceholder')} id={`${CONTEXT}-email-input`} />
+        <Input name="password" type="password" label={t('passwordPlaceholder')} id={`${CONTEXT}-password-input`} />
+        <Button className="float-right" type="submit" id={`${CONTEXT}-login-button`}>
+          {t('loginButtonText')}
+        </Button>
+        <div className="text-center">{message}</div>
+      </FormikFormWrapper>
+    );
+  }
+
+  render(): JSX.Element {
+    const { redirect } = this.state;
     if (redirect) return <Redirect to={redirect} />;
-    const t = ct('login', locale);
+    const t = this.getT();
     return (
       <AuthLayout
         title={t('title')}
@@ -83,32 +104,7 @@ export class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
         context={CONTEXT}
         links={this.getLinks()}
       >
-        <FormikFormWrapper<LoginBody>
-          initialValues={{ email: '', password: '' }}
-          onSubmit={this.onSubmit}
-        >
-          <div>
-            <Input
-              name="email"
-              label={t('emailPlaceholder')}
-              id={`${CONTEXT}-email-input`}
-            />
-            <Input
-              name="password"
-              type="password"
-              label={t('passwordPlaceholder')}
-              id={`${CONTEXT}-password-input`}
-            />
-            <Button
-              className="float-right"
-              type="submit"
-              id={`${CONTEXT}-login-button`}
-            >
-              {t('loginButtonText')}
-            </Button>
-            <div className="text-center">{message}</div>
-          </div>
-        </FormikFormWrapper>
+        {this.getLoginForm()}
       </AuthLayout>
     );
   }

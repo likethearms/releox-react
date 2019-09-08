@@ -6,7 +6,7 @@ import {
   AbstractAuthOneInputScene,
 } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 import { apis } from '../../apis';
-import { getErrorMessage } from '../../config';
+import { getErrorMessage, getAuthErrorUrl } from '../../config';
 import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
 import { parseParams } from '../../parse-params';
 import { validateTokenRequest } from '../../requests';
@@ -37,9 +37,7 @@ export class ResetPasswordScene
     parseParams(true)
       .then(({ user, access_token }) => validateTokenRequest(access_token, user))
       .then(() => this.setState({ loading: false }))
-      .catch((e: AxiosError) => this.setState({
-        redirect: `${routes.ERROR}?message=${getErrorMessage(e)}`,
-      }));
+      .catch((e: AxiosError) => this.setState({ redirect: getAuthErrorUrl(getErrorMessage(e)) }));
     /* eslint-enable camelcase */
   }
 

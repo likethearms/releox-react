@@ -1,10 +1,9 @@
 import { ReleoxLocale } from './I18N';
+import { routes } from './routes';
 
 declare global {
   interface Window {
     API_ENDPOINT: string;
-    TOKEN_KEY: string;
-    USER_ID_KEY: string;
     RELEOX_OPTIONS: ReleoxOptions;
   }
 }
@@ -17,12 +16,14 @@ export interface AccessInformation {
 export interface ReleoxOptions {
   showRegisterLink?: boolean;
   locale?: ReleoxLocale;
+  userIdKey?: string;
+  tokenKey?: string;
 }
 
 export const getReleoxOptions = (): ReleoxOptions => window.RELEOX_OPTIONS || {};
-export const getApiUrl = (): string => window.API_ENDPOINT;
-export const getTokenKey = (): string => window.TOKEN_KEY || 'accessToken';
-export const getUserIdKey = (): string => window.USER_ID_KEY || 'userId';
+export const getApiUrl = (): string => window.API_ENDPOINT || '';
+export const getTokenKey = (): string => getReleoxOptions().tokenKey || 'accessToken';
+export const getUserIdKey = (): string => getReleoxOptions().userIdKey || 'userId';
 export const saveAccessInformation = (
   accessToken: string,
   userId: string,
@@ -41,7 +42,7 @@ export const getAccessInformation = (): Promise<AccessInformation> => new Promis
   },
 );
 
-export const destroyAccessInformation = (): Promise<void> => new Promise((resolve) => {
+export const destroyAccessInformation = (): Promise<any> => new Promise((resolve) => {
   localStorage.removeItem(getTokenKey());
   localStorage.removeItem(getUserIdKey());
   return resolve();
@@ -53,3 +54,5 @@ export const getErrorMessage = (error: any) => {
   if (res && typeof res.data !== 'string' && res.data.error.message) errorMessage = res.data.error.message;
   return errorMessage;
 };
+
+export const getAuthErrorUrl = (message:string) => `${routes.ERROR}?message=${message}`;
