@@ -3,8 +3,8 @@ import { shallow, mount } from 'enzyme';
 import { CheckBox } from './CheckBox';
 import { FormikFormWrapper } from '../FormikFormWrapper/FormikFormWrapper';
 
-it('should implement props', () => {
-  let wrapper = shallow(
+it('should implement default props', () => {
+  const wrapper = shallow(
     <CheckBox
       name="bar"
     />,
@@ -12,8 +12,10 @@ it('should implement props', () => {
   expect(wrapper.find('[name="bar"]').length).toBe(1);
   expect(wrapper.find('#bar-input').length).toBe(1);
   expect(wrapper.find('.form-control').length).toBe(1);
+});
 
-  wrapper = shallow(
+it('should implement props', () => {
+  const wrapper = shallow(
     <CheckBox
       name="bar"
       id="id-foo"
@@ -27,7 +29,7 @@ it('should implement props', () => {
 it('should call render', () => {
   const wrapper = mount(
     <FormikFormWrapper
-      onSubmit={() => {}}
+      onSubmit={() => { }}
       initialValues={{}}
     >
       <CheckBox

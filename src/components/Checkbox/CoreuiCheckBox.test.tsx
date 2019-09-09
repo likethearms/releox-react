@@ -3,8 +3,8 @@ import { shallow, mount } from 'enzyme';
 import { CoreuiCheckBox } from './CoreuiCheckBox';
 import { FormikFormWrapper } from '../FormikFormWrapper/FormikFormWrapper';
 
-it('should implement props', () => {
-  let wrapper = shallow(
+it('should default props', () => {
+  const wrapper = shallow(
     <CoreuiCheckBox
       name="bar"
       label="foo"
@@ -13,8 +13,10 @@ it('should implement props', () => {
   expect(wrapper.find('[name="bar"]').length).toBe(1);
   expect(wrapper.find('#bar-input').length).toBe(1);
   expect(wrapper.find('.form-control').length).toBe(1);
+});
 
-  wrapper = shallow(
+it('should implement props', () => {
+  const wrapper = shallow(
     <CoreuiCheckBox
       name="bar"
       label="foo"
