@@ -3,26 +3,31 @@ import { shallow, mount } from 'enzyme';
 import { CoreuiCheckBox } from './CoreuiCheckBox';
 import { FormikFormWrapper } from '../FormikFormWrapper/FormikFormWrapper';
 
-it('should show CoreuiCheckBox', () => {
-  const wrapper = shallow(<CoreuiCheckBox name="bar" id="id-foo" label="foo" />);
-  expect(wrapper.find('#id-foo').length).toBe(1);
-  expect(wrapper.find('.form-control').length).toBe(1);
-});
-
 it('should implement props', () => {
-  const wrapper = shallow(
+  let wrapper = shallow(
     <CoreuiCheckBox
       name="bar"
-      className="classname-foo"
       label="foo"
     />,
   );
-  expect(wrapper.find('#bar-input').length).toBe(1);
-  expect(wrapper.find('.classname-foo').length).toBe(1);
   expect(wrapper.find('[name="bar"]').length).toBe(1);
+  expect(wrapper.find('#bar-input').length).toBe(1);
+  expect(wrapper.find('.form-control').length).toBe(1);
+
+  wrapper = shallow(
+    <CoreuiCheckBox
+      name="bar"
+      label="foo"
+      id="idFoo"
+      className="classname-bar"
+    />,
+  );
+  expect(wrapper.find('[name="bar"]').length).toBe(1);
+  expect(wrapper.find('#idFoo').length).toBe(1);
+  expect(wrapper.find('.classname-bar').length).toBe(1);
 });
 
-it('should change initial prop', () => {
+it('should simulate change to checked', () => {
   const wrapper = mount(
     <FormikFormWrapper
       onSubmit={() => { }}
@@ -30,9 +35,7 @@ it('should change initial prop', () => {
     >
       <CoreuiCheckBox
         name="bar"
-        id="id-foo"
         label="foo"
-        className="classname-foo"
       />
     </FormikFormWrapper>,
   );
@@ -40,4 +43,6 @@ it('should change initial prop', () => {
   const checkbox = wrapper.find('#core-checkbox');
   checkbox.simulate('change');
   expect(wrapper.find('input').prop('checked')).toBe(true);
+  const label = wrapper.find('.label');
+  expect(label.prop('children')).toBe('foo');
 });
