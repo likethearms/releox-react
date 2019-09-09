@@ -24,7 +24,7 @@ it('should implement props', () => {
 
 it('should change initial prop', () => {
   const wrapper = mount(
-    <FormikFormWrapper
+    <FormikFormWrapper<any>
       onSubmit={() => { }}
       initialValues={{ field: { value: false } }}
     >
@@ -38,8 +38,6 @@ it('should change initial prop', () => {
   );
 
   const checkbox = wrapper.find('#core-checkbox');
-  checkbox.instance().value = false;
   checkbox.simulate('change');
-
   expect(wrapper.find('input').prop('checked')).toBe(true);
 });
