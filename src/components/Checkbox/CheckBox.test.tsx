@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow, mount, ReactWrapper } from 'enzyme';
 import { CheckBox } from './CheckBox';
 import { FormikFormWrapper } from '../FormikFormWrapper/FormikFormWrapper';
 
@@ -26,16 +26,27 @@ it('should implement props', () => {
   expect(wrapper.find('.classname-foo').length).toBe(1);
 });
 
-it('should call render', () => {
-  const wrapper = mount(
-    <FormikFormWrapper
-      onSubmit={() => { }}
-      initialValues={{}}
-    >
-      <CheckBox
-        name="bar"
-      />
-    </FormikFormWrapper>,
-  );
-  expect(wrapper.find('input').prop('type')).toBe('checkbox');
+describe('Mounted test', () => {
+  let wrapper: ReactWrapper;
+
+  beforeAll(() => {
+    wrapper = mount(
+      <FormikFormWrapper
+        onSubmit={() => { }}
+        initialValues={{ bar: true }}
+      >
+        <CheckBox
+          name="bar"
+        />
+      </FormikFormWrapper>,
+    );
+  });
+
+  it('should inject init values', () => {
+    expect(wrapper.find('FormikFormWrapperComponent').prop('initialValues')).toStrictEqual({ bar: true });
+  });
+
+  it('should render', () => {
+    expect(wrapper.find('input').prop('type')).toBe('checkbox');
+  });
 });

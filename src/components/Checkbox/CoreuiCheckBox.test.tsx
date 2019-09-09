@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow, mount, ReactWrapper } from 'enzyme';
 import { CoreuiCheckBox } from './CoreuiCheckBox';
 import { FormikFormWrapper } from '../FormikFormWrapper/FormikFormWrapper';
 
@@ -29,22 +29,35 @@ it('should implement props', () => {
   expect(wrapper.find('.classname-bar').length).toBe(1);
 });
 
-it('should simulate change to checked', () => {
-  const wrapper = mount(
-    <FormikFormWrapper
-      onSubmit={() => { }}
-      initialValues={{ field: { value: false } }}
-    >
-      <CoreuiCheckBox
-        name="bar"
-        label="foo"
-      />
-    </FormikFormWrapper>,
-  );
+describe('Mounted test', () => {
+  let wrapper: ReactWrapper;
 
-  const checkbox = wrapper.find('#core-checkbox');
-  checkbox.simulate('change');
-  expect(wrapper.find('input').prop('checked')).toBe(true);
-  const label = wrapper.find('.label');
-  expect(label.prop('children')).toBe('foo');
+  beforeAll(() => {
+    wrapper = mount(
+      <FormikFormWrapper
+        onSubmit={() => { }}
+        initialValues={{ bar: true }}
+      >
+        <CoreuiCheckBox
+          name="bar"
+          label="foo"
+        />
+      </FormikFormWrapper>,
+    );
+  });
+
+  it('should inject init values', () => {
+    expect(wrapper.find('input').prop('checked')).toBe(true);
+  });
+
+  it('should simulate change', () => {
+    const checkbox = wrapper.find('#core-checkbox');
+    checkbox.simulate('change');
+    expect(wrapper.find('input').prop('checked')).toBe(false);
+  });
+
+  it('should have label', () => {
+    const label = wrapper.find('.label');
+    expect(label.prop('children')).toBe('foo');
+  });
 });
