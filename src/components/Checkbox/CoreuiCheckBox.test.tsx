@@ -24,7 +24,7 @@ it('should implement props', () => {
 
 it('should change initial prop', () => {
   const wrapper = mount(
-    <FormikFormWrapper<any>
+    <FormikFormWrapper
       onSubmit={() => { }}
       initialValues={{ field: { value: false } }}
     >
