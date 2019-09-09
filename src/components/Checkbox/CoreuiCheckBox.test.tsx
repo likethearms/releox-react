@@ -25,7 +25,7 @@ it('should implement props', () => {
 it('should change initial prop', () => {
   const wrapper = mount(
     <FormikFormWrapper
-      onSubmit={() => {}}
+      onSubmit={() => { }}
       initialValues={{ field: { value: false } }}
     >
       <CoreuiCheckBox
@@ -36,9 +36,10 @@ it('should change initial prop', () => {
       />
     </FormikFormWrapper>,
   );
-  const onC = wrapper.find('input').prop('onChange') as Function;
-  onC();
 
-  // Test for checked prop to have changed from initial prop
-  wrapper.find('input').props();
+  const checkbox = wrapper.find('#core-checkbox');
+  checkbox.instance().value = false;
+  checkbox.simulate('change');
+
+  expect(wrapper.find('input').prop('checked')).toBe(true);
 });
