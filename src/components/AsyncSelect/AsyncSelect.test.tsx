@@ -6,67 +6,19 @@ import { AsyncSelect } from './AsyncSelect';
 let wrapper: ReactWrapper<{}, {}, AsyncSelect>;
 
 describe('AsyncSelect', () => {
-  beforeEach(() => {
-    moxios.install();
-    moxios.stubRequest(/./, {
-      status: 200,
-      response: [
-        {
-          id: 1,
-          name: 'Foo',
-        },
-        {
-          id: 2,
-          name: 'Bar',
-        },
-      ],
-    });
-
-    wrapper = mount((
-      <AsyncSelect
-        onChange={() => { }}
-        onError={() => { }}
-        getUrl="/Products/"
-        searchFields={['name', 'bar']}
-        queryFormat="postgresql"
-        value="1"
-      />
-    ));
-  });
-
-  afterEach(() => {
-    moxios.uninstall();
-  });
-
-  xit('should set default value', () => {
-    expect(wrapper.state('defaultValue')).toStrictEqual({ value: 1, label: 'Foo' });
-  });
-
-  xit('should have right postgresql query', () => {
-    expect(wrapper.instance().buildQuery('1')).toStrictEqual({ name: { ilike: '%1%' } });
-  });
-
-  xit('should have right mongodb query', () => {
-    wrapper = mount((
-      <AsyncSelect
-        onChange={() => { }}
-        getUrl="/Products/"
-        searchFields={['name', 'bar']}
-        queryFormat="mongodb"
-      />
-    ));
-
-    expect(wrapper.instance().buildQuery('1')).toStrictEqual({ name: { like: '1', options: 'i' } });
-  });
-
-  it('should match children', () => {
-    wrapper = mount((
-      <AsyncSelect
-        onChange={() => { }}
-        getUrl="/Products/"
-        searchFields={['name', 'bar']}
-        queryFormat="mongodb"
-      />
-    ));
+  describe('Async props', () => {
+    xit('should inject undefined default values if non is passed', () => { });
+    xit('should fetch and inject given default values to Async', () => { });
+    xit('should call onChange with empty string if value is null', () => { });
+    xit('should call onChange with given value if value object passed', () => { });
+    xit('should inject placeholder', () => { });
+    xtest('loadOptions return promise', () => { });
+    xtest('loadOptions return build mongodb query', () => { });
+    xtest('loadOptions return build postgres query', () => { });
+    xtest('loadOptions call onError when promise rejects', () => { });
+    xit('should turn loading off if no default values passed', () => { });
+    xit('should turn loading off if default values is given', () => { });
+    xit('should use different mapValue in query if given', () => { });
+    xit('should use different mapLabel in query if given', () => { });
   });
 });
