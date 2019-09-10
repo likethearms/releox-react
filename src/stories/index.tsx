@@ -15,11 +15,26 @@ import { ForgotScene } from '../scenes/ForgotScene/ForgotScene';
 import { ForgotSuccessScene } from '../scenes/ForgotSuccessScene/ForgotSuccessScene';
 import { ResetPasswordScene } from '../scenes/ResetPasswordScene/ResetPasswordScene';
 import { ResetPasswordSuccessScene } from '../scenes/ResetPasswordSuccessScene/ResetPasswordSuccessScene';
+import { AsyncSelectFormik } from '../components/AsyncSelect/AsyncSelectFormik';
 
 moxios.install();
 moxios.stubRequest(/undefined.Members.user*/, {
   status: 200,
 });
+moxios.stubRequest(/Products/, {
+  status: 200,
+  response: [
+    {
+      id: 1,
+      name: 'Foo',
+    },
+    {
+      id: 2,
+      name: 'Bar',
+    },
+  ],
+});
+
 moxios.stubRequest(/.*/, {
   status: 400,
   response: {
@@ -45,6 +60,12 @@ storiesOf('Form', module)
       initialValues={{ name: '' }}
     >
       <Field name="name" type="input" />
+      <AsyncSelectFormik
+        getUrl="/Products/"
+        queryFormat="mongodb"
+        label="Products"
+        name="products"
+      />
     </FormikFormWrapper>
   ));
 
