@@ -23,7 +23,7 @@ describe('AsyncSelect', () => {
         <AsyncSelect
           onChange={() => { }}
           getUrl="url"
-          searchFields={['name', 'id']} // TODO: why 2 values
+          searchFields={['name']}
           queryFormat="mongodb"
         />
       ));
@@ -32,7 +32,7 @@ describe('AsyncSelect', () => {
     });
 
     it('should fetch and inject given default values to Async', async () => {
-      moxios.stubRequest(/./, { // TODO: wildcard need to changed to specify url
+      moxios.stubRequest(/url/, {
         status: 200,
         response: [
           {
@@ -50,7 +50,7 @@ describe('AsyncSelect', () => {
         <AsyncSelect
           onChange={() => { }}
           getUrl="url"
-          searchFields={['name', 'id']} // TODO: why 2 values
+          searchFields={['name']}
           queryFormat="mongodb"
           value="1"
         />
@@ -65,7 +65,7 @@ describe('AsyncSelect', () => {
         <AsyncSelect
           onChange={() => { }}
           getUrl="url"
-          searchFields={['name', 'id']} // TODO: why 2 values
+          searchFields={['name']}
           queryFormat="mongodb"
           placeholder="Select placeholder"
         />
@@ -80,7 +80,7 @@ describe('AsyncSelect', () => {
         <AsyncSelect
           onChange={spy}
           getUrl="url"
-          searchFields={['id', 'name']} // TODO: why 2 values
+          searchFields={['id']}
           queryFormat="mongodb"
         />
       ));
@@ -95,7 +95,7 @@ describe('AsyncSelect', () => {
         <AsyncSelect
           onChange={spy}
           getUrl="url"
-          searchFields={['id', 'name']} // TODO: why 2 values
+          searchFields={['id']}
           queryFormat="mongodb"
         />
       ));
@@ -105,7 +105,7 @@ describe('AsyncSelect', () => {
     });
 
     test('loadOptions return promise', async () => {
-      moxios.stubRequest(/./, { // TODO: wildcard need to changed to specify url
+      moxios.stubRequest(/url/, {
         status: 200,
         response: [
           {
@@ -123,7 +123,7 @@ describe('AsyncSelect', () => {
         <AsyncSelect
           onChange={() => { }}
           getUrl="url"
-          searchFields={['id', 'name']} // TODO: why 2 values
+          searchFields={['id']}
           queryFormat="mongodb"
         />
       ));
@@ -134,7 +134,7 @@ describe('AsyncSelect', () => {
 
     test('loadOptions call onError when promise rejects', (done) => {
       const spy = jest.fn();
-      moxios.stubRequest(/./, { // TODO: wildcard need to changed to specify url
+      moxios.stubRequest(/url/, {
         status: 400,
         response: { error: { message: 'Error' } },
       });
@@ -143,7 +143,7 @@ describe('AsyncSelect', () => {
         <AsyncSelect
           onChange={() => { }}
           getUrl="url"
-          searchFields={['id', 'name']} // TODO: why 2 values
+          searchFields={['id']}
           queryFormat="mongodb"
           onError={spy}
         />
@@ -161,7 +161,7 @@ describe('AsyncSelect', () => {
 
 
     test('loadOptions call rejects', (done) => {
-      moxios.stubRequest(/./, { // TODO: wildcard need to changed to specify url
+      moxios.stubRequest(/url/, {
         status: 400,
         response: { error: { message: 'Error' } },
       });
@@ -170,7 +170,7 @@ describe('AsyncSelect', () => {
         <AsyncSelect
           onChange={() => { }}
           getUrl="url"
-          searchFields={['id', 'name']} // TODO: why 2 values
+          searchFields={['id']}
           queryFormat="mongodb"
         />
       ));
@@ -186,7 +186,7 @@ describe('AsyncSelect', () => {
     });
 
     it('should turn loading off if no default values passed', async () => {
-      moxios.stubRequest(/./, { // TODO: wildcard need to changed to specify url
+      moxios.stubRequest(/url/, {
         status: 200,
         response: [
           {
@@ -204,7 +204,7 @@ describe('AsyncSelect', () => {
         <AsyncSelect
           onChange={() => { }}
           getUrl="url"
-          searchFields={['name', 'id']} // TODO: why 2 values
+          searchFields={['name']}
           queryFormat="mongodb"
         />
       ));
@@ -214,7 +214,7 @@ describe('AsyncSelect', () => {
     });
 
     it('should turn loading off if default values is given', async () => {
-      moxios.stubRequest(/./, { // TODO: wildcard need to changed to specify url
+      moxios.stubRequest(/url/, {
         status: 200,
         response: [
           {
@@ -232,7 +232,7 @@ describe('AsyncSelect', () => {
         <AsyncSelect
           onChange={() => { }}
           getUrl="url"
-          searchFields={['name', 'id']} // TODO: why 2 values
+          searchFields={['name']}
           queryFormat="mongodb"
           value="1"
         />
@@ -243,25 +243,24 @@ describe('AsyncSelect', () => {
     });
 
     it('should use different mapValue in query if given', async () => {
-      moxios.stubRequest(/./, { // TODO: wildcard need to changed to specify url
+      const url1 = 'url?filter=%7B%22where%22:%7B%22name%22:%221%22%7D%7D';
+      const url2 = 'url?filter=%7B%22where%22:%7B%22name%22:%7B%22options%22:%22i%22%7D%7D%7D&limit=10';
+      const response1 = [{ id: 1, name: 'Foo' }];
+      const response2 = [{ id: 1, name: 'Foo' }, { id: 2, name: 'Bar' }];
+      moxios.stubRequest(url1, {
         status: 200,
-        response: [
-          {
-            id: 1,
-            name: 'Foo',
-          },
-          {
-            id: 2,
-            name: 'Bar',
-          },
-        ],
+        response: response1,
+      });
+      moxios.stubRequest(url2, {
+        status: 200,
+        response: response2,
       });
       const waitForSample = createWaitForElement('Async');
       wrapper = shallow((
         <AsyncSelect
           onChange={() => { }}
           getUrl="url"
-          searchFields={['name', 'id']} // TODO: why 2 values
+          searchFields={['name']}
           queryFormat="mongodb"
           mapValue="name"
           value="1"
@@ -269,12 +268,14 @@ describe('AsyncSelect', () => {
       ));
       await waitForSample(wrapper);
       const async = wrapper.find('Async');
-      // TODO: invalid test
+      const onLoad = async.prop('loadOptions') as Function;
+      const res = await onLoad();
       expect(async.prop('defaultValue')).toStrictEqual({ label: 'Foo', value: 'Foo' });
+      expect(res).toStrictEqual([{ label: 'Foo', value: 'Foo' }, { label: 'Bar', value: 'Bar' }]);
     });
 
     it('should use different mapLabel in query if given', async () => {
-      moxios.stubRequest(/./, { // TODO: wildcard need to changed to specify url
+      moxios.stubRequest(/url/, {
         status: 200,
         response: [
           {
@@ -292,7 +293,7 @@ describe('AsyncSelect', () => {
         <AsyncSelect
           onChange={() => { }}
           getUrl="url"
-          searchFields={['name', 'id']} // TODO: why 2 values
+          searchFields={['name']}
           queryFormat="mongodb"
           mapLabel="id"
           value="1"
@@ -302,49 +303,38 @@ describe('AsyncSelect', () => {
       const async = wrapper.find('Async');
       expect(async.prop('defaultValue')).toStrictEqual({ label: 1, value: 1 });
     });
-  });
-});
 
-describe('Mounted component', () => {
-  let wrapper: ReactWrapper<{}, {}, AsyncSelect>;
+    test('loadOptions return build mongodb query', () => {
+      expect(wrapper.instance().buildQuery('1')).toStrictEqual({ name: { like: '1', options: 'i' } });
+    });
 
-  beforeAll(() => {
-    moxios.install(); // TODO: why moxios if you dont use it
-  });
-
-  afterAll(() => {
-    moxios.uninstall(); // TODO: why moxios if you dont use it
-  });
-
-  test('loadOptions return build postgres query', () => {
-    // TODO: tarpeeton mount
-    wrapper = mount((
-      <AsyncSelect
-        onChange={() => { }}
-        onError={() => { }}
-        getUrl="/Products/"
-        searchFields={['name', 'bar']} // TODO: why 2 values
-        queryFormat="postgresql"
-        value="1"
-      />
-    ));
-    // TODO: Tarpeeton instance() kutsu, testaa Asyncin propsista ja kayta moxiosia tarkistamaan
-    expect(wrapper.instance().buildQuery('1')).toStrictEqual({ name: { ilike: '%1%' } });
-  });
-
-  test('loadOptions return build mongodb query', () => {
-    // TODO: tarpeeton mount
-    wrapper = mount((
-      <AsyncSelect
-        onChange={() => { }}
-        onError={() => { }}
-        getUrl="/Products/"
-        searchFields={['name', 'bar']} // TODO: why 2 values
-        queryFormat="mongodb"
-        value="1"
-      />
-    ));
-    // TODO: Tarpeeton instance() kutsu, testaa Asyncin propsista ja kayta moxiosia tarkistamaan
-    expect(wrapper.instance().buildQuery('1')).toStrictEqual({ name: { like: '1', options: 'i' } });
+    test('loadOptions return build postgres query', async () => {
+      moxios.stubRequest(/url/, {
+        status: 200,
+        response: [
+          {
+            id: 1,
+            name: 'Foo',
+          },
+          {
+            id: 2,
+            name: 'Bar',
+          },
+        ],
+      });
+      const waitForSample = createWaitForElement('Async');
+      wrapper = shallow((
+        <AsyncSelect
+          onChange={() => { }}
+          getUrl="url"
+          searchFields={['name']}
+          queryFormat="postgresql"
+          mapLabel="id"
+          value="1"
+        />
+      ));
+      await waitForSample(wrapper);
+      expect(wrapper.instance().buildQuery('1')).toStrictEqual({ name: { ilike: '%1%' } });
+    });
   });
 });
