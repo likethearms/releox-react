@@ -1,7 +1,9 @@
 import React from 'react';
 import moxios from 'moxios';
 import { createWaitForElement } from 'enzyme-wait';
-import { shallow, ShallowWrapper, mount, ReactWrapper } from 'enzyme';
+import {
+  shallow, ShallowWrapper, mount, ReactWrapper,
+} from 'enzyme';
 import { AsyncSelect } from './AsyncSelect';
 
 
