@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Async from 'react-select/lib/Async';
+import Async from 'react-select/async';
 import Axios from 'axios';
 import PropTypes, { Requireable, Validator } from 'prop-types';
 

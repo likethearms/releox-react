@@ -5,11 +5,11 @@
   "main": "lib/index.js",
   "author": "Henrik Salmela",
   "dependencies": {
-    "@types/react-select": "^2.0.17",
+    "@types/react-select": "^3.0.4",
     "prop-types": "^15.7.2",
     "query-string": "^6.8.3",
     "react-loading": "^2.0.3",
-    "react-select": "^2.4.3",
+    "react-select": "^3.0.4",
     "webpack": "4.39.1"
   },
   "scripts": {
@@ -54,8 +54,8 @@
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "^24.0.18",
-    "@types/moxios": "^0.4.8",
-    "@types/node": "^11.12.1",
+    "@types/moxios": "^0.4.9",
+    "@types/node": "^12.7.5",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^4.3.5",

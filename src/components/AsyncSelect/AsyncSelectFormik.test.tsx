@@ -1,44 +1,38 @@
 import React from 'react';
-import { mount, ReactWrapper } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import { AsyncSelectFormik } from './AsyncSelectFormik';
-import { FormikFormWrapper } from '../FormikFormWrapper/FormikFormWrapper';
 
 describe('AsyncSelectFormik', () => {
-  let wrapper: ReactWrapper;
-  let input: ReactWrapper;
+  let wrapper: ShallowWrapper;
+  let input: ShallowWrapper;
 
   beforeAll(() => {
-    wrapper = mount((
-      <FormikFormWrapper
-        onSubmit={() => { }}
-        initialValues={{}}
-      >
-        <AsyncSelectFormik
-          label="selectLabel"
-          getUrl="url"
-          queryFormat="mongodb"
-          name="selectName"
-          id="selectBox"
-        />
-      </FormikFormWrapper>
+    wrapper = shallow((
+      <AsyncSelectFormik
+        label="selectLabel"
+        getUrl="url"
+        queryFormat="mongodb"
+        name="selectName"
+        id="selectBox"
+      />
     ));
     input = wrapper.find('#selectBox');
   });
 
 
   it('should have name to be specific', () => {
-    expect(input.first().prop('name')).toBe('selectName');
+    expect(input.prop('name')).toBe('selectName');
   });
 
   it('should have label to be specific', () => {
-    expect(input.first().prop('label')).toBe('selectLabel');
+    expect(wrapper.find('label').text()).toBe('selectLabel');
   });
 
   it('should have queryFormat to be specific', () => {
-    expect(input.first().prop('queryFormat')).toBe('mongodb');
+    expect(input.prop('queryFormat')).toBe('mongodb');
   });
 
   it('should have getUrl to be specific', () => {
-    expect(input.first().prop('getUrl')).toBe('url');
+    expect(input.prop('getUrl')).toBe('url');
   });
 });
