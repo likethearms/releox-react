@@ -2,7 +2,10 @@
 .vscode
 node_modules
 stories
-todo
+public
 .gitignore
 .editorconfig
+scripts
+builds-configs
 .babelrc
+src
