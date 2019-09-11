@@ -7,6 +7,11 @@ import { AsyncSelect } from './AsyncSelect';
 
 describe('AsyncSelect', () => {
   let wrapper: ShallowWrapper<{}, {}, AsyncSelect>;
+  const url1 = 'url?filter=%7B%22where%22:%7B%22id%22:%221%22%7D%7D';
+  const url2 = 'url?filter=%7B%22where%22:%7B%22id%22:%7B%22options%22:%22i%22%7D%7D%7D&limit=10';
+  const response1 = [{ id: 1, name: 'Foo' }];
+  const response2 = [{ id: 1, name: 'Foo' }, { id: 2, name: 'Bar' }];
+
   describe('Async props', () => {
     beforeEach(() => {
       moxios.install();
@@ -30,10 +35,6 @@ describe('AsyncSelect', () => {
     });
 
     it('should fetch and inject given default values to Async', async () => {
-      const url1 = 'url?filter=%7B%22where%22:%7B%22id%22:%221%22%7D%7D';
-      const url2 = 'url?filter=%7B%22where%22:%7B%22id%22:%7B%22options%22:%22i%22%7D%7D%7D&limit=10';
-      const response1 = [{ id: 1, name: 'Foo' }];
-      const response2 = [{ id: 1, name: 'Foo' }, { id: 2, name: 'Bar' }];
       moxios.stubRequest(url1, {
         status: 200,
         response: response1,
@@ -103,10 +104,6 @@ describe('AsyncSelect', () => {
     });
 
     test('loadOptions return promise', async () => {
-      const url1 = 'url?filter=%7B%22where%22:%7B%22id%22:%221%22%7D%7D';
-      const url2 = 'url?filter=%7B%22where%22:%7B%22id%22:%7B%22options%22:%22i%22%7D%7D%7D&limit=10';
-      const response1 = [{ id: 1, name: 'Foo' }];
-      const response2 = [{ id: 1, name: 'Foo' }, { id: 2, name: 'Bar' }];
       moxios.stubRequest(url1, {
         status: 200,
         response: response1,
@@ -133,8 +130,6 @@ describe('AsyncSelect', () => {
 
     test('loadOptions call onError when promise rejects', (done) => {
       const spy = jest.fn();
-      const url1 = 'url?filter=%7B%22where%22:%7B%22id%22:%221%22%7D%7D';
-      const url2 = 'url?filter=%7B%22where%22:%7B%22id%22:%7B%22options%22:%22i%22%7D%7D%7D&limit=10';
       moxios.stubRequest(url1, {
         status: 400,
         response: { error: { message: 'Error' } },
@@ -166,8 +161,6 @@ describe('AsyncSelect', () => {
 
 
     test('loadOptions call rejects', (done) => {
-      const url1 = 'url?filter=%7B%22where%22:%7B%22id%22:%221%22%7D%7D';
-      const url2 = 'url?filter=%7B%22where%22:%7B%22id%22:%7B%22options%22:%22i%22%7D%7D%7D&limit=10';
       moxios.stubRequest(url1, {
         status: 400,
         response: { error: { message: 'Error' } },
@@ -197,10 +190,6 @@ describe('AsyncSelect', () => {
     });
 
     it('should turn loading off if no default values passed', async () => {
-      const url1 = 'url?filter=%7B%22where%22:%7B%22id%22:%221%22%7D%7D';
-      const url2 = 'url?filter=%7B%22where%22:%7B%22id%22:%7B%22options%22:%22i%22%7D%7D%7D&limit=10';
-      const response1 = [{ id: 1, name: 'Foo' }];
-      const response2 = [{ id: 1, name: 'Foo' }, { id: 2, name: 'Bar' }];
       moxios.stubRequest(url1, {
         status: 200,
         response: response1,
@@ -226,10 +215,6 @@ describe('AsyncSelect', () => {
     });
 
     it('should turn loading off if default values is given', async () => {
-      const url1 = 'url?filter=%7B%22where%22:%7B%22id%22:%221%22%7D%7D';
-      const url2 = 'url?filter=%7B%22where%22:%7B%22id%22:%7B%22options%22:%22i%22%7D%7D%7D&limit=10';
-      const response1 = [{ id: 1, name: 'Foo' }];
-      const response2 = [{ id: 1, name: 'Foo' }, { id: 2, name: 'Bar' }];
       moxios.stubRequest(url1, {
         status: 200,
         response: response1,
@@ -255,15 +240,13 @@ describe('AsyncSelect', () => {
     });
 
     it('should use different mapValue in query if given', async () => {
-      const url1 = 'url?filter=%7B%22where%22:%7B%22name%22:%221%22%7D%7D';
-      const url2 = 'url?filter=%7B%22where%22:%7B%22name%22:%7B%22options%22:%22i%22%7D%7D%7D&limit=10';
-      const response1 = [{ id: 1, name: 'Foo' }];
-      const response2 = [{ id: 1, name: 'Foo' }, { id: 2, name: 'Bar' }];
-      moxios.stubRequest(url1, {
+      const urlName1 = 'url?filter=%7B%22where%22:%7B%22name%22:%221%22%7D%7D';
+      const urlName2 = 'url?filter=%7B%22where%22:%7B%22name%22:%7B%22options%22:%22i%22%7D%7D%7D&limit=10';
+      moxios.stubRequest(urlName1, {
         status: 200,
         response: response1,
       });
-      moxios.stubRequest(url2, {
+      moxios.stubRequest(urlName2, {
         status: 200,
         response: response2,
       });
@@ -287,10 +270,6 @@ describe('AsyncSelect', () => {
     });
 
     it('should use different mapLabel in query if given', async () => {
-      const url1 = 'url?filter=%7B%22where%22:%7B%22id%22:%221%22%7D%7D';
-      const url2 = 'url?filter=%7B%22where%22:%7B%22id%22:%7B%22options%22:%22i%22%7D%7D%7D&limit=10';
-      const response1 = [{ id: 1, name: 'Foo' }];
-      const response2 = [{ id: 1, name: 'Foo' }, { id: 2, name: 'Bar' }];
       moxios.stubRequest(url1, {
         status: 200,
         response: response1,
@@ -320,10 +299,6 @@ describe('AsyncSelect', () => {
     });
 
     test('loadOptions return build postgres query', async () => {
-      const url1 = 'url?filter=%7B%22where%22:%7B%22id%22:%221%22%7D%7D';
-      const url2 = 'url?filter=%7B%22where%22:%7B%22id%22:%7B%22options%22:%22i%22%7D%7D%7D&limit=10';
-      const response1 = [{ id: 1, name: 'Foo' }];
-      const response2 = [{ id: 1, name: 'Foo' }, { id: 2, name: 'Bar' }];
       moxios.stubRequest(url1, {
         status: 200,
         response: response1,
