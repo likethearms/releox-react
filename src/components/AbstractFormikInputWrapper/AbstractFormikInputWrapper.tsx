@@ -7,7 +7,7 @@ export interface AbstractFormikInputWrapperProps {
   form: { setFieldValue: Function };
 }
 
-export class AbstractFormikInputWrapper<V, P>
+export abstract class AbstractFormikInputWrapper<V, P>
   extends Component<P & AbstractFormikInputWrapperProps> {
   onChange(value: V): void {
     const { form, field } = this.props;
