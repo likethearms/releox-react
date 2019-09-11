@@ -243,25 +243,24 @@ describe('AsyncSelect', () => {
     });
 
     it('should use different mapValue in query if given', async () => {
-      moxios.stubRequest(/./, { // TODO: wildcard need to changed to specify url
+      const url1 = 'url?filter=%7B%22where%22:%7B%22name%22:%221%22%7D%7D';
+      const url2 = 'url?filter=%7B%22where%22:%7B%22name%22:%7B%22options%22:%22i%22%7D%7D%7D&limit=10';
+      const response1 = [{ id: 1, name: 'Foo' }];
+      const response2 = [{ id: 1, name: 'Foo' }, { id: 2, name: 'Bar' }];
+      moxios.stubRequest(url1, {
         status: 200,
-        response: [
-          {
-            id: 1,
-            name: 'Foo',
-          },
-          {
-            id: 2,
-            name: 'Bar',
-          },
-        ],
+        response: response1,
+      });
+      moxios.stubRequest(url2, {
+        status: 200,
+        response: response2,
       });
       const waitForSample = createWaitForElement('Async');
       wrapper = shallow((
         <AsyncSelect
           onChange={() => { }}
           getUrl="url"
-          searchFields={['name', 'id']} // TODO: why 2 values
+          searchFields={['name']}
           queryFormat="mongodb"
           mapValue="name"
           value="1"
@@ -269,8 +268,10 @@ describe('AsyncSelect', () => {
       ));
       await waitForSample(wrapper);
       const async = wrapper.find('Async');
-      // TODO: invalid test
+      const onLoad = async.prop('loadOptions') as Function;
+      const res = await onLoad();
       expect(async.prop('defaultValue')).toStrictEqual({ label: 'Foo', value: 'Foo' });
+      expect(res).toStrictEqual([{ label: 'Foo', value: 'Foo' }, { label: 'Bar', value: 'Bar' }]);
     });
 
     it('should use different mapLabel in query if given', async () => {
