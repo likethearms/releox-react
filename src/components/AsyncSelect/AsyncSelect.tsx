@@ -7,7 +7,6 @@ export interface AsyncSelectInputDefaultProps {
   onError?: (e: Error) => any;
   placeholder: undefined;
   value: undefined;
-  fixedValue: undefined;
   mapValue: string;
   mapLabel: string;
 }
@@ -19,7 +18,6 @@ export interface AsyncSelectInputProps {
   onError?(e: Error): any;
   queryFormat: AsyncSelectQueryFormat;
   placeholder?: string;
-  fixedValue?: string;
   value?: string;
   getUrl: string;
   mapValue: string;
@@ -36,7 +34,6 @@ interface AsyncSelectInputPropTypes {
   placeholder: Requireable<string>;
   onChange: Validator<NonNullable<(value: string | number | null) => void>>;
   getUrl: Validator<NonNullable<string>>;
-  fixedValue: Requireable<string>;
   mapValue: Requireable<string>;
   onError: Requireable<Function>;
   mapLabel: Requireable<string>;
@@ -49,7 +46,6 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
     placeholder: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     getUrl: PropTypes.string.isRequired,
-    fixedValue: PropTypes.string,
     onError: PropTypes.func,
     mapValue: PropTypes.string,
     mapLabel: PropTypes.string,
@@ -60,7 +56,6 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
   static defaultProps: AsyncSelectInputDefaultProps = {
     placeholder: undefined,
     value: undefined,
-    fixedValue: undefined,
     onError: undefined,
     mapValue: 'id',
     mapLabel: 'name',
@@ -86,14 +81,11 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
 
   getAsyncSelectElement(): JSX.Element {
     const {
-      onChange, placeholder, fixedValue,
+      onChange, placeholder,
     } = this.props;
     const { defaultValue } = this.state;
-    const compProps: { value?: string; } = {};
-    if (fixedValue) compProps.value = fixedValue;
     return (
       <Async
-        {...compProps} /* eslint-disable-line react/jsx-props-no-spreading */
         cacheOptions
         placeholder={placeholder}
         defaultOptions
