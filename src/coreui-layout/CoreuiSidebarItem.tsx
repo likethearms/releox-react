@@ -25,6 +25,9 @@ const CoreuiSidebarItemComponent = (props: SidebarItemProps) => {
           exact={exact}
           to={url as string}
           className="nav-link"
+          // onClick is required to close sidebar on mobile when link is clicked
+          onClick={() => document
+            .getElementsByClassName('app')[0].classList.toggle('sidebar-show')}
         >
           {icon ? <i className={icon} /> : ''}
           {` ${children}`}

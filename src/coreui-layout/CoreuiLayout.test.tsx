@@ -71,6 +71,16 @@ describe('CoreuiLayout', () => {
       expect(wrapper.find('.nav-title').length).toBe(1);
     });
 
+    it('should remove class sidebar-show from app class', () => {
+      const spy = jest.fn();
+      const menu = [{ text: 'Foo', url: '/foo' }];
+      document.getElementsByClassName = () => ([{ classList: { toggle: spy } }]) as any;
+      wrapper = mount(routerWrapper(<CoreuiLayout brand="Foo Bar" sidebarMenu={menu}>MainContent</CoreuiLayout>));
+      const onClick = wrapper.find('NavLink[to="/foo"]').prop('onClick') as Function;
+      onClick();
+      expect(spy).toBeCalledWith('sidebar-show');
+    });
+
     it('should render dropdown items correctly', () => {
       const children = [{ text: 'Foo', url: '/foo' }, { text: 'Bar', url: '/bar' }];
       const menu = [{
