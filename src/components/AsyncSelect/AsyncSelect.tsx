@@ -16,7 +16,7 @@ export type AsyncSelectQueryFormat = 'mongodb' | 'postgresql';
 
 export interface AsyncSelectInputProps {
   onChange(value: string | number | null): void;
-  onError(e: Error): any;
+  onError?(e: Error): any;
   queryFormat: AsyncSelectQueryFormat;
   placeholder?: string;
   fixedValue?: string;
@@ -61,7 +61,7 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
     placeholder: undefined,
     value: undefined,
     fixedValue: undefined,
-    onError: (e: Error) => e,
+    onError: undefined,
     mapValue: 'id',
     mapLabel: 'name',
   };
@@ -135,11 +135,14 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
     const {
       getUrl, mapValue, mapLabel, onError,
     } = this.props;
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       Axios
         .get(getUrl, { params: { filter: { where: this.buildQuery(inputValue) }, limit: 10 } })
         .then((r) => resolve(r.data.map((c: any) => ({ value: c[mapValue], label: c[mapLabel] }))))
-        .catch(onError);
+        .catch((e) => {
+          if (onError) onError(e);
+          reject(e);
+        });
     });
   }
 
