@@ -2,12 +2,10 @@ import { AbstractFormikInputWrapper, AbstractFormikInputWrapperProps } from './A
 
 class A extends AbstractFormikInputWrapper<string, AbstractFormikInputWrapperProps> { }
 
-describe('AbstractFormikInputWrapper', () => {
-  const spy = jest.fn();
-  const inputWrapper = new A({ form: { setFieldValue: spy }, field: { name: 'foo' } });
+const spy = jest.fn();
+const inputWrapper = new A({ form: { setFieldValue: spy }, field: { name: 'foo' } });
 
-  it('', () => {
-    inputWrapper.onChange('Bar');
-    expect(spy).toBeCalledWith('foo', 'Bar');
-  });
+it('should call onChange with value to be as expected ', () => {
+  inputWrapper.onChange('Bar');
+  expect(spy).toBeCalledWith('foo', 'Bar');
 });
