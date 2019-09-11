@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Async from 'react-select/lib/Async';
+import Async from 'react-select/async';
 import Axios from 'axios';
 import PropTypes, { Requireable, Validator } from 'prop-types';
 
@@ -7,7 +7,6 @@ export interface AsyncSelectInputDefaultProps {
   onError?: (e: Error) => any;
   placeholder: undefined;
   value: undefined;
-  fixedValue: undefined;
   mapValue: string;
   mapLabel: string;
 }
@@ -16,10 +15,9 @@ export type AsyncSelectQueryFormat = 'mongodb' | 'postgresql';
 
 export interface AsyncSelectInputProps {
   onChange(value: string | number | null): void;
-  onError(e: Error): any;
+  onError?(e: Error): any;
   queryFormat: AsyncSelectQueryFormat;
   placeholder?: string;
-  fixedValue?: string;
   value?: string;
   getUrl: string;
   mapValue: string;
@@ -36,7 +34,6 @@ interface AsyncSelectInputPropTypes {
   placeholder: Requireable<string>;
   onChange: Validator<NonNullable<(value: string | number | null) => void>>;
   getUrl: Validator<NonNullable<string>>;
-  fixedValue: Requireable<string>;
   mapValue: Requireable<string>;
   onError: Requireable<Function>;
   mapLabel: Requireable<string>;
@@ -49,7 +46,6 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
     placeholder: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     getUrl: PropTypes.string.isRequired,
-    fixedValue: PropTypes.string,
     onError: PropTypes.func,
     mapValue: PropTypes.string,
     mapLabel: PropTypes.string,
@@ -60,8 +56,7 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
   static defaultProps: AsyncSelectInputDefaultProps = {
     placeholder: undefined,
     value: undefined,
-    fixedValue: undefined,
-    onError: (e: Error) => e,
+    onError: undefined,
     mapValue: 'id',
     mapLabel: 'name',
   };
@@ -86,14 +81,11 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
 
   getAsyncSelectElement(): JSX.Element {
     const {
-      onChange, placeholder, fixedValue,
+      onChange, placeholder,
     } = this.props;
     const { defaultValue } = this.state;
-    const compProps: { value?: string; } = {};
-    if (fixedValue) compProps.value = fixedValue;
     return (
       <Async
-        {...compProps} /* eslint-disable-line react/jsx-props-no-spreading */
         cacheOptions
         placeholder={placeholder}
         defaultOptions
@@ -135,11 +127,14 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
     const {
       getUrl, mapValue, mapLabel, onError,
     } = this.props;
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       Axios
         .get(getUrl, { params: { filter: { where: this.buildQuery(inputValue) }, limit: 10 } })
         .then((r) => resolve(r.data.map((c: any) => ({ value: c[mapValue], label: c[mapLabel] }))))
-        .catch(onError);
+        .catch((e) => {
+          if (onError) onError(e);
+          reject(e);
+        });
     });
   }
 
