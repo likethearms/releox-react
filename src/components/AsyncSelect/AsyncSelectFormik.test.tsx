@@ -5,6 +5,7 @@ import { FormikFormWrapper } from '../FormikFormWrapper/FormikFormWrapper';
 
 describe('AsyncSelectFormik', () => {
   let wrapper: ReactWrapper;
+  let input: ReactWrapper;
 
   beforeAll(() => {
     wrapper = mount((
@@ -21,26 +22,23 @@ describe('AsyncSelectFormik', () => {
         />
       </FormikFormWrapper>
     ));
+    input = wrapper.find('#selectBox');
   });
 
 
   it('should have name to be specific', () => {
-    const input = wrapper.find('#selectBox');
     expect(input.first().prop('name')).toBe('selectName');
   });
 
   it('should have label to be specific', () => {
-    const input = wrapper.find('#selectBox');
     expect(input.first().prop('label')).toBe('selectLabel');
   });
 
   it('should have queryFormat to be specific', () => {
-    const input = wrapper.find('#selectBox');
     expect(input.first().prop('queryFormat')).toBe('mongodb');
   });
 
   it('should have getUrl to be specific', () => {
-    const input = wrapper.find('#selectBox');
     expect(input.first().prop('getUrl')).toBe('url');
   });
 });
