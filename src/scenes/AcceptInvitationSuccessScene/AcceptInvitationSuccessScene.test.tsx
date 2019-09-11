@@ -23,7 +23,7 @@ describe('UI', () => {
 
     it('should have finnish login link', () => {
       const arr = authLayout.prop('links') as AuthLayoutLinkItem[];
-      expect(arr[0].text).toBe('Takaisin');
+      expect(arr[0].text).toBe('Kirjautumissivulle');
     });
   });
 

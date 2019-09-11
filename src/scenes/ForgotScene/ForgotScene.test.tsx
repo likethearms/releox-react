@@ -35,7 +35,7 @@ describe('UI tests', () => {
 
     it('should have finnish subtitle', () => {
       const word = wrapper.find('AuthLayout').prop('subTitle');
-      expect(word).toBe('Kirjoita sähköpostiosoitteesi, niin lähetämme sinulle linkin jolla voit vaihtaa salasanasi.');
+      expect(word).toBe('Kirjoita sähköpostiosoitteesi, niin lähetämme sinulle linkin, jolla voit vaihtaa salasanasi.');
     });
 
     it('should have finnish placeholder', () => {

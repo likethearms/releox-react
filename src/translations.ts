@@ -78,17 +78,17 @@ export const translations: Translation<TranslationObject> = {
     'forgot.buttonText': 'Nollaa',
     'forgot.linkText': 'Takaisin kirjautumissivulle',
     'forgot.title': 'Nollaa salasana',
-    'forgot.subTitle': 'Kirjoita sähköpostiosoitteesi, niin lähetämme sinulle linkin jolla voit vaihtaa salasanasi.',
+    'forgot.subTitle': 'Kirjoita sähköpostiosoitteesi, niin lähetämme sinulle linkin, jolla voit vaihtaa salasanasi.',
     'forgot.placeholder': 'Sähköposti',
 
     // ForgotSuccess
     'forgotSuccess.title': 'Salasanan nollauspyyntö lähetetty!',
-    'forgotSuccess.link': 'Kirjautumissivulle',
+    'forgotSuccess.link': 'Takaisin kirjautumissivulle',
     'forgotSuccess.subTitle': 'Salasanan nollauslinkki on lähetetty sähköpostiisi! Avaa sähköpostissa oleva linkki ja vaihda salasana.',
 
     // ResetPassword
     'resetPassword.title': 'Kirjoita uusi salasana',
-    'resetPassword.subTitle': 'Kirjoita uusi salasana ja paina tallenna',
+    'resetPassword.subTitle': 'Kirjoita uusi salasanasi ja paina tallenna',
     'resetPassword.placeholder': 'Salasana',
     'resetPassword.buttonText': 'Tallenna',
 
@@ -115,7 +115,7 @@ export const translations: Translation<TranslationObject> = {
 
     // Accept Invitation Success
     'acceptInvitationSuccess.title': 'Salasanasi on tallennettu',
-    'acceptInvitationSuccess.link': 'Takaisin',
+    'acceptInvitationSuccess.link': 'Kirjautumissivulle',
     'acceptInvitationSuccess.subTitle': 'Tunnuksesi on valmis. Voit nyt kirjautua ohjelmaan.',
 
     // Validate Model
@@ -153,12 +153,12 @@ export const translations: Translation<TranslationObject> = {
 
     // ResetPasswordSuccess
     'resetPasswordSuccess.title': 'Your password is changed',
-    'resetPasswordSuccess.link': 'Back to login',
+    'resetPasswordSuccess.link': 'To login',
     'resetPasswordSuccess.subTitle': 'Your password is now changed. Go back to login page and log in with new password.',
 
     // AuthError
     'authError.title': 'Oops... There was an error',
-    'authError.link': 'Back to login',
+    'authError.link': 'To login',
     'authError.subTitle': 'We couldn\'t find reason for an error.',
 
     // Confirm

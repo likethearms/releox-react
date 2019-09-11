@@ -46,7 +46,7 @@ describe('UI', () => {
 
     it('should have english login link', () => {
       const arr = authLayout.prop('links') as AuthLayoutLinkItem[];
-      expect(arr[0].text).toBe('Back to login');
+      expect(arr[0].text).toBe('To login');
     });
   });
 

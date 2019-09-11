@@ -16,6 +16,10 @@ import { ForgotSuccessScene } from '../scenes/ForgotSuccessScene/ForgotSuccessSc
 import { ResetPasswordScene } from '../scenes/ResetPasswordScene/ResetPasswordScene';
 import { ResetPasswordSuccessScene } from '../scenes/ResetPasswordSuccessScene/ResetPasswordSuccessScene';
 import { AsyncSelectFormik } from '../components/AsyncSelect/AsyncSelectFormik';
+import { AuthErrorScene } from '../scenes/AuthErrorScene/AuthErrorScene';
+import { ConfirmScene } from '../scenes/ConfirmScene/ConfirmScene';
+import { AcceptInvitationScene } from '../scenes/AcceptInvitationScene/AcceptInvitationScene';
+import { AcceptInvitationSuccessScene } from '../scenes/AcceptInvitationSuccessScene/AcceptInvitationSuccessScene';
 
 moxios.install();
 moxios.stubRequest(/undefined.Members.user*/, {
@@ -75,4 +79,8 @@ storiesOf('Scenes', module)
   .add('Forgot', () => <ForgotScene />)
   .add('ForgotSuccess', () => <ForgotSuccessScene />)
   .add('ResetPassword', () => <ResetPasswordScene />)
-  .add('ResetPasswordSuccess', () => <ResetPasswordSuccessScene />);
+  .add('ResetPasswordSuccess', () => <ResetPasswordSuccessScene />)
+  .add('AuthError', () => <AuthErrorScene />)
+  .add('Confirm', () => <ConfirmScene />)
+  .add('AcceptInvitation', () => <AcceptInvitationScene />)
+  .add('AcceptInvitationSuccess', () => <AcceptInvitationSuccessScene />);

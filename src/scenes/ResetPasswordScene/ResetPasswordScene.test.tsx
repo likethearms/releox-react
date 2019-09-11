@@ -82,7 +82,7 @@ describe('UI tests', () => {
 
     it('should have finnish subtitle', () => {
       const word = wrapper.find('AuthLayout').prop('subTitle');
-      expect(word).toBe('Kirjoita uusi salasana ja paina tallenna');
+      expect(word).toBe('Kirjoita uusi salasanasi ja paina tallenna');
     });
 
     it('should have finnish placeholder', () => {

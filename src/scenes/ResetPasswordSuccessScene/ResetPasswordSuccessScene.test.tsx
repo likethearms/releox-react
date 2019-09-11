@@ -57,7 +57,7 @@ describe('UI tests', () => {
         {
           to: '/login',
           id: 'login-link',
-          text: 'Back to login',
+          text: 'To login',
         },
       ]);
     });
