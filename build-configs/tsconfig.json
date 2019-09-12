@@ -15,6 +15,7 @@
   "exclude": [
     "../**/*.test.ts",
     "../**/*.test.tsx",
+    "../src/stories/*",
     "../src/cra-index.tsx",
     "../src/testing-cra/*",
     "../src/setupTests.ts"
