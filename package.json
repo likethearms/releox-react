@@ -22,7 +22,7 @@
     "publish-beta": "npm publish --tag beta",
     "test": "react-scripts test",
     "lint": "eslint src --ext .js,.tsx,.ts",
-    "create-typings": "tsc --project tsconfig.typing.json",
+    "create-typings": "tsc --project ./build-configs/tsconfig.typing.json",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"

@@ -13,8 +13,10 @@
     "../src"
   ],
   "exclude": [
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "setupTests.ts"
+    "../**/*.test.ts",
+    "../**/*.test.tsx",
+    "../src/cra-index.tsx",
+    "../src/testing-cra/*",
+    "../src/setupTests.ts"
   ]
 }
