@@ -17,3 +17,9 @@ const CustomComponent = () => <h1>Foo</h1>
   ...
 <CoreuiLayout>
 ```
+### CoreuiLayout props
+- `children` - JSX.Element | String, Required - Layout's main content
+- `brand` - String | JSX.Element, Required - Header brand text or element
+- `sidebarMenu` - CoreuiSidebarMenu[], Required - Sidebar menu
+- `brandUrl` - String, Default: `'/'` - Header brand text or element
+- `headerRightText` - String, Default: `''` - Text in right side of CoreuiHeader
