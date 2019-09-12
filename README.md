@@ -16,11 +16,11 @@ LoginScene with title block
   ...
 <LoginScene>
 ```
+### LoginScene props
 - `onSubmit` - (body: LoginBody) => Promise<void>; - Default behavior - Logs user in through API, saves user and token and sets redirect state to the wanted page
 - `onError` - (err: Error) => void; - Default behavior - Sets error message to the state
 - `locale` - ReleoxLocale; Default `fi` - Sets translations of the page
 - `titleBlock` - String | JSX.Element; Default `undefined` - Sets custom title to the screen
-
 
 ## Coreui Layout
 Coreui layout
