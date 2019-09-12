@@ -1,6 +1,26 @@
 # Releox react
 ## Table of Content
+- [LoginScene](#loginscene)
 - [Coreui Layout](#coreui-layout)
+
+## LoginScene
+LoginScene
+```js
+<LoginScene>
+  ...
+<LoginScene>
+```
+LoginScene with title block
+```js
+<LoginScene titleBlock={<h1>Custom title</h1>}>
+  ...
+<LoginScene>
+```
+- `onSubmit` - (body: LoginBody) => Promise<void>; - Default behavior - Logs user in through API, saves user and token and sets redirect state to the wanted page
+- `onError` - (err: Error) => void; - Default behavior - Sets error message to the state
+- `locale` - ReleoxLocale; Default `fi` - Sets translations of the page
+- `titleBlock` - String | JSX.Element; Default `undefined` - Sets custom title to the screen
+
 
 ## Coreui Layout
 Coreui layout

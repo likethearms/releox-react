@@ -21,6 +21,7 @@ export interface LoginSceneProps {
   onSubmit?: (body: LoginBody) => Promise<void>;
   onError?: (err: Error) => void;
   locale?: ReleoxLocale;
+  titleBlock?: string | JSX.Element;
 }
 
 export interface LoginBody {
@@ -95,10 +96,12 @@ export class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
 
   render(): JSX.Element {
     const { redirect } = this.state;
+    const { titleBlock } = this.props;
     if (redirect) return <Redirect to={redirect} />;
     const t = this.getT();
     return (
       <AuthLayout
+        titleBlock={titleBlock}
         title={t('title')}
         subTitle={t('subTitle')}
         context={CONTEXT}
