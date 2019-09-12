@@ -81,7 +81,7 @@ storiesOf('Scenes', module)
       titleBlock={(
         <div className="text-center">
           <h1>Service title</h1>
-          <img src="https://loremflickr.com/300/200" />
+          <img alt="" src="https://loremflickr.com/300/200" />
         </div>
       )}
     />
