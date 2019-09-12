@@ -16,9 +16,9 @@ describe('onSubmit', () => {
 
 describe('UI tests', () => {
   it('should have custom title block', () => {
-    const wrapper = shallow<LoginScene>(<LoginScene
-      titleBlock={<h1>Service title</h1>}
-    />);
+    const wrapper = shallow<LoginScene>((
+      <LoginScene titleBlock={<h1>Service title</h1>} />
+    ));
     const title = wrapper.find('AuthLayout').prop('titleBlock');
     expect(title).toStrictEqual(<h1>Service title</h1>);
   });
