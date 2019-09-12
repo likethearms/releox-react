@@ -9,3 +9,7 @@ scripts
 builds-configs
 .babelrc
 src
+coverage
+test-reporter-latest-linux-amd64
+Jenkinsfile
+tsconfig.json
