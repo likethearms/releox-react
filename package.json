@@ -1,16 +1,12 @@
 {
   "name": "releox-react",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "typings": "lib/index.d.ts",
   "main": "lib/index.js",
   "author": "Henrik Salmela",
   "dependencies": {
-    "@types/react-select": "^3.0.4",
-    "prop-types": "^15.7.2",
     "query-string": "^6.8.3",
-    "react-loading": "^2.0.3",
-    "react-select": "^3.0.4",
-    "webpack": "4.39.1"
+    "react-loading": "^2.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -22,7 +18,7 @@
     "publish-beta": "npm publish --tag beta",
     "test": "react-scripts test",
     "lint": "eslint src --ext .js,.tsx,.ts",
-    "create-typings": "tsc --project tsconfig.typing.json",
+    "create-typings": "tsc --project ./build-configs/tsconfig.typing.json",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
@@ -85,6 +81,10 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.1.1",
     "sass": "^1.22.10",
-    "typescript": "~3.5.0"
+    "typescript": "~3.5.0",
+    "@types/react-select": "^3.0.4",
+    "prop-types": "^15.7.2",
+    "react-select": "^3.0.4",
+    "webpack": "4.39.1"
   }
 }

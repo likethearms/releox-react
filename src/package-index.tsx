@@ -20,3 +20,4 @@ export * from './HOC/auth-middleware';
 export * from './HOC/guest-middleware';
 export * from './HOC/validate-model';
 export * from './config';
+export * from './components/DataTable/DataTable';

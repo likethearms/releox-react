@@ -17,15 +17,17 @@ export interface AuthLayoutProps {
   message?: string;
   children?: JSX.Element | JSX.Element[] | string;
   links: AuthLayoutLinkItem[];
+  titleBlock?: string | JSX.Element;
 }
 
 export const AuthLayout = (props: AuthLayoutProps) => {
   const {
-    context, title, subTitle, children, links, message,
+    context, title, subTitle, children, links, message, titleBlock,
   } = props;
   return (
     <CenterContent>
       <div className="col-lg-6" id={context}>
+        {titleBlock}
         <Card>
           <div>
             <CardTitle>{title}</CardTitle>

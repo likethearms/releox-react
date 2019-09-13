@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import DataTable from './DataTable';
+import { DataTable } from './DataTable';
 
 describe('DataTable', () => {
   it('should setup some options by default to component', () => {
@@ -19,7 +19,7 @@ describe('DataTable', () => {
     expect(wrapper.prop('hover')).toBe(true);
     expect(wrapper.prop('bordered')).toBe(false);
     expect(wrapper.prop('striped')).toBe(true);
-    expect(wrapper.prop('loading')).toBe(undefined);
+    expect(wrapper.prop('loading')).toBe(false);
   });
 
   it('should show default noDataText', () => {

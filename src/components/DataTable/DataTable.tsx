@@ -25,9 +25,9 @@ export interface DataTableProps {
   hover: boolean;
   striped: boolean;
   totalSize: number;
-  noDataText?: string;
+  noDataText: string;
   overlayElement?: () => JSX.Element;
-  loading?: boolean;
+  loading: boolean;
   bordered: boolean;
   onClick?(event: string, row: any): void;
   data: any[];
@@ -61,18 +61,22 @@ export interface DataTableLoopbackFilter {
 interface DefaultProps {
   keyField: string;
   hover: boolean;
+  loading: boolean,
+  noDataText: string;
   striped: boolean;
   onClick: undefined;
   bordered: boolean;
 }
 
 
-class DataTable extends Component<DataTableProps, State> {
+export class DataTable extends Component<DataTableProps, State> {
   static defaultProps: DefaultProps = {
     keyField: 'id',
     hover: true,
     striped: true,
     onClick: undefined,
+    loading: false,
+    noDataText: 'There is nothing to show',
     bordered: false,
   };
 
@@ -142,7 +146,7 @@ class DataTable extends Component<DataTableProps, State> {
         bordered={bordered}
         striped={striped}
         onTableChange={this.onTableChange}
-        noDataIndication={() => <p style={{ textAlign: 'center', margin: 0 }}>{noDataText || 'There is nothing to show'}</p>}
+        noDataIndication={() => <p style={{ textAlign: 'center', margin: 0 }}>{noDataText}</p>}
         loading={loading}
         overlay={overlayElementFunction({ overlayElement })}
         rowClasses={combinedRowClasses.join(' ')}
@@ -154,5 +158,3 @@ class DataTable extends Component<DataTableProps, State> {
     );
   }
 }
-
-export default DataTable;

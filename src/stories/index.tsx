@@ -76,6 +76,16 @@ storiesOf('Form', module)
 storiesOf('Scenes', module)
   .addDecorator((c) => <MemoryRouter>{c()}</MemoryRouter>)
   .add('Login', () => <LoginScene />)
+  .add('Login titleBlock', () => (
+    <LoginScene
+      titleBlock={(
+        <div className="text-center">
+          <h1>Service title</h1>
+          <img alt="" src="https://loremflickr.com/300/200" />
+        </div>
+      )}
+    />
+  ))
   .add('Forgot', () => <ForgotScene />)
   .add('ForgotSuccess', () => <ForgotSuccessScene />)
   .add('ResetPassword', () => <ResetPasswordScene />)

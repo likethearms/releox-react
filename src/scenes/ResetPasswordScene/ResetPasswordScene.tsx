@@ -35,7 +35,7 @@ export class ResetPasswordScene
   componentDidMount(): void {
     /* eslint-disable camelcase */
     parseParams(true)
-      .then(({ user, access_token }) => validateTokenRequest(access_token, user))
+      .then(({ user, access_token }) => validateTokenRequest(user, access_token))
       .then(() => this.setState({ loading: false }))
       .catch((e: AxiosError) => this.setState({ redirect: getAuthErrorUrl(getErrorMessage(e)) }));
     /* eslint-enable camelcase */
