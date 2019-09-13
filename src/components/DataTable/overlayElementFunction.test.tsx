@@ -9,13 +9,13 @@ describe('overlayElementFunction', () => {
     expect(wrapper.find('p').text()).toBe('Foo');
   });
 
-  it('should show loading', () => {
+  it('should show default loading indicator', () => {
     const El = overlayElementFunction()(true);
     const wrapper = shallow(<El><p>Foo</p></El>);
     expect(wrapper.find('p').text()).toBe('Loading...');
   });
 
-  it('should show loading', () => {
+  it('should show custom loading indicator', () => {
     const El = overlayElementFunction({ overlayElement: () => <p>Bar...</p> })(true);
     const wrapper = mount(<El><p>Foo</p></El>);
     expect(wrapper.find('p').text()).toBe('Bar...');
