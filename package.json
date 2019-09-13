@@ -1,16 +1,12 @@
 {
   "name": "releox-react",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "typings": "lib/index.d.ts",
   "main": "lib/index.js",
   "author": "Henrik Salmela",
   "dependencies": {
-    "@types/react-select": "^3.0.4",
-    "prop-types": "^15.7.2",
     "query-string": "^6.8.3",
-    "react-loading": "^2.0.3",
-    "react-select": "^3.0.4",
-    "webpack": "4.39.1"
+    "react-loading": "^2.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -79,10 +75,16 @@
     "jest-localstorage-mock": "^2.4.0",
     "moxios": "^0.4.0",
     "react": "^16.9.0",
+    "react-bootstrap-table-next": "^3.2.0",
+    "react-bootstrap-table2-paginator": "^2.1.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.1.1",
     "sass": "^1.22.10",
-    "typescript": "~3.5.0"
+    "typescript": "~3.5.0",
+    "@types/react-select": "^3.0.4",
+    "prop-types": "^15.7.2",
+    "react-select": "^3.0.4",
+    "webpack": "4.39.1"
   }
 }
