@@ -23,6 +23,7 @@ export interface LoginSceneProps {
   locale?: ReleoxLocale;
   titleBlock?: string | JSX.Element;
   loginFieldName: LoginFieldName;
+  showForgotPasswordLink: boolean;
 }
 
 export interface LoginBody {
@@ -33,6 +34,7 @@ export interface LoginBody {
 type LoginFieldName = 'username' | 'email';
 
 interface DefaultProps {
+  showForgotPasswordLink: boolean;
   loginFieldName: LoginFieldName;
 }
 
@@ -61,15 +63,16 @@ export class LoginSceneComponent extends Component<LoginSceneProps, LoginSceneSt
   }
 
   getLinks(): AuthLayoutLinkItem[] {
-    const { locale } = this.props;
+    const { locale, showForgotPasswordLink } = this.props;
     const t = ct('login', locale);
-    const links = [
-      {
+    const links = [];
+    if (showForgotPasswordLink) {
+      links.push({
         to: routes.FORGOT,
         id: `${CONTEXT}-forgot-link`,
         text: t('forgotPasswordText'),
-      },
-    ];
+      });
+    }
     if (getReleoxOptions().showRegisterLink) {
       links.push({
         to: routes.REGISTER,
@@ -125,6 +128,7 @@ export class LoginSceneComponent extends Component<LoginSceneProps, LoginSceneSt
 
 LoginSceneComponent.defaultProps = {
   loginFieldName: 'email',
+  showForgotPasswordLink: true,
 };
 
 export const LoginScene = LoginSceneComponent;

@@ -14,6 +14,7 @@ describe('onSubmit', () => {
   });
 });
 
+
 describe('loginFieldName', () => {
   it('should set email value to input name prop by default', () => {
     const w = shallow(<LoginScene />);
@@ -122,6 +123,12 @@ describe('UI tests', () => {
           text: 'Unohditko salasanasi?',
         },
       ]);
+    });
+
+    it('should hide forgot link if showForgotPasswordLink is false', () => {
+      const wrapper = shallow(<LoginScene showForgotPasswordLink={false} />);
+      const links = wrapper.find('AuthLayout').prop('links');
+      expect(links).toEqual([]);
     });
 
     it('should have default links in english', () => {
