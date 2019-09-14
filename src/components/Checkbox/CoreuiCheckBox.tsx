@@ -14,17 +14,17 @@ interface CoreuiCheckBoxInputProps {
 
 const Input = ({ field, form, label }: CoreuiCheckBoxInputProps) => (
   <div className="form-check-inline CoreuiCheckBox">
-    <label htmlFor="core-checkbox" className="switch switch-3d switch-primary">
+    <label htmlFor={`core-checkbox-${field.name}`} className="switch switch-3d switch-primary">
       <input
         className="switch-input"
-        id="core-checkbox"
+        id={`core-checkbox-${field.name}`}
         type="checkbox"
         onChange={() => form.setFieldValue(field.name, !field.value)}
         checked={field.value}
       />
       <span className="switch-slider" />
     </label>
-    <label htmlFor="core-checkbox" className="label">{label}</label>
+    <label htmlFor={`core-checkbox-${field.name}`} className="label">{label}</label>
   </div>
 );
 
