@@ -14,9 +14,21 @@ describe('onSubmit', () => {
   });
 });
 
+describe('loginFieldName', () => {
+  it('should set email value to input name prop by default', () => {
+    const w = shallow(<LoginScene />);
+    expect(w.find('[name="email"]')).toHaveLength(1);
+  });
+
+  it('should set username value to input name prop', () => {
+    const w = shallow(<LoginScene loginFieldName="username" />);
+    expect(w.find('[name="username"]')).toHaveLength(1);
+  });
+});
+
 describe('UI tests', () => {
   it('should have custom title block', () => {
-    const wrapper = shallow<LoginScene>((
+    const wrapper = shallow((
       <LoginScene titleBlock={<h1>Service title</h1>} />
     ));
     const title = wrapper.find('AuthLayout').prop('titleBlock');
@@ -26,7 +38,7 @@ describe('UI tests', () => {
   describe('Finnish translations', () => {
     let wrapper: ShallowWrapper;
     beforeAll(() => {
-      wrapper = shallow<LoginScene>(<LoginScene />);
+      wrapper = shallow(<LoginScene />);
     });
 
     it('should have finnish title', () => {
@@ -44,6 +56,12 @@ describe('UI tests', () => {
       expect(word).toBe('Sähköposti');
     });
 
+    it('should have finnish username placeholder', () => {
+      const w = shallow(<LoginScene loginFieldName="username" />);
+      const word = w.find('[name="username"]').prop('label');
+      expect(word).toBe('Käyttäjänimi');
+    });
+
     it('should have finnish password placeholder', () => {
       const word = wrapper.find('[name="password"]').prop('label');
       expect(word).toBe('Salasana');
@@ -58,7 +76,7 @@ describe('UI tests', () => {
   describe('English translations', () => {
     let wrapper: ShallowWrapper;
     beforeAll(() => {
-      wrapper = shallow<LoginScene>(<LoginScene locale="en" />);
+      wrapper = shallow(<LoginScene locale="en" />);
     });
 
     it('should have english title', () => {
@@ -76,6 +94,12 @@ describe('UI tests', () => {
       expect(word).toBe('Email');
     });
 
+    it('should have english username placeholder', () => {
+      const w = shallow(<LoginScene loginFieldName="username" locale="en" />);
+      const word = w.find('[name="username"]').prop('label');
+      expect(word).toBe('Username');
+    });
+
     it('should have english password placeholder', () => {
       const word = wrapper.find('[name="password"]').prop('label');
       expect(word).toBe('Password');
@@ -89,7 +113,7 @@ describe('UI tests', () => {
 
   describe('getLinks test', () => {
     it('should have default links', () => {
-      const wrapper = shallow<LoginScene>(<LoginScene />);
+      const wrapper = shallow(<LoginScene />);
       const links = wrapper.find('AuthLayout').prop('links');
       expect(links).toEqual([
         {
@@ -101,7 +125,7 @@ describe('UI tests', () => {
     });
 
     it('should have default links in english', () => {
-      const wrapper = shallow<LoginScene>(<LoginScene locale="en" />);
+      const wrapper = shallow(<LoginScene locale="en" />);
       const links = wrapper.find('AuthLayout').prop('links');
       expect(links).toEqual([
         {
@@ -114,7 +138,7 @@ describe('UI tests', () => {
 
     it('should show register link if showRegisterLink is set to true', () => {
       window.RELEOX_OPTIONS = { showRegisterLink: true };
-      const wrapper = shallow<LoginScene>(<LoginScene />);
+      const wrapper = shallow(<LoginScene />);
       const links = wrapper.find('AuthLayout').prop('links');
       expect(links).toEqual([
         {
@@ -132,7 +156,7 @@ describe('UI tests', () => {
 
     it('should show register link in english if showRegisterLink is set to true and locale is set to EN', () => {
       window.RELEOX_OPTIONS = { showRegisterLink: true };
-      const wrapper = shallow<LoginScene>(<LoginScene locale="en" />);
+      const wrapper = shallow(<LoginScene locale="en" />);
       const links = wrapper.find('AuthLayout').prop('links');
       expect(links).toEqual([
         {
@@ -159,7 +183,7 @@ describe('moxios tests', () => {
     moxios.uninstall();
   });
 
-  const wrapper = shallow<LoginScene>(<LoginScene />);
+  const wrapper = shallow<any, any, typeof LoginScene>(<LoginScene />);
   const body = {
     email: 'email@email.com',
     password: 'password',
@@ -172,7 +196,7 @@ describe('moxios tests', () => {
     });
 
     wrapper.instance().onSubmit(body).then(() => {
-      expect(wrapper.state().redirect).toBe('/');
+      expect(wrapper.state('redirect')).toBe('/');
       expect(localStorage.__STORE__.userId).toBe('1'); // eslint-disable-line no-underscore-dangle
       expect(localStorage.__STORE__.accessToken).toBe('2'); // eslint-disable-line no-underscore-dangle
       done();
@@ -185,9 +209,9 @@ describe('moxios tests', () => {
       response: { error: { message: 'Foo bar' } },
     });
 
-    const w = shallow<LoginScene>(<LoginScene />);
+    const w = shallow<any, any, typeof LoginScene>(<LoginScene />);
     w.instance().onSubmit(body).then(() => {
-      expect(w.state().message).toBe('Foo bar');
+      expect(w.state('message')).toBe('Foo bar');
       done();
     });
   });
@@ -199,7 +223,7 @@ describe('moxios tests', () => {
       response: { error: { message: 'Foo bar' } },
     });
 
-    const w = shallow<LoginScene>(<LoginScene onError={onError} />);
+    const w = shallow<any, any, typeof LoginScene>(<LoginScene onError={onError} />);
     w.instance().onSubmit(body).then(() => {
       expect(onError).toBeCalledTimes(1);
       done();

@@ -28,6 +28,7 @@
 - `onError` - (err: Error) => void; - Default behavior - Sets error message to the state
 - `locale` - ReleoxLocale; Default `fi` - Sets translations of the page
 - `titleBlock` - String | JSX.Element; Default `undefined` - Sets custom title to the screen
+- `loginFieldName` - String; Default `'email'` - Change login login to email based login or username based login
 
 ## Coreui Layout
 ### CoreuiLayout props
