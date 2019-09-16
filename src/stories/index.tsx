@@ -20,6 +20,8 @@ import { AuthErrorScene } from '../scenes/AuthErrorScene/AuthErrorScene';
 import { ConfirmScene } from '../scenes/ConfirmScene/ConfirmScene';
 import { AcceptInvitationScene } from '../scenes/AcceptInvitationScene/AcceptInvitationScene';
 import { AcceptInvitationSuccessScene } from '../scenes/AcceptInvitationSuccessScene/AcceptInvitationSuccessScene';
+import { Card } from '../components/Card/Card';
+import { CardTitle } from '../components/CardTitle/CardTitle';
 
 moxios.install();
 moxios.stubRequest(/undefined.Members.user*/, {
@@ -55,7 +57,26 @@ storiesOf('Components', module)
     </CenterContent>
   ))
   .add('Loading', () => <Loading />)
-  .add('Button', () => <Button id="save-button">Save</Button>);
+  .add('Button', () => <Button id="save-button">Save</Button>)
+  .add('Card', () => (
+    <CenterContent>
+      <CenterContent>
+        <Card>
+          <CardTitle>Card title</CardTitle>
+          <p className="text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus porro incidunt ea ipsum mollitia illo delectus saepe impedit vitae exercitationem! Voluptatem alias sint obcaecati? Possimus temporibus ut nostrum eligendi blanditiis.</p>
+        </Card>
+      </CenterContent>
+    </CenterContent>
+  ))
+  .add('Header card', () => (
+    <CenterContent>
+      <Card header headerChildren={<span style={{ fontSize: '16pt' }}>Hello</span>} color="#009C95">
+        <CardTitle>Card title</CardTitle>
+        <p className="text-muted">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
+      </Card>
+    </CenterContent>
+  ));
+
 
 storiesOf('Form', module)
   .add('FormikFormWrapper', () => (
