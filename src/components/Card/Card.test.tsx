@@ -8,7 +8,7 @@ it('should show card', () => {
 });
 
 it('should show card with header', () => {
-  const wrapper = shallow(<Card header headerChildren={<span>Foo</span>} className="bg-primary">Bar</Card>);
+  const wrapper = shallow(<Card header={<span>Foo</span>} className="bg-primary">Bar</Card>);
   expect(wrapper.find({ children: 'Bar' }).length).toBe(1);
   expect(wrapper.find({ children: 'Foo' }).length).toBe(1);
   expect(wrapper.find('.bg-primary').length).toBe(1);

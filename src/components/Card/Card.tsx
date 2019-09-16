@@ -3,25 +3,20 @@ import PropTypes from 'prop-types';
 
 export interface CardProps {
   children: JSX.Element[] | string[] | string | JSX.Element;
-  header?: boolean;
-  headerChildren?: JSX.Element | string;
-  color?: string;
+  header?: JSX.Element | string;
   id?: string;
   className?: string;
+  setCardBody?: boolean;
 }
 
 const CardComponent = (props: CardProps) => {
   const {
-    children, header, headerChildren, color, id, className,
+    children, header, id, className, setCardBody,
   } = props;
   return (
-    <div className="card">
-      {
-        header
-          ? <div className={`card-header text-white ${className}`} style={{ backgroundColor: `${color}` }} id={id}>{headerChildren}</div>
-          : null
-      }
-      <div className="card-body">
+    <div className="card" id={id}>
+      {header ? <div className={`card-header ${className}`}>{header}</div> : undefined}
+      <div className={setCardBody ? 'card-body' : ''}>
         {children}
       </div>
     </div>
@@ -30,19 +25,17 @@ const CardComponent = (props: CardProps) => {
 
 CardComponent.propTypes = {
   children: PropTypes.node.isRequired,
-  header: PropTypes.bool,
-  headerChildren: PropTypes.node,
-  color: PropTypes.string,
+  header: PropTypes.node,
   id: PropTypes.string,
   className: PropTypes.string,
+  setCardBody: PropTypes.bool,
 };
 
 CardComponent.defaultProps = {
-  header: false,
-  headerChildren: '',
-  color: '',
+  header: undefined,
   id: '',
   className: '',
+  setCardBody: true,
 };
 
 export const Card = CardComponent;

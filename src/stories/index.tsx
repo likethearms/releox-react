@@ -70,7 +70,7 @@ storiesOf('Components', module)
   ))
   .add('Header card', () => (
     <CenterContent>
-      <Card header headerChildren={<span style={{ fontSize: '16pt' }}>Hello</span>} color="#009C95">
+      <Card header={<span style={{ fontSize: '16pt' }}>Hello</span>} className="fancy-card">
         <CardTitle>Card title</CardTitle>
         <p className="text-muted">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
       </Card>
