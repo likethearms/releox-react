@@ -22,14 +22,25 @@ export interface LoginSceneProps {
   onError?: (err: Error) => void;
   locale?: ReleoxLocale;
   titleBlock?: string | JSX.Element;
+  loginFieldName: LoginFieldName;
+  showForgotPasswordLink: boolean;
 }
 
 export interface LoginBody {
   password: string;
-  email: string;
+  [key: string]: string;
 }
 
-export class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
+type LoginFieldName = 'username' | 'email';
+
+interface DefaultProps {
+  showForgotPasswordLink: boolean;
+  loginFieldName: LoginFieldName;
+}
+
+export class LoginSceneComponent extends Component<LoginSceneProps, LoginSceneState> {
+  static defaultProps: DefaultProps;
+
   constructor(props: LoginSceneProps) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
@@ -52,15 +63,16 @@ export class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
   }
 
   getLinks(): AuthLayoutLinkItem[] {
-    const { locale } = this.props;
+    const { locale, showForgotPasswordLink } = this.props;
     const t = ct('login', locale);
-    const links = [
-      {
+    const links = [];
+    if (showForgotPasswordLink) {
+      links.push({
         to: routes.FORGOT,
         id: `${CONTEXT}-forgot-link`,
         text: t('forgotPasswordText'),
-      },
-    ];
+      });
+    }
     if (getReleoxOptions().showRegisterLink) {
       links.push({
         to: routes.REGISTER,
@@ -78,13 +90,14 @@ export class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
 
   getLoginForm() {
     const { message } = this.state;
+    const { loginFieldName } = this.props;
     const t = this.getT();
     return (
       <FormikFormWrapper<LoginBody>
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ [loginFieldName]: '', password: '' }}
         onSubmit={this.onSubmit}
       >
-        <Input name="email" label={t('emailPlaceholder')} id={`${CONTEXT}-email-input`} />
+        <Input name={loginFieldName} label={t(`${loginFieldName}Placeholder`)} id={`${CONTEXT}-${loginFieldName}-input`} />
         <Input name="password" type="password" label={t('passwordPlaceholder')} id={`${CONTEXT}-password-input`} />
         <Button className="float-right" type="submit" id={`${CONTEXT}-login-button`}>
           {t('loginButtonText')}
@@ -112,3 +125,10 @@ export class LoginScene extends Component<LoginSceneProps, LoginSceneState> {
     );
   }
 }
+
+LoginSceneComponent.defaultProps = {
+  loginFieldName: 'email',
+  showForgotPasswordLink: true,
+};
+
+export const LoginScene = LoginSceneComponent;

@@ -89,7 +89,7 @@ export class DataTable extends Component<DataTableProps, State> {
     this.onTableChange = this.onTableChange.bind(this);
   }
 
-  componentWillMount(): void {
+  componentDidMount(): void {
     const { sizePerPage, page } = this.state;
     const object = {
       page,
@@ -97,7 +97,7 @@ export class DataTable extends Component<DataTableProps, State> {
       sortField: '',
       sortOrder: '',
     };
-    this.onTableChange('componentWillMount', object);
+    this.onTableChange('componentDidMount', object);
   }
 
   onTableChange(_: string, object: TableChangeObject): void {

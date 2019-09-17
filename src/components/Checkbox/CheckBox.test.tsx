@@ -41,6 +41,7 @@ describe('Mounted test', () => {
   let wrapper: ReactWrapper;
 
   beforeAll(() => {
+    const spy = jest.fn();
     wrapper = mount(
       <FormikFormWrapper
         onSubmit={() => { }}

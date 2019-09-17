@@ -48,7 +48,7 @@ describe('Mounted test', () => {
   });
 
   it('should simulate change', () => {
-    const checkbox = wrapper.find('#core-checkbox');
+    const checkbox = wrapper.find('#core-checkbox-bar');
     checkbox.simulate('change');
     expect(wrapper.find('input').prop('checked')).toBe(false);
   });
