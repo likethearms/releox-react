@@ -11,6 +11,7 @@ it('should implement default props', () => {
     />,
   );
   expect(wrapper.find('[name="bar"]').length).toBe(1);
+  expect(wrapper.find('#bar-input').length).toBe(1);
 });
 
 it('should implement props', () => {
