@@ -7,11 +7,10 @@ it('should implement default props', () => {
   const wrapper = shallow(
     <CheckBox
       name="bar"
+      label="Foo"
     />,
   );
   expect(wrapper.find('[name="bar"]').length).toBe(1);
-  expect(wrapper.find('#bar-input').length).toBe(1);
-  expect(wrapper.find('.form-control').length).toBe(1);
 });
 
 it('should implement props', () => {
@@ -19,12 +18,23 @@ it('should implement props', () => {
     <CheckBox
       name="bar"
       id="id-foo"
-      className="classname-foo"
+      label="Foo"
     />,
   );
   expect(wrapper.find('#id-foo').length).toBe(1);
-  expect(wrapper.find('.classname-foo').length).toBe(1);
 });
+
+it('should show label', () => {
+  const wrapper = shallow(
+    <CheckBox
+      name="bar"
+      id="id-foo"
+      label="Foo"
+    />,
+  );
+  expect(wrapper.find('label[children="Foo"]')).toHaveLength(1);
+});
+
 
 describe('Mounted test', () => {
   let wrapper: ReactWrapper;
@@ -37,6 +47,7 @@ describe('Mounted test', () => {
       >
         <CheckBox
           name="bar"
+          label="Foo"
         />
       </FormikFormWrapper>,
     );
