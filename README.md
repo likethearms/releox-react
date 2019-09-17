@@ -29,6 +29,8 @@
 - `onError` - (err: Error) => void; - Default behavior - Sets error message to the state
 - `locale` - ReleoxLocale; Default `fi` - Sets translations of the page
 - `titleBlock` - string | JSX.Element; Default `undefined` - Sets custom title to the screen
+- `loginFieldName` - string; Default `'email'` - Change login login to email based login or username based login
+- `showForgotPasswordLink` - Boolean; Default `true` - Hide forgot password link from page
 
 ## Coreui Layout
 ### CoreuiLayout props
