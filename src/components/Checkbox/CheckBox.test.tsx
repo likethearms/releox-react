@@ -20,16 +20,17 @@ it('should implement props', () => {
       name="bar"
       id="id-foo"
       label="Foo"
+      labelClass="label-class"
     />,
   );
   expect(wrapper.find('#id-foo').length).toBe(1);
+  expect(wrapper.find('.label-class').length).toBe(1);
 });
 
 it('should show label', () => {
   const wrapper = shallow(
     <CheckBox
       name="bar"
-      id="id-foo"
       label="Foo"
     />,
   );
@@ -49,6 +50,7 @@ describe('Mounted test', () => {
         <CheckBox
           name="bar"
           label="Foo"
+          inputClass="input-class"
         />
       </FormikFormWrapper>,
     );
@@ -56,6 +58,10 @@ describe('Mounted test', () => {
 
   it('should inject init values', () => {
     expect(wrapper.find('FormikFormWrapperComponent').prop('initialValues')).toStrictEqual({ bar: true });
+  });
+
+  it('should set custom class to input', () => {
+    expect(wrapper.find('.input-class').length).toBe(1);
   });
 
   it('should render', () => {

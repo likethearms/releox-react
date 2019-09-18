@@ -6,11 +6,13 @@ export interface CheckBoxProps {
   onChange?: Function;
   name: string;
   label: string;
+  inputClass?: string;
+  labelClass?: string;
 }
 
 export const CheckBox = (props: CheckBoxProps) => {
   const {
-    id, name, onChange, label,
+    id, name, onChange, label, inputClass, labelClass,
   } = props;
   return (
     <div className="form-check checkbox">
@@ -21,7 +23,7 @@ export const CheckBox = (props: CheckBoxProps) => {
           <input
             type="checkbox"
             checked={field.value}
-            className="form-check-input"
+            className={inputClass || 'form-check-input'}
             {...field} /* eslint-disable-line react/jsx-props-no-spreading */
             onChange={(e) => {
               if (onChange) onChange(e);
@@ -30,7 +32,7 @@ export const CheckBox = (props: CheckBoxProps) => {
           />
         )}
       />
-      <label htmlFor={id || `${name}-input`} className="form-check-label">{label}</label>
+      <label htmlFor={id || `${name}-input`} className={labelClass || 'form-check-label'}>{label}</label>
     </div>
   );
 };

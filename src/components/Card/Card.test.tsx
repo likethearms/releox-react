@@ -15,7 +15,7 @@ it('should show card with header', () => {
   expect(wrapper.find('.card-body').length).toBe(1);
 });
 
-it('should show card with header without card-body class', () => {
-  const wrapper = shallow(<Card header={<span>Foo</span>} setCardBody={false} className="bg-primary">Bar</Card>);
+it('should show card without card-body class', () => {
+  const wrapper = shallow(<Card setCardBody={false} className="bg-primary">Bar</Card>);
   expect(wrapper.find('.card-body').length).toBe(0);
 });
