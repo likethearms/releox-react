@@ -12,7 +12,6 @@ it('should default props', () => {
   );
   expect(wrapper.find('[name="bar"]').length).toBe(1);
   expect(wrapper.find('#bar-input').length).toBe(1);
-  expect(wrapper.find('.form-control').length).toBe(1);
 });
 
 it('should implement props', () => {
@@ -21,12 +20,10 @@ it('should implement props', () => {
       name="bar"
       label="foo"
       id="idFoo"
-      className="classname-bar"
     />,
   );
   expect(wrapper.find('[name="bar"]').length).toBe(1);
   expect(wrapper.find('#idFoo').length).toBe(1);
-  expect(wrapper.find('.classname-bar').length).toBe(1);
 });
 
 describe('Mounted test', () => {
