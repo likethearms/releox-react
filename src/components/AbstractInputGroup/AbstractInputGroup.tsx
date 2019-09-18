@@ -20,12 +20,10 @@ export abstract class AbstractInputGroup<T> extends Component<T & AbstractInputG
     if (typeof inlineLabelWidth === 'number') inlineWidth = inlineLabelWidth;
     const inputWidth = 12 - inlineWidth;
     return (
-      <div className="form-group">
-        <div className={inline ? 'row' : ''}>
-          <label htmlFor={id} className={`${labelClass} ${inline ? `col-md-${inlineWidth} col-form-label` : ''}`}>{label}</label>
-          <div className={inline ? `col-md-${inputWidth}` : ''}>
-            {this.getElement(name, id)}
-          </div>
+      <div className={`form-group ${inline ? 'row' : ''}`}>
+        <label htmlFor={id} className={`${labelClass} ${inline ? `col-md-${inlineWidth} col-form-label` : ''}`}>{label}</label>
+        <div className={inline ? `col-md-${inputWidth}` : ''}>
+          {this.getElement(name, id)}
         </div>
       </div>
     );
