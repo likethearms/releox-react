@@ -8,6 +8,37 @@ it('should show input', () => {
   expect(wrapper.find(Field).length).toBe(1);
 });
 
+it('should show default inline input', () => {
+  const wrapper = shallow((
+    <Input
+      inline
+      name="foo"
+      label="Foo"
+    />
+  ));
+
+  expect(wrapper.find('.row').length).toBe(1);
+  expect(wrapper.find('label.col-md-4').length).toBe(1);
+  expect(wrapper.find('.col-md-8').length).toBe(1);
+});
+
+it('should show default inline input with custom width and label on right', () => {
+  const wrapper = shallow((
+    <Input
+      inline
+      name="foo"
+      label="Foo"
+      inlineLabelWidth={8}
+      labelClass="text-right"
+    />
+  ));
+
+  expect(wrapper.find('.row').length).toBe(1);
+  expect(wrapper.find('label.col-md-8').length).toBe(1);
+  expect(wrapper.find('.col-md-4').length).toBe(1);
+  expect(wrapper.find('.text-right').length).toBe(1);
+});
+
 it('should implement custom props', () => {
   const wrapper = shallow((
     <Input
