@@ -41,7 +41,6 @@ describe('Mounted test', () => {
   let wrapper: ReactWrapper;
 
   beforeAll(() => {
-    const spy = jest.fn();
     wrapper = mount(
       <FormikFormWrapper
         onSubmit={() => { }}
@@ -61,5 +60,30 @@ describe('Mounted test', () => {
 
   it('should render', () => {
     expect(wrapper.find('input').prop('type')).toBe('checkbox');
+  });
+
+  it('should call onChange on checbox', () => {
+    const event = { target: { name: 'bar', value: false } };
+    wrapper.find('input[type="checkbox"]').simulate('change', event);
+    expect(wrapper.find('input').prop('checked')).toBe(false);
+  });
+
+  it('should call custom onChange on checbox', () => {
+    const spy = jest.fn();
+    wrapper = mount(
+      <FormikFormWrapper
+        onSubmit={() => { }}
+        initialValues={{ bar: true }}
+      >
+        <CheckBox
+          name="bar"
+          label="Foo"
+          onChange={spy}
+        />
+      </FormikFormWrapper>,
+    );
+    const event = { target: { name: 'bar', value: false } };
+    wrapper.find('input[type="checkbox"]').simulate('change', event);
+    expect(wrapper.find('input').prop('checked')).toBe(false);
   });
 });
