@@ -4,6 +4,7 @@ import { FormikFormWrapper } from '../components/FormikFormWrapper/FormikFormWra
 import { AsyncSelectFormik } from '../components/AsyncSelect/AsyncSelectFormik';
 import { CoreuiCheckBox } from '../components/Checkbox/CoreuiCheckBox';
 import { Input } from '../components/Input/Input';
+import { CheckBox } from '../components/Checkbox/CheckBox';
 
 const Components = () => (
   <div className="m-5">
@@ -25,6 +26,8 @@ const Components = () => (
         <Input inlineLabelWidth={10} inline name="hello" label="Hello" />
         <CoreuiCheckBox label="Admin" name="admin" />
         <CoreuiCheckBox label="Label" name="Label" />
+        <CheckBox label="Admin" name="foo" />
+        <CheckBox label="Label" name="bar" />
       </FormikFormWrapper>
     </Card>
   </div>

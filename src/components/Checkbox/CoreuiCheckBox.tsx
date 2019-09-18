@@ -30,14 +30,13 @@ const Input = ({ field, form, label }: CoreuiCheckBoxInputProps) => (
 
 export const CoreuiCheckBox = (props: CoreuiCheckBoxProps) => {
   const {
-    id, className, name, label,
+    id, name, label,
   } = props;
   return (
     <div className="form-group">
       <Field
         name={name}
         id={id || `${name}-input`}
-        className={className || 'form-control'}
         render={({ field, form }: any) => (
           <Input field={field} label={label} form={form} />)}
       />
