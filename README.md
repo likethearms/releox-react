@@ -122,6 +122,39 @@
 - `loginFieldName` - string; Default `'email'` - Change login login to email based login or username based login
 - `showForgotPasswordLink` - Boolean; Default `true` - Hide forgot password link from page
 
+## Coreui Layout
+
+### CoreuiLayout props
+
+- `children` - JSX.Element | string, **Required** - Layout's main content
+- `brand` - string | JSX.Element, **Required** - Header brand text or element
+- `sidebarMenu` - CoreuiSidebarMenu[], **Required** - Sidebar menu
+- `brandUrl` - string, Default: `'/'` - Header brand text or element
+- `headerRightText` - string, Default: `''` - Text in right side of CoreuiHeader
+
+## Card
+
+### Card props
+
+- `children` - JSX.Element, **Required** - Card's main content
+- `header` - JSX.Element, Default: `undefined` - Header element of card
+- `id` - string, Default: `''` - Card's id
+- `className` - string, Default: `''` - Custom class for card header
+- `setCardBody` - boolean, Default: `true'` - Add card-body class to card body
+
+## Create generic index
+
+```typescript
+createGenericIndex(title, reduxEntry, listAction, dataTableProps, redirectUrl, createLink);
+```
+
+- `title` - string, **required** - Title of the page
+- `reduxEntry` - string, **required** - Redux entry key
+- `listAction` - function, **required** - List action
+- `dataTableProps` - DataTableProps, **required** - DataTable props columns, defaultSorted and query
+- `redirectUrl` - string, Default: `undefined` - URL to page you want to open when record clicked. NOTE! require `':id'` params
+- `createLink` - string, Default: `undefined` - Link to create page
+
 ### NativeInput
 
 ### NativeInput props

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export interface CardProps {
-  children: JSX.Element[] | string[] | string | JSX.Element;
+  children: JSX.Element[] | string[] | string | JSX.Element | undefined;
   header?: JSX.Element | string;
   id?: string;
   className?: string;
