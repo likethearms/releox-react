@@ -2,15 +2,15 @@
 
 ## Table of Content
 
-<<<<<<< HEAD
-=======
+# <<<<<<< HEAD
+
 - [AsyncSelectFormik](#asyncSelectFormik)
 - [Button](#button)
 - [Card](#card)
 - [CheckBox](#checkBox)
 - [CoreuiCheckBox](#coreuiCheckBox)
 - [Coreui Layout](#coreui-layout)
->>>>>>> 1.1.0
+  > > > > > > > 1.1.0
 - [DataTable](#datatable)
 - [Input](#input)
 - [LoginScene](#loginscene)
@@ -125,7 +125,6 @@
 - `loginFieldName` - string; Default `'email'` - Change login login to email based login or username based login
 - `showForgotPasswordLink` - Boolean; Default `true` - Hide forgot password link from page
 
-<<<<<<< HEAD
 ## Coreui Layout
 
 ### CoreuiLayout props
@@ -158,7 +157,7 @@ createGenericIndex(title, reduxEntry, listAction, dataTableProps, redirectUrl, c
 - `dataTableProps` - DataTableProps, **required** - DataTable props columns, defaultSorted and query
 - `redirectUrl` - string, Default: `undefined` - URL to page you want to open when record clicked. NOTE! require `':id'` params
 - `createLink` - string, Default: `undefined` - Link to create page
-=======
+
 ### NativeInput
 
 ### NativeInput props
@@ -200,4 +199,3 @@ createGenericIndex(title, reduxEntry, listAction, dataTableProps, redirectUrl, c
 - `rows` - number, Default: `6` - Length of rows in textArea
 - `placeholder` - string, Default: `label` - Placeholder for textArea
 - `classname` - string, Default: `form-control'` - Custom class for textArea
->>>>>>> 1.1.0
