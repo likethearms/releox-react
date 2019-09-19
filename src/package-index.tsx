@@ -26,3 +26,4 @@ export * from './components/DataTable/DataTable';
 export * from './generic-scenes/create-generic-index';
 export * from './components/Details/DetailField';
 export * from './components/Details/Details';
+export * from './components/AbstractInputGroup/AbstractInputGroup';
