@@ -1,25 +1,38 @@
 import React from 'react';
-import { Field } from 'formik';
 import { Card } from '../components/Card/Card';
 import { FormikFormWrapper } from '../components/FormikFormWrapper/FormikFormWrapper';
 import { AsyncSelectFormik } from '../components/AsyncSelect/AsyncSelectFormik';
-import { CheckBox } from '../components/Checkbox/CheckBox';
 import { CoreuiCheckBox } from '../components/Checkbox/CoreuiCheckBox';
+import { Input } from '../components/Input/Input';
+import { CheckBox } from '../components/Checkbox/CheckBox';
+import { TextArea } from '../components/TextArea/TextArea';
 
 const Components = () => (
   <div className="m-5">
     <Card>
       <FormikFormWrapper<any>
-        onSubmit={() => {}}
+        onSubmit={() => { }}
         initialValues={{ name: '' }}
       >
-        <Field name="name" type="input" />
         <AsyncSelectFormik
           getUrl="/Products/"
           queryFormat="mongodb"
           label="Products"
           name="products"
         />
+        <AsyncSelectFormik
+          getUrl="/Products/"
+          queryFormat="mongodb"
+          label="Products"
+          name="products"
+          inline
+        />
+        <TextArea name="foofoo" label="Foofoo" />
+        <TextArea inline inlineLabelWidth={2} name="barbar" label="Barbar" />
+        <Input inline name="hello" label="Hello" />
+        <Input labelClass="text-right" inline name="hello" label="Hello" />
+        <Input labelClass="text-right" inlineLabelWidth={2} inline name="hello" label="Hello" />
+        <Input inlineLabelWidth={10} inline name="hello" label="Hello" />
         <CoreuiCheckBox label="Admin" name="admin" />
         <CoreuiCheckBox label="Label" name="Label" />
         <CheckBox label="Admin" name="foo" />
