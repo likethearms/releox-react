@@ -6,6 +6,7 @@ import { CoreuiCheckBox } from '../components/Checkbox/CoreuiCheckBox';
 import { Input } from '../components/Input/Input';
 import { CheckBox } from '../components/Checkbox/CheckBox';
 import { TextArea } from '../components/TextArea/TextArea';
+import { AsyncSelect } from '../components/AsyncSelect/AsyncSelect';
 
 const Components = () => (
   <div className="m-5">
@@ -21,11 +22,24 @@ const Components = () => (
           name="products"
         />
         <AsyncSelectFormik
-          getUrl="/Products/"
-          queryFormat="mongodb"
           label="Products"
           name="products"
+          getUrl="/Products/"
+          queryFormat="mongodb"
+          id=""
           inline
+          inlineLabelWidth={4}
+          labelClass=""
+        />
+        <AsyncSelect
+          getUrl="/Products/"
+          queryFormat="mongodb"
+          onError={() => { }}
+          searchFields={[]}
+          onChange={() => { }}
+          placeholder=""
+          mapLabel=""
+          mapValue=""
         />
         <TextArea name="foofoo" label="Foofoo" />
         <TextArea inline inlineLabelWidth={2} name="barbar" label="Barbar" />

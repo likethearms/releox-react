@@ -4,6 +4,11 @@
 - [LoginScene](#loginscene)
 - [Coreui Layout](#coreui-layout)
 - [Card](#card)
+- [Input](#input)
+- [TextArea](#textArea)
+- [CheckBox](#checkBox)
+- [CoreuiCheckBox](#coreuiCheckBox)
+- [AsyncSelectFormik](#asyncSelectFormik)
 
 ## DataTable
 ### DataTable props
@@ -47,3 +52,54 @@
 - `id` - string, Default: `''` - Card's id
 - `className` - string, Default: `''` - Custom class for card header
 - `setCardBody` - boolean, Default: `true'` - Add card-body class to card body
+
+## Input
+### Input props
+- `label` - string, **Required** - Label for input
+- `name` - string, **Required** - Name for input
+- `id` - string, - Default `${name}-input` - Custom id for input
+- `inline` - boolean, Default: `false` - Inline label format for input
+- `inlineLabelWidth` - number, Default: `4` - Label width for input (MAX = 12)
+- `labelClass` - string, Default: `''` - Custom class for label
+- `type` - InputTypes, Default: `'text'` - Type of input data ('text' | 'email' | 'password' | 'date' | 'number')
+- `placeholder` - string, Default: `label` - Placeholder for input
+- `classname` - string, Default: `form-control'` - Custom class for input
+
+## TextArea
+### TextArea props
+- `label` - string, **Required** - Label for textArea
+- `name` - string, **Required** - Name for textArea
+- `id` - string, - Default `${name}-input` - Custom id for textArea
+- `inline` - boolean, Default: `false` - Inline label format for textArea
+- `inlineLabelWidth` - number, Default: `4` - Label width for textArea (MAX = 12)
+- `labelClass` - string, Default: `''` - Custom class for label
+- `rows` - number, Default: `6` - Length of rows in textArea
+- `placeholder` - string, Default: `label` - Placeholder for textArea
+- `classname` - string, Default: `form-control'` - Custom class for textArea
+
+## CheckBox
+### CheckBox props
+- `label` - string, **Required** - Label for checkBox
+- `name` - string, **Required** - Name for checkBox
+- `id` - string, - Default `${name}-input` - Custom id for checkBox
+- `labelClass` - string, Default: `'form-check-label'` - Custom class for label
+- `inputClass` - string, Default: `'form-check-input'` - Custom class for input
+- `onChange` - (event: React.ChangeEvent) => void, Default: `undefined` - onChange function to checkBox
+
+## CoreuiCheckBox
+### CoreuiCheckBox props
+- `label` - string, **Required** - Label for coreuicheckBox
+- `name` - string, **Required** - Name for coreuicheckBox
+- `id` - string, - Default `${name}-input` - Custom id for coreuicheckBox
+
+## AsyncSelectFormik
+### AsyncSelectFormik props
+- `label` - string, **Required** - Label for AsyncSelectFormik
+- `name` - string, **Required** - Name for AsyncSelectFormik
+- `getUrl` - string, **Required** - URL for data in AsyncSelectFormik
+- `queryFormat` - string, **Required** - Queryformat for data in AsyncSelectFormik ('mongodb' | 'postgresql')
+- `id` - string, - Default `'undefined'` - Custom id for AsyncSelectFormik
+- `inline` - boolean, Default: `false` - Inline label format for AsyncSelectFormik
+- `inlineLabelWidth` - number, Default: `4` - Label width for AsyncSelectFormik (MAX = 12)
+- `labelClass` - string, Default: `''` - Custom class for label
+
