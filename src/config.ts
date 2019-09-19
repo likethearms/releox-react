@@ -20,7 +20,20 @@ export interface ReleoxOptions {
   tokenKey?: string;
 }
 
+export type ReleoxOptionKeys = 'showRegisterLink' | 'locale' | 'userIdKey' | 'tokenKey';
+
 export const getReleoxOptions = (): ReleoxOptions => window.RELEOX_OPTIONS || {};
+export const setReleoxOptions = (object: ReleoxOptions): ReleoxOptions => {
+  const options = {
+    ...getReleoxOptions(),
+    ...object,
+  };
+  window.RELEOX_OPTIONS = options;
+  return window.RELEOX_OPTIONS;
+};
+export const getReleoxOption = (key: ReleoxOptionKeys): string | boolean | undefined =>
+  getReleoxOptions()[key];
+
 export const getApiUrl = (): string => window.API_ENDPOINT || '';
 export const getTokenKey = (): string => getReleoxOptions().tokenKey || 'accessToken';
 export const getUserIdKey = (): string => getReleoxOptions().userIdKey || 'userId';

@@ -1,4 +1,4 @@
-import { getUserIdKey, getTokenKey } from './config';
+import { getUserIdKey, getTokenKey, getReleoxOption, setReleoxOptions } from './config';
 
 describe('getUserIdKey', () => {
   afterAll(() => {
@@ -27,5 +27,25 @@ describe('getTokenKey', () => {
   it('should return fooBar by default', () => {
     window.RELEOX_OPTIONS = { tokenKey: 'fooBar' };
     expect(getTokenKey()).toBe('fooBar');
+  });
+});
+
+describe('getReleoxOption', () => {
+  it('should return releox options by key', () => {
+    window.RELEOX_OPTIONS = {
+      locale: 'fi',
+    };
+    expect(getReleoxOption('locale')).toBe('fi');
+  });
+});
+
+describe('setReleoxOptions', () => {
+  it('should set options', () => {
+    window.RELEOX_OPTIONS = {
+      locale: 'fi',
+    };
+    setReleoxOptions({ locale: 'en', tokenKey: 'tokenKey' });
+    expect(window.RELEOX_OPTIONS.locale).toBe('en');
+    expect(window.RELEOX_OPTIONS.tokenKey).toBe('tokenKey');
   });
 });
