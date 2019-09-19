@@ -177,3 +177,17 @@ createGenericIndex(title, reduxEntry, listAction, dataTableProps, redirectUrl, c
 - `rows` - number, Default: `6` - Length of rows in textArea
 - `placeholder` - string, Default: `label` - Placeholder for textArea
 - `classname` - string, Default: `form-control'` - Custom class for textArea
+
+## Details
+
+### Details props
+
+- `object` - object, **Required** - Data object
+- `properties` - DetailsFieldData, **Required** - Properties show data from object, it should have label and key
+
+## DetailField
+
+### DetailField props
+
+- `label` - string, **Required** - Label for field
+- `children` - string, **Required** - Value to show
