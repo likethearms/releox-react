@@ -27,13 +27,19 @@ describe('authMiddleware', () => {
     localStorage.setItem('userId', '1');
     localStorage.setItem('accessToken', '2');
     const El = authMiddleware(() => <span>Foo Bar</span>);
-    wrapper = mount(<MemoryRouter><El /></MemoryRouter>);
+    wrapper = mount(
+      <MemoryRouter>
+        <El />
+      </MemoryRouter>
+    );
     const GM = wrapper.find('AuthMiddleware');
     // @ts-ignore
     await GM.instance().componentDidMount();
     wrapper.update();
     expect(wrapper.find('span[children="Foo Bar"]')).toHaveLength(1);
-    expect(wrapper.find('[authenticatedUser]').prop('authenticatedUser')).toStrictEqual({ name: 'Foo' });
+    expect(wrapper.find('[authenticatedUser]').prop('authenticatedUser')).toStrictEqual({
+      name: 'Foo',
+    });
   });
 
   it('should return redirect if token is invalid', async () => {
@@ -46,7 +52,11 @@ describe('authMiddleware', () => {
     localStorage.setItem('userId', '1');
     localStorage.setItem('accessToken', '2');
     const El = authMiddleware(() => <span>Foo Bar</span>);
-    wrapper = mount(<MemoryRouter><El /></MemoryRouter>);
+    wrapper = mount(
+      <MemoryRouter>
+        <El />
+      </MemoryRouter>
+    );
     const GM = wrapper.find('AuthMiddleware');
     // @ts-ignore
     await GM.instance().componentDidMount();
@@ -63,7 +73,11 @@ describe('authMiddleware', () => {
     });
     localStorage.setItem('accessToken', '2');
     const El = authMiddleware(() => <span>Foo Bar</span>);
-    wrapper = mount(<MemoryRouter><El /></MemoryRouter>);
+    wrapper = mount(
+      <MemoryRouter>
+        <El />
+      </MemoryRouter>
+    );
     const GM = wrapper.find('AuthMiddleware');
     // @ts-ignore
     await GM.instance().componentDidMount();

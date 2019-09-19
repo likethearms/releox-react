@@ -9,13 +9,7 @@ it('should show textArea', () => {
 
 it('should implement props', () => {
   const wrapper = shallow(
-    <TextArea
-      rows={10}
-      name="bar"
-      id="id-foo"
-      label="foo bar"
-      className="classname-foo"
-    />,
+    <TextArea rows={10} name="bar" id="id-foo" label="foo bar" className="classname-foo" />
   );
 
   expect(wrapper.find('#id-foo').length).toBe(1);

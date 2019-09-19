@@ -18,7 +18,9 @@ describe('UI', () => {
     });
 
     it('should have finnish subTitle', () => {
-      expect(authLayout.prop('subTitle')).toBe('Tunnuksesi on valmis. Voit nyt kirjautua ohjelmaan.');
+      expect(authLayout.prop('subTitle')).toBe(
+        'Tunnuksesi on valmis. Voit nyt kirjautua ohjelmaan.'
+      );
     });
 
     it('should have finnish login link', () => {

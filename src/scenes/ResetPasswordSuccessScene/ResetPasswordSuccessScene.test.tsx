@@ -16,7 +16,9 @@ describe('UI tests', () => {
 
     it('should have finnish subtitle', () => {
       const word = wrapper.find('AuthLayout').prop('subTitle');
-      expect(word).toBe('Salasanasi on vaihdettu onnistuneesti. Voit nyt palata kirjautumissivulle ja kirjautua uudella salasanalla');
+      expect(word).toBe(
+        'Salasanasi on vaihdettu onnistuneesti. Voit nyt palata kirjautumissivulle ja kirjautua uudella salasanalla'
+      );
     });
   });
 
@@ -33,7 +35,9 @@ describe('UI tests', () => {
 
     it('should have english subtitle', () => {
       const word = wrapper.find('AuthLayout').prop('subTitle');
-      expect(word).toBe('Your password is now changed. Go back to login page and log in with new password.');
+      expect(word).toBe(
+        'Your password is now changed. Go back to login page and log in with new password.'
+      );
     });
   });
 

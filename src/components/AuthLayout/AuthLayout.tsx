@@ -21,9 +21,7 @@ export interface AuthLayoutProps {
 }
 
 export const AuthLayout = (props: AuthLayoutProps) => {
-  const {
-    context, title, subTitle, children, links, message, titleBlock,
-  } = props;
+  const { context, title, subTitle, children, links, message, titleBlock } = props;
   return (
     <CenterContent>
       <div className="col-lg-6" id={context}>

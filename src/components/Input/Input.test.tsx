@@ -9,30 +9,15 @@ it('should show input', () => {
 });
 
 it('should show default inline input', () => {
-  const wrapper = shallow((
-    <Input
-      inline
-      name="foo"
-      label="Foo"
-    />
-  ));
-
+  const wrapper = shallow(<Input inline name="foo" label="Foo" />);
   expect(wrapper.find('.row').length).toBe(1);
   expect(wrapper.find('label.col-md-4').length).toBe(1);
   expect(wrapper.find('.col-md-8').length).toBe(1);
 });
 
 it('should show default inline input with custom width and label on right', () => {
-  const wrapper = shallow((
-    <Input
-      inline
-      name="foo"
-      label="Foo"
-      inlineLabelWidth={8}
-      labelClass="text-right"
-    />
-  ));
-
+  const comp = <Input inline name="foo" label="Foo" inlineLabelWidth={8} labelClass="text-right" />;
+  const wrapper = shallow(comp);
   expect(wrapper.find('.row').length).toBe(1);
   expect(wrapper.find('label.col-md-8').length).toBe(1);
   expect(wrapper.find('.col-md-4').length).toBe(1);
@@ -40,7 +25,7 @@ it('should show default inline input with custom width and label on right', () =
 });
 
 it('should implement custom props', () => {
-  const wrapper = shallow((
+  const comp = (
     <Input
       label="Test"
       id="test"
@@ -49,7 +34,8 @@ it('should implement custom props', () => {
       placeholder="test placeholder"
       className="custom-class"
     />
-  ));
+  );
+  const wrapper = shallow(comp);
   const field = wrapper.find(Field);
   expect(wrapper.find({ children: 'Test' }).length).toBe(1);
   expect(field.prop('id')).toBe('test');
@@ -59,14 +45,8 @@ it('should implement custom props', () => {
   expect(field.prop('className')).toBe('custom-class');
 });
 
-
 it('should inject default props', () => {
-  const wrapper = shallow((
-    <Input
-      label="Test"
-      name="test-name"
-    />
-  ));
+  const wrapper = shallow(<Input label="Test" name="test-name" />);
   const field = wrapper.find(Field);
   expect(wrapper.find({ children: 'Test' }).length).toBe(1);
   expect(field.prop('id')).toBe('test-name-input');

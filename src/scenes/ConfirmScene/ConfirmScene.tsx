@@ -8,7 +8,7 @@ import { getErrorMessage, getAuthErrorUrl } from '../../config';
 import { Loading } from '../../components/Loading/Loading';
 import { confirmUserRequest } from '../../requests';
 
-export interface ConfirmSceneProps { }
+export interface ConfirmSceneProps {}
 interface State {
   redirect: string;
   loading: boolean;
@@ -29,7 +29,8 @@ export class ConfirmScene extends Component<ConfirmSceneProps & SuccessSceneProp
     const query = queryString.parse(window.location.search);
 
     if (!query.uid || !query.token) return this.redirectToAuthErrorPage('Missing information');
-    if (Array.isArray(query.uid) || Array.isArray(query.token)) return this.redirectToAuthErrorPage('Information is on wrong format');
+    if (Array.isArray(query.uid) || Array.isArray(query.token))
+      return this.redirectToAuthErrorPage('Information is on wrong format');
 
     return confirmUserRequest(query.uid, query.token)
       .then(this.turnLoadingOff)

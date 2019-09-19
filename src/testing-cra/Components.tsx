@@ -10,10 +10,7 @@ import { TextArea } from '../components/TextArea/TextArea';
 const Components = () => (
   <div className="m-5">
     <Card>
-      <FormikFormWrapper<any>
-        onSubmit={() => { }}
-        initialValues={{ name: '' }}
-      >
+      <FormikFormWrapper<any> onSubmit={() => {}} initialValues={{ name: '' }}>
         <AsyncSelectFormik
           getUrl="/Products/"
           queryFormat="mongodb"

@@ -24,21 +24,20 @@ const Input = ({ field, form, label }: CoreuiCheckBoxInputProps) => (
       />
       <span className="switch-slider" />
     </label>
-    <label htmlFor={`core-checkbox-${field.name}`} className="label">{label}</label>
+    <label htmlFor={`core-checkbox-${field.name}`} className="label">
+      {label}
+    </label>
   </div>
 );
 
 export const CoreuiCheckBox = (props: CoreuiCheckBoxProps) => {
-  const {
-    id, name, label,
-  } = props;
+  const { id, name, label } = props;
   return (
     <div className="form-group">
       <Field
         name={name}
         id={id || `${name}-input`}
-        render={({ field, form }: any) => (
-          <Input field={field} label={label} form={form} />)}
+        render={({ field, form }: any) => <Input field={field} label={label} form={form} />}
       />
     </div>
   );

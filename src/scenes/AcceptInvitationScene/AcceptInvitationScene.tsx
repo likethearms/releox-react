@@ -27,8 +27,10 @@ interface AcceptInvitationSceneProps extends AbstractAuthOneInputSceneProps {
 const CONTEXT = 'AcceptInvitation';
 
 /* eslint-disable class-methods-use-this */
-export class AcceptInvitationScene
-  extends AbstractAuthOneInputScene<BodyData, AcceptInvitationSceneProps> {
+export class AcceptInvitationScene extends AbstractAuthOneInputScene<
+  BodyData,
+  AcceptInvitationSceneProps
+> {
   static defaultProps: DefaultProps = {
     resetPasswordAPIUrl: apis.PASSWORD_RESET,
     removeAccessTokenUrl: apis.LOGOUT,

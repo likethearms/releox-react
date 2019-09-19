@@ -11,9 +11,7 @@ export interface CheckBoxProps {
 }
 
 export const CheckBox = (props: CheckBoxProps) => {
-  const {
-    id, name, onChange, label, inputClass, labelClass,
-  } = props;
+  const { id, name, onChange, label, inputClass, labelClass } = props;
   return (
     <div className="form-check checkbox">
       <Field
@@ -32,7 +30,9 @@ export const CheckBox = (props: CheckBoxProps) => {
           />
         )}
       />
-      <label htmlFor={id || `${name}-input`} className={labelClass || 'form-check-label'}>{label}</label>
+      <label htmlFor={id || `${name}-input`} className={labelClass || 'form-check-label'}>
+        {label}
+      </label>
     </div>
   );
 };

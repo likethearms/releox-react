@@ -1,6 +1,9 @@
-import { AbstractFormikInputWrapper, AbstractFormikInputWrapperProps } from './AbstractFormikInputWrapper';
+import {
+  AbstractFormikInputWrapper,
+  AbstractFormikInputWrapperProps,
+} from './AbstractFormikInputWrapper';
 
-class A extends AbstractFormikInputWrapper<string, AbstractFormikInputWrapperProps> { }
+class A extends AbstractFormikInputWrapper<string, AbstractFormikInputWrapperProps> {}
 
 const spy = jest.fn();
 const inputWrapper = new A({ form: { setFieldValue: spy }, field: { name: 'foo' } });

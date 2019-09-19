@@ -7,7 +7,7 @@ let wrapper: ReactWrapper;
 
 describe('AuthLayout', () => {
   beforeAll(() => {
-    wrapper = mount((
+    wrapper = mount(
       <MemoryRouter>
         <AuthLayout
           context="Context"
@@ -22,7 +22,7 @@ describe('AuthLayout', () => {
           Foo Content
         </AuthLayout>
       </MemoryRouter>
-    ));
+    );
   });
 
   it('should inject context', () => {

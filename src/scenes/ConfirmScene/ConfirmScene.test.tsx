@@ -71,7 +71,9 @@ describe('Test information errors', () => {
     const waitForSample = createWaitForElement('Redirect');
     wrapper = shallow(<ConfirmScene />);
     await waitForSample(wrapper);
-    expect(wrapper.find('[to="/auth-error?message=Information is on wrong format"]').length).toBe(1);
+    expect(wrapper.find('[to="/auth-error?message=Information is on wrong format"]').length).toBe(
+      1
+    );
   });
 
   test('error shown if token is array ', async () => {
@@ -79,7 +81,9 @@ describe('Test information errors', () => {
     const waitForSample = createWaitForElement('Redirect');
     wrapper = shallow(<ConfirmScene />);
     await waitForSample(wrapper);
-    expect(wrapper.find('[to="/auth-error?message=Information is on wrong format"]').length).toBe(1);
+    expect(wrapper.find('[to="/auth-error?message=Information is on wrong format"]').length).toBe(
+      1
+    );
   });
 });
 
@@ -108,7 +112,10 @@ describe('UI tests', () => {
     });
 
     it('should have finnish subtitle', () => {
-      expect(wrapper.find('[subTitle="Tunnuksesi on aktivoitu. Voit nyt jatkaa ohjelman käyttöä"]').length).toBe(1);
+      expect(
+        wrapper.find('[subTitle="Tunnuksesi on aktivoitu. Voit nyt jatkaa ohjelman käyttöä"]')
+          .length
+      ).toBe(1);
     });
 
     it('should have default link', () => {
@@ -129,7 +136,11 @@ describe('UI tests', () => {
     });
 
     it('should have english subtitle', () => {
-      expect(wrapper.find('[subTitle="Your account is now activated. You can now continue using application."]').length).toBe(1);
+      expect(
+        wrapper.find(
+          '[subTitle="Your account is now activated. You can now continue using application."]'
+        ).length
+      ).toBe(1);
     });
 
     it('should have default links in english if locale is set to EN', () => {

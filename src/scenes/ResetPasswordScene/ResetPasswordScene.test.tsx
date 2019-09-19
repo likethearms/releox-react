@@ -36,20 +36,26 @@ describe('Errors', () => {
   });
 
   it('should return error when no user object or access token is not present', () => {
-    expect(wrapper.state('redirect')).toBe('/auth-error?message=Missing User Object or Access Token');
+    expect(wrapper.state('redirect')).toBe(
+      '/auth-error?message=Missing User Object or Access Token'
+    );
   });
 
   it('should return error when no user object is not present', () => {
     const url = '?user=xx';
     Object.defineProperty(window, 'location', { value: { search: url } });
-    expect(wrapper.state('redirect')).toBe('/auth-error?message=Missing User Object or Access Token');
+    expect(wrapper.state('redirect')).toBe(
+      '/auth-error?message=Missing User Object or Access Token'
+    );
   });
 
   it('should return error when no access token is not present', () => {
     const url = '?access_token=xxx';
     Object.defineProperty(window, 'location', { value: { search: url } });
     window.location.search = url;
-    expect(wrapper.state('redirect')).toBe('/auth-error?message=Missing User Object or Access Token');
+    expect(wrapper.state('redirect')).toBe(
+      '/auth-error?message=Missing User Object or Access Token'
+    );
   });
 });
 

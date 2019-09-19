@@ -33,4 +33,5 @@ export const t = (key: string, locale?: ReleoxLocale): string => {
  * @param prefix string
  * @param locale string
  */
-export const ct = (prefix: string, locale?: ReleoxLocale) => (key: string): string => t(`${prefix}.${key}`, locale);
+export const ct = (prefix: string, locale?: ReleoxLocale) => (key: string): string =>
+  t(`${prefix}.${key}`, locale);

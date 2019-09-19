@@ -7,10 +7,8 @@ import '@coreui/coreui/dist/css/coreui.min.css';
 import './releox.css';
 
 ReactDom.render(
-  (
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  ),
-  document.getElementById('root'),
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById('root')
 );

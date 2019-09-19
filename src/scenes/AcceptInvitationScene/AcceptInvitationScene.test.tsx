@@ -106,18 +106,26 @@ describe('Test information errors', () => {
   });
 
   test('error shown if uid is array ', async () => {
-    Object.defineProperty(window, 'location', { value: { search: '?uid=1&uid=3&invitation_token=2' } });
+    Object.defineProperty(window, 'location', {
+      value: { search: '?uid=1&uid=3&invitation_token=2' },
+    });
     const waitForSample = createWaitForElement('Redirect');
     wrapper = shallow(<AcceptInvitationScene />);
     await waitForSample(wrapper);
-    expect(wrapper.find('[to="/auth-error?message=Information is on wrong format"]').length).toBe(1);
+    expect(wrapper.find('[to="/auth-error?message=Information is on wrong format"]').length).toBe(
+      1
+    );
   });
 
   test('error shown if invitation_token is array ', async () => {
-    Object.defineProperty(window, 'location', { value: { search: '?uid=1&invitation_token=3&invitation_token=2' } });
+    Object.defineProperty(window, 'location', {
+      value: { search: '?uid=1&invitation_token=3&invitation_token=2' },
+    });
     const waitForSample = createWaitForElement('Redirect');
     wrapper = shallow(<AcceptInvitationScene />);
     await waitForSample(wrapper);
-    expect(wrapper.find('[to="/auth-error?message=Information is on wrong format"]').length).toBe(1);
+    expect(wrapper.find('[to="/auth-error?message=Information is on wrong format"]').length).toBe(
+      1
+    );
   });
 });
