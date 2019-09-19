@@ -100,7 +100,7 @@ interface DataTableProps {
   defaultSorted?: DataTableDefaultSort;
 }
 
-export default (
+export const createGenericIndex = (
   title: string,
   reduxEntry: string,
   listAction: Function,
