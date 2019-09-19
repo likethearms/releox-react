@@ -11,9 +11,7 @@ export interface SidebarDropdownProps {
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 const CoreuiSidebarDropdownComponent = (props: SidebarDropdownProps) => {
-  const {
-    icon, text, clickHandler, children, url,
-  } = props;
+  const { icon, text, clickHandler, children, url } = props;
   const isActive = window.location.pathname.includes(url);
   return (
     <li className={`nav-item nav-dropdown ${isActive ? 'open' : ''}`}>
@@ -21,9 +19,7 @@ const CoreuiSidebarDropdownComponent = (props: SidebarDropdownProps) => {
         <i className={icon} />
         {` ${text}`}
       </a>
-      <ul className="nav-dropdown-items">
-        {children}
-      </ul>
+      <ul className="nav-dropdown-items">{children}</ul>
     </li>
   );
 };

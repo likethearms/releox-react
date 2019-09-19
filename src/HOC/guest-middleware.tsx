@@ -10,7 +10,7 @@ export interface GuestMiddlewareState {
 }
 
 /* eslint-disable react/jsx-props-no-spreading */
-export const guestMiddleware = <P extends object>(WrapperComponent: ComponentType<P>) => (
+export const guestMiddleware = <P extends object>(WrapperComponent: ComponentType<P>) =>
   class GuestMiddleware extends Component<P, GuestMiddlewareState> {
     constructor(props: P) {
       super(props);
@@ -32,4 +32,4 @@ export const guestMiddleware = <P extends object>(WrapperComponent: ComponentTyp
       if (loading) return <Loading centeredVertical />;
       return <WrapperComponent {...this.props} />;
     }
-  });
+  };

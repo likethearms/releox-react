@@ -9,16 +9,11 @@ it('should show input', () => {
 });
 
 it('should implement props', () => {
-  const wrapper = shallow((
-    <Button
-      id="foo-id"
-      type="submit"
-      className="test-class"
-      color="light"
-    >
+  const wrapper = shallow(
+    <Button id="foo-id" type="submit" className="test-class" color="light">
       Foo
     </Button>
-  ));
+  );
   expect(wrapper.find('button').prop('type')).toBe('submit');
   expect(wrapper.find('button').prop('className')).toContain('test-class');
   expect(wrapper.find('button').prop('className')).toContain('light');

@@ -35,7 +35,9 @@ describe('UI tests', () => {
 
     it('should have finnish subtitle', () => {
       const word = wrapper.find('AuthLayout').prop('subTitle');
-      expect(word).toBe('Kirjoita sähköpostiosoitteesi, niin lähetämme sinulle linkin, jolla voit vaihtaa salasanasi.');
+      expect(word).toBe(
+        'Kirjoita sähköpostiosoitteesi, niin lähetämme sinulle linkin, jolla voit vaihtaa salasanasi.'
+      );
     });
 
     it('should have finnish placeholder', () => {
@@ -136,9 +138,12 @@ describe('moxios tests', () => {
     });
 
     wrapper = shallow(<ForgotScene />);
-    wrapper.instance().onSubmitMethod(url, body, redirect).then(() => {
-      expect(wrapper.find('AuthLayout').prop('message')).toBe('Email not found');
-      done();
-    });
+    wrapper
+      .instance()
+      .onSubmitMethod(url, body, redirect)
+      .then(() => {
+        expect(wrapper.find('AuthLayout').prop('message')).toBe('Email not found');
+        done();
+      });
   });
 });

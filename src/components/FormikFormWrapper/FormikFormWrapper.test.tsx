@@ -3,14 +3,11 @@ import { mount } from 'enzyme';
 import { FormikFormWrapper } from './FormikFormWrapper';
 
 const onSubmit = jest.fn();
-const wrapper = mount((
-  <FormikFormWrapper<any>
-    onSubmit={onSubmit}
-    initialValues={{ name: '' }}
-  >
+const wrapper = mount(
+  <FormikFormWrapper<any> onSubmit={onSubmit} initialValues={{ name: '' }}>
     <p>Test</p>
   </FormikFormWrapper>
-));
+);
 
 it('should call onSubmit', () => {
   const onS = wrapper.find('Formik').prop('onSubmit') as Function;

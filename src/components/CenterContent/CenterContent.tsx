@@ -8,9 +8,7 @@ export interface CenterContentProps {
 const CenterContentComponent = ({ children }: CenterContentProps) => (
   <div className="flex-row align-items-center CenterContent">
     <div className="container">
-      <div className="row justify-content-center CenterContent-row">
-        {children}
-      </div>
+      <div className="row justify-content-center CenterContent-row">{children}</div>
     </div>
   </div>
 );

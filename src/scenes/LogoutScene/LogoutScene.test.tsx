@@ -51,7 +51,6 @@ describe('LogoutScene', () => {
     /* eslint-enable no-underscore-dangle */
   });
 
-
   test('destroy token and localstorage when http request is not 400', async () => {
     moxios.stubRequest(/./, {
       status: 400,

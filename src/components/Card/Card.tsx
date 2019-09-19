@@ -10,15 +10,11 @@ export interface CardProps {
 }
 
 const CardComponent = (props: CardProps) => {
-  const {
-    children, header, id, className, setCardBody,
-  } = props;
+  const { children, header, id, className, setCardBody } = props;
   return (
     <div className="card" id={id}>
       {header ? <div className={`card-header ${className}`}>{header}</div> : undefined}
-      <div className={setCardBody ? 'card-body' : ''}>
-        {children}
-      </div>
+      <div className={setCardBody ? 'card-body' : ''}>{children}</div>
     </div>
   );
 };

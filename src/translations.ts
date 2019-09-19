@@ -79,13 +79,15 @@ export const translations: Translation<TranslationObject> = {
     'forgot.buttonText': 'Nollaa',
     'forgot.linkText': 'Takaisin kirjautumissivulle',
     'forgot.title': 'Nollaa salasana',
-    'forgot.subTitle': 'Kirjoita sähköpostiosoitteesi, niin lähetämme sinulle linkin, jolla voit vaihtaa salasanasi.',
+    'forgot.subTitle':
+      'Kirjoita sähköpostiosoitteesi, niin lähetämme sinulle linkin, jolla voit vaihtaa salasanasi.',
     'forgot.placeholder': 'Sähköposti',
 
     // ForgotSuccess
     'forgotSuccess.title': 'Salasanan nollauspyyntö lähetetty!',
     'forgotSuccess.link': 'Takaisin kirjautumissivulle',
-    'forgotSuccess.subTitle': 'Salasanan nollauslinkki on lähetetty sähköpostiisi! Avaa sähköpostissa oleva linkki ja vaihda salasana.',
+    'forgotSuccess.subTitle':
+      'Salasanan nollauslinkki on lähetetty sähköpostiisi! Avaa sähköpostissa oleva linkki ja vaihda salasana.',
 
     // ResetPassword
     'resetPassword.title': 'Kirjoita uusi salasana',
@@ -96,7 +98,8 @@ export const translations: Translation<TranslationObject> = {
     // ResetPasswordSuccess
     'resetPasswordSuccess.title': 'Salasanasi on vaihdettu',
     'resetPasswordSuccess.link': 'Kirjautumissivulle',
-    'resetPasswordSuccess.subTitle': 'Salasanasi on vaihdettu onnistuneesti. Voit nyt palata kirjautumissivulle ja kirjautua uudella salasanalla',
+    'resetPasswordSuccess.subTitle':
+      'Salasanasi on vaihdettu onnistuneesti. Voit nyt palata kirjautumissivulle ja kirjautua uudella salasanalla',
 
     // AuthError
     'authError.title': 'Oops... Tapahtui virhe',
@@ -145,7 +148,8 @@ export const translations: Translation<TranslationObject> = {
     // ForgotSuccess
     'forgotSuccess.title': 'Reset email is sent!',
     'forgotSuccess.link': 'Back to login',
-    'forgotSuccess.subTitle': 'Password reset link is sent to your email. Click link on your email and change password.',
+    'forgotSuccess.subTitle':
+      'Password reset link is sent to your email. Click link on your email and change password.',
 
     // ResetPassword
     'resetPassword.title': 'Set new password',
@@ -156,12 +160,13 @@ export const translations: Translation<TranslationObject> = {
     // ResetPasswordSuccess
     'resetPasswordSuccess.title': 'Your password is changed',
     'resetPasswordSuccess.link': 'To login',
-    'resetPasswordSuccess.subTitle': 'Your password is now changed. Go back to login page and log in with new password.',
+    'resetPasswordSuccess.subTitle':
+      'Your password is now changed. Go back to login page and log in with new password.',
 
     // AuthError
     'authError.title': 'Oops... There was an error',
     'authError.link': 'To login',
-    'authError.subTitle': 'We couldn\'t find reason for an error.',
+    'authError.subTitle': "We couldn't find reason for an error.",
 
     // Confirm
     'confirm.title': 'Your account is now activated.',

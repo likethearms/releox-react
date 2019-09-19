@@ -8,7 +8,7 @@ let spy: jest.Mock;
 describe('AuthForm', () => {
   beforeAll(() => {
     spy = jest.fn();
-    wrapper = mount((
+    wrapper = mount(
       <AuthForm<any>
         placeholder="Placeholder"
         initialValues={{ foo: 'bar' }}
@@ -17,7 +17,7 @@ describe('AuthForm', () => {
         onSubmit={spy}
         inputProps={{ type: 'text', name: 'input-name' }}
       />
-    ));
+    );
   });
 
   it('should show placeholder', () => {
@@ -29,7 +29,9 @@ describe('AuthForm', () => {
   });
 
   it('should inject init values', () => {
-    expect(wrapper.find('FormikFormWrapperComponent').prop('initialValues')).toStrictEqual({ foo: 'bar' });
+    expect(wrapper.find('FormikFormWrapperComponent').prop('initialValues')).toStrictEqual({
+      foo: 'bar',
+    });
   });
 
   it('should call onSubmit', () => {

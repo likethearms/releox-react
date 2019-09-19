@@ -5,12 +5,7 @@ import { validateModel } from '../HOC/validate-model';
 import { authMiddleware } from '../HOC/auth-middleware';
 
 const CUI = ({ user }: any) => (
-  <CoreuiLayout
-    sidebarMenu={[]}
-    headerRightText={user.name}
-    brandUrl="/"
-    brand="Testi"
-  >
+  <CoreuiLayout sidebarMenu={[]} headerRightText={user.name} brandUrl="/" brand="Testi">
     Foo Bar
   </CoreuiLayout>
 );

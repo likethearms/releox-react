@@ -22,10 +22,9 @@ interface Props {
 
 const CONTEXT = 'ValidateModelMiddleware';
 
-export const validateModel = (
-  fields: string[],
-  FormComponent: ElementType,
-) => (WrapperElement: any) => (
+export const validateModel = (fields: string[], FormComponent: ElementType) => (
+  WrapperElement: any
+) =>
   class ValidateModel extends Component<Props, State> {
     constructor(props: Props) {
       super(props);
@@ -99,5 +98,4 @@ export const validateModel = (
       if (validationFail) return this.getValidationForm();
       return <WrapperElement {...this.props} />;
     }
-  }
-);
+  };

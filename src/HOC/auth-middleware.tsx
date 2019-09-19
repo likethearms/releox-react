@@ -13,7 +13,7 @@ export interface AuthMiddlewareState<U> {
 }
 
 /* eslint-disable react/jsx-props-no-spreading */
-export const authMiddleware = <U extends {}>(WrapperComponent: ElementType) => (
+export const authMiddleware = <U extends {}>(WrapperComponent: ElementType) =>
   class AuthMiddleware extends Component<any, AuthMiddlewareState<U>> {
     constructor(props: any) {
       super(props);
@@ -37,8 +37,7 @@ export const authMiddleware = <U extends {}>(WrapperComponent: ElementType) => (
           this.setState({ loading: false });
         })
         .catch(() => {
-          destroyAccessInformation()
-            .then(() => this.setState({ redirect: routes.LOGIN }));
+          destroyAccessInformation().then(() => this.setState({ redirect: routes.LOGIN }));
         });
     }
 
@@ -48,4 +47,4 @@ export const authMiddleware = <U extends {}>(WrapperComponent: ElementType) => (
       if (loading) return <Loading centeredVertical />;
       return <WrapperComponent {...this.props} authenticatedUser={authenticatedUser} />;
     }
-  });
+  };

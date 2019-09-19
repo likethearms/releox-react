@@ -9,16 +9,12 @@ export interface FormikFormWrapperProps<R> {
 }
 
 const FormikFormWrapperComponent = <R extends {}>(
-  props: FormikFormWrapperProps<R>,
+  props: FormikFormWrapperProps<R>
 ): JSX.Element => {
   const { onSubmit, initialValues, children } = props;
   return (
     <Formik onSubmit={onSubmit} initialValues={initialValues}>
-      {({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          {children}
-        </form>
-      )}
+      {({ handleSubmit }) => <form onSubmit={handleSubmit}>{children}</form>}
     </Formik>
   );
 };

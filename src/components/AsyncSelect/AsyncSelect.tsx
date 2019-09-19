@@ -80,9 +80,7 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
   }
 
   getAsyncSelectElement(): JSX.Element {
-    const {
-      onChange, placeholder,
-    } = this.props;
+    const { onChange, placeholder } = this.props;
     const { defaultValue } = this.state;
     return (
       <Async
@@ -98,18 +96,16 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
   }
 
   setupDefaultValue(): Promise<void> {
-    const {
-      value, getUrl, mapValue, mapLabel,
-    } = this.props;
-    return Axios
-      .get(getUrl, { params: { filter: { where: { [mapValue]: value } } } })
-      .then((r) => this.setState({
+    const { value, getUrl, mapValue, mapLabel } = this.props;
+    return Axios.get(getUrl, { params: { filter: { where: { [mapValue]: value } } } }).then((r) =>
+      this.setState({
         defaultValue: {
           value: r.data[0][mapValue],
           label: r.data[0][mapLabel],
         },
         loading: false,
-      }));
+      })
+    );
   }
 
   buildQuery(inputValue: string): { [key: string]: { ilike: string } } {
@@ -123,13 +119,10 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
     return { [searchFields[0]]: query };
   }
 
-  loadOptions(inputValue: string): Promise<{ value: string, label: string }[]> {
-    const {
-      getUrl, mapValue, mapLabel, onError,
-    } = this.props;
+  loadOptions(inputValue: string): Promise<{ value: string; label: string }[]> {
+    const { getUrl, mapValue, mapLabel, onError } = this.props;
     return new Promise((resolve, reject) => {
-      Axios
-        .get(getUrl, { params: { filter: { where: this.buildQuery(inputValue) }, limit: 10 } })
+      Axios.get(getUrl, { params: { filter: { where: this.buildQuery(inputValue) }, limit: 10 } })
         .then((r) => resolve(r.data.map((c: any) => ({ value: c[mapValue], label: c[mapLabel] }))))
         .catch((e) => {
           if (onError) onError(e);
