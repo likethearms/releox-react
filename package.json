@@ -5,8 +5,10 @@
   "main": "lib/index.js",
   "author": "Henrik Salmela",
   "dependencies": {
+    "@types/react-redux": "^7.1.2",
     "query-string": "^6.8.3",
-    "react-loading": "^2.0.3"
+    "react-loading": "^2.0.3",
+    "react-redux": "^7.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -55,7 +57,9 @@
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^4.3.5",
+    "@types/react-router-redux": "^5.0.18",
     "@types/react-select": "^3.0.4",
+    "@types/redux-mock-store": "^1.0.1",
     "@types/storybook__addon-actions": "^3.4.3",
     "@types/storybook__addon-links": "^3.3.5",
     "@types/storybook__react": "^4.0.2",
@@ -83,9 +87,14 @@
     "react-bootstrap-table-next": "^3.2.0",
     "react-bootstrap-table2-paginator": "^2.1.0",
     "react-dom": "^16.9.0",
+    "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
+    "react-router-redux": "^4.0.8",
     "react-scripts": "^3.1.1",
     "react-select": "^3.0.4",
+    "redux": "^4.0.4",
+    "redux-mock-store": "^1.5.3",
+    "redux-thunk": "^2.3.0",
     "sass": "^1.22.10",
     "typescript": "~3.5.0",
     "webpack": "4.39.1"
