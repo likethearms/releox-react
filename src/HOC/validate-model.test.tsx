@@ -14,7 +14,7 @@ const Form = () => (
 );
 
 window = Object.create(window); // eslint-disable-line
-Object.defineProperty(window, 'location', { value: { reload: () => { } }, writable: true });
+Object.defineProperty(window, 'location', { value: { reload: () => {} }, writable: true });
 
 describe('validateModelMiddleware', () => {
   beforeEach(() => {
@@ -29,7 +29,12 @@ describe('validateModelMiddleware', () => {
     const El = validateModel(['name'], Form)(() => <span>Foo Bar</span>);
     wrapper = mount(<El authenticatedUser={{ name: 'Foo' }} />);
     expect(wrapper.find('span[children="Foo Bar"]')).toHaveLength(1);
-    expect(wrapper.find('span').parent().prop('authenticatedUser')).toStrictEqual({ name: 'Foo' });
+    expect(
+      wrapper
+        .find('span')
+        .parent()
+        .prop('authenticatedUser')
+    ).toStrictEqual({ name: 'Foo' });
   });
 
   it('should return form if model is incomplete', () => {
@@ -41,9 +46,7 @@ describe('validateModelMiddleware', () => {
   it('submit success', () => {
     moxios.stubRequest(/./, {
       status: 200,
-      response: {
-
-      },
+      response: {},
     });
     const El = validateModel(['name'], Form)(() => <span>Foo Bar</span>);
     wrapper = mount(<El authenticatedUser={{}} />);

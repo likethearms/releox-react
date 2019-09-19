@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export type ButtonColor = 'primary' | 'secondary' | 'success' | 'danger' |
-  'warning' | 'info' | 'light' | 'dark' | 'link';
+export type ButtonColor =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'danger'
+  | 'warning'
+  | 'info'
+  | 'light'
+  | 'dark'
+  | 'link';
 export type ButtonType = 'submit' | 'button';
 
 export interface ButtonProps {
@@ -16,16 +24,9 @@ export interface ButtonProps {
 
 /* eslint-disable react/button-has-type */
 const ButtonComponent = (props: ButtonProps) => {
-  const {
-    id, children, color, className, onClick, type,
-  } = props;
+  const { id, children, color, className, onClick, type } = props;
   return (
-    <button
-      type={type}
-      id={id}
-      onClick={onClick}
-      className={`btn btn-${color} ${className}`}
-    >
+    <button type={type} id={id} onClick={onClick} className={`btn btn-${color} ${className}`}>
       {children}
     </button>
   );

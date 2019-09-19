@@ -19,9 +19,7 @@ const CoreuiHeaderComponent = ({ title, headerRightText, brandUrl }: CoreuiHeade
       {title}
     </Link>
     <ul className="nav navbar-nav ml-auto d-none d-sm-block">
-      <li className="nav-item px-3">
-        {headerRightText}
-      </li>
+      <li className="nav-item px-3">{headerRightText}</li>
     </ul>
   </div>
 );

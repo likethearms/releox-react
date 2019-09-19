@@ -23,17 +23,14 @@ export const CheckBox = (props: CheckBoxProps) => {
             checked={field.value}
             className={inputClass || 'form-check-input'}
             {...field} /* eslint-disable-line react/jsx-props-no-spreading */
-            onChange={e => {
+            onChange={(e) => {
               if (onChange) onChange(e);
               field.onChange(e);
             }}
           />
         )}
       />
-      <label
-        htmlFor={id || `${name}-input`}
-        className={labelClass || 'form-check-label'}
-      >
+      <label htmlFor={id || `${name}-input`} className={labelClass || 'form-check-label'}>
         {label}
       </label>
     </div>

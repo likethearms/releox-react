@@ -6,12 +6,13 @@ import overlayElementFunction from './overlayElementFunction';
 export interface DataTableColumn {
   dataField: string;
   text: string;
-  headerClasses?: string,
+  headerClasses?: string;
   formatter?(
     cell: any,
     row: any,
     rowIndex: number,
-    formatExtraData: any): ReactElement | string | number;
+    formatExtraData: any
+  ): ReactElement | string | number;
   sort?: boolean;
 }
 
@@ -61,13 +62,12 @@ export interface DataTableLoopbackFilter {
 interface DefaultProps {
   keyField: string;
   hover: boolean;
-  loading: boolean,
+  loading: boolean;
   noDataText: string;
   striped: boolean;
   onClick: undefined;
   bordered: boolean;
 }
-
 
 export class DataTable extends Component<DataTableProps, State> {
   static defaultProps: DefaultProps = {
@@ -129,8 +129,17 @@ export class DataTable extends Component<DataTableProps, State> {
 
   render(): JSX.Element {
     const {
-      keyField, hover, bordered, striped, data, columns, onClick, totalSize, loading,
-      overlayElement, noDataText,
+      keyField,
+      hover,
+      bordered,
+      striped,
+      data,
+      columns,
+      onClick,
+      totalSize,
+      loading,
+      overlayElement,
+      noDataText,
     } = this.props;
     let rowEvents;
     const { page, sizePerPage } = this.state;

@@ -12,7 +12,11 @@ const CoreuiHeaderSideBarToggleComponent = ({
 }: CoreuiHeaderSideBarToggleProps) => {
   const onClick = () => document.getElementsByClassName('app')[0].classList.toggle(toggleClass);
   return (
-    <button className={`CoreuiHeaderSideBarToggleComponent ${buttonClass}`} type="button" onClick={onClick}>
+    <button
+      className={`CoreuiHeaderSideBarToggleComponent ${buttonClass}`}
+      type="button"
+      onClick={onClick}
+    >
       <span className="navbar-toggler-icon" />
     </button>
   );

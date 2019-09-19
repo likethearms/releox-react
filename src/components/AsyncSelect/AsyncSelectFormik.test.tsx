@@ -7,7 +7,7 @@ describe('AsyncSelectFormik', () => {
   let input: ShallowWrapper;
 
   beforeAll(() => {
-    wrapper = shallow((
+    wrapper = shallow(
       <AsyncSelectFormik
         label="selectLabel"
         getUrl="url"
@@ -15,10 +15,9 @@ describe('AsyncSelectFormik', () => {
         name="selectName"
         id="selectBox"
       />
-    ));
+    );
     input = wrapper.find('#selectBox');
   });
-
 
   it('should have name to be specific', () => {
     expect(input.prop('name')).toBe('selectName');

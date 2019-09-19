@@ -12,19 +12,11 @@ export interface CoreuiLayoutProps {
 }
 
 export const CoreuiLayout = (props: CoreuiLayoutProps) => {
-  const {
-    children, sidebarMenu, headerRightText, brand, brandUrl,
-  } = props;
+  const { children, sidebarMenu, headerRightText, brand, brandUrl } = props;
   return (
     <CoreuiMainLayout
       sidebar={<CoreuiSidebar menu={sidebarMenu} />}
-      header={(
-        <CoreuiHeader
-          brandUrl={brandUrl}
-          headerRightText={headerRightText}
-          title={brand}
-        />
-      )}
+      header={<CoreuiHeader brandUrl={brandUrl} headerRightText={headerRightText} title={brand} />}
     >
       {children}
     </CoreuiMainLayout>

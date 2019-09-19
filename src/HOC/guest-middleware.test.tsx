@@ -15,7 +15,11 @@ describe('guestMiddleware', () => {
     localStorage.setItem('userId', '1');
     localStorage.setItem('accessToken', '2');
     const El = guestMiddleware(() => <span>Foo Bar</span>);
-    wrapper = mount(<MemoryRouter><El /></MemoryRouter>);
+    wrapper = mount(
+      <MemoryRouter>
+        <El />
+      </MemoryRouter>
+    );
     const GM = wrapper.find('GuestMiddleware');
     // @ts-ignore
     await GM.instance().componentDidMount();
@@ -26,7 +30,11 @@ describe('guestMiddleware', () => {
   it('should redirect user to home route if localstorage has user id and access token', async () => {
     localStorage.setItem('accessToken', '2');
     const El = guestMiddleware(() => <span>Foo Bar</span>);
-    wrapper = mount(<MemoryRouter><El /></MemoryRouter>);
+    wrapper = mount(
+      <MemoryRouter>
+        <El />
+      </MemoryRouter>
+    );
     const GM = wrapper.find('GuestMiddleware');
     // @ts-ignore
     await GM.instance().componentDidMount();

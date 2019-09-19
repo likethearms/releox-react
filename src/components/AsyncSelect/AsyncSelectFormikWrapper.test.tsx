@@ -4,7 +4,7 @@ import { AsyncSelectFormikWrapper } from './AsyncSelectFormikWrapper';
 
 describe('AsyncSelectFormikWrapper', () => {
   const setFieldValue = jest.fn();
-  const wrapper = shallow((
+  const wrapper = shallow(
     <AsyncSelectFormikWrapper
       getUrl="fooUrl"
       field={{ value: 'bar', name: 'fieldName' }}
@@ -12,7 +12,7 @@ describe('AsyncSelectFormikWrapper', () => {
       form={{ setFieldValue } as any}
       placeholder="fooPlaceholder"
     />
-  ));
+  );
   const select = wrapper.find('AsyncSelect');
 
   it('should inject value', () => {
@@ -42,7 +42,7 @@ describe('AsyncSelectFormikWrapper', () => {
   });
 
   it('should inject ["foo"] if searchFields is given', () => {
-    const w = shallow((
+    const w = shallow(
       <AsyncSelectFormikWrapper
         getUrl="fooUrl"
         field={{ value: 'bar', name: 'fieldName' }}
@@ -51,7 +51,7 @@ describe('AsyncSelectFormikWrapper', () => {
         placeholder="fooPlaceholder"
         searchFields={['foo']}
       />
-    ));
+    );
     const s = w.find('AsyncSelect');
     expect(s.prop('searchFields')).toStrictEqual(['foo']);
   });

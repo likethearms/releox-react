@@ -16,8 +16,10 @@ export interface AsyncSelectWrapperDefaultProps {
   searchFields: string[];
 }
 
-export class AsyncSelectFormikWrapper
-  extends AbstractFormikInputWrapper<string, AsyncSelectFormikWrapperProps> {
+export class AsyncSelectFormikWrapper extends AbstractFormikInputWrapper<
+  string,
+  AsyncSelectFormikWrapperProps
+> {
   public static defaultProps: AsyncSelectWrapperDefaultProps = {
     searchFields: ['name'],
   };
@@ -28,9 +30,7 @@ export class AsyncSelectFormikWrapper
   }
 
   render(): JSX.Element {
-    const {
-      field, getUrl, searchFields, placeholder, queryFormat,
-    } = this.props;
+    const { field, getUrl, searchFields, placeholder, queryFormat } = this.props;
     return (
       <AsyncSelect
         value={field.value}

@@ -97,8 +97,17 @@ export class LoginSceneComponent extends Component<LoginSceneProps, LoginSceneSt
         initialValues={{ [loginFieldName]: '', password: '' }}
         onSubmit={this.onSubmit}
       >
-        <Input name={loginFieldName} label={t(`${loginFieldName}Placeholder`)} id={`${CONTEXT}-${loginFieldName}-input`} />
-        <Input name="password" type="password" label={t('passwordPlaceholder')} id={`${CONTEXT}-password-input`} />
+        <Input
+          name={loginFieldName}
+          label={t(`${loginFieldName}Placeholder`)}
+          id={`${CONTEXT}-${loginFieldName}-input`}
+        />
+        <Input
+          name="password"
+          type="password"
+          label={t('passwordPlaceholder')}
+          id={`${CONTEXT}-password-input`}
+        />
         <Button className="float-right" type="submit" id={`${CONTEXT}-login-button`}>
           {t('loginButtonText')}
         </Button>

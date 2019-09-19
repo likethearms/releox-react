@@ -1,7 +1,10 @@
 import React from 'react';
 import { Field } from 'formik';
 import { AsyncSelectFormikWrapper } from './AsyncSelectFormikWrapper';
-import { AbstractInputGroup, AbstractInputGroupProps } from '../AbstractInputGroup/AbstractInputGroup';
+import {
+  AbstractInputGroup,
+  AbstractInputGroupProps,
+} from '../AbstractInputGroup/AbstractInputGroup';
 import { AsyncSelectQueryFormat } from './AsyncSelect';
 
 export interface AsyncSelectFormikProps extends AbstractInputGroupProps {

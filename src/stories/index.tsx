@@ -51,11 +51,7 @@ moxios.stubRequest(/.*/, {
 });
 
 storiesOf('Components', module)
-  .add('CenterContent', () => (
-    <CenterContent>
-      CenterContent
-    </CenterContent>
-  ))
+  .add('CenterContent', () => <CenterContent>CenterContent</CenterContent>)
   .add('Loading', () => <Loading />)
   .add('Button', () => <Button id="save-button">Save</Button>)
   .add('Card', () => (
@@ -63,7 +59,11 @@ storiesOf('Components', module)
       <CenterContent>
         <Card>
           <CardTitle>Card title</CardTitle>
-          <p className="text-muted">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus porro incidunt ea ipsum mollitia illo delectus saepe impedit vitae exercitationem! Voluptatem alias sint obcaecati? Possimus temporibus ut nostrum eligendi blanditiis.</p>
+          <p className="text-muted">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus porro incidunt ea
+            ipsum mollitia illo delectus saepe impedit vitae exercitationem! Voluptatem alias sint
+            obcaecati? Possimus temporibus ut nostrum eligendi blanditiis.
+          </p>
         </Card>
       </CenterContent>
     </CenterContent>
@@ -72,41 +72,33 @@ storiesOf('Components', module)
     <CenterContent>
       <Card header={<span style={{ fontSize: '16pt' }}>Hello</span>} className="fancy-card">
         <CardTitle>Card title</CardTitle>
-        <p className="text-muted">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
+        <p className="text-muted">
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+          tincidunt ut laoreet dolore magna aliquam erat.
+        </p>
       </Card>
     </CenterContent>
   ));
 
-
-storiesOf('Form', module)
-  .add('FormikFormWrapper', () => (
-    <FormikFormWrapper<any>
-      onSubmit={action('onSubmit')}
-      initialValues={{ name: '' }}
-    >
-      <Field name="name" type="input" />
-      <AsyncSelectFormik
-        getUrl="/Products/"
-        queryFormat="mongodb"
-        label="Products"
-        name="products"
-      />
-    </FormikFormWrapper>
-  ));
+storiesOf('Form', module).add('FormikFormWrapper', () => (
+  <FormikFormWrapper<any> onSubmit={action('onSubmit')} initialValues={{ name: '' }}>
+    <Field name="name" type="input" />
+    <AsyncSelectFormik getUrl="/Products/" queryFormat="mongodb" label="Products" name="products" />
+  </FormikFormWrapper>
+));
 
 storiesOf('Scenes', module)
   .addDecorator((c) => <MemoryRouter>{c()}</MemoryRouter>)
   .add('Login', () => <LoginScene />)
-  .add('Login titleBlock', () => (
-    <LoginScene
-      titleBlock={(
-        <div className="text-center">
-          <h1>Service title</h1>
-          <img alt="" src="https://loremflickr.com/300/200" />
-        </div>
-      )}
-    />
-  ))
+  .add('Login titleBlock', () => {
+    const titleBlock = (
+      <div className="text-center">
+        <h1>Service title</h1>
+        <img alt="" src="https://loremflickr.com/300/200" />
+      </div>
+    );
+    return <LoginScene titleBlock={titleBlock} />;
+  })
   .add('Forgot', () => <ForgotScene />)
   .add('ForgotSuccess', () => <ForgotSuccessScene />)
   .add('ResetPassword', () => <ResetPasswordScene />)

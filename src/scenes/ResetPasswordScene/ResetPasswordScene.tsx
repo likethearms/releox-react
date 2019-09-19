@@ -26,8 +26,10 @@ export interface ResetPasswordSceneProps extends AbstractAuthOneInputSceneProps 
 const CONTEXT = 'ForgotScene';
 
 /* eslint-disable class-methods-use-this */
-export class ResetPasswordScene
-  extends AbstractAuthOneInputScene<BodyData, ResetPasswordSceneProps> {
+export class ResetPasswordScene extends AbstractAuthOneInputScene<
+  BodyData,
+  ResetPasswordSceneProps
+> {
   static defaultProps: DefaultProps = {
     resetPasswordAPIUrl: apis.PASSWORD_RESET,
   };

@@ -10,7 +10,7 @@ export const successScene = (
   context: string,
   translationPrefix: string,
   linkUrl: string,
-  getText?: () => string,
+  getText?: () => string
 ) => ({ locale }: SuccessSceneProps) => {
   const t = ct(translationPrefix, locale);
   return (

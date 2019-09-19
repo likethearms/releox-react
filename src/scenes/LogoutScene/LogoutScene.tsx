@@ -25,8 +25,7 @@ export class LogoutScene extends Component<{}, State> {
   }
 
   afterRequest(): void {
-    destroyAccessInformation()
-      .then(() => this.setState({ redirect: routes.LOGIN }));
+    destroyAccessInformation().then(() => this.setState({ redirect: routes.LOGIN }));
   }
 
   render(): JSX.Element {

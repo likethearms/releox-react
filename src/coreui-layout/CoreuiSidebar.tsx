@@ -47,7 +47,11 @@ const getSidebarDropdown = (menu: CoreuiSidebarMenu, clickHandler: (e: any) => v
   );
 };
 
-const getMenuTitle = (m: CoreuiSidebarMenu) => <li key={`title#${m.text}`} className="nav-title">{m.text}</li>;
+const getMenuTitle = (m: CoreuiSidebarMenu) => (
+  <li key={`title#${m.text}`} className="nav-title">
+    {m.text}
+  </li>
+);
 
 const generateMenuArray = (m: CoreuiSidebarMenu) => {
   const clickHandler = (e: any) => {
@@ -66,18 +70,18 @@ const CoreuiSidebarComponent = ({ menu }: CoreuiSidebarProps) => {
   return (
     <div className="sidebar pt-2">
       <div className="sidebar-nav">
-        <ul className="nav">
-          {menuJsx}
-        </ul>
+        <ul className="nav">{menuJsx}</ul>
       </div>
     </div>
   );
 };
 
 CoreuiSidebarComponent.propTypes = {
-  menu: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  })).isRequired,
+  menu: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+    })
+  ).isRequired,
 };
 
 export const CoreuiSidebar = CoreuiSidebarComponent;

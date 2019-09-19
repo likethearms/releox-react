@@ -35,8 +35,10 @@ export interface AbstractAuthOneInputSceneTranslation {
 }
 
 /* eslint-disable camelcase */
-export abstract class AbstractAuthOneInputScene<Data, Prop>
-  extends Component<Prop & AbstractAuthOneInputSceneProps, State> {
+export abstract class AbstractAuthOneInputScene<Data, Prop> extends Component<
+  Prop & AbstractAuthOneInputSceneProps,
+  State
+> {
   constructor(props: Prop) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);

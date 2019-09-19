@@ -14,7 +14,6 @@ describe('onSubmit', () => {
   });
 });
 
-
 describe('loginFieldName', () => {
   it('should set email value to input name prop by default', () => {
     const w = shallow(<LoginScene />);
@@ -29,9 +28,7 @@ describe('loginFieldName', () => {
 
 describe('UI tests', () => {
   it('should have custom title block', () => {
-    const wrapper = shallow((
-      <LoginScene titleBlock={<h1>Service title</h1>} />
-    ));
+    const wrapper = shallow(<LoginScene titleBlock={<h1>Service title</h1>} />);
     const title = wrapper.find('AuthLayout').prop('titleBlock');
     expect(title).toStrictEqual(<h1>Service title</h1>);
   });
@@ -202,12 +199,15 @@ describe('moxios tests', () => {
       response: { id: 2, userId: 1 },
     });
 
-    wrapper.instance().onSubmit(body).then(() => {
-      expect(wrapper.state('redirect')).toBe('/');
-      expect(localStorage.__STORE__.userId).toBe('1'); // eslint-disable-line no-underscore-dangle
-      expect(localStorage.__STORE__.accessToken).toBe('2'); // eslint-disable-line no-underscore-dangle
-      done();
-    });
+    wrapper
+      .instance()
+      .onSubmit(body)
+      .then(() => {
+        expect(wrapper.state('redirect')).toBe('/');
+        expect(localStorage.__STORE__.userId).toBe('1'); // eslint-disable-line no-underscore-dangle
+        expect(localStorage.__STORE__.accessToken).toBe('2'); // eslint-disable-line no-underscore-dangle
+        done();
+      });
   });
 
   it('should set error message to message state', (done) => {
@@ -217,10 +217,12 @@ describe('moxios tests', () => {
     });
 
     const w = shallow<any, any, typeof LoginScene>(<LoginScene />);
-    w.instance().onSubmit(body).then(() => {
-      expect(w.state('message')).toBe('Foo bar');
-      done();
-    });
+    w.instance()
+      .onSubmit(body)
+      .then(() => {
+        expect(w.state('message')).toBe('Foo bar');
+        done();
+      });
   });
 
   it('should call custom error handler if errorHander is passed to component', (done) => {
@@ -231,9 +233,11 @@ describe('moxios tests', () => {
     });
 
     const w = shallow<any, any, typeof LoginScene>(<LoginScene onError={onError} />);
-    w.instance().onSubmit(body).then(() => {
-      expect(onError).toBeCalledTimes(1);
-      done();
-    });
+    w.instance()
+      .onSubmit(body)
+      .then(() => {
+        expect(onError).toBeCalledTimes(1);
+        done();
+      });
   });
 });

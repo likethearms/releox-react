@@ -1,7 +1,9 @@
 import React from 'react';
 import { Field } from 'formik';
-import { AbstractInputGroupProps, AbstractInputGroup } from '../AbstractInputGroup/AbstractInputGroup';
-
+import {
+  AbstractInputGroupProps,
+  AbstractInputGroup,
+} from '../AbstractInputGroup/AbstractInputGroup';
 
 export interface TextAreaProps extends AbstractInputGroupProps {
   rows?: number;
@@ -11,9 +13,7 @@ export interface TextAreaProps extends AbstractInputGroupProps {
 
 export class TextArea extends AbstractInputGroup<TextAreaProps> {
   getElement(name: string, id: string): JSX.Element {
-    const {
-      rows, placeholder, label, className,
-    } = this.props;
+    const { rows, placeholder, label, className } = this.props;
     return (
       <Field
         name={name}

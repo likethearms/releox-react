@@ -11,10 +11,7 @@ import { AsyncSelect } from '../components/AsyncSelect/AsyncSelect';
 const Components = () => (
   <div className="m-5">
     <Card>
-      <FormikFormWrapper<any>
-        onSubmit={() => { }}
-        initialValues={{ name: '' }}
-      >
+      <FormikFormWrapper<any> onSubmit={() => {}} initialValues={{ name: '' }}>
         <AsyncSelectFormik
           getUrl="/Products/"
           queryFormat="mongodb"
@@ -34,9 +31,9 @@ const Components = () => (
         <AsyncSelect
           getUrl="/Products/"
           queryFormat="mongodb"
-          onError={() => { }}
+          onError={() => {}}
           searchFields={[]}
-          onChange={() => { }}
+          onChange={() => {}}
           placeholder=""
           mapLabel=""
           mapValue=""
