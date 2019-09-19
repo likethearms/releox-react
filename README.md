@@ -14,6 +14,8 @@
 - [NativeInput](#nativeInput)
 - [TextArea](#textArea)
 - [Create generic index](#create-generic-index)
+- [Details](#details)
+- [DetailField](#detailField)
 
 ## AsyncSelectFormik
 
