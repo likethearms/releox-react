@@ -2,15 +2,12 @@
 
 ## Table of Content
 
-# <<<<<<< HEAD
-
 - [AsyncSelectFormik](#asyncSelectFormik)
 - [Button](#button)
 - [Card](#card)
 - [CheckBox](#checkBox)
 - [CoreuiCheckBox](#coreuiCheckBox)
 - [Coreui Layout](#coreui-layout)
-  > > > > > > > 1.1.0
 - [DataTable](#datatable)
 - [Input](#input)
 - [LoginScene](#loginscene)
