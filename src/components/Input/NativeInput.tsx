@@ -9,7 +9,7 @@ export interface NativeInputProps extends AbstractInputGroupProps {
   type?: InputTypes;
   placeholder?: string;
   className?: string;
-  value?: string;
+  value?: string | number;
   onChange?(e: FormEvent<HTMLInputElement>): void;
 }
 
