@@ -1,21 +1,28 @@
-import React, { useEffect } from 'react';
-import { Formik, Form } from 'formik';
+import React, { useEffect, useState } from 'react';
+import { Formik, Form, FormikErrors } from 'formik';
 import { goBack } from 'react-router-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
+import { ObjectSchema } from 'yup';
 import { connect } from 'react-redux';
 import { Card } from '../components/Card/Card';
 import { CardTitle } from '../components/CardTitle/CardTitle';
-import { Loading } from '../components/Loading/Loading';
 import { Button } from '../components/Button/Button';
+import { Loading } from '../components/Loading/Loading';
 
 interface ContactCreateSceneProps<T> {
   save(body: T): void;
   back(): void;
   fetch?(): void;
   del?(): void;
+  data: T;
   user: any;
   isLoading: boolean;
+}
+
+interface ValidationObject {
+  validate?: (values: any) => FormikErrors<any> | Promise<any>;
+  validationSchema?: ObjectSchema<any> | (() => ObjectSchema<any>);
 }
 
 export const createGenericFormScene = <T extends {}>(
@@ -24,10 +31,11 @@ export const createGenericFormScene = <T extends {}>(
   initialValues: T,
   saveAction: Function,
   entity: string,
+  validationObject: ValidationObject = {},
   fetchAction?: (id: number) => any,
   delAction?: (id: number) => any,
-  injectUserFields: string[] = [],
-  redirect?: string
+  redirect?: string,
+  injectUserFields: string[] = []
 ) => {
   const mapDispatchToProps = (
     dispatch: ThunkDispatch<void, void, Action>,
@@ -50,18 +58,23 @@ export const createGenericFormScene = <T extends {}>(
   });
 
   const ContactCreateScene = (props: ContactCreateSceneProps<T>) => {
-    const { user, isLoading, save, fetch, del, back } = props;
-    const iv = initialValues as any;
+    const { user, isLoading, save, fetch, del, back, data } = props;
+    const [isFetched, setIsFetched] = useState(false);
+    let initValues: any;
+    if (!fetch) initValues = initialValues;
+    else initValues = data;
     injectUserFields.map((key) => {
-      iv[key] = user[key];
+      initValues[key] = user[key];
       return true;
     });
     return (
       <GenericFormScene
-        data={iv}
+        data={initValues}
         title={title}
+        validationObject={validationObject}
         EmbedForm={EmbedForm}
-        isLoading={isLoading}
+        isLoading={isLoading || !isFetched}
+        setIsFetched={setIsFetched}
         back={back}
         fetch={fetch}
         save={save}
@@ -101,6 +114,8 @@ export interface GenericFormSceneProps<T> {
   title: string;
   EmbedForm: any;
   isLoading?: boolean;
+  validationObject: ValidationObject;
+  setIsFetched(value: boolean): void;
   save(body: T): void;
   back(): void;
   fetch?: () => void;
@@ -108,15 +123,32 @@ export interface GenericFormSceneProps<T> {
 }
 
 export const GenericFormScene = <T extends {}>(props: GenericFormSceneProps<T>) => {
-  const { data, EmbedForm, title, isLoading, save, del, fetch, back } = props;
+  const {
+    data,
+    EmbedForm,
+    title,
+    isLoading,
+    save,
+    del,
+    fetch,
+    back,
+    setIsFetched,
+    validationObject,
+  } = props;
   useEffect(() => {
     if (fetch) fetch();
-  }, [fetch]);
+    setIsFetched(true);
+  }, [fetch, setIsFetched]);
   if (isLoading) return <Loading centeredVertical />;
   return (
     <GenericFormLayout title={title}>
       <div>
-        <Formik onSubmit={save} initialValues={data}>
+        <Formik
+          onSubmit={save}
+          initialValues={data}
+          validate={validationObject.validate}
+          validationSchema={validationObject.validationSchema}
+        >
           {() => (
             <Form>
               <EmbedForm />

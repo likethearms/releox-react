@@ -68,8 +68,10 @@ describe('create-generic-form-scene', () => {
       { name: 'Foo Bar' },
       save,
       'entry',
+      undefined,
       fetch,
       del,
+      undefined,
       ['country']
     );
     const wrapper = mount(
@@ -99,7 +101,7 @@ describe('create-generic-form-scene', () => {
 
     expect(wrapper.find('Formik').prop('initialValues')).toEqual({
       country: 'United States',
-      name: 'Foo Bar',
+      name: 'Store name',
     });
   });
 
