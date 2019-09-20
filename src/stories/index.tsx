@@ -1,21 +1,17 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import moxios from 'moxios';
-import { Field } from 'formik';
 import { MemoryRouter } from 'react-router';
-import { action } from '@storybook/addon-actions';
 import '../releox.css';
 import { storiesOf } from '@storybook/react';
 import { CenterContent } from '../components/CenterContent/CenterContent';
 import { Loading } from '../components/Loading/Loading';
 import { Button } from '../components/Button/Button';
-import { FormikFormWrapper } from '../components/FormikFormWrapper/FormikFormWrapper';
 import { LoginScene } from '../scenes/LoginScene/LoginScene';
 import { ForgotScene } from '../scenes/ForgotScene/ForgotScene';
 import { ForgotSuccessScene } from '../scenes/ForgotSuccessScene/ForgotSuccessScene';
 import { ResetPasswordScene } from '../scenes/ResetPasswordScene/ResetPasswordScene';
 import { ResetPasswordSuccessScene } from '../scenes/ResetPasswordSuccessScene/ResetPasswordSuccessScene';
-import { AsyncSelectFormik } from '../components/AsyncSelect/AsyncSelectFormik';
 import { AuthErrorScene } from '../scenes/AuthErrorScene/AuthErrorScene';
 import { ConfirmScene } from '../scenes/ConfirmScene/ConfirmScene';
 import { AcceptInvitationScene } from '../scenes/AcceptInvitationScene/AcceptInvitationScene';
@@ -79,13 +75,6 @@ storiesOf('Components', module)
       </Card>
     </CenterContent>
   ));
-
-storiesOf('Form', module).add('FormikFormWrapper', () => (
-  <FormikFormWrapper<any> onSubmit={action('onSubmit')} initialValues={{ name: '' }}>
-    <Field name="name" type="input" />
-    <AsyncSelectFormik getUrl="/Products/" queryFormat="mongodb" label="Products" name="products" />
-  </FormikFormWrapper>
-));
 
 storiesOf('Scenes', module)
   .addDecorator((c) => <MemoryRouter>{c()}</MemoryRouter>)

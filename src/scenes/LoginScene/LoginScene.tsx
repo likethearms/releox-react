@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import { Formik, Form } from 'formik';
 import { AxiosResponse } from 'axios';
 import { Redirect } from 'react-router-dom';
 import { saveAccessInformation, getErrorMessage, getReleoxOptions } from '../../config';
 import { ct, ReleoxLocale } from '../../I18N';
 import { routes } from '../../routes';
 import { AuthLayoutLinkItem, AuthLayout } from '../../components/AuthLayout/AuthLayout';
-import { FormikFormWrapper } from '../../components/FormikFormWrapper/FormikFormWrapper';
 import { Input } from '../../components/Input/Input';
 import { Button } from '../../components/Button/Button';
 import { loginRequest } from '../../requests';
@@ -93,26 +93,27 @@ export class LoginSceneComponent extends Component<LoginSceneProps, LoginSceneSt
     const { loginFieldName } = this.props;
     const t = this.getT();
     return (
-      <FormikFormWrapper<LoginBody>
-        initialValues={{ [loginFieldName]: '', password: '' }}
-        onSubmit={this.onSubmit}
-      >
-        <Input
-          name={loginFieldName}
-          label={t(`${loginFieldName}Placeholder`)}
-          id={`${CONTEXT}-${loginFieldName}-input`}
-        />
-        <Input
-          name="password"
-          type="password"
-          label={t('passwordPlaceholder')}
-          id={`${CONTEXT}-password-input`}
-        />
-        <Button className="float-right" type="submit" id={`${CONTEXT}-login-button`}>
-          {t('loginButtonText')}
-        </Button>
-        <div className="text-center">{message}</div>
-      </FormikFormWrapper>
+      <Formik initialValues={{ [loginFieldName]: '', password: '' }} onSubmit={this.onSubmit}>
+        {() => (
+          <Form>
+            <Input
+              name={loginFieldName}
+              label={t(`${loginFieldName}Placeholder`)}
+              id={`${CONTEXT}-${loginFieldName}-input`}
+            />
+            <Input
+              name="password"
+              type="password"
+              label={t('passwordPlaceholder')}
+              id={`${CONTEXT}-password-input`}
+            />
+            <Button className="float-right" type="submit" id={`${CONTEXT}-login-button`}>
+              {t('loginButtonText')}
+            </Button>
+            <div className="text-center">{message}</div>
+          </Form>
+        )}
+      </Formik>
     );
   }
 

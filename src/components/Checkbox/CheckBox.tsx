@@ -3,7 +3,6 @@ import { Field } from 'formik';
 
 export interface CheckBoxProps {
   id?: string;
-  onChange?: Function;
   name: string;
   label: string;
   inputClass?: string;
@@ -11,7 +10,7 @@ export interface CheckBoxProps {
 }
 
 export const CheckBox = (props: CheckBoxProps) => {
-  const { id, name, onChange, label, inputClass, labelClass } = props;
+  const { id, name, label, inputClass, labelClass } = props;
   return (
     <div className="form-check checkbox">
       <Field
@@ -23,10 +22,6 @@ export const CheckBox = (props: CheckBoxProps) => {
             checked={field.value}
             className={inputClass || 'form-check-input'}
             {...field} /* eslint-disable-line react/jsx-props-no-spreading */
-            onChange={(e) => {
-              if (onChange) onChange(e);
-              field.onChange(e);
-            }}
           />
         )}
       />

@@ -1,6 +1,6 @@
 import React from 'react';
+import { Formik } from 'formik';
 import { Card } from '../components/Card/Card';
-import { FormikFormWrapper } from '../components/FormikFormWrapper/FormikFormWrapper';
 import { AsyncSelectFormik } from '../components/AsyncSelect/AsyncSelectFormik';
 import { CoreuiCheckBox } from '../components/Checkbox/CoreuiCheckBox';
 import { Input } from '../components/Input/Input';
@@ -11,7 +11,7 @@ import { AsyncSelect } from '../components/AsyncSelect/AsyncSelect';
 const Components = () => (
   <div className="m-5">
     <Card>
-      <FormikFormWrapper<any> onSubmit={() => {}} initialValues={{ name: '' }}>
+      <Formik onSubmit={() => {}} initialValues={{ name: '' }}>
         <AsyncSelectFormik
           getUrl="/Products/"
           queryFormat="mongodb"
@@ -48,7 +48,7 @@ const Components = () => (
         <CoreuiCheckBox label="Label" name="Label" />
         <CheckBox label="Admin" name="foo" />
         <CheckBox label="Label" name="bar" />
-      </FormikFormWrapper>
+      </Formik>
     </Card>
   </div>
 );

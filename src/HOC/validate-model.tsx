@@ -1,9 +1,9 @@
+import { Formik, Form } from 'formik';
 import React, { Component, ElementType } from 'react';
 import { getErrorMessage } from '../config';
 import { ct } from '../I18N';
 import { Loading } from '../components/Loading/Loading';
 import { AuthLayout } from '../components/AuthLayout/AuthLayout';
-import { FormikFormWrapper } from '../components/FormikFormWrapper/FormikFormWrapper';
 import { Button } from '../components/Button/Button';
 import { patchUserRequest } from '../requests';
 
@@ -58,14 +58,16 @@ export const validateModel = (fields: string[], FormComponent: ElementType) => (
           subTitle={t('subTitle')}
           links={[]}
         >
-          <FormikFormWrapper onSubmit={this.submit} initialValues={authenticatedUser}>
-            <div>
-              <FormComponent />
-              <Button type="submit" id="submit" className="float-right">
-                {t('button')}
-              </Button>
-            </div>
-          </FormikFormWrapper>
+          <Formik onSubmit={this.submit} initialValues={authenticatedUser}>
+            {() => (
+              <Form>
+                <FormComponent />
+                <Button type="submit" id="submit" className="float-right">
+                  {t('button')}
+                </Button>
+              </Form>
+            )}
+          </Formik>
         </AuthLayout>
       );
     }
