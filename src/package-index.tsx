@@ -24,3 +24,4 @@ export * from './HOC/validate-model';
 export * from './config';
 export * from './components/DataTable/DataTable';
 export * from './generic-scenes/create-generic-index';
+export * from './components/NativeSelect/NativeSelect';
