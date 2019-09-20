@@ -1,4 +1,6 @@
-body,html,#root {
+body,
+html,
+#root {
   height: 100%;
   background-color: #eee;
 }
@@ -8,4 +10,8 @@ body,html,#root {
 
 .CoreuiCheckBox > .label {
   margin-left: 10px;
+}
+
+.DetailField-key {
+  padding-right: 10px;
 }
