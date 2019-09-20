@@ -1,7 +1,7 @@
 import React from 'react';
+import { Formik } from 'formik';
 import { shallow, mount, ReactWrapper } from 'enzyme';
 import { CoreuiCheckBox } from './CoreuiCheckBox';
-import { FormikFormWrapper } from '../FormikFormWrapper/FormikFormWrapper';
 
 it('should default props', () => {
   const wrapper = shallow(<CoreuiCheckBox name="bar" label="foo" />);
@@ -20,9 +20,9 @@ describe('Mounted test', () => {
 
   beforeAll(() => {
     wrapper = mount(
-      <FormikFormWrapper onSubmit={() => {}} initialValues={{ bar: true }}>
-        <CoreuiCheckBox name="bar" label="foo" />
-      </FormikFormWrapper>
+      <Formik onSubmit={() => {}} initialValues={{ bar: true }}>
+        {() => <CoreuiCheckBox name="bar" label="foo" />}
+      </Formik>
     );
   });
 

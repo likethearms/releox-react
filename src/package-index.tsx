@@ -10,7 +10,6 @@ export * from './components/TextArea/TextArea';
 export * from './components/TextArea/NativeTextArea';
 export * from './components/CardTitle/CardTitle';
 export * from './components/CenterContent/CenterContent';
-export * from './components/FormikFormWrapper/FormikFormWrapper';
 export * from './components/Input/Input';
 export * from './components/Input/NativeInput';
 export * from './components/Loading/Loading';

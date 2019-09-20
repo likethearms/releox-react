@@ -50,7 +50,7 @@ describe('validateModelMiddleware', () => {
     });
     const El = validateModel(['name'], Form)(() => <span>Foo Bar</span>);
     wrapper = mount(<El authenticatedUser={{}} />);
-    const onSubmit = wrapper.find('FormikFormWrapperComponent').prop('onSubmit') as Function;
+    const onSubmit = wrapper.find('Formik').prop('onSubmit') as Function;
     onSubmit({});
     expect(wrapper.find('ValidateModel').state('message')).toBe('');
   });
@@ -62,7 +62,7 @@ describe('validateModelMiddleware', () => {
     });
     const El = validateModel(['name'], Form)(() => <span>Foo Bar</span>);
     wrapper = mount(<El authenticatedUser={{}} />);
-    const onSubmit = wrapper.find('FormikFormWrapperComponent').prop('onSubmit') as Function;
+    const onSubmit = wrapper.find('Formik').prop('onSubmit') as Function;
     await onSubmit({});
     expect(wrapper.find('ValidateModel').state('message')).toBe('Foo bar');
   });
