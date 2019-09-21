@@ -20,23 +20,35 @@ interface ContactCreateSceneProps<T> {
   isLoading: boolean;
 }
 
-interface ValidationObject {
+interface GenericFormOptions<T> {
   validate?: (values: any) => FormikErrors<any> | Promise<any>;
   validationSchema?: ObjectSchema<any> | (() => ObjectSchema<any>);
+  title: string;
+  EmbedForm: any;
+  initialValues: T;
+  saveAction: Function;
+  reduxEntry: string;
+  fetchAction?: (id: number) => any;
+  delAction?: (id: number) => any;
+  redirect?: string;
+  injectUserFields?: string[];
 }
 
-export const createGenericFormScene = <T extends {}>(
-  title: string,
-  EmbedForm: any,
-  initialValues: T,
-  saveAction: Function,
-  entity: string,
-  validationObject: ValidationObject = {},
-  fetchAction?: (id: number) => any,
-  delAction?: (id: number) => any,
-  redirect?: string,
-  injectUserFields: string[] = []
-) => {
+export const createGenericFormScene = <T extends {}>(opts: GenericFormOptions<T>) => {
+  const {
+    validate,
+    validationSchema,
+    title,
+    EmbedForm,
+    initialValues,
+    saveAction,
+    reduxEntry,
+    fetchAction,
+    delAction,
+    redirect,
+    injectUserFields = [],
+  } = opts;
+
   const mapDispatchToProps = (
     dispatch: ThunkDispatch<void, void, Action>,
     { match }: { match: any }
@@ -53,8 +65,8 @@ export const createGenericFormScene = <T extends {}>(
   };
   const mapStateToProps = (store: any) => ({
     user: store.user,
-    data: store[entity].model.data,
-    isLoading: store[entity].model.isLoading,
+    data: store[reduxEntry].model.data,
+    isLoading: store[reduxEntry].model.isLoading,
   });
 
   const ContactCreateScene = (props: ContactCreateSceneProps<T>) => {
@@ -71,7 +83,8 @@ export const createGenericFormScene = <T extends {}>(
       <GenericFormScene
         data={initValues}
         title={title}
-        validationObject={validationObject}
+        validationSchema={validationSchema}
+        validate={validate}
         EmbedForm={EmbedForm}
         isLoading={isLoading || !isFetched}
         setIsFetched={setIsFetched}
@@ -114,7 +127,8 @@ export interface GenericFormSceneProps<T> {
   title: string;
   EmbedForm: any;
   isLoading?: boolean;
-  validationObject: ValidationObject;
+  validate?: (values: any) => FormikErrors<any> | Promise<any>;
+  validationSchema?: ObjectSchema<any> | (() => ObjectSchema<any>);
   setIsFetched(value: boolean): void;
   save(body: T): void;
   back(): void;
@@ -133,7 +147,8 @@ export const GenericFormScene = <T extends {}>(props: GenericFormSceneProps<T>) 
     fetch,
     back,
     setIsFetched,
-    validationObject,
+    validate,
+    validationSchema,
   } = props;
   useEffect(() => {
     if (fetch) fetch();
@@ -146,8 +161,8 @@ export const GenericFormScene = <T extends {}>(props: GenericFormSceneProps<T>) 
         <Formik
           onSubmit={save}
           initialValues={data}
-          validate={validationObject.validate}
-          validationSchema={validationObject.validationSchema}
+          validate={validate}
+          validationSchema={validationSchema}
         >
           {() => (
             <Form>

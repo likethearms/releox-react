@@ -25,8 +25,8 @@ export abstract class AbstractInputGroup<T> extends Component<T & AbstractInputG
     return (
       <div className={`form-group ${inline ? 'row' : ''}`}>
         <label
-          htmlFor={id}
-          className={`${labelClass} ${inline ? `col-md-${inlineWidth} col-form-label` : ''}`}
+          htmlFor={id || `${name}-input`}
+          className={`${labelClass || ''} ${inline ? `col-md-${inlineWidth} col-form-label` : ''}`}
         >
           {label}
         </label>

@@ -5,11 +5,12 @@
  */
 import React from 'react';
 import { FieldProps, ErrorMessage } from 'formik';
+import getValue from 'get-value';
 import { AbstractInputGroup } from './AbstractInputGroup';
 
 export abstract class AbstractFormikInputGroup<T> extends AbstractInputGroup<T> {
   getInvalidClass({ field, form: { touched, errors } }: FieldProps) {
-    return errors[field.name] && touched[field.name] ? 'is-invalid' : '';
+    return getValue(errors, field.name) && getValue(touched, field.name) ? 'is-invalid' : '';
   }
 
   getErrorMessageField() {

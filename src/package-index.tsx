@@ -27,3 +27,4 @@ export * from './generic-scenes/create-generic-form-scene';
 export * from './components/Details/DetailField';
 export * from './components/Details/Details';
 export * from './components/AbstractInputGroup/AbstractInputGroup';
+export * from './components/Select/Select';

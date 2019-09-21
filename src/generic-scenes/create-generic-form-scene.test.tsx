@@ -35,7 +35,14 @@ describe('create-generic-form-scene', () => {
   it('should show all key elements on create scene', () => {
     const spy = jest.fn();
     const save = (a: any) => () => spy(a);
-    const El: any = createGenericFormScene('Create form', F, { name: 'Foo Bar' }, save, 'entry');
+    // 'Create form', F, { name: 'Foo Bar' }, save, 'entry'
+    const El: any = createGenericFormScene({
+      title: 'Create form',
+      EmbedForm: F,
+      initialValues: { name: 'Foo Bar' },
+      saveAction: save,
+      reduxEntry: 'entry',
+    });
     const wrapper = mount(
       <Provider store={store}>
         <MemoryRouter initialEntries={['/record/new']}>
@@ -63,16 +70,26 @@ describe('create-generic-form-scene', () => {
     const fetch = (a: any) => () => spy2(a);
     const del = (a: any) => () => spy3(a);
     const El: any = createGenericFormScene(
-      'Create form',
-      F,
-      { name: 'Foo Bar' },
-      save,
-      'entry',
-      undefined,
-      fetch,
-      del,
-      undefined,
-      ['country']
+      // 'Create form',
+      // F,
+      // { name: 'Foo Bar' },
+      // save,
+      // 'entry',
+      // undefined,
+      // fetch,
+      // del,
+      // undefined,
+      // ['country']
+      {
+        title: 'Create form',
+        EmbedForm: F,
+        initialValues: { name: 'Foo Bar' },
+        saveAction: save,
+        fetchAction: fetch,
+        delAction: del,
+        injectUserFields: ['country'],
+        reduxEntry: 'entry',
+      }
     );
     const wrapper = mount(
       <Provider store={store}>
@@ -116,7 +133,13 @@ describe('create-generic-form-scene', () => {
         },
       },
     });
-    const El: any = createGenericFormScene('Create form', F, { name: 'Foo Bar' }, save, 'entry');
+    const El: any = createGenericFormScene({
+      title: 'Create form',
+      EmbedForm: F,
+      initialValues: { name: 'Foo Bar' },
+      saveAction: save,
+      reduxEntry: 'entry',
+    });
     const wrapper = mount(
       <Provider store={store2}>
         <MemoryRouter initialEntries={['/record/1']}>
