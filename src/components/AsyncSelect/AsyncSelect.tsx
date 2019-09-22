@@ -18,6 +18,8 @@ export interface AsyncSelectInputProps {
   onError?(e: Error): any;
   queryFormat: AsyncSelectQueryFormat;
   placeholder?: string;
+  className?: string;
+  id?: string;
   value?: string;
   getUrl: string;
   mapValue: string;
@@ -80,12 +82,15 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
   }
 
   getAsyncSelectElement(): JSX.Element {
-    const { onChange, placeholder } = this.props;
+    const { onChange, placeholder, className, id } = this.props;
     const { defaultValue } = this.state;
     return (
       <Async
         cacheOptions
         placeholder={placeholder}
+        className={className}
+        id={id}
+        classNamePrefix="AsynSelect"
         defaultOptions
         isClearable
         loadOptions={this.loadOptions}
