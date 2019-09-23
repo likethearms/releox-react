@@ -22,6 +22,5 @@ it('should implement props', () => {
   );
   expect(wrapper.find('#id-foo').length).toBe(2);
   expect(wrapper.find('.classname-foo').length).toBe(2);
-  expect(wrapper.find('textarea[name="bar"]').length).toBe(1);
   expect(wrapper.find('[placeholder="foo bar"]').length).toBe(1);
 });
