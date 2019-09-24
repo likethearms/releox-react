@@ -1,5 +1,6 @@
 import React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { MemoryRouter } from 'react-router';
+import { shallow, mount, ReactWrapper } from 'enzyme';
 import 'jest-localstorage-mock';
 import moxios from 'moxios';
 import { LoginScene } from './LoginScene';
@@ -8,7 +9,7 @@ describe('onSubmit', () => {
   it('should call onSubmit', () => {
     const onSubmit = jest.fn();
     const wrapper = shallow(<LoginScene onSubmit={onSubmit} />);
-    const onSubmitProp = wrapper.find('FormikFormWrapperComponent').props().onSubmit as Function;
+    const onSubmitProp = wrapper.find('Formik').prop('onSubmit') as Function;
     onSubmitProp();
     expect(onSubmit).toBeCalledTimes(1);
   });
@@ -16,13 +17,21 @@ describe('onSubmit', () => {
 
 describe('loginFieldName', () => {
   it('should set email value to input name prop by default', () => {
-    const w = shallow(<LoginScene />);
-    expect(w.find('[name="email"]')).toHaveLength(1);
+    const w = mount(
+      <MemoryRouter>
+        <LoginScene />
+      </MemoryRouter>
+    );
+    expect(w.find('input[name="email"]')).toHaveLength(1);
   });
 
   it('should set username value to input name prop', () => {
-    const w = shallow(<LoginScene loginFieldName="username" />);
-    expect(w.find('[name="username"]')).toHaveLength(1);
+    const w = mount(
+      <MemoryRouter>
+        <LoginScene loginFieldName="username" />
+      </MemoryRouter>
+    );
+    expect(w.find('input[name="username"]')).toHaveLength(1);
   });
 });
 
@@ -34,9 +43,13 @@ describe('UI tests', () => {
   });
 
   describe('Finnish translations', () => {
-    let wrapper: ShallowWrapper;
+    let wrapper: ReactWrapper;
     beforeAll(() => {
-      wrapper = shallow(<LoginScene />);
+      wrapper = mount(
+        <MemoryRouter>
+          <LoginScene />
+        </MemoryRouter>
+      );
     });
 
     it('should have finnish title', () => {
@@ -50,18 +63,22 @@ describe('UI tests', () => {
     });
 
     it('should have finnish email placeholder', () => {
-      const word = wrapper.find('[name="email"]').prop('label');
+      const word = wrapper.find('[htmlFor="LoginScene-email-input"]').text();
       expect(word).toBe('Sähköposti');
     });
 
     it('should have finnish username placeholder', () => {
-      const w = shallow(<LoginScene loginFieldName="username" />);
-      const word = w.find('[name="username"]').prop('label');
+      const w = mount(
+        <MemoryRouter>
+          <LoginScene loginFieldName="username" />
+        </MemoryRouter>
+      );
+      const word = w.find('[htmlFor="LoginScene-username-input"]').text();
       expect(word).toBe('Käyttäjänimi');
     });
 
     it('should have finnish password placeholder', () => {
-      const word = wrapper.find('[name="password"]').prop('label');
+      const word = wrapper.find('[htmlFor="LoginScene-password-input"]').text();
       expect(word).toBe('Salasana');
     });
 
@@ -72,9 +89,13 @@ describe('UI tests', () => {
   });
 
   describe('English translations', () => {
-    let wrapper: ShallowWrapper;
+    let wrapper: ReactWrapper;
     beforeAll(() => {
-      wrapper = shallow(<LoginScene locale="en" />);
+      wrapper = mount(
+        <MemoryRouter>
+          <LoginScene locale="en" />
+        </MemoryRouter>
+      );
     });
 
     it('should have english title', () => {
@@ -88,18 +109,22 @@ describe('UI tests', () => {
     });
 
     it('should have english email placeholder', () => {
-      const word = wrapper.find('[name="email"]').prop('label');
+      const word = wrapper.find('[htmlFor="LoginScene-email-input"]').text();
       expect(word).toBe('Email');
     });
 
     it('should have english username placeholder', () => {
-      const w = shallow(<LoginScene loginFieldName="username" locale="en" />);
-      const word = w.find('[name="username"]').prop('label');
+      const w = mount(
+        <MemoryRouter>
+          <LoginScene loginFieldName="username" locale="en" />
+        </MemoryRouter>
+      );
+      const word = w.find('[htmlFor="LoginScene-username-input"]').text();
       expect(word).toBe('Username');
     });
 
     it('should have english password placeholder', () => {
-      const word = wrapper.find('[name="password"]').prop('label');
+      const word = wrapper.find('[htmlFor="LoginScene-password-input"]').text();
       expect(word).toBe('Password');
     });
 

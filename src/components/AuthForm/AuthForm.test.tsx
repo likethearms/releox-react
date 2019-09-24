@@ -29,13 +29,13 @@ describe('AuthForm', () => {
   });
 
   it('should inject init values', () => {
-    expect(wrapper.find('FormikFormWrapperComponent').prop('initialValues')).toStrictEqual({
+    expect(wrapper.find('Formik').prop('initialValues')).toStrictEqual({
       foo: 'bar',
     });
   });
 
   it('should call onSubmit', () => {
-    const onSubmit = wrapper.find('FormikFormWrapperComponent').prop('onSubmit') as Function;
+    const onSubmit = wrapper.find('Formik').prop('onSubmit') as Function;
     onSubmit();
     expect(spy).toBeCalledTimes(1);
   });

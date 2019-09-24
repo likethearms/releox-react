@@ -100,14 +100,17 @@ interface DataTableProps {
   defaultSorted?: DataTableDefaultSort;
 }
 
-export const createGenericIndex = (
-  title: string,
-  reduxEntry: string,
-  listAction: Function,
-  dataTableProps: DataTableProps,
-  redirectUrl?: string,
-  createLink?: string
-) => {
+interface GenericIndexOptions {
+  title: string;
+  reduxEntry: string;
+  listAction: Function;
+  dataTableProps: DataTableProps;
+  redirectUrl?: string;
+  createLink?: string;
+}
+
+export const createGenericIndex = (opts: GenericIndexOptions) => {
+  const { title, reduxEntry, listAction, dataTableProps, redirectUrl, createLink } = opts;
   const mapStateToProps = (state: any) => ({
     data: state[reduxEntry].list.data,
     count: state[reduxEntry].list.count,

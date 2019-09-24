@@ -4,7 +4,7 @@ import { Card } from './Card';
 
 it('should show card', () => {
   const wrapper = shallow(<Card>Foo</Card>);
-  expect(wrapper.find({ children: 'Foo' }).length).toBe(1);
+  expect(wrapper.find({ children: 'Foo' })).toHaveLength(1);
 });
 
 it('should show card with header', () => {
@@ -13,10 +13,10 @@ it('should show card with header', () => {
       Bar
     </Card>
   );
-  expect(wrapper.find({ children: 'Bar' }).length).toBe(1);
-  expect(wrapper.find({ children: 'Foo' }).length).toBe(1);
-  expect(wrapper.find('.bg-primary').length).toBe(1);
-  expect(wrapper.find('.card-body').length).toBe(1);
+  expect(wrapper.find({ children: 'Bar' })).toHaveLength(1);
+  expect(wrapper.find({ children: 'Foo' })).toHaveLength(1);
+  expect(wrapper.find('.bg-primary')).toHaveLength(1);
+  expect(wrapper.find('.card-body')).toHaveLength(1);
 });
 
 it('should show card without card-body class', () => {
@@ -25,5 +25,5 @@ it('should show card without card-body class', () => {
       Bar
     </Card>
   );
-  expect(wrapper.find('.card-body').length).toBe(0);
+  expect(wrapper.find('.card-body')).toHaveLength(0);
 });

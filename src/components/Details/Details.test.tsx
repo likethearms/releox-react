@@ -5,9 +5,14 @@ import { Details } from './Details';
 const object = {
   name: 'Test Name',
   id: 1,
+  empty: undefined,
 };
 
-const props = [{ label: 'Name', key: 'name' }, { label: '#', key: 'id' }];
+const props = [
+  { label: 'Name', key: 'name' },
+  { label: '#', key: 'id' },
+  { label: 'Empty value', key: 'empty' },
+];
 
 describe('Details', () => {
   it('should list all given fields', () => {
@@ -16,5 +21,6 @@ describe('Details', () => {
     expect(wrapper.find('[children="#"]')).toHaveLength(1);
     expect(wrapper.find('td[children="Test Name"]')).toHaveLength(1);
     expect(wrapper.find('td[children=1]')).toHaveLength(1);
+    expect(wrapper.find('td[children="-"]')).toHaveLength(1);
   });
 });

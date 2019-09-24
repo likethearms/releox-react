@@ -1,9 +1,7 @@
 import React from 'react';
-import { Field } from 'formik';
-import {
-  AbstractInputGroupProps,
-  AbstractInputGroup,
-} from '../AbstractInputGroup/AbstractInputGroup';
+import { Field, FieldProps } from 'formik';
+import { AbstractInputGroupProps } from '../AbstractInputGroup/AbstractInputGroup';
+import { AbstractFormikInputGroup } from '../AbstractInputGroup/AbstractFormikInputGroup';
 
 export interface TextAreaProps extends AbstractInputGroupProps {
   rows?: number;
@@ -11,18 +9,26 @@ export interface TextAreaProps extends AbstractInputGroupProps {
   className?: string;
 }
 
-export class TextArea extends AbstractInputGroup<TextAreaProps> {
-  getElement(name: string, id: string): JSX.Element {
-    const { rows, placeholder, label, className } = this.props;
+export class TextArea extends AbstractFormikInputGroup<TextAreaProps> {
+  getInputElement = (fieldProps: FieldProps) => {
+    const { rows, placeholder, label, className, name, id } = this.props;
     return (
-      <Field
-        name={name}
-        component="textarea"
-        rows={rows || 6}
-        id={id || `${name}-input`}
-        placeholder={placeholder || label}
-        className={className || 'form-control'}
-      />
+      <div>
+        <textarea
+          rows={rows || 6}
+          defaultValue={fieldProps.field.value}
+          onBlur={(e) => fieldProps.form.setFieldValue(fieldProps.field.name, e.target.value)}
+          id={id || `${name}-input`}
+          placeholder={placeholder || label}
+          className={className || `form-control ${this.getInvalidClass(fieldProps)}`}
+        />
+        {this.getErrorMessageField()}
+      </div>
     );
+  };
+
+  getElement(name: string): JSX.Element {
+    this.getInputElement = this.getInputElement.bind(this);
+    return <Field name={name} component={this.getInputElement} />;
   }
 }

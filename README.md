@@ -14,9 +14,13 @@
 - [NativeInput](#nativeInput)
 - [TextArea](#textArea)
 - [Create generic index](#create-generic-index)
+- [Create generic form](#create-generic-form)
 - [Details](#details)
 - [DetailField](#detailField)
-- [ReactSelect](#reactSelect)
+  <<<<<<< HEAD
+- # [ReactSelect](#reactSelect)
+- [Select](#select)
+  > > > > > > > origin/1.1.0
 
 ## AsyncSelectFormik
 
@@ -129,15 +133,18 @@
 ## Create generic index
 
 ```typescript
-createGenericIndex(title, reduxEntry, listAction, dataTableProps, redirectUrl, createLink);
+createGenericIndex(options);
 ```
 
-- `title` - string, **required** - Title of the page
-- `reduxEntry` - string, **required** - Redux entry key
-- `listAction` - function, **required** - List action
-- `dataTableProps` - DataTableProps, **required** - DataTable props columns, defaultSorted and query
-- `redirectUrl` - string, Default: `undefined` - URL to page you want to open when record clicked. NOTE! require `':id'` params
-- `createLink` - string, Default: `undefined` - Link to create page
+- `options` - GenericIndexOptions, **required** - Index scene options
+
+## Create generic form
+
+```typescript
+createGenericFormScene(options);
+```
+
+- `options` - GenericFormSceneProps, **required** - Form scene options
 
 ## NativeInput
 
@@ -210,3 +217,17 @@ createGenericIndex(title, reduxEntry, listAction, dataTableProps, redirectUrl, c
 - `placeholder` - string, Default: `label` - Placeholder for reactSelect
 - `classname` - string, Default: `form-control'` - Custom class for reactSelect
 - `selectedOption` - string, Default: `null'` - Initial value for reactSelect
+
+## Select
+
+### Select props
+
+- `label` - string, **Required** - Label for select
+- `name` - string, **Required** - Name for select
+- `options` - [{value: string | number, label: string | number}] **Required** - Select options for select component
+- `id` - string, - Default `${name}-input` - Custom id for select
+- `inline` - boolean, Default: `false` - Inline label format for select
+- `inlineLabelWidth` - number, Default: `4` - Label width for select (MAX = 12)
+- `labelClass` - string, Default: `''` - Custom class for label
+- `placeholder` - string, Default: `label` - Placeholder for select
+- `classname` - string, Default: `form-control'` - Custom class for select

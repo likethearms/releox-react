@@ -1,18 +1,18 @@
 import React from 'react';
+import { Formik } from 'formik';
 import { shallow, mount, ReactWrapper } from 'enzyme';
 import { CoreuiCheckBox } from './CoreuiCheckBox';
-import { FormikFormWrapper } from '../FormikFormWrapper/FormikFormWrapper';
 
 it('should default props', () => {
   const wrapper = shallow(<CoreuiCheckBox name="bar" label="foo" />);
-  expect(wrapper.find('[name="bar"]').length).toBe(1);
-  expect(wrapper.find('#bar-input').length).toBe(1);
+  expect(wrapper.find('[name="bar"]')).toHaveLength(1);
+  expect(wrapper.find('#bar-input')).toHaveLength(1);
 });
 
 it('should implement props', () => {
   const wrapper = shallow(<CoreuiCheckBox name="bar" label="foo" id="idFoo" />);
-  expect(wrapper.find('[name="bar"]').length).toBe(1);
-  expect(wrapper.find('#idFoo').length).toBe(1);
+  expect(wrapper.find('[name="bar"]')).toHaveLength(1);
+  expect(wrapper.find('#idFoo')).toHaveLength(1);
 });
 
 describe('Mounted test', () => {
@@ -20,9 +20,9 @@ describe('Mounted test', () => {
 
   beforeAll(() => {
     wrapper = mount(
-      <FormikFormWrapper onSubmit={() => {}} initialValues={{ bar: true }}>
-        <CoreuiCheckBox name="bar" label="foo" />
-      </FormikFormWrapper>
+      <Formik onSubmit={() => {}} initialValues={{ bar: true }}>
+        {() => <CoreuiCheckBox name="bar" label="foo" />}
+      </Formik>
     );
   });
 

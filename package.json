@@ -1,16 +1,18 @@
 {
   "name": "releox-react",
-  "version": "1.1.0-beta.5",
+  "version": "1.1.0-beta.20",
   "typings": "lib/index.d.ts",
   "main": "lib/index.js",
   "author": "Henrik Salmela",
   "dependencies": {
     "@types/get-value": "^3.0.1",
     "@types/react-redux": "^7.1.2",
+    "@types/yup": "^0.26.24",
     "get-value": "^3.0.1",
     "query-string": "^6.8.3",
     "react-loading": "^2.0.3",
-    "react-redux": "^7.1.1"
+    "react-redux": "^7.1.1",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",
