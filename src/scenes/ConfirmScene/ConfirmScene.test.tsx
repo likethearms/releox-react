@@ -30,7 +30,7 @@ describe('componentDidMount', () => {
     const waitForSample = createWaitForElement('AuthLayout');
     wrapper = shallow(<ConfirmScene />);
     await waitForSample(wrapper);
-    expect(wrapper.find('[title="Tunnuksesi on nyt aktivoitu"]').length).toBe(1);
+    expect(wrapper.find('[title="Tunnuksesi on nyt aktivoitu"]')).toHaveLength(1);
   });
 
   it('should set error message on reject', async () => {
@@ -41,7 +41,7 @@ describe('componentDidMount', () => {
     const waitForSample = createWaitForElement('Redirect');
     wrapper = shallow(<ConfirmScene />);
     await waitForSample(wrapper);
-    expect(wrapper.find('[to="/auth-error?message=Error message"]').length).toBe(1);
+    expect(wrapper.find('[to="/auth-error?message=Error message"]')).toHaveLength(1);
   });
 });
 
@@ -55,7 +55,7 @@ describe('Test information errors', () => {
     const waitForSample = createWaitForElement('Redirect');
     wrapper = shallow(<ConfirmScene />);
     await waitForSample(wrapper);
-    expect(wrapper.find('[to="/auth-error?message=Missing information"]').length).toBe(1);
+    expect(wrapper.find('[to="/auth-error?message=Missing information"]')).toHaveLength(1);
   });
 
   test('error shown if missing token', async () => {
@@ -63,7 +63,7 @@ describe('Test information errors', () => {
     const waitForSample = createWaitForElement('Redirect');
     wrapper = shallow(<ConfirmScene />);
     await waitForSample(wrapper);
-    expect(wrapper.find('[to="/auth-error?message=Missing information"]').length).toBe(1);
+    expect(wrapper.find('[to="/auth-error?message=Missing information"]')).toHaveLength(1);
   });
 
   test('error shown if uid is array ', async () => {
@@ -71,7 +71,7 @@ describe('Test information errors', () => {
     const waitForSample = createWaitForElement('Redirect');
     wrapper = shallow(<ConfirmScene />);
     await waitForSample(wrapper);
-    expect(wrapper.find('[to="/auth-error?message=Information is on wrong format"]').length).toBe(
+    expect(wrapper.find('[to="/auth-error?message=Information is on wrong format"]')).toHaveLength(
       1
     );
   });
@@ -81,7 +81,7 @@ describe('Test information errors', () => {
     const waitForSample = createWaitForElement('Redirect');
     wrapper = shallow(<ConfirmScene />);
     await waitForSample(wrapper);
-    expect(wrapper.find('[to="/auth-error?message=Information is on wrong format"]').length).toBe(
+    expect(wrapper.find('[to="/auth-error?message=Information is on wrong format"]')).toHaveLength(
       1
     );
   });
@@ -108,7 +108,7 @@ describe('UI tests', () => {
     });
 
     it('should have finnish title', () => {
-      expect(wrapper.find('[title="Tunnuksesi on nyt aktivoitu"]').length).toBe(1);
+      expect(wrapper.find('[title="Tunnuksesi on nyt aktivoitu"]')).toHaveLength(1);
     });
 
     it('should have finnish subtitle', () => {
@@ -132,7 +132,7 @@ describe('UI tests', () => {
     });
 
     it('should have english title', () => {
-      expect(wrapper.find('[title="Your account is now activated."]').length).toBe(1);
+      expect(wrapper.find('[title="Your account is now activated."]')).toHaveLength(1);
     });
 
     it('should have english subtitle', () => {

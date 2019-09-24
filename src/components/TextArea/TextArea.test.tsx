@@ -9,7 +9,7 @@ it('should show textArea', () => {
       {() => <TextArea name="bar" label="FOO BAR" />}
     </Formik>
   );
-  expect(wrapper.find('#bar-input').length).toBe(1);
+  expect(wrapper.find('#bar-input')).toHaveLength(1);
 });
 
 it('should implement props', () => {
@@ -20,7 +20,7 @@ it('should implement props', () => {
       )}
     </Formik>
   );
-  expect(wrapper.find('#id-foo').length).toBe(2);
-  expect(wrapper.find('.classname-foo').length).toBe(2);
-  expect(wrapper.find('[placeholder="foo bar"]').length).toBe(1);
+  expect(wrapper.find('#id-foo')).toHaveLength(2);
+  expect(wrapper.find('.classname-foo')).toHaveLength(2);
+  expect(wrapper.find('[placeholder="foo bar"]')).toHaveLength(1);
 });

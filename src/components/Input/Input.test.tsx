@@ -5,23 +5,23 @@ import { Input } from './Input';
 
 it('should show input', () => {
   const wrapper = shallow(<Input label="Test" id="test" name="test-name" />);
-  expect(wrapper.find(Field).length).toBe(1);
+  expect(wrapper.find(Field)).toHaveLength(1);
 });
 
 it('should show default inline input', () => {
   const wrapper = shallow(<Input inline name="foo" label="Foo" />);
-  expect(wrapper.find('.row').length).toBe(1);
-  expect(wrapper.find('label.col-md-4').length).toBe(1);
-  expect(wrapper.find('.col-md-8').length).toBe(1);
+  expect(wrapper.find('.row')).toHaveLength(1);
+  expect(wrapper.find('label.col-md-4')).toHaveLength(1);
+  expect(wrapper.find('.col-md-8')).toHaveLength(1);
 });
 
 it('should show default inline input with custom width and label on right', () => {
   const comp = <Input inline name="foo" label="Foo" inlineLabelWidth={8} labelClass="text-right" />;
   const wrapper = shallow(comp);
-  expect(wrapper.find('.row').length).toBe(1);
-  expect(wrapper.find('label.col-md-8').length).toBe(1);
-  expect(wrapper.find('.col-md-4').length).toBe(1);
-  expect(wrapper.find('.text-right').length).toBe(1);
+  expect(wrapper.find('.row')).toHaveLength(1);
+  expect(wrapper.find('label.col-md-8')).toHaveLength(1);
+  expect(wrapper.find('.col-md-4')).toHaveLength(1);
+  expect(wrapper.find('.text-right')).toHaveLength(1);
 });
 
 it('should implement custom props', () => {
@@ -41,7 +41,7 @@ it('should implement custom props', () => {
   );
   const wrapper = mount(comp);
   const field = wrapper.find('input');
-  expect(wrapper.find({ children: 'Test' }).length).toBe(1);
+  expect(wrapper.find({ children: 'Test' })).toHaveLength(1);
   expect(field.prop('id')).toBe('test');
   expect(field.prop('name')).toBe('test-name');
   expect(field.prop('type')).toBe('email');
@@ -56,7 +56,7 @@ it('should inject default props', () => {
     </Formik>
   );
   const field = wrapper.find('input');
-  expect(wrapper.find({ children: 'Test' }).length).toBe(1);
+  expect(wrapper.find({ children: 'Test' })).toHaveLength(1);
   expect(field.prop('id')).toBe('test-name-input');
   expect(field.prop('name')).toBe('test-name');
   expect(field.prop('type')).toBe('text');

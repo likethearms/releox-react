@@ -5,14 +5,14 @@ import { CoreuiCheckBox } from './CoreuiCheckBox';
 
 it('should default props', () => {
   const wrapper = shallow(<CoreuiCheckBox name="bar" label="foo" />);
-  expect(wrapper.find('[name="bar"]').length).toBe(1);
-  expect(wrapper.find('#bar-input').length).toBe(1);
+  expect(wrapper.find('[name="bar"]')).toHaveLength(1);
+  expect(wrapper.find('#bar-input')).toHaveLength(1);
 });
 
 it('should implement props', () => {
   const wrapper = shallow(<CoreuiCheckBox name="bar" label="foo" id="idFoo" />);
-  expect(wrapper.find('[name="bar"]').length).toBe(1);
-  expect(wrapper.find('#idFoo').length).toBe(1);
+  expect(wrapper.find('[name="bar"]')).toHaveLength(1);
+  expect(wrapper.find('#idFoo')).toHaveLength(1);
 });
 
 describe('Mounted test', () => {

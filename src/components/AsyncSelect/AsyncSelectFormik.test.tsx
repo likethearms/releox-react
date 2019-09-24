@@ -33,7 +33,7 @@ describe('AsyncSelectFormik', () => {
     expect(wrapper.find('label').text()).toBe('selectLabel');
   });
 
-  it('should call', () => {
+  it('should call onChange', () => {
     const onChange = input.prop('onChange') as Function;
     onChange('foo');
     expect(spy).toBeCalledWith('selectName', 'foo');

@@ -4,8 +4,8 @@ import { Button } from './Button';
 
 it('should show input', () => {
   const wrapper = shallow(<Button id="foo-id">Foo</Button>);
-  expect(wrapper.find({ children: 'Foo' }).length).toBe(1);
-  expect(wrapper.find('#foo-id').length).toBe(1);
+  expect(wrapper.find({ children: 'Foo' })).toHaveLength(1);
+  expect(wrapper.find('#foo-id')).toHaveLength(1);
 });
 
 it('should implement props', () => {

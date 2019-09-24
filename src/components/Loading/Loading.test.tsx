@@ -16,12 +16,12 @@ it('should have spin type by default', () => {
 
 it('should center element by default', () => {
   const wrapper = shallow(<Loading />);
-  expect(wrapper.find(CenterContent).length).toBe(1);
+  expect(wrapper.find(CenterContent)).toHaveLength(1);
 });
 
 it('should turn center align off when needed', () => {
   const wrapper = shallow(<Loading centeredVertical={false} />);
-  expect(wrapper.find(CenterContent).length).toBe(0);
+  expect(wrapper.find(CenterContent)).toHaveLength(0);
 });
 
 it('should change color', () => {
