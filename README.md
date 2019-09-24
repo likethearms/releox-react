@@ -16,6 +16,7 @@
 - [Create generic index](#create-generic-index)
 - [Details](#details)
 - [DetailField](#detailField)
+- [Select](#select)
 
 ## AsyncSelectFormik
 
@@ -193,3 +194,17 @@ createGenericIndex(title, reduxEntry, listAction, dataTableProps, redirectUrl, c
 
 - `label` - string, **Required** - Label for field
 - `children` - string, **Required** - Value to show
+
+## Select
+
+### Select props
+
+- `label` - string, **Required** - Label for select
+- `name` - string, **Required** - Name for select
+- `options` - [{value: string | number, label: string | number}] **Required** - Select options for select component
+- `id` - string, - Default `${name}-input` - Custom id for select
+- `inline` - boolean, Default: `false` - Inline label format for select
+- `inlineLabelWidth` - number, Default: `4` - Label width for select (MAX = 12)
+- `labelClass` - string, Default: `''` - Custom class for label
+- `placeholder` - string, Default: `label` - Placeholder for select
+- `classname` - string, Default: `form-control'` - Custom class for select

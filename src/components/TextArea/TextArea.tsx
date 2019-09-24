@@ -10,9 +10,9 @@ export interface TextAreaProps extends AbstractInputGroupProps {
 }
 
 export class TextArea extends AbstractFormikInputGroup<TextAreaProps> {
-  getElement(name: string, id: string): JSX.Element {
-    const { rows, placeholder, label, className } = this.props;
-    const InputElement = (fieldProps: FieldProps) => (
+  getInputElement = (fieldProps: FieldProps) => {
+    const { rows, placeholder, label, className, name, id } = this.props;
+    return (
       <div>
         <textarea
           rows={rows || 6}
@@ -25,6 +25,10 @@ export class TextArea extends AbstractFormikInputGroup<TextAreaProps> {
         {this.getErrorMessageField()}
       </div>
     );
-    return <Field name={name} component={InputElement} />;
+  };
+
+  getElement(name: string): JSX.Element {
+    this.getInputElement = this.getInputElement.bind(this);
+    return <Field name={name} component={this.getInputElement} />;
   }
 }
