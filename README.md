@@ -14,6 +14,7 @@
 - [NativeInput](#nativeInput)
 - [TextArea](#textArea)
 - [Create generic index](#create-generic-index)
+- [Create generic form](#create-generic-form)
 - [Details](#details)
 - [DetailField](#detailField)
 - [Select](#select)
@@ -129,15 +130,18 @@
 ## Create generic index
 
 ```typescript
-createGenericIndex(title, reduxEntry, listAction, dataTableProps, redirectUrl, createLink);
+createGenericIndex(options);
 ```
 
-- `title` - string, **required** - Title of the page
-- `reduxEntry` - string, **required** - Redux entry key
-- `listAction` - function, **required** - List action
-- `dataTableProps` - DataTableProps, **required** - DataTable props columns, defaultSorted and query
-- `redirectUrl` - string, Default: `undefined` - URL to page you want to open when record clicked. NOTE! require `':id'` params
-- `createLink` - string, Default: `undefined` - Link to create page
+- `options` - GenericIndexOptions, **required** - Index scene options
+
+## Create generic form
+
+```typescript
+createGenericFormScene(options);
+```
+
+- `options` - GenericFormSceneProps, **required** - Form scene options
 
 ## NativeInput
 
