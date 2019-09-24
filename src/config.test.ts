@@ -1,9 +1,9 @@
 import { getUserIdKey, getTokenKey, getReleoxOption, setReleoxOptions } from './config';
 
 describe('getUserIdKey', () => {
-  afterAll(() => {
-    window.RELEOX_OPTIONS = {};
-  });
+  // afterAll(() => {
+  //   window.RELEOX_OPTIONS = {};
+  // });
 
   it('should return userId by default', () => {
     expect(getUserIdKey()).toBe('userId');
@@ -16,9 +16,9 @@ describe('getUserIdKey', () => {
 });
 
 describe('getTokenKey', () => {
-  afterAll(() => {
-    window.RELEOX_OPTIONS = {};
-  });
+  // afterAll(() => {
+  //   window.RELEOX_OPTIONS = {};
+  // });
 
   it('should return userId by default', () => {
     expect(getTokenKey()).toBe('accessToken');

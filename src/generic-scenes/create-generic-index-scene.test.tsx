@@ -4,7 +4,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router';
-import { createGenericIndex } from './create-generic-index';
+import { createGenericIndex } from './create-generic-index-scene';
 
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
@@ -26,8 +26,13 @@ describe('create-generic-index', () => {
   it('should call list and expect default order', () => {
     const spy = jest.fn();
     const list = (a: any) => () => spy(a);
-    const Component: any = createGenericIndex('Foo title', 'entry', list, {
-      columns: [{ text: '#', dataField: 'id' }],
+    const Component: any = createGenericIndex({
+      title: 'Foo title',
+      reduxEntry: 'entry',
+      listAction: list,
+      dataTableProps: {
+        columns: [{ text: '#', dataField: 'id' }],
+      },
     });
     const connectedComponent = () => (
       <Provider store={store}>
@@ -48,9 +53,14 @@ describe('create-generic-index', () => {
   it('should setup custom order', () => {
     const spy = jest.fn();
     const list = (a: any) => () => spy(a);
-    const Component: any = createGenericIndex('Foo title', 'entry', list, {
-      columns: [{ text: '#', dataField: 'id' }],
-      defaultSorted: { dataField: 'name', order: 'asc' },
+    const Component: any = createGenericIndex({
+      title: 'Foo title',
+      reduxEntry: 'entry',
+      listAction: list,
+      dataTableProps: {
+        columns: [{ text: '#', dataField: 'id' }],
+        defaultSorted: { dataField: 'name', order: 'asc' },
+      },
     });
     const connectedComponent = () => (
       <Provider store={store}>
@@ -70,16 +80,14 @@ describe('create-generic-index', () => {
   it('should call create new button', () => {
     const spy = jest.fn();
     const list = (a: any) => () => spy(a);
-    const Component: any = createGenericIndex(
-      'Foo title',
-      'entry',
-      list,
-      {
-        columns: [{ text: '#', dataField: 'id' }],
-      },
-      '/show/:id',
-      '/create'
-    );
+    const Component: any = createGenericIndex({
+      title: 'Foo title',
+      reduxEntry: 'entry',
+      listAction: list,
+      dataTableProps: { columns: [{ text: '#', dataField: 'id' }] },
+      createLink: '/create',
+      redirectUrl: '/show/:id',
+    });
     const connectedComponent = () => (
       <Provider store={store}>
         <MemoryRouter>
@@ -95,16 +103,16 @@ describe('create-generic-index', () => {
   it('should test that onClick call redirect', () => {
     const spy = jest.fn();
     const list = (a: any) => () => spy(a);
-    const Component: any = createGenericIndex(
-      'Foo title',
-      'entry',
-      list,
-      {
+    const Component: any = createGenericIndex({
+      title: 'Foo title',
+      reduxEntry: 'entry',
+      listAction: list,
+      dataTableProps: {
         columns: [{ text: '#', dataField: 'id' }],
         defaultSorted: { dataField: 'id', order: 'asc' },
       },
-      '/show/:id'
-    );
+      redirectUrl: '/show/:id',
+    });
     const connectedComponent = () => (
       <Provider store={store}>
         <MemoryRouter>

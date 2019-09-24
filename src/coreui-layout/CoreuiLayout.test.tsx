@@ -91,10 +91,10 @@ describe('CoreuiLayout', () => {
           </CoreuiLayout>
         )
       );
-      expect(wrapper.find('NavLink[to="/foo"]').length).toBe(1);
-      expect(wrapper.find('NavLink[to="/bar"]').length).toBe(1);
-      expect(wrapper.find('[children="Foo"]').length).toBe(1);
-      expect(wrapper.find('[children="Bar"]').length).toBe(1);
+      expect(wrapper.find('NavLink[to="/foo"]')).toHaveLength(1);
+      expect(wrapper.find('NavLink[to="/bar"]')).toHaveLength(1);
+      expect(wrapper.find('[children="Foo"]')).toHaveLength(1);
+      expect(wrapper.find('[children="Bar"]')).toHaveLength(1);
     });
 
     it('should show icon', () => {
@@ -106,7 +106,7 @@ describe('CoreuiLayout', () => {
           </CoreuiLayout>
         )
       );
-      expect(wrapper.find('i').length).toBe(1);
+      expect(wrapper.find('i')).toHaveLength(1);
     });
 
     it('should show button instead if onclick is set', () => {
@@ -130,7 +130,7 @@ describe('CoreuiLayout', () => {
           </CoreuiLayout>
         )
       );
-      expect(wrapper.find('.nav-title').length).toBe(1);
+      expect(wrapper.find('.nav-title')).toHaveLength(1);
     });
 
     it('should remove class sidebar-show from app class', () => {
@@ -166,11 +166,11 @@ describe('CoreuiLayout', () => {
           </CoreuiLayout>
         )
       );
-      expect(wrapper.find('.nav-dropdown').length).toBe(1);
-      expect(wrapper.find('NavLink[to="/foo"]').length).toBe(1);
-      expect(wrapper.find('NavLink[to="/bar"]').length).toBe(1);
-      expect(wrapper.find('[children="Foo"]').length).toBe(1);
-      expect(wrapper.find('[children="Bar"]').length).toBe(1);
+      expect(wrapper.find('.nav-dropdown')).toHaveLength(1);
+      expect(wrapper.find('NavLink[to="/foo"]')).toHaveLength(1);
+      expect(wrapper.find('NavLink[to="/bar"]')).toHaveLength(1);
+      expect(wrapper.find('[children="Foo"]')).toHaveLength(1);
+      expect(wrapper.find('[children="Bar"]')).toHaveLength(1);
     });
 
     it('should render dropdown open if url is same than prop url', () => {
@@ -191,7 +191,7 @@ describe('CoreuiLayout', () => {
           </CoreuiLayout>
         )
       );
-      expect(wrapper.find('.open').length).toBe(1);
+      expect(wrapper.find('.open')).toHaveLength(1);
     });
 
     test('onclick add open class to dropdown parent', () => {

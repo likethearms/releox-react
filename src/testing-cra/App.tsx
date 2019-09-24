@@ -8,8 +8,8 @@ import { routeMapper } from '../routeMapper';
 const App = () => (
   <Switch>
     {authRoutes.map(routeMapper)}
-    <Route exact path="/components" component={Components} />
     <Route exact path="/" component={Core} />
+    <Route exact path="/components" component={Components} />
   </Switch>
 );
 

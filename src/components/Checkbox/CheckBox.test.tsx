@@ -10,7 +10,7 @@ it('should implement default props', () => {
     </Formik>
   );
   expect(wrapper.find('input[name="bar"]')).toHaveLength(1);
-  expect(wrapper.find('FieldInner#bar-input')).toHaveLength(1);
+  expect(wrapper.find('input#bar-input')).toHaveLength(1);
   expect(wrapper.find('.form-check-input')).toHaveLength(1);
 });
 
@@ -20,7 +20,7 @@ it('should implement props', () => {
       {() => <CheckBox name="bar" id="id-foo" label="Foo" labelClass="label-class" />}
     </Formik>
   );
-  expect(wrapper.find('FieldInner#id-foo')).toHaveLength(1);
+  expect(wrapper.find('input#id-foo')).toHaveLength(1);
   expect(wrapper.find('label.label-class')).toHaveLength(1);
 });
 

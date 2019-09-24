@@ -1,3 +1,8 @@
+/*
+ * This component should be use to make inputs for Releox framework. It add default
+ * styling to every input and make it to easy add features to all inputs
+ * if you planning to make Formik input, i recommend to you to use AbstractFormikInputGroup.
+ */
 import React, { Component } from 'react';
 
 export interface AbstractInputGroupProps {
@@ -20,8 +25,8 @@ export abstract class AbstractInputGroup<T> extends Component<T & AbstractInputG
     return (
       <div className={`form-group ${inline ? 'row' : ''}`}>
         <label
-          htmlFor={id}
-          className={`${labelClass} ${inline ? `col-md-${inlineWidth} col-form-label` : ''}`}
+          htmlFor={id || `${name}-input`}
+          className={`${labelClass || ''} ${inline ? `col-md-${inlineWidth} col-form-label` : ''}`}
         >
           {label}
         </label>

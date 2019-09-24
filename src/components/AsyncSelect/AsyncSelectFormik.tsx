@@ -1,28 +1,45 @@
 import React from 'react';
-import { Field } from 'formik';
-import { AsyncSelectFormikWrapper } from './AsyncSelectFormikWrapper';
-import {
-  AbstractInputGroup,
-  AbstractInputGroupProps,
-} from '../AbstractInputGroup/AbstractInputGroup';
-import { AsyncSelectQueryFormat } from './AsyncSelect';
+import { Field, FieldProps } from 'formik';
+import { AbstractInputGroupProps } from '../AbstractInputGroup/AbstractInputGroup';
+import { AsyncSelectQueryFormat, AsyncSelect } from './AsyncSelect';
+import { AbstractFormikInputGroup } from '../AbstractInputGroup/AbstractFormikInputGroup';
 
 export interface AsyncSelectFormikProps extends AbstractInputGroupProps {
   getUrl: string;
   queryFormat: AsyncSelectQueryFormat;
+  mapLabel?: string;
+  mapValue?: string;
+  searchFields?: string[];
+
+  onError?(e: Error): any;
+  placeholder?: string;
+  value?: string;
 }
 
-export class AsyncSelectFormik extends AbstractInputGroup<AsyncSelectFormikProps> {
-  getElement(name: string, id: string): JSX.Element {
-    const { getUrl, queryFormat } = this.props;
+export class AsyncSelectFormik extends AbstractFormikInputGroup<AsyncSelectFormikProps> {
+  getInputElement(fieldProps: FieldProps) {
+    const { getUrl, queryFormat, mapLabel, searchFields, mapValue, placeholder, id } = this.props;
     return (
-      <Field
-        name={name}
-        id={id}
-        getUrl={getUrl}
-        queryFormat={queryFormat}
-        component={AsyncSelectFormikWrapper}
-      />
+      <div className="ReactSelectHelper">
+        <AsyncSelect
+          {...fieldProps.field} // eslint-disable-line
+          getUrl={getUrl}
+          id={id}
+          className={this.getInvalidClass(fieldProps)}
+          queryFormat={queryFormat}
+          mapLabel={mapLabel}
+          mapValue={mapValue}
+          onChange={(value: string) => fieldProps.form.setFieldValue(fieldProps.field.name, value)}
+          placeholder={placeholder}
+          searchFields={searchFields || ['name']}
+        />
+        {this.getErrorMessageField()}
+      </div>
     );
+  }
+
+  getElement(name: string): JSX.Element {
+    this.getInputElement = this.getInputElement.bind(this);
+    return <Field name={name} component={this.getInputElement} />;
   }
 }

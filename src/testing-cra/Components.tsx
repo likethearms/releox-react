@@ -1,53 +1,38 @@
 import React from 'react';
-import { Formik } from 'formik';
+import { Formik, Form } from 'formik';
 import { Card } from '../components/Card/Card';
 import { AsyncSelectFormik } from '../components/AsyncSelect/AsyncSelectFormik';
-import { CoreuiCheckBox } from '../components/Checkbox/CoreuiCheckBox';
-import { Input } from '../components/Input/Input';
-import { CheckBox } from '../components/Checkbox/CheckBox';
 import { TextArea } from '../components/TextArea/TextArea';
-import { AsyncSelect } from '../components/AsyncSelect/AsyncSelect';
+import { Input } from '../components/Input/Input';
 
 const Components = () => (
   <div className="m-5">
+    <span>Foo</span>
     <Card>
-      <Formik onSubmit={() => {}} initialValues={{ name: '' }}>
-        <AsyncSelectFormik
-          getUrl="/Products/"
-          queryFormat="mongodb"
-          label="Products"
-          name="products"
-        />
-        <AsyncSelectFormik
-          label="Products"
-          name="products"
-          getUrl="/Products/"
-          queryFormat="mongodb"
-          id=""
-          inline
-          inlineLabelWidth={4}
-          labelClass=""
-        />
-        <AsyncSelect
-          getUrl="/Products/"
-          queryFormat="mongodb"
-          onError={() => {}}
-          searchFields={[]}
-          onChange={() => {}}
-          placeholder=""
-          mapLabel=""
-          mapValue=""
-        />
-        <TextArea name="foofoo" label="Foofoo" />
-        <TextArea inline inlineLabelWidth={2} name="barbar" label="Barbar" />
-        <Input inline name="hello" label="Hello" />
-        <Input labelClass="text-right" inline name="hello" label="Hello" />
-        <Input labelClass="text-right" inlineLabelWidth={2} inline name="hello" label="Hello" />
-        <Input inlineLabelWidth={10} inline name="hello" label="Hello" />
-        <CoreuiCheckBox label="Admin" name="admin" />
-        <CoreuiCheckBox label="Label" name="Label" />
-        <CheckBox label="Admin" name="foo" />
-        <CheckBox label="Label" name="bar" />
+      <Formik
+        onSubmit={(x) => x}
+        initialValues={{ name: '', foo: '', async: '' }}
+        validate={(v) => {
+          const e: any = {};
+          if (!v.name) e.name = 'Missing';
+          return e;
+        }}
+      >
+        {() => (
+          <Form>
+            <button type="submit">Submit</button>
+            <AsyncSelectFormik
+              getUrl="http://localhost:3001/api/Vehicles"
+              queryFormat="mongodb"
+              label="Products"
+              mapLabel="registerNumber"
+              searchFields={['registerNumber']}
+              name="async"
+            />
+            <TextArea name="name" label="Name" />
+            <Input name="foo" label="foo" />
+          </Form>
+        )}
       </Formik>
     </Card>
   </div>

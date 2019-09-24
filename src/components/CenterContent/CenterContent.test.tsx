@@ -4,5 +4,5 @@ import { CenterContent } from './CenterContent';
 
 it('should render children', () => {
   const wrapper = shallow(<CenterContent>Foo</CenterContent>);
-  expect(wrapper.find({ children: 'Foo' }).length).toBe(1);
+  expect(wrapper.find({ children: 'Foo' })).toHaveLength(1);
 });

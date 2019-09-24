@@ -15,10 +15,10 @@ export const CheckBox = (props: CheckBoxProps) => {
     <div className="form-check checkbox">
       <Field
         name={name}
-        id={id || `${name}-input`}
         render={({ field }: any) => (
           <input
             type="checkbox"
+            id={id || `${name}-input`}
             checked={field.value}
             className={inputClass || 'form-check-input'}
             {...field} /* eslint-disable-line react/jsx-props-no-spreading */

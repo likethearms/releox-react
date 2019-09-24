@@ -1,9 +1,7 @@
 import React from 'react';
-import { Field } from 'formik';
-import {
-  AbstractInputGroupProps,
-  AbstractInputGroup,
-} from '../AbstractInputGroup/AbstractInputGroup';
+import { Field, FieldProps } from 'formik';
+import { AbstractInputGroupProps } from '../AbstractInputGroup/AbstractInputGroup';
+import { AbstractFormikInputGroup } from '../AbstractInputGroup/AbstractFormikInputGroup';
 
 export type InputTypes = 'text' | 'email' | 'password' | 'date' | 'number';
 
@@ -13,18 +11,23 @@ export interface InputProps extends AbstractInputGroupProps {
   className?: string;
 }
 
-export class Input extends AbstractInputGroup<InputProps> {
+export class Input extends AbstractFormikInputGroup<InputProps> {
   getElement(name: string, id: string): JSX.Element {
     const { type, placeholder, label, className } = this.props;
-    return (
-      <Field
-        name={name}
-        component="input"
-        id={id || `${name}-input`}
-        type={type || 'text'}
-        placeholder={placeholder || label}
-        className={className || 'form-control'}
-      />
-    );
+    const InputElement = (fieldProps: FieldProps) => {
+      return (
+        <div>
+          <input
+            {...fieldProps.field} // eslint-disable-line
+            type={type || 'text'}
+            id={id || `${name}-input`}
+            placeholder={placeholder || label}
+            className={className || `form-control ${this.getInvalidClass(fieldProps)}`}
+          />
+          {this.getErrorMessageField()}
+        </div>
+      );
+    };
+    return <Field name={name} render={InputElement} />;
   }
 }
