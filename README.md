@@ -16,6 +16,7 @@
 - [Create generic index](#create-generic-index)
 - [Details](#details)
 - [DetailField](#detailField)
+- [ReactSelect](#reactSelect)
 
 ## AsyncSelectFormik
 
@@ -193,3 +194,19 @@ createGenericIndex(title, reduxEntry, listAction, dataTableProps, redirectUrl, c
 
 - `label` - string, **Required** - Label for field
 - `children` - string, **Required** - Value to show
+
+## ReactSelect
+
+### ReactSelect props
+
+- `label` - string, **Required** - Label for reactSelect
+- `name` - string, **Required** - Name for reactSelect
+- `options` - [{value: string, label: string}] **Required** - Select options for reactSelect component
+- `onChange` - (selectedOption: string) => void, **Required** - onChange function to reactSelect
+- `id` - string, - Default `${name}-input` - Custom id for reactSelect
+- `inline` - boolean, Default: `false` - Inline label format for reactSelect
+- `inlineLabelWidth` - number, Default: `4` - Label width for reactSelect (MAX = 12)
+- `labelClass` - string, Default: `''` - Custom class for label
+- `placeholder` - string, Default: `label` - Placeholder for reactSelect
+- `classname` - string, Default: `form-control'` - Custom class for reactSelect
+- `selectedOption` - string, Default: `null'` - Initial value for reactSelect

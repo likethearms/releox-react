@@ -7,7 +7,7 @@ import { Input } from '../components/Input/Input';
 import { CheckBox } from '../components/Checkbox/CheckBox';
 import { TextArea } from '../components/TextArea/TextArea';
 import { AsyncSelect } from '../components/AsyncSelect/AsyncSelect';
-import { NativeSelect } from '../components/NativeSelect/NativeSelect';
+import { ReactSelect } from '../components/ReactSelect/ReactSelect';
 
 const Components = () => (
   <div className="m-5">
@@ -49,7 +49,7 @@ const Components = () => (
         <CoreuiCheckBox label="Label" name="Label" />
         <CheckBox label="Admin" name="foo" />
         <CheckBox label="Label" name="bar" />
-        <NativeSelect
+        <ReactSelect
           options={[
             { value: 'chocolate', label: 'Chocolate' },
             { value: 'strawberry', label: 'Strawberry' },
@@ -59,9 +59,8 @@ const Components = () => (
           onChange={() => {}}
           label="Select from select"
           name="Selectselect"
-          placeholder="Selectselect"
         />
-        <NativeSelect
+        <ReactSelect
           options={[
             { value: 'chocolate', label: 'Chocolate' },
             { value: 'strawberry', label: 'Strawberry' },
