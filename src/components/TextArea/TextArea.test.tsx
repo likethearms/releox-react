@@ -39,6 +39,6 @@ it('should switch value', () => {
   const textarea: ShallowWrapper = w.find('textarea');
 
   const onB = textarea.prop('onBlur') as Function;
-  onB({ target: { bar: 'changedValue' } });
+  onB({ target: { value: 'changedValue' } });
   expect(spy).toBeCalledWith('bar', 'changedValue');
 });
