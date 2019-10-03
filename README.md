@@ -17,10 +17,8 @@
 - [Create generic form](#create-generic-form)
 - [Details](#details)
 - [DetailField](#detailField)
-  <<<<<<< HEAD
-- # [ReactSelect](#reactSelect)
+- [ReactSelect](#reactSelect)
 - [Select](#select)
-  > > > > > > > origin/1.1.0
 
 ## AsyncSelectFormik
 
@@ -209,14 +207,12 @@ createGenericFormScene(options);
 - `label` - string, **Required** - Label for reactSelect
 - `name` - string, **Required** - Name for reactSelect
 - `options` - [{value: string, label: string}] **Required** - Select options for reactSelect component
-- `onChange` - (selectedOption: string) => void, **Required** - onChange function to reactSelect
 - `id` - string, - Default `${name}-input` - Custom id for reactSelect
 - `inline` - boolean, Default: `false` - Inline label format for reactSelect
 - `inlineLabelWidth` - number, Default: `4` - Label width for reactSelect (MAX = 12)
 - `labelClass` - string, Default: `''` - Custom class for label
 - `placeholder` - string, Default: `label` - Placeholder for reactSelect
 - `classname` - string, Default: `form-control'` - Custom class for reactSelect
-- `selectedOption` - string, Default: `null'` - Initial value for reactSelect
 
 ## Select
 

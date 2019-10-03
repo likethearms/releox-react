@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow, mount, ShallowWrapper } from 'enzyme';
 import Select from 'react-select';
 import { Formik } from 'formik';
 import { ReactSelect } from './ReactSelect';
@@ -13,8 +13,6 @@ it('should show default inline ReactSelect', () => {
         { value: 'chocolate', label: 'Chocolate' },
         { value: 'strawberry', label: 'Strawberry' },
       ]}
-      selectedOption="chocolate"
-      onChange={() => {}}
       label="Foo"
     />
   );
@@ -33,8 +31,6 @@ it('should show default inline ReactSelect with custom width and label on right'
         { value: 'chocolate', label: 'Chocolate' },
         { value: 'strawberry', label: 'Strawberry' },
       ]}
-      selectedOption="chocolate"
-      onChange={() => {}}
       inlineLabelWidth={8}
       labelClass="text-right"
     />
@@ -60,8 +56,6 @@ it('should implement custom props', () => {
             { value: 'chocolate', label: 'Chocolate' },
             { value: 'strawberry', label: 'Strawberry' },
           ]}
-          selectedOption=""
-          onChange={() => {}}
         />
       )}
     </Formik>
@@ -76,7 +70,6 @@ it('should implement custom props', () => {
 });
 
 it('should inject default props', () => {
-  const spy = jest.fn();
   const comp = (
     <Formik initialValues={{}} onSubmit={() => {}}>
       {() => (
@@ -87,8 +80,6 @@ it('should inject default props', () => {
             { value: 'chocolate', label: 'Chocolate' },
             { value: 'strawberry', label: 'Strawberry' },
           ]}
-          selectedOption="Chocolate"
-          onChange={spy}
         />
       )}
     </Formik>
@@ -102,9 +93,29 @@ it('should inject default props', () => {
     { label: 'Strawberry', value: 'strawberry' },
   ]);
   expect(wrapper.find(Select).prop('placeholder')).toBe('Test');
-  expect(wrapper.find(Select).prop('value')).toBe('Chocolate');
   expect(wrapper.find(Select).prop('id')).toBe('test-name-input');
-  const onChange = reactSelect.prop('onChange') as Function;
-  onChange();
-  expect(spy).toBeCalledTimes(1);
+});
+
+it('should switch value', () => {
+  const spy = jest.fn();
+  const wrapper: ShallowWrapper<any, any, ReactSelect> = shallow(
+    <ReactSelect
+      label="Test"
+      name="bar"
+      options={[
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+      ]}
+    />
+  );
+  const formProps = {
+    field: { name: 'bar' },
+    form: { setFieldValue: spy },
+    errors: {},
+  } as any;
+  const w = shallow(wrapper.instance().getInputElement(formProps));
+  const select: ShallowWrapper = w.find(Select);
+  const onC = select.prop('onChange') as Function;
+  onC({ value: 'changedValue' });
+  expect(spy).toBeCalledWith('bar', 'changedValue');
 });
