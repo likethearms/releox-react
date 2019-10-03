@@ -20,7 +20,7 @@ describe('overlayElementFunction', () => {
         <p>Foo</p>
       </El>
     );
-    expect(wrapper.find('p').text()).toBe('Loading...');
+    expect(wrapper.find('p').text()).toBe('Lataa...');
   });
 
   it('should show custom loading indicator', () => {
