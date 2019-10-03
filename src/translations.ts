@@ -57,6 +57,18 @@ interface TranslationObject {
   'validateModel.title': string;
   'validateModel.subTitle': string;
   'validateModel.button': string;
+
+  // Generic Form
+  'genericForm.save': string;
+  'genericForm.back': string;
+  'genericForm.delete': string;
+
+  // Generic Index
+  'genericIndex.addNew': string;
+
+  // DataTable
+  'dataTable.noDataText': string;
+  'dataTable.loading': string;
 }
 
 interface Translation<T> {
@@ -126,6 +138,18 @@ export const translations: Translation<TranslationObject> = {
     'validateModel.title': 'Viimeistele tarvittavat tiedot',
     'validateModel.subTitle': 'Viimeistele tarvittavat tiedot ja paina tallenna',
     'validateModel.button': 'Tallenna',
+
+    // Generic Form
+    'genericForm.save': 'Tallenna',
+    'genericForm.back': 'Takaisin',
+    'genericForm.delete': 'Poista',
+
+    // Generic Index
+    'genericIndex.addNew': 'Luo uusi',
+
+    // DataTable
+    'dataTable.noDataText': 'Ei näytettäviä tietoja',
+    'dataTable.loading': 'Lataa...',
   },
   en: {
     // Login
@@ -188,5 +212,17 @@ export const translations: Translation<TranslationObject> = {
     'validateModel.title': 'Complete your account',
     'validateModel.subTitle': 'Complete missing information and click save',
     'validateModel.button': 'Save',
+
+    // Generic Form
+    'genericForm.save': 'Save',
+    'genericForm.back': 'Back',
+    'genericForm.delete': 'Delete',
+
+    // Generic Index
+    'genericIndex.addNew': 'Add new',
+
+    // DataTable
+    'dataTable.noDataText': 'There is nothing to show',
+    'dataTable.loading': 'Loading...',
   },
 };

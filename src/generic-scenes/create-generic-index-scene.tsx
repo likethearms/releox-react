@@ -10,6 +10,7 @@ import {
   DataTable,
 } from '../components/DataTable/DataTable';
 import { CardTitle } from '../components/CardTitle/CardTitle';
+import { ct } from '../I18N';
 
 interface IndexSceneProps {
   title: string;
@@ -38,10 +39,11 @@ const IndexScene = (props: IndexSceneProps): JSX.Element => {
     loading,
   } = props;
   let addLink = <span />;
+  const t = ct('genericIndex');
   if (createLink) {
     addLink = (
       <Link className="btn btn-primary float-right" to={createLink}>
-        Add new
+        {t('addNew')}
       </Link>
     );
   }

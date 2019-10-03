@@ -2,6 +2,7 @@ import React, { Component, ReactElement } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import overlayElementFunction from './overlayElementFunction';
+import { ct } from '../../I18N';
 
 export interface DataTableColumn {
   dataField: string;
@@ -76,7 +77,7 @@ export class DataTable extends Component<DataTableProps, State> {
     striped: true,
     onClick: undefined,
     loading: false,
-    noDataText: 'There is nothing to show',
+    noDataText: '',
     bordered: false,
   };
 
@@ -144,6 +145,7 @@ export class DataTable extends Component<DataTableProps, State> {
     let rowEvents;
     const { page, sizePerPage } = this.state;
     const combinedRowClasses = this.getCombinedRowClasses();
+    const t = ct('dataTable');
     if (onClick) rowEvents = { onClick };
     return (
       <BootstrapTable
@@ -155,7 +157,9 @@ export class DataTable extends Component<DataTableProps, State> {
         bordered={bordered}
         striped={striped}
         onTableChange={this.onTableChange}
-        noDataIndication={() => <p style={{ textAlign: 'center', margin: 0 }}>{noDataText}</p>}
+        noDataIndication={() => (
+          <p style={{ textAlign: 'center', margin: 0 }}>{noDataText || t('noDataText')}</p>
+        )}
         loading={loading}
         overlay={overlayElementFunction({ overlayElement })}
         rowClasses={combinedRowClasses.join(' ')}

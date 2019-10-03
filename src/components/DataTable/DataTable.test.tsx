@@ -32,7 +32,7 @@ describe('DataTable', () => {
       />
     );
     expect(wrapper.prop('noDataIndication')()).toStrictEqual(
-      <p style={{ margin: 0, textAlign: 'center' }}>There is nothing to show</p>
+      <p style={{ margin: 0, textAlign: 'center' }}>Ei näytettäviä tietoja</p>
     );
   });
 
