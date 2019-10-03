@@ -9,6 +9,7 @@ import { Card } from '../components/Card/Card';
 import { CardTitle } from '../components/CardTitle/CardTitle';
 import { Button } from '../components/Button/Button';
 import { Loading } from '../components/Loading/Loading';
+import { ct } from '../I18N';
 
 interface ContactCreateSceneProps<T> {
   save(body: T): void;
@@ -154,6 +155,7 @@ export const GenericFormScene = <T extends {}>(props: GenericFormSceneProps<T>) 
     if (fetch) fetch();
     setIsFetched(true);
   }, [fetch, setIsFetched]);
+  const t = ct('genericForm');
   if (isLoading) return <Loading centeredVertical />;
   return (
     <GenericFormLayout title={title}>
@@ -168,10 +170,10 @@ export const GenericFormScene = <T extends {}>(props: GenericFormSceneProps<T>) 
             <Form>
               <EmbedForm />
               <Button id="GenericFormScene-back" onClick={back}>
-                Back
+                {t('back')}
               </Button>
               <Button type="submit" id="GenericFormScene-submit" className="float-right">
-                Save
+                {t('save')}
               </Button>
             </Form>
           )}
@@ -180,7 +182,7 @@ export const GenericFormScene = <T extends {}>(props: GenericFormSceneProps<T>) 
           <div>
             <hr />
             <Button id="delete-button" color="danger" onClick={del}>
-              Delete
+              {t('delete')}
             </Button>
           </div>
         ) : (

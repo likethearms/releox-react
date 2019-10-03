@@ -53,9 +53,9 @@ describe('create-generic-form-scene', () => {
     expect(wrapper.find('input[name="name"]')).toHaveLength(1);
     expect(wrapper.find('input[name="name"]').prop('value')).toBe('Foo Bar');
     expect(wrapper.find('h5[children="Create form"]')).toHaveLength(1);
-    expect(wrapper.find('button[children="Back"]')).toHaveLength(1);
-    expect(wrapper.find('button[children="Save"]')).toHaveLength(1);
-    expect(wrapper.find('button[children="Delete"]')).toHaveLength(0);
+    expect(wrapper.find('button[children="Takaisin"]')).toHaveLength(1);
+    expect(wrapper.find('button[children="Tallenna"]')).toHaveLength(1);
+    expect(wrapper.find('button[children="Poista"]')).toHaveLength(0);
     const onSubmit = wrapper.find('Formik').prop('onSubmit') as () => void;
     onSubmit();
     expect(spy).toBeCalledTimes(1);
@@ -89,13 +89,13 @@ describe('create-generic-form-scene', () => {
     expect(spy2).toBeCalledTimes(1);
 
     // Delete
-    expect(wrapper.find('button[children="Delete"]')).toHaveLength(1);
-    const onClick = wrapper.find('button[children="Delete"]').prop('onClick') as () => void;
+    expect(wrapper.find('button[children="Poista"]')).toHaveLength(1);
+    const onClick = wrapper.find('button[children="Poista"]').prop('onClick') as () => void;
     onClick();
     expect(spy3).toBeCalledTimes(1);
 
     // Back
-    const onBack = wrapper.find('button[children="Back"]').prop('onClick') as () => void;
+    const onBack = wrapper.find('button[children="Takaisin"]').prop('onClick') as () => void;
     onBack();
 
     // Update on submit
