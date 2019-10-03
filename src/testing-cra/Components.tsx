@@ -1,9 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { Card } from '../components/Card/Card';
-import { AsyncSelectFormik } from '../components/AsyncSelect/AsyncSelectFormik';
-import { TextArea } from '../components/TextArea/TextArea';
-import { Input } from '../components/Input/Input';
+import { ReactSelect } from '../components/ReactSelect/ReactSelect';
 
 const Components = () => (
   <div className="m-5">
@@ -11,26 +9,29 @@ const Components = () => (
     <Card>
       <Formik
         onSubmit={(x) => x}
-        initialValues={{ name: '', foo: '', async: '' }}
+        initialValues={{
+          reactSelect: 'foo',
+          selectReact: '',
+        }}
         validate={(v) => {
           const e: any = {};
-          if (!v.name) e.name = 'Missing';
+          if (!v.selectReact) e.selectReact = 'Missing';
           return e;
         }}
       >
         {() => (
           <Form>
             <button type="submit">Submit</button>
-            <AsyncSelectFormik
-              getUrl="http://localhost:3001/api/Vehicles"
-              queryFormat="mongodb"
-              label="Products"
-              mapLabel="registerNumber"
-              searchFields={['registerNumber']}
-              name="async"
+            <ReactSelect
+              options={[{ label: 'Foo', value: 'foo' }, { label: 'Bar', value: 'bar' }]}
+              label="ReactSelect"
+              name="reactSelect"
             />
-            <TextArea name="name" label="Name" />
-            <Input name="foo" label="foo" />
+            <ReactSelect
+              options={[{ label: 'Hello', value: 'hello' }, { label: 'Bye', value: 'bye' }]}
+              label="SelectReact"
+              name="selectReact"
+            />
           </Form>
         )}
       </Formik>
