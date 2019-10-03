@@ -57,6 +57,11 @@ interface TranslationObject {
   'validateModel.title': string;
   'validateModel.subTitle': string;
   'validateModel.button': string;
+
+  // Generic Form
+  'genericForm.save': string;
+  'genericForm.back': string;
+  'genericForm.delete': string;
 }
 
 interface Translation<T> {
@@ -126,6 +131,11 @@ export const translations: Translation<TranslationObject> = {
     'validateModel.title': 'Viimeistele tarvittavat tiedot',
     'validateModel.subTitle': 'Viimeistele tarvittavat tiedot ja paina tallenna',
     'validateModel.button': 'Tallenna',
+
+    // Generic Form
+    'genericForm.save': 'Tallenna',
+    'genericForm.back': 'Takaisin',
+    'genericForm.delete': 'Poista',
   },
   en: {
     // Login
@@ -188,5 +198,10 @@ export const translations: Translation<TranslationObject> = {
     'validateModel.title': 'Complete your account',
     'validateModel.subTitle': 'Complete missing information and click save',
     'validateModel.button': 'Save',
+
+    // Generic Form
+    'genericForm.save': 'Save',
+    'genericForm.back': 'Back',
+    'genericForm.delete': 'Delete',
   },
 };
