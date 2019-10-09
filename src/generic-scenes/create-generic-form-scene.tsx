@@ -64,11 +64,16 @@ export const createGenericFormScene = <T extends {}>(opts: GenericFormOptions<T>
     else out.save = (body: T) => dispatch(saveAction(body, redirect));
     return out;
   };
-  const mapStateToProps = (store: any) => ({
-    user: store.user,
-    data: store[reduxEntry].model.data,
-    isLoading: store[reduxEntry].model.isLoading,
-  });
+  const mapStateToProps = (store: any) => {
+    const map: any = {
+      data: store[reduxEntry].model.data,
+      isLoading: store[reduxEntry].model.isLoading,
+    };
+    if (injectUserFields.length) {
+      map.user = store.user.model.data;
+    }
+    return map;
+  };
 
   const ContactCreateScene = (props: ContactCreateSceneProps<T>) => {
     const { user, isLoading, save, fetch, del, back, data } = props;

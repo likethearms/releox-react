@@ -22,7 +22,11 @@ describe('create-generic-form-scene', () => {
   beforeEach(() => {
     store = mockStore({
       user: {
-        country: 'United States',
+        model: {
+          data: {
+            country: 'United States',
+          },
+        },
       },
       entry: {
         model: {
