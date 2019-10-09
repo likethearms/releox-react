@@ -70,15 +70,27 @@ const IndexScene = (props: IndexSceneProps): JSX.Element => {
 interface WrapperProps {
   data: any[];
   count: number;
+  user: any;
   fetch: any;
   loading: boolean;
   onRowClick?(_: string, row: any): void;
 }
 
-const getWrappedIndexScene = (title: string, passProps: DataTableProps, createLink?: string) => (
-  props: WrapperProps
-): JSX.Element => {
-  const { data, count, fetch, onRowClick, loading } = props;
+const getWrappedIndexScene = (
+  title: string,
+  passProps: DataTableProps,
+  injectUserFields: string[],
+  createLink?: string
+) => (props: WrapperProps): JSX.Element => {
+  const { data, count, fetch, onRowClick, loading, user } = props;
+  let queryBuild: any = passProps.query;
+  injectUserFields.map((key) => {
+    const keyObj = { [key]: user[key] };
+    if (!queryBuild) queryBuild = { where: keyObj };
+    else if (!queryBuild.where) queryBuild.where = keyObj;
+    else queryBuild.where = { ...queryBuild.where, keyObj };
+    return true;
+  });
 
   return (
     <IndexScene
@@ -88,7 +100,7 @@ const getWrappedIndexScene = (title: string, passProps: DataTableProps, createLi
       defaultSorted={passProps.defaultSorted}
       loading={loading}
       totalSize={count}
-      query={passProps.query}
+      query={queryBuild}
       onChangeLoopback={fetch}
       createLink={createLink}
       title={title}
@@ -109,15 +121,30 @@ interface GenericIndexOptions {
   dataTableProps: DataTableProps;
   redirectUrl?: string;
   createLink?: string;
+  injectUserFields?: string[];
 }
 
 export const createGenericIndex = (opts: GenericIndexOptions) => {
-  const { title, reduxEntry, listAction, dataTableProps, redirectUrl, createLink } = opts;
-  const mapStateToProps = (state: any) => ({
-    data: state[reduxEntry].list.data,
-    count: state[reduxEntry].list.count,
-    loading: state[reduxEntry].list.isFetchLoading || state[reduxEntry].list.isCountLoading,
-  });
+  const {
+    title,
+    reduxEntry,
+    listAction,
+    dataTableProps,
+    redirectUrl,
+    createLink,
+    injectUserFields = [],
+  } = opts;
+  const mapStateToProps = (state: any) => {
+    const map: any = {
+      data: state[reduxEntry].list.data,
+      count: state[reduxEntry].list.count,
+      loading: state[reduxEntry].list.isFetchLoading || state[reduxEntry].list.isCountLoading,
+    };
+    if (injectUserFields.length) {
+      map.user = state.user.model.data;
+    }
+    return map;
+  };
 
   const mapDispatchToProps = (dispatch: Function) => {
     const obj: any = { fetch: (filter: DataTableLoopbackFilter) => dispatch(listAction(filter)) };
@@ -128,7 +155,7 @@ export const createGenericIndex = (opts: GenericIndexOptions) => {
     return obj;
   };
 
-  const Component = getWrappedIndexScene(title, dataTableProps, createLink);
+  const Component = getWrappedIndexScene(title, dataTableProps, injectUserFields, createLink);
   return connect(
     mapStateToProps,
     mapDispatchToProps
