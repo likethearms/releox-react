@@ -27,7 +27,7 @@ interface GenericFormOptions {
   validationSchema?: ObjectSchema<any> | (() => ObjectSchema<any>);
   title: string;
   EmbedForm: any;
-  initialValues?: any | ((data: any) => any);
+  initialValues: any | ((data: any) => any);
   saveAction: Function;
   reduxEntry: string;
   fetchAction?: (id: number) => any;
@@ -80,11 +80,14 @@ export const createGenericFormScene = <T extends {}>(opts: GenericFormOptions) =
     const { user, isLoading, save, fetch, del, back, data, match } = props;
     const [isFetched, setIsFetched] = useState(false);
     let initValues: any;
-    if (!fetch) {
-      if (!initialValues) throw new Error('Missing initial values');
-      if (typeof initialValues === 'object') initValues = initialValues;
-      else initValues = initialValues({ user, match });
-    } else initValues = data;
+    let init;
+
+    if (typeof initialValues === 'object') init = initialValues;
+    else init = initialValues({ user, match });
+
+    if (!fetch) initValues = init;
+    else initValues = { ...init, ...data };
+
     return (
       <GenericFormScene
         data={initValues}
