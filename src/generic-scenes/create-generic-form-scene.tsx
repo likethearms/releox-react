@@ -22,17 +22,12 @@ interface ContactCreateSceneProps<T> {
   match: any;
 }
 
-interface ConnectionData {
-  user: any;
-  match: any;
-}
-
 interface GenericFormOptions {
   validate?: (values: any) => FormikErrors<any> | Promise<any>;
   validationSchema?: ObjectSchema<any> | (() => ObjectSchema<any>);
   title: string;
   EmbedForm: any;
-  initialValues?: any | ((data: ConnectionData) => any);
+  initialValues?: any | ((data: any) => any);
   saveAction: Function;
   reduxEntry: string;
   fetchAction?: (id: number) => any;
