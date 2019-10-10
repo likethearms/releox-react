@@ -89,6 +89,7 @@ export const createGenericFormScene = <T extends {}>(opts: GenericFormOptions) =
       <GenericFormScene
         data={initValues}
         title={title}
+        user={user}
         validationSchema={validationSchema}
         validate={validate}
         EmbedForm={EmbedForm}
@@ -131,6 +132,7 @@ export interface FormProps {
 export interface GenericFormSceneProps<T> {
   data: any;
   title: string;
+  user?: any;
   EmbedForm: any;
   isLoading?: boolean;
   validate?: (values: any) => FormikErrors<any> | Promise<any>;
@@ -142,7 +144,7 @@ export interface GenericFormSceneProps<T> {
   del?: () => void;
 }
 
-export const GenericFormScene = <T extends {}>(props: GenericFormSceneProps<T>) => {
+const GenericFormScene = <T extends {}>(props: GenericFormSceneProps<T>) => {
   const {
     data,
     EmbedForm,
@@ -155,6 +157,7 @@ export const GenericFormScene = <T extends {}>(props: GenericFormSceneProps<T>) 
     setIsFetched,
     validate,
     validationSchema,
+    user,
   } = props;
   useEffect(() => {
     if (fetch) fetch();
@@ -173,7 +176,7 @@ export const GenericFormScene = <T extends {}>(props: GenericFormSceneProps<T>) 
         >
           {() => (
             <Form>
-              <EmbedForm />
+              <EmbedForm user={user} initialValues={data} />
               <Button id="GenericFormScene-back" onClick={back}>
                 {t('back')}
               </Button>
