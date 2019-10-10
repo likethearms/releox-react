@@ -75,11 +75,9 @@ describe('create-generic-form-scene', () => {
     const El: any = createGenericFormScene({
       title: 'Create form',
       EmbedForm: F,
-      initialValues: { name: 'Foo Bar' },
       saveAction: save,
       fetchAction: fetch,
       delAction: del,
-      injectUserFields: ['country'],
       reduxEntry: 'entry',
     });
     const wrapper = mount(
@@ -108,7 +106,6 @@ describe('create-generic-form-scene', () => {
     expect(spy1).toBeCalledWith('1');
 
     expect(wrapper.find('Formik').prop('initialValues')).toEqual({
-      country: 'United States',
       name: 'Store name',
     });
   });

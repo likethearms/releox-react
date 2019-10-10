@@ -19,23 +19,29 @@ interface ContactCreateSceneProps<T> {
   data: T;
   user: any;
   isLoading: boolean;
+  match: any;
 }
 
-interface GenericFormOptions<T> {
+interface ConnectionData {
+  user: any;
+  match: any;
+}
+
+interface GenericFormOptions {
   validate?: (values: any) => FormikErrors<any> | Promise<any>;
   validationSchema?: ObjectSchema<any> | (() => ObjectSchema<any>);
   title: string;
   EmbedForm: any;
-  initialValues: T;
+  initialValues?: any | ((data: ConnectionData) => any);
   saveAction: Function;
   reduxEntry: string;
   fetchAction?: (id: number) => any;
   delAction?: (id: number) => any;
   redirect?: string;
-  injectUserFields?: string[];
+  mapUserKey?: boolean;
 }
 
-export const createGenericFormScene = <T extends {}>(opts: GenericFormOptions<T>) => {
+export const createGenericFormScene = <T extends {}>(opts: GenericFormOptions) => {
   const {
     validate,
     validationSchema,
@@ -47,7 +53,7 @@ export const createGenericFormScene = <T extends {}>(opts: GenericFormOptions<T>
     fetchAction,
     delAction,
     redirect,
-    injectUserFields = [],
+    mapUserKey,
   } = opts;
 
   const mapDispatchToProps = (
@@ -69,22 +75,21 @@ export const createGenericFormScene = <T extends {}>(opts: GenericFormOptions<T>
       data: store[reduxEntry].model.data,
       isLoading: store[reduxEntry].model.isLoading,
     };
-    if (injectUserFields.length) {
+    if (mapUserKey) {
       map.user = store.user.model.data;
     }
     return map;
   };
 
   const ContactCreateScene = (props: ContactCreateSceneProps<T>) => {
-    const { user, isLoading, save, fetch, del, back, data } = props;
+    const { user, isLoading, save, fetch, del, back, data, match } = props;
     const [isFetched, setIsFetched] = useState(false);
     let initValues: any;
-    if (!fetch) initValues = initialValues;
-    else initValues = data;
-    injectUserFields.map((key) => {
-      initValues[key] = user[key];
-      return true;
-    });
+    if (!fetch) {
+      if (!initialValues) throw new Error('Missing initial values');
+      if (typeof initialValues === 'object') initValues = initialValues;
+      else initValues = initialValues({ user, match });
+    } else initValues = data;
     return (
       <GenericFormScene
         data={initValues}
