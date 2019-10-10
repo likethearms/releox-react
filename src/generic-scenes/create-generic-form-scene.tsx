@@ -33,7 +33,7 @@ interface GenericFormOptions {
   fetchAction?: (id: number) => any;
   delAction?: (id: number) => any;
   redirect?: string;
-  mapUserKey?: boolean;
+  mapUser?: boolean;
 }
 
 export const createGenericFormScene = <T extends {}>(opts: GenericFormOptions) => {
@@ -48,7 +48,7 @@ export const createGenericFormScene = <T extends {}>(opts: GenericFormOptions) =
     fetchAction,
     delAction,
     redirect,
-    mapUserKey,
+    mapUser,
   } = opts;
 
   const mapDispatchToProps = (
@@ -70,7 +70,7 @@ export const createGenericFormScene = <T extends {}>(opts: GenericFormOptions) =
       data: store[reduxEntry].model.data,
       isLoading: store[reduxEntry].model.isLoading,
     };
-    if (mapUserKey) {
+    if (mapUser) {
       map.user = store.user.model.data;
     }
     return map;
