@@ -76,6 +76,7 @@ describe('create-generic-form-scene', () => {
       title: 'Create form',
       EmbedForm: F,
       saveAction: save,
+      initialValues: {},
       fetchAction: fetch,
       delAction: del,
       reduxEntry: 'entry',
