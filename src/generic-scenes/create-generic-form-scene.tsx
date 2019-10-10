@@ -34,6 +34,7 @@ interface GenericFormOptions {
   delAction?: (id: number) => any;
   redirect?: string;
   mapUser?: boolean;
+  valuesFormatter?: (data: any) => any;
 }
 
 export const createGenericFormScene = <T extends {}>(opts: GenericFormOptions) => {
@@ -48,6 +49,7 @@ export const createGenericFormScene = <T extends {}>(opts: GenericFormOptions) =
     fetchAction,
     delAction,
     redirect,
+    valuesFormatter,
     mapUser,
   } = opts;
 
@@ -87,6 +89,8 @@ export const createGenericFormScene = <T extends {}>(opts: GenericFormOptions) =
 
     if (!fetch) initValues = init;
     else initValues = { ...init, ...data };
+
+    if (valuesFormatter) initValues = valuesFormatter(initValues);
 
     return (
       <GenericFormScene
