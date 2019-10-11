@@ -30,7 +30,7 @@ export class ReactSelect extends AbstractFormikInputGroup<SelectProps> {
           value={options.find((option: Option) => option.value === fieldProps.field.value)}
           onChange={(option: any) => fieldProps.form.setFieldValue(name, option.value)}
         />
-        {this.getErrorMessageField()}
+        {this.getErrorMessageField(name)}
       </div>
     );
   };

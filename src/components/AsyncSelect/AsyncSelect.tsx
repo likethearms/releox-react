@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Async from 'react-select/async';
+import { Field } from 'formik';
 import Axios from 'axios';
-import PropTypes, { Requireable, Validator } from 'prop-types';
+import { AbstractFormikInputGroup } from '../AbstractInputGroup/AbstractFormikInputGroup';
+import { ct } from '../../I18N';
 
 export interface AsyncSelectInputDefaultProps {
   onError?: (e: Error) => any;
+  onChange?: () => void;
   placeholder: undefined;
   value: undefined;
+  queryFormat: AsyncSelectQueryFormat;
   mapValue: string;
   mapLabel: string;
 }
@@ -14,17 +18,18 @@ export interface AsyncSelectInputDefaultProps {
 export type AsyncSelectQueryFormat = 'mongodb' | 'postgresql';
 
 export interface AsyncSelectInputProps {
-  onChange(value: string | number | null): void;
+  searchFields: string[];
+  getUrl: string;
+  name: string;
+  label: string;
+  onChange?(value: string | number | null): void;
   onError?(e: Error): any;
-  queryFormat: AsyncSelectQueryFormat;
-  placeholder?: string;
+  queryFormat?: AsyncSelectQueryFormat;
   className?: string;
   id?: string;
   value?: string;
-  getUrl: string;
-  mapValue: string;
-  mapLabel: string;
-  searchFields: string[];
+  mapValue?: string;
+  mapLabel?: string;
 }
 
 export interface AsyncSelectInputState {
@@ -32,40 +37,25 @@ export interface AsyncSelectInputState {
   loading: boolean;
 }
 
-interface AsyncSelectInputPropTypes {
-  placeholder: Requireable<string>;
-  onChange: Validator<NonNullable<(value: string | number | null) => void>>;
-  getUrl: Validator<NonNullable<string>>;
-  mapValue: Requireable<string>;
-  onError: Requireable<Function>;
-  mapLabel: Requireable<string>;
-  value: Requireable<string>;
-  searchFields: Validator<NonNullable<(string | undefined | null)[]>>;
+const defaultProps = {
+  mapValue: 'id',
+  queryFormat: 'mongodb',
+  mapLabel: 'name',
+};
+
+interface ExtendedProps extends AsyncSelectInputProps {
+  form: any;
+  field: any;
 }
 
-export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInputState> {
-  static propTypes: AsyncSelectInputPropTypes = {
-    placeholder: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
-    getUrl: PropTypes.string.isRequired,
-    onError: PropTypes.func,
-    mapValue: PropTypes.string,
-    mapLabel: PropTypes.string,
-    value: PropTypes.string,
-    searchFields: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
-
-  static defaultProps: AsyncSelectInputDefaultProps = {
-    placeholder: undefined,
-    value: undefined,
-    onError: undefined,
-    mapValue: 'id',
-    mapLabel: 'name',
-  };
-
-  constructor(props: AsyncSelectInputProps) {
+export class AsyncSelectElement extends AbstractFormikInputGroup<
+  ExtendedProps,
+  AsyncSelectInputState
+> {
+  constructor(props: any) {
     super(props);
     this.loadOptions = this.loadOptions.bind(this);
+    this.onChange = this.onChange.bind(this);
     this.state = {
       loading: true,
       defaultValue: undefined,
@@ -73,40 +63,28 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
   }
 
   componentDidMount(): void {
-    const { value } = this.props;
-    if (value) {
+    const { field } = this.props;
+    if (field.value) {
       this.setupDefaultValue();
     } else {
       this.setState({ loading: false });
     }
   }
 
-  getAsyncSelectElement(): JSX.Element {
-    const { onChange, placeholder, className, id } = this.props;
-    const { defaultValue } = this.state;
-    return (
-      <Async
-        cacheOptions
-        placeholder={placeholder}
-        className={className}
-        id={id}
-        classNamePrefix="AsynSelect"
-        defaultOptions
-        isClearable
-        loadOptions={this.loadOptions}
-        onChange={(o: any) => onChange(o === null ? '' : o.value)}
-        defaultValue={defaultValue}
-      />
-    );
+  onChange(o: any) {
+    const { field, form } = this.props;
+    form.setFieldValue(field.name, o === null ? '' : o.value);
   }
 
   setupDefaultValue(): Promise<void> {
-    const { value, getUrl, mapValue, mapLabel } = this.props;
-    return Axios.get(getUrl, { params: { filter: { where: { [mapValue]: value } } } }).then((r) =>
+    const { field, getUrl, mapValue, mapLabel } = this.props;
+    const mapV = mapValue || defaultProps.mapValue;
+    const mapL = mapLabel || defaultProps.mapLabel;
+    return Axios.get(getUrl, { params: { filter: { where: { [mapV]: field.value } } } }).then((r) =>
       this.setState({
         defaultValue: {
-          value: r.data[0][mapValue],
-          label: r.data[0][mapLabel],
+          value: r.data[0][mapV],
+          label: r.data[0][mapL],
         },
         loading: false,
       })
@@ -115,8 +93,9 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
 
   buildQuery(inputValue: string): { [key: string]: { ilike: string } } {
     const { searchFields, queryFormat } = this.props;
+    const qf = queryFormat || defaultProps.queryFormat;
     let query: any;
-    if (queryFormat === 'postgresql') {
+    if (qf === 'postgresql') {
       query = { ilike: `%${inputValue}%` };
     } else {
       query = { like: inputValue, options: 'i' };
@@ -126,9 +105,11 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
 
   loadOptions(inputValue: string): Promise<{ value: string; label: string }[]> {
     const { getUrl, mapValue, mapLabel, onError } = this.props;
+    const mapV = mapValue || defaultProps.mapValue;
+    const mapL = mapLabel || defaultProps.mapLabel;
     return new Promise((resolve, reject) => {
       Axios.get(getUrl, { params: { filter: { where: this.buildQuery(inputValue) }, limit: 10 } })
-        .then((r) => resolve(r.data.map((c: any) => ({ value: c[mapValue], label: c[mapLabel] }))))
+        .then((r) => resolve(r.data.map((c: any) => ({ value: c[mapV], label: c[mapL] }))))
         .catch((e) => {
           if (onError) onError(e);
           reject(e);
@@ -136,9 +117,33 @@ export class AsyncSelect extends Component<AsyncSelectInputProps, AsyncSelectInp
     });
   }
 
-  render(): JSX.Element {
-    const { loading } = this.state;
-    if (loading) return <span id="loading" />;
-    return this.getAsyncSelectElement();
+  getElement(): JSX.Element {
+    const { className, id, field, form } = this.props;
+    const { defaultValue, loading } = this.state;
+    const t = ct('asyncSelect');
+    if (loading) return <p>{t('loading')}</p>;
+    return (
+      <div className="ReactSelectHelper">
+        <Async
+          cacheOptions
+          placeholder={t('placeholder')}
+          className={`${className || ''} ${this.getInvalidClass({ field, form })}`}
+          id={id}
+          classNamePrefix="AsynSelect"
+          defaultOptions
+          isClearable
+          onBlur={() => form.setFieldTouched(field.name, true)}
+          loadOptions={this.loadOptions}
+          onChange={this.onChange}
+          defaultValue={defaultValue}
+        />
+        {this.getErrorMessageField(field.name)}
+      </div>
+    );
   }
 }
+
+export const AsyncSelect = (props: AsyncSelectInputProps) => (
+  // eslint-disable-next-line
+  <Field component={AsyncSelectElement} {...props} />
+);

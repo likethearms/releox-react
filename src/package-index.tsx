@@ -3,7 +3,6 @@ export * from './components/Checkbox/CoreuiCheckBox';
 export * from './scenes/LoginScene/LoginScene';
 export * from './coreui-layout/CoreuiLayout';
 export * from './components/AsyncSelect/AsyncSelect';
-export * from './components/AsyncSelect/AsyncSelectFormik';
 export * from './components/Button/Button';
 export * from './components/Card/Card';
 export * from './components/TextArea/TextArea';

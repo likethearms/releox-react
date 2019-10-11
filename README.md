@@ -2,7 +2,6 @@
 
 ## Table of Content
 
-- [AsyncSelectFormik](#asyncSelectFormik)
 - [Button](#button)
 - [Card](#card)
 - [CheckBox](#checkBox)
@@ -19,19 +18,6 @@
 - [DetailField](#detailField)
 - [ReactSelect](#reactSelect)
 - [Select](#select)
-
-## AsyncSelectFormik
-
-### AsyncSelectFormik props
-
-- `label` - string, **Required** - Label for AsyncSelectFormik
-- `name` - string, **Required** - Name for AsyncSelectFormik
-- `getUrl` - string, **Required** - URL for data in AsyncSelectFormik
-- `queryFormat` - string, **Required** - Queryformat for data in AsyncSelectFormik ('mongodb' | 'postgresql')
-- `id` - string, - Default `'undefined'` - Custom id for AsyncSelectFormik
-- `inline` - boolean, Default: `false` - Inline label format for AsyncSelectFormik
-- `inlineLabelWidth` - number, Default: `4` - Label width for AsyncSelectFormik (MAX = 12)
-- `labelClass` - string, Default: `''` - Custom class for label
 
 ## Button
 

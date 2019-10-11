@@ -14,7 +14,10 @@ export interface AbstractInputGroupProps {
   labelClass?: string;
 }
 
-export abstract class AbstractInputGroup<T> extends Component<T & AbstractInputGroupProps> {
+export abstract class AbstractInputGroup<T, S = {}> extends Component<
+  T & AbstractInputGroupProps,
+  S
+> {
   abstract getElement(name: string, id?: string): JSX.Element;
 
   render(): JSX.Element {

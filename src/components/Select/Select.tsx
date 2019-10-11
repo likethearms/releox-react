@@ -28,7 +28,7 @@ export class Select extends AbstractFormikInputGroup<Props> {
             </option>
           ))}
         </select>
-        {this.getErrorMessageField()}
+        {this.getErrorMessageField(name)}
       </div>
     );
     return <Field name={name} render={Element} />;

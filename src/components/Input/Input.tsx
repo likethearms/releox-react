@@ -24,7 +24,7 @@ export class Input extends AbstractFormikInputGroup<InputProps> {
             placeholder={placeholder || label}
             className={className || `form-control ${this.getInvalidClass(fieldProps)}`}
           />
-          {this.getErrorMessageField()}
+          {this.getErrorMessageField(name)}
         </div>
       );
     };

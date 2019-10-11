@@ -22,7 +22,7 @@ export class TextArea extends AbstractFormikInputGroup<TextAreaProps> {
           placeholder={placeholder || label}
           className={className || `form-control ${this.getInvalidClass(fieldProps)}`}
         />
-        {this.getErrorMessageField()}
+        {this.getErrorMessageField(name)}
       </div>
     );
   };

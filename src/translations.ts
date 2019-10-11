@@ -150,6 +150,10 @@ export const translations: Translation<TranslationObject> = {
     // DataTable
     'dataTable.noDataText': 'Ei näytettäviä tietoja',
     'dataTable.loading': 'Lataa...',
+
+    // AsyncSelect
+    'asyncSelect.loading': 'Lataa...',
+    'asyncSelect.placeholder': 'Valitse...',
   },
   en: {
     // Login
@@ -224,5 +228,9 @@ export const translations: Translation<TranslationObject> = {
     // DataTable
     'dataTable.noDataText': 'There is nothing to show',
     'dataTable.loading': 'Loading...',
+
+    // AsyncSelect
+    'asyncSelect.loading': 'Loading...',
+    'asyncSelect.placeholder': 'Select...',
   },
 };
