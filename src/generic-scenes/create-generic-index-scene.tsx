@@ -76,21 +76,15 @@ interface WrapperProps {
   onRowClick?(_: string, row: any): void;
 }
 
-const getWrappedIndexScene = (
-  title: string,
-  passProps: DataTableProps,
-  injectUserFields: string[],
-  createLink?: string
-) => (props: WrapperProps): JSX.Element => {
+const getWrappedIndexScene = (title: string, passProps: DataTableProps, createLink?: string) => (
+  props: WrapperProps
+): JSX.Element => {
   const { data, count, fetch, onRowClick, loading, user } = props;
-  let queryBuild: any = passProps.query;
-  injectUserFields.map((key) => {
-    const keyObj = { [key]: user[key] };
-    if (!queryBuild) queryBuild = { where: keyObj };
-    else if (!queryBuild.where) queryBuild.where = keyObj;
-    else queryBuild.where = { ...queryBuild.where, keyObj };
-    return true;
-  });
+
+  let query;
+
+  if (typeof passProps.query === 'object') query = passProps.query;
+  else if (typeof passProps.query === 'object') query = passProps.query({ user });
 
   return (
     <IndexScene
@@ -100,7 +94,7 @@ const getWrappedIndexScene = (
       defaultSorted={passProps.defaultSorted}
       loading={loading}
       totalSize={count}
-      query={queryBuild}
+      query={query}
       onChangeLoopback={fetch}
       createLink={createLink}
       title={title}
@@ -121,26 +115,18 @@ interface GenericIndexOptions {
   dataTableProps: DataTableProps;
   redirectUrl?: string;
   createLink?: string;
-  injectUserFields?: string[];
+  mapUser?: boolean;
 }
 
 export const createGenericIndex = (opts: GenericIndexOptions) => {
-  const {
-    title,
-    reduxEntry,
-    listAction,
-    dataTableProps,
-    redirectUrl,
-    createLink,
-    injectUserFields = [],
-  } = opts;
+  const { title, reduxEntry, listAction, dataTableProps, redirectUrl, createLink, mapUser } = opts;
   const mapStateToProps = (state: any) => {
     const map: any = {
       data: state[reduxEntry].list.data,
       count: state[reduxEntry].list.count,
       loading: state[reduxEntry].list.isFetchLoading || state[reduxEntry].list.isCountLoading,
     };
-    if (injectUserFields.length) {
+    if (mapUser) {
       map.user = state.user.model.data;
     }
     return map;
@@ -155,7 +141,7 @@ export const createGenericIndex = (opts: GenericIndexOptions) => {
     return obj;
   };
 
-  const Component = getWrappedIndexScene(title, dataTableProps, injectUserFields, createLink);
+  const Component = getWrappedIndexScene(title, dataTableProps, createLink);
   return connect(
     mapStateToProps,
     mapDispatchToProps
