@@ -19,12 +19,13 @@ export class FileInput extends AbstractFormikInputGroup<InputProps> {
             type="file"
             id={id || `${name}-input`}
             placeholder={placeholder || label}
-            className={className || `form-control ${this.getInvalidClass(fieldProps)}`}
+            className={className || `inputfile ${this.getInvalidClass(fieldProps)}`}
             value={fieldProps.field.value}
             onChange={(event: any) => {
               fieldProps.form.setFieldValue('file', event.currentTarget.files[0]);
             }}
           />
+          <label htmlFor={id || `${name}-input`}>Valitse tiedosto</label>
           {this.getErrorMessageField()}
         </div>
       );
