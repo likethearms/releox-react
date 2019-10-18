@@ -1,0 +1,25 @@
+[type='file'] {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+[type='file'] + label {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #888;
+  display: inline-block;
+  outline: none;
+  padding: 0.5em 50px;
+  position: relative;
+  transition: all 0.3s;
+  vertical-align: middle;
+
+  &:hover {
+    background-color: darken(#fff, 10%);
+  }
+}

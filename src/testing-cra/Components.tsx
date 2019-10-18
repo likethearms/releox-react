@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import { Card } from '../components/Card/Card';
 import { ReactSelect } from '../components/ReactSelect/ReactSelect';
+import { FileInput } from '../components/Input/FileInput';
 
 const Components = () => (
   <div className="m-5">
@@ -15,6 +16,7 @@ const Components = () => (
         }}
         validate={(v) => {
           const e: any = {};
+          console.log(v);
           if (!v.selectReact) e.selectReact = 'Missing';
           return e;
         }}
@@ -32,6 +34,7 @@ const Components = () => (
               label="SelectReact"
               name="selectReact"
             />
+            <FileInput name="fileInput" label="fileInput" />
           </Form>
         )}
       </Formik>
