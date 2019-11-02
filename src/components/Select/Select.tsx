@@ -3,7 +3,7 @@ import { Field, FieldProps } from 'formik';
 import { AbstractFormikInputGroup } from '../AbstractInputGroup/AbstractFormikInputGroup';
 import { AbstractInputGroupProps } from '../AbstractInputGroup/AbstractInputGroup';
 
-interface SelectOption {
+export interface SelectOption {
   value: string | number;
   label: string | number;
 }
