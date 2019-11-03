@@ -27,6 +27,7 @@ export interface DataTableProps {
   hover: boolean;
   striped: boolean;
   totalSize: number;
+  initialSizePerPage?: number;
   noDataText: string;
   overlayElement?: () => JSX.Element;
   loading: boolean;
@@ -85,7 +86,7 @@ export class DataTable extends Component<DataTableProps, State> {
     super(props);
     this.state = {
       page: 1,
-      sizePerPage: 20,
+      sizePerPage: props.initialSizePerPage || 20,
     };
     this.onTableChange = this.onTableChange.bind(this);
   }
