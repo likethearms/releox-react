@@ -1,9 +1,11 @@
 import React from 'react';
+import getValue from 'get-value';
 import { DetailField } from './DetailField';
 
 interface DetailsFieldData {
   label: string;
   key: string;
+  formatter?(value: any, object: any): string | JSX.Element;
 }
 
 export interface DetailsProps {
@@ -16,7 +18,9 @@ export const Details = ({ object, properties }: DetailsProps) => (
     <tbody>
       {properties.map((prop) => (
         <DetailField key={prop.key} label={prop.label}>
-          {object[prop.key]}
+          {prop.formatter
+            ? prop.formatter(getValue(object, prop.key), object)
+            : getValue(object, prop.key)}
         </DetailField>
       ))}
     </tbody>

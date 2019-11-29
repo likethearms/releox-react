@@ -25,6 +25,7 @@ export interface AsyncSelectInputProps {
   onChange?(value: string | number | null): void;
   onError?(e: Error): any;
   queryFormat?: AsyncSelectQueryFormat;
+  order?: string;
   className?: string;
   id?: string;
   value?: string;
@@ -114,11 +115,13 @@ export class AsyncSelectElement extends AbstractFormikInputGroup<
   }
 
   loadOptions(inputValue: string): Promise<{ value: string; label: string }[]> {
-    const { getUrl, mapValue, mapLabel, onError } = this.props;
+    const { getUrl, mapValue, mapLabel, onError, order } = this.props;
     const mapV = mapValue || defaultProps.mapValue;
     const mapL = mapLabel || defaultProps.mapLabel;
     return new Promise((resolve, reject) => {
-      Axios.get(getUrl, { params: { filter: { where: this.buildQuery(inputValue) }, limit: 10 } })
+      Axios.get(getUrl, {
+        params: { filter: { where: this.buildQuery(inputValue), order }, limit: 10 },
+      })
         .then((r) => resolve(r.data.map((c: any) => ({ value: c[mapV], label: c[mapL] }))))
         .catch((e) => {
           if (onError) onError(e);
