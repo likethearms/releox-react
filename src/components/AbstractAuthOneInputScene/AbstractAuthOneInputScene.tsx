@@ -5,7 +5,7 @@ import { AuthLayoutLinkItem, AuthLayout } from '../AuthLayout/AuthLayout';
 import { ct, ReleoxLocale } from '../../I18N';
 import { getErrorMessage } from '../../config';
 import { apis } from '../../apis';
-import { InputTypes } from '../Input/Input';
+import { InputTypes } from '../form/Input/Input';
 import { parseParams } from '../../parse-params';
 import { AuthForm } from '../AuthForm/AuthForm';
 import { Loading } from '../Loading/Loading';

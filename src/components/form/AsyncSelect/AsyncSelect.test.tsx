@@ -9,7 +9,10 @@ describe('AsyncSelect', () => {
   const url1 = 'url?filter=%7B%22where%22:%7B%22id%22:%221%22%7D%7D';
   const url2 = 'url?filter=%7B%22where%22:%7B%22id%22:%7B%22options%22:%22i%22%7D%7D%7D&limit=10';
   const response1 = [{ id: 1, name: 'Foo' }];
-  const response2 = [{ id: 1, name: 'Foo' }, { id: 2, name: 'Bar' }];
+  const response2 = [
+    { id: 1, name: 'Foo' },
+    { id: 2, name: 'Bar' },
+  ];
 
   describe('Async props', () => {
     beforeEach(() => {
@@ -253,7 +256,10 @@ describe('AsyncSelect', () => {
       const onLoad = async.prop('loadOptions') as Function;
       const res = await onLoad();
       expect(async.prop('defaultValue')).toStrictEqual({ label: 'Foo', value: 'Foo' });
-      expect(res).toStrictEqual([{ label: 'Foo', value: 'Foo' }, { label: 'Bar', value: 'Bar' }]);
+      expect(res).toStrictEqual([
+        { label: 'Foo', value: 'Foo' },
+        { label: 'Bar', value: 'Bar' },
+      ]);
     });
 
     it('should use different mapLabel in query if given', async () => {

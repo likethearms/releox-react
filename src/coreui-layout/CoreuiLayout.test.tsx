@@ -83,7 +83,10 @@ describe('CoreuiLayout', () => {
 
   describe('CoreuiSidebar', () => {
     it('should render sidebar items correctly', () => {
-      const menu = [{ text: 'Foo', url: '/foo' }, { text: 'Bar', url: '/bar' }];
+      const menu = [
+        { text: 'Foo', url: '/foo' },
+        { text: 'Bar', url: '/bar' },
+      ];
       wrapper = mount(
         routerWrapper(
           <CoreuiLayout brand="Foo Bar" sidebarMenu={menu}>
@@ -150,7 +153,10 @@ describe('CoreuiLayout', () => {
     });
 
     it('should render dropdown items correctly', () => {
-      const children = [{ text: 'Foo', url: '/foo' }, { text: 'Bar', url: '/bar' }];
+      const children = [
+        { text: 'Foo', url: '/foo' },
+        { text: 'Bar', url: '/bar' },
+      ];
       const menu = [
         {
           children,
@@ -175,7 +181,10 @@ describe('CoreuiLayout', () => {
 
     it('should render dropdown open if url is same than prop url', () => {
       Object.defineProperty(window, 'location', { value: { pathname: '/baz' }, writable: true });
-      const children = [{ text: 'Foo', url: '/foo' }, { text: 'Bar', url: '/bar' }];
+      const children = [
+        { text: 'Foo', url: '/foo' },
+        { text: 'Bar', url: '/bar' },
+      ];
       const menu = [
         {
           children,
@@ -195,7 +204,10 @@ describe('CoreuiLayout', () => {
     });
 
     test('onclick add open class to dropdown parent', () => {
-      const children = [{ text: 'Foo', url: '/foo' }, { text: 'Bar', url: '/bar' }];
+      const children = [
+        { text: 'Foo', url: '/foo' },
+        { text: 'Bar', url: '/bar' },
+      ];
       const menu = [
         {
           children,

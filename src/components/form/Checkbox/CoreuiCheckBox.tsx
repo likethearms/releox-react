@@ -37,7 +37,7 @@ export const CoreuiCheckBox = (props: CoreuiCheckBoxProps) => {
       <Field
         name={name}
         id={id || `${name}-input`}
-        render={({ field, form }: any) => <Input field={field} label={label} form={form} />}
+        component={({ field, form }: any) => <Input field={field} label={label} form={form} />}
       />
     </div>
   );

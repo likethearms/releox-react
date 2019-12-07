@@ -15,7 +15,7 @@ export const CheckBox = (props: CheckBoxProps) => {
     <div className="form-check checkbox">
       <Field
         name={name}
-        render={({ field }: any) => (
+        component={({ field }: any) => (
           <input
             type="checkbox"
             id={id || `${name}-input`}

@@ -4,7 +4,7 @@ import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route } from 'react-router';
 import thunk from 'redux-thunk';
-import { Input } from '../components/Input/Input';
+import { Input } from '../components/form/Input/Input';
 import { createGenericFormScene } from './create-generic-form-scene';
 
 const middleware = [thunk];

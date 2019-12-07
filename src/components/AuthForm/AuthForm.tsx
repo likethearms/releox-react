@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { Input, InputTypes } from '../Input/Input';
+import { Input, InputTypes } from '../form/Input/Input';
 import { Button } from '../Button/Button';
 
 interface InputProps {

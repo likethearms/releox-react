@@ -3,7 +3,7 @@ import 'jest-localstorage-mock';
 import moxios from 'moxios';
 import { mount, ReactWrapper } from 'enzyme';
 import { validateModel } from './validate-model';
-import { Input } from '../components/Input/Input';
+import { Input } from '../components/form/Input/Input';
 
 let wrapper: ReactWrapper;
 

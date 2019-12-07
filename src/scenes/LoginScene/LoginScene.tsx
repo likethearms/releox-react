@@ -6,7 +6,7 @@ import { saveAccessInformation, getErrorMessage, getReleoxOptions } from '../../
 import { ct, ReleoxLocale } from '../../I18N';
 import { routes } from '../../routes';
 import { AuthLayoutLinkItem, AuthLayout } from '../../components/AuthLayout/AuthLayout';
-import { Input } from '../../components/Input/Input';
+import { Input } from '../../components/form/Input/Input';
 import { Button } from '../../components/Button/Button';
 import { loginRequest } from '../../requests';
 

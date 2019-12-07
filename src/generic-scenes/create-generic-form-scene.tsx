@@ -109,10 +109,7 @@ export const createGenericFormScene = <T extends {}>(opts: GenericFormOptions) =
       />
     );
   };
-  return connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(ContactCreateScene);
+  return connect(mapStateToProps, mapDispatchToProps)(ContactCreateScene);
 };
 
 interface Props {

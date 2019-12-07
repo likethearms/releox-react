@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Async from 'react-select/async';
 import { Field } from 'formik';
 import Axios from 'axios';
-import { AbstractFormikInputGroup } from '../AbstractInputGroup/AbstractFormikInputGroup';
-import { ct } from '../../I18N';
+import { ct } from '../../../I18N';
+import { BaseInput } from '../BaseInput/BaseInput';
 
 export interface AsyncSelectInputDefaultProps {
   onError?: (e: Error) => any;
@@ -48,12 +48,10 @@ const defaultProps = {
 interface ExtendedProps extends AsyncSelectInputProps {
   form: any;
   field: any;
+  meta: any;
 }
 
-export class AsyncSelectElement extends AbstractFormikInputGroup<
-  ExtendedProps,
-  AsyncSelectInputState
-> {
+export class AsyncSelectElement extends Component<ExtendedProps, AsyncSelectInputState> {
   constructor(props: any) {
     super(props);
     this.loadOptions = this.loadOptions.bind(this);
@@ -130,28 +128,33 @@ export class AsyncSelectElement extends AbstractFormikInputGroup<
     });
   }
 
-  getElement(): JSX.Element {
+  render() {
     const { className, id, field, form } = this.props;
     const { defaultValue, loading } = this.state;
     const t = ct('asyncSelect');
     if (loading) return <p>{t('loading')}</p>;
     return (
-      <div className="ReactSelectHelper">
-        <Async
-          cacheOptions
-          placeholder={t('placeholder')}
-          className={`${className || ''} ${this.getInvalidClass({ field, form })}`}
-          id={id}
-          classNamePrefix="AsynSelect"
-          defaultOptions
-          isClearable
-          onBlur={() => form.setFieldTouched(field.name, true)}
-          loadOptions={this.loadOptions}
-          onChange={this.onChange}
-          defaultValue={defaultValue}
-        />
-        {this.getErrorMessageField(field.name)}
-      </div>
+      // eslint-disable-next-line
+      <BaseInput {...this.props} name={this.props.field.name}>
+        {({ getInvalidClass, getErrorMessageField }) => (
+          <div className="ReactSelectHelper">
+            <Async
+              cacheOptions
+              placeholder={t('placeholder')}
+              className={`${className || ''} ${getInvalidClass(this.props)}`}
+              id={id}
+              classNamePrefix="AsynSelect"
+              defaultOptions
+              isClearable
+              onBlur={() => form.setFieldTouched(field.name, true)}
+              loadOptions={this.loadOptions}
+              onChange={this.onChange}
+              defaultValue={defaultValue}
+            />
+            {getErrorMessageField()}
+          </div>
+        )}
+      </BaseInput>
     );
   }
 }

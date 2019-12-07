@@ -142,8 +142,5 @@ export const createGenericIndex = (opts: GenericIndexOptions) => {
   };
 
   const Component = getWrappedIndexScene(title, dataTableProps, createLink);
-  return connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Component);
+  return connect(mapStateToProps, mapDispatchToProps)(Component);
 };
