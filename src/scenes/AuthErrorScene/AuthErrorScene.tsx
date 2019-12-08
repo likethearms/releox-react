@@ -1,8 +1,14 @@
+import React, { useEffect, useState } from 'react';
 import queryString from 'query-string';
-import { successScene } from '../../HOC/success-scene';
-import { routes } from '../../routes';
+import { SuccessScene } from '../../components/SuccessScene';
 
-export const AuthErrorScene = successScene('AuthErrorScene', 'authError', routes.LOGIN, () => {
-  const query = queryString.parse(window.location.search);
-  return query.message as string;
-});
+export const AuthErrorScene = () => {
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const query = queryString.parse(window.location.search);
+    setMessage(query.message as string);
+  }, []);
+
+  return <SuccessScene context="AuthErrorScene" subTitle={message} />;
+};

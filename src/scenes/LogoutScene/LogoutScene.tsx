@@ -1,36 +1,24 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { getAccessInformation, destroyAccessInformation } from '../../config';
 import { routes } from '../../routes';
 import { Loading } from '../../components/Loading/Loading';
 import { logoutRequest } from '../../requests';
 
-interface State {
-  redirect: string;
-}
+export const LogoutScene = () => {
+  const [redirect, setRedirect] = useState('');
 
-export class LogoutScene extends Component<{}, State> {
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      redirect: '',
-    };
-  }
+  const afterRequest = () => {
+    destroyAccessInformation().then(() => setRedirect(routes.LOGIN));
+  };
 
-  componentDidMount(): void {
+  useEffect(() => {
     getAccessInformation()
       .then(({ accessToken }) => logoutRequest(accessToken))
-      .then(this.afterRequest.bind(this))
-      .catch(this.afterRequest.bind(this));
-  }
+      .then(afterRequest)
+      .catch(afterRequest);
+  }, []);
 
-  afterRequest(): void {
-    destroyAccessInformation().then(() => this.setState({ redirect: routes.LOGIN }));
-  }
-
-  render(): JSX.Element {
-    const { redirect } = this.state;
-    if (redirect) return <Redirect to={redirect} />;
-    return <Loading centeredVertical />;
-  }
-}
+  if (redirect) return <Redirect to={redirect} />;
+  return <Loading centeredVertical />;
+};

@@ -5,12 +5,14 @@ import Components from './Components';
 import { authRoutes } from '../auth-routes';
 import { routeMapper } from '../routeMapper';
 
-const App = () => (
-  <Switch>
-    {authRoutes.map(routeMapper)}
-    <Route exact path="/" component={Core} />
-    <Route exact path="/components" component={Components} />
-  </Switch>
-);
+const App = () => {
+  return (
+    <Switch>
+      {authRoutes.map(routeMapper)}
+      <Route exact path="/" component={Core} />
+      <Route exact path="/components" component={Components} />
+    </Switch>
+  );
+};
 
 export default App;

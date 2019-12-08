@@ -1,11 +1,11 @@
 import { Formik, Form } from 'formik';
 import React, { Component, ElementType } from 'react';
 import { getErrorMessage } from '../config';
-import { ct } from '../I18N';
 import { Loading } from '../components/Loading/Loading';
 import { AuthLayout } from '../components/AuthLayout/AuthLayout';
 import { Button } from '../components/Button/Button';
 import { patchUserRequest } from '../requests';
+import { useTranslation } from 'react-i18next';
 
 /* eslint-disable react/jsx-props-no-spreading */
 
@@ -49,7 +49,7 @@ export const validateModel = (fields: string[], FormComponent: ElementType) => (
     getValidationForm(): JSX.Element {
       const { authenticatedUser } = this.props;
       const { message } = this.state;
-      const t = ct('validateModel');
+      const { t } = useTranslation('validateModel');
       return (
         <AuthLayout
           context={CONTEXT}

@@ -3,13 +3,13 @@ import { Formik, Form, FormikErrors } from 'formik';
 import { goBack } from 'react-router-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
+import { useTranslation } from 'react-i18next';
 import { ObjectSchema } from 'yup';
 import { connect } from 'react-redux';
 import { Card } from '../components/Card/Card';
 import { CardTitle } from '../components/CardTitle/CardTitle';
 import { Button } from '../components/Button/Button';
 import { Loading } from '../components/Loading/Loading';
-import { ct } from '../I18N';
 
 interface ContactCreateSceneProps<T> {
   save(body: T): void;
@@ -167,7 +167,7 @@ const GenericFormScene = <T extends {}>(props: GenericFormSceneProps<T>) => {
     if (fetch) fetch();
     setIsFetched(true);
   }, [fetch, setIsFetched]);
-  const t = ct('genericForm');
+  const { t } = useTranslation('genericForm');
   if (isLoading) return <Loading centeredVertical />;
   return (
     <GenericFormLayout title={title}>

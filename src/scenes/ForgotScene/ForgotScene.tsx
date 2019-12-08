@@ -1,61 +1,27 @@
+import React, { useState } from 'react';
+import { Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
+import Axios from 'axios';
+import { Redirect } from 'react-router';
 import { routes } from '../../routes';
-import {
-  AbstractAuthOneInputSceneProps,
-  AbstractAuthOneInputSceneInputProps,
-  AbstractAuthOneInputScene,
-} from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
+import { AuthLayoutLinkItem, AuthLayout } from '../../components/AuthLayout/AuthLayout';
+import { ForgotForm } from '../../scene-forms/ForgotForm';
 import { apis } from '../../apis';
-import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
+import { getErrorMessage } from '../../config';
 
 interface BodyData {
   email: string;
 }
 
-interface DefaultProps {
-  forgotAPIUrl: string;
-}
-
-export interface ForgotSceneProps extends AbstractAuthOneInputSceneProps {
-  forgotAPIUrl: string;
-}
-
 const CONTEXT = 'ForgotScene';
 
-/* eslint-disable class-methods-use-this */
-class ForgotSceneComponent extends AbstractAuthOneInputScene<BodyData, ForgotSceneProps> {
-  static defaultProps: DefaultProps;
+export const ForgotScene = () => {
+  const [message, setMessage] = useState('');
+  const [redirect, setRedirect] = useState('');
 
-  componentDidMount(): void {
-    this.setState({ loading: false });
-  }
+  const { t } = useTranslation('ForgotScene');
 
-  onSubmit(body: BodyData): Promise<void> {
-    const { forgotAPIUrl } = this.props;
-    return this.onSubmitMethod(forgotAPIUrl, body, routes.FORGOT_SUCCESS);
-  }
-
-  getPostUrl(): string {
-    const { forgotAPIUrl } = this.props;
-    return forgotAPIUrl;
-  }
-
-  getRedirectUrl(): string {
-    return routes.FORGOT_SUCCESS;
-  }
-
-  getInitValues(): BodyData {
-    return { email: '' };
-  }
-
-  getInputProps(): AbstractAuthOneInputSceneInputProps {
-    return {
-      name: 'email',
-      type: 'email',
-    };
-  }
-
-  getLinks(): AuthLayoutLinkItem[] {
-    const t = this.getT();
+  const getLinks = (): AuthLayoutLinkItem[] => {
     return [
       {
         id: 'back-link',
@@ -63,19 +29,23 @@ class ForgotSceneComponent extends AbstractAuthOneInputScene<BodyData, ForgotSce
         text: t('linkText'),
       },
     ];
-  }
+  };
 
-  getContext(): string {
-    return CONTEXT;
-  }
+  const submit = (body: BodyData) => {
+    setMessage('');
+    Axios.post(apis.FORGOT, body)
+      .then(() => setRedirect(routes.FORGOT_SUCCESS))
+      .catch((e) => setMessage(getErrorMessage(e)));
+  };
 
-  getTPrefix(): string {
-    return 'forgot';
-  }
-}
+  const initValues = { email: '' };
 
-ForgotSceneComponent.defaultProps = {
-  forgotAPIUrl: apis.FORGOT,
+  if (redirect) return <Redirect to={redirect} />;
+  return (
+    <AuthLayout context={CONTEXT} links={getLinks()}>
+      <Formik initialValues={initValues} onSubmit={submit}>
+        {() => <ForgotForm context={CONTEXT} message={message} />}
+      </Formik>
+    </AuthLayout>
+  );
 };
-
-export const ForgotScene = ForgotSceneComponent;

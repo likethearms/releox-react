@@ -1,90 +1,70 @@
+import React, { useEffect, useState } from 'react';
+import { Formik } from 'formik';
+import { Redirect } from 'react-router';
 import queryString from 'query-string';
-import { AxiosError } from 'axios';
-import {
-  AbstractAuthOneInputSceneProps,
-  AbstractAuthOneInputSceneInputProps,
-  AbstractAuthOneInputScene,
-} from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
+import Axios, { AxiosError } from 'axios';
 import { getErrorMessage, getAuthErrorUrl } from '../../config';
-import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
+import { AuthLayout } from '../../components/AuthLayout/AuthLayout';
 import { apis } from '../../apis';
 import { routes } from '../../routes';
 import { validateInvitationTokenRequest } from '../../requests';
+import { InvitationForm } from '../../scene-forms/InvitationForm';
+import { Loading } from '../../components/Loading/Loading';
 
 interface BodyData {
   password: string;
 }
 
-interface DefaultProps {
-  resetPasswordAPIUrl: string;
-  removeAccessTokenUrl: string;
-}
-
-interface AcceptInvitationSceneProps extends AbstractAuthOneInputSceneProps {
-  resetPasswordAPIUrl: string;
-}
-
 const CONTEXT = 'AcceptInvitation';
 
-/* eslint-disable class-methods-use-this */
-export class AcceptInvitationScene extends AbstractAuthOneInputScene<
-  BodyData,
-  AcceptInvitationSceneProps
-> {
-  static defaultProps: DefaultProps = {
-    resetPasswordAPIUrl: apis.PASSWORD_RESET,
-    removeAccessTokenUrl: apis.LOGOUT,
+export const AcceptInvitationScene = () => {
+  const [redirect, setRedirect] = useState('');
+  const [message, setMessage] = useState('');
+  const [token, setToken] = useState('');
+  const [uid, setUid] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  const redirectToAuthErrorPage = (msg: string): void => {
+    setRedirect(getAuthErrorUrl(msg));
   };
 
-  componentDidMount(): any {
+  useEffect(() => {
     const query = queryString.parse(window.location.search);
 
     if (!query.uid || !query.invitation_token) {
-      return this.redirectToAuthErrorPage('Missing information');
+      return redirectToAuthErrorPage('Missing information');
     }
 
     if (Array.isArray(query.uid) || Array.isArray(query.invitation_token)) {
-      return this.redirectToAuthErrorPage('Information is on wrong format');
+      return redirectToAuthErrorPage('Information is on wrong format');
     }
 
-    return validateInvitationTokenRequest(query.uid, query.invitation_token)
-      .then(() => this.setState({ loading: false }))
-      .catch((e: AxiosError) => this.redirectToAuthErrorPage(getErrorMessage(e)));
-  }
+    validateInvitationTokenRequest(query.uid, query.invitation_token)
+      .then(() => {
+        setUid(query.uid as string);
+        setToken(query.invitation_token as string);
+        setIsLoading(false);
+      })
+      .catch((e: AxiosError) => redirectToAuthErrorPage(getErrorMessage(e)));
+    return undefined;
+  }, []);
 
-  redirectToAuthErrorPage(message: string): void {
-    this.setState({ redirect: getAuthErrorUrl(message) });
-  }
+  const onSubmit = (body: BodyData) => {
+    const url = apis.ACCEPT_INVITATION.replace(':userId', uid).replace(':invitationToken', token);
+    Axios.post(url, body)
+      .then(() => setRedirect(routes.ACCEPT_INVITATION_SUCCESS))
+      .catch((e) => setMessage(getErrorMessage(e)));
+  };
 
-  getPostUrl(): string {
-    const q = queryString.parse(window.location.search);
-    return `${apis.ACCEPT_INVITATION}?invitation_token=${q.invitation_token}&uid=${q.uid}`;
-  }
+  const initValues = { password: '' };
 
-  getRedirectUrl(): string {
-    return routes.ACCEPT_INVITATION_SUCCESS;
-  }
-
-  getInitValues(): BodyData {
-    return { password: '' };
-  }
-
-  getInputProps(): AbstractAuthOneInputSceneInputProps {
-    return {
-      name: 'password',
-      type: 'password',
-    };
-  }
-
-  getLinks(): AuthLayoutLinkItem[] {
-    return [];
-  }
-
-  getContext(): string {
-    return CONTEXT;
-  }
-
-  getTPrefix(): any {
-    return 'acceptInvitation';
-  }
-}
+  if (redirect) return <Redirect to={redirect} />;
+  if (isLoading) return <Loading centeredVertical />;
+  return (
+    <AuthLayout context={CONTEXT} links={[]}>
+      <Formik initialValues={initValues} onSubmit={onSubmit}>
+        {() => <InvitationForm context={CONTEXT} message={message} />}
+      </Formik>
+    </AuthLayout>
+  );
+};

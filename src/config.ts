@@ -1,4 +1,3 @@
-import { ReleoxLocale } from './I18N';
 import { routes } from './routes';
 
 declare global {
@@ -15,18 +14,12 @@ export interface AccessInformation {
 
 export interface ReleoxOptions {
   showRegisterLink?: boolean;
-  locale?: ReleoxLocale;
   userIdKey?: string;
   tokenKey?: string;
   loginModelName?: string;
 }
 
-export type ReleoxOptionKeys =
-  | 'showRegisterLink'
-  | 'locale'
-  | 'userIdKey'
-  | 'tokenKey'
-  | 'loginModelName';
+export type ReleoxOptionKeys = 'showRegisterLink' | 'userIdKey' | 'tokenKey' | 'loginModelName';
 
 const defaultOptions: ReleoxOptions = {
   userIdKey: 'userId',

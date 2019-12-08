@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { CenterContent } from '../CenterContent/CenterContent';
 import { Card } from '../Card/Card';
 import { CardTitle } from '../CardTitle/CardTitle';
@@ -12,24 +13,25 @@ export interface AuthLayoutLinkItem {
 
 export interface AuthLayoutProps {
   context: string;
-  title: string;
-  subTitle: string;
   message?: string;
+  subTitle?: string;
+  title?: string;
   children?: JSX.Element | JSX.Element[] | string;
   links: AuthLayoutLinkItem[];
   titleBlock?: string | JSX.Element;
 }
 
 export const AuthLayout = (props: AuthLayoutProps) => {
-  const { context, title, subTitle, children, links, message, titleBlock } = props;
+  const { context, children, links, message, titleBlock, subTitle } = props;
+  const { t } = useTranslation(context);
   return (
     <CenterContent>
       <div className="col-lg-6" id={context}>
         {titleBlock}
         <Card>
-          <div>
-            <CardTitle>{title}</CardTitle>
-            <p className="text-muted">{subTitle}</p>
+          <>
+            <CardTitle>{t('title')}</CardTitle>
+            <p className="text-muted">{subTitle || t('subTitle')}</p>
             {children}
             {links.map((l) => (
               <Link to={l.to} key={l.to} id={`${context}-${l.id}`}>
@@ -37,7 +39,7 @@ export const AuthLayout = (props: AuthLayoutProps) => {
               </Link>
             ))}
             <div className="text-center">{message}</div>
-          </div>
+          </>
         </Card>
       </div>
     </CenterContent>

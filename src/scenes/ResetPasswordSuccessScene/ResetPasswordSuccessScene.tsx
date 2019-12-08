@@ -1,8 +1,4 @@
-import { successScene } from '../../HOC/success-scene';
-import { routes } from '../../routes';
+import React from 'react';
+import { SuccessScene } from '../../components/SuccessScene';
 
-export const ResetPasswordSuccessScene = successScene(
-  'ResetPasswordSuccessScene',
-  'resetPasswordSuccess',
-  routes.LOGIN
-);
+export const ResetPasswordSuccessScene = () => <SuccessScene context="ResetPasswordSuccessScene" />;

@@ -14,7 +14,7 @@ import { LogoutScene } from './scenes/LogoutScene/LogoutScene';
 export const authRoutes: ReleoxRoutes[] = [
   {
     url: routes.LOGIN,
-    component: guestMiddleware(LoginScene),
+    component: guestMiddleware<any>(LoginScene),
   },
   {
     url: routes.FORGOT,

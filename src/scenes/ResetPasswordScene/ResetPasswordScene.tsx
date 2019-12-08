@@ -1,81 +1,55 @@
-import { AxiosError } from 'axios';
-import { routes } from '../../routes';
-import {
-  AbstractAuthOneInputSceneProps,
-  AbstractAuthOneInputSceneInputProps,
-  AbstractAuthOneInputScene,
-} from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
-import { apis } from '../../apis';
-import { getErrorMessage, getAuthErrorUrl } from '../../config';
-import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
+import React, { useState, useEffect } from 'react';
+import { Formik } from 'formik';
+import Axios from 'axios';
+import { Redirect } from 'react-router';
+import { PasswordForm } from '../../scene-forms/PasswordForm';
+import { Loading } from '../../components/Loading/Loading';
+import { AuthLayout } from '../../components/AuthLayout/AuthLayout';
 import { parseParams } from '../../parse-params';
 import { validateTokenRequest } from '../../requests';
+import { getErrorMessage, getAuthErrorUrl } from '../../config';
+import { apis } from '../../apis';
+import { routes } from '../../routes';
 
 interface BodyData {
   newPassword: string;
 }
 
-interface DefaultProps {
-  resetPasswordAPIUrl: string;
-}
-
-export interface ResetPasswordSceneProps extends AbstractAuthOneInputSceneProps {
-  resetPasswordAPIUrl: string;
-}
-
 const CONTEXT = 'ForgotScene';
 
-/* eslint-disable class-methods-use-this */
-export class ResetPasswordScene extends AbstractAuthOneInputScene<
-  BodyData,
-  ResetPasswordSceneProps
-> {
-  static defaultProps: DefaultProps = {
-    resetPasswordAPIUrl: apis.PASSWORD_RESET,
+export const ResetPasswordScene = () => {
+  const [message, setMessage] = useState('');
+  const [redirect, setRedirect] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [accessToken, setAccessToken] = useState('');
+
+  useEffect(() => {
+    parseParams(true)
+      // eslint-disable-next-line camelcase
+      .then(({ user, access_token }) => {
+        setAccessToken(access_token);
+        return validateTokenRequest(user, access_token);
+      })
+      .then(() => setIsLoading(false))
+      .catch((e) => setRedirect(getAuthErrorUrl(getErrorMessage(e))));
+  }, []);
+
+  const onSubmit = (body: BodyData) => {
+    setMessage('');
+    Axios.post(`${apis.PASSWORD_RESET}?access_token=${accessToken}`, body)
+      .then(() => setRedirect(routes.RESET_SUCCESS))
+      .catch((e) => setMessage(getErrorMessage(e)));
   };
 
-  componentDidMount(): void {
-    /* eslint-disable camelcase */
-    parseParams(true)
-      .then(({ user, access_token }) => validateTokenRequest(user, access_token))
-      .then(() => this.setState({ loading: false }))
-      .catch((e: AxiosError) => this.setState({ redirect: getAuthErrorUrl(getErrorMessage(e)) }));
-    /* eslint-enable camelcase */
-  }
+  const initValues = { newPassword: '' };
 
-  getPostUrl(): string {
-    const { resetPasswordAPIUrl } = this.props;
-    return resetPasswordAPIUrl;
-  }
-
-  getRedirectUrl(): string {
-    return routes.RESET_SUCCESS;
-  }
-
-  shouldDestroyToken(): boolean {
-    return true;
-  }
-
-  getInitValues(): BodyData {
-    return { newPassword: '' };
-  }
-
-  getInputProps(): AbstractAuthOneInputSceneInputProps {
-    return {
-      name: 'newPassword',
-      type: 'password',
-    };
-  }
-
-  getLinks(): AuthLayoutLinkItem[] {
-    return [];
-  }
-
-  getContext(): string {
-    return CONTEXT;
-  }
-
-  getTPrefix(): any {
-    return 'resetPassword';
-  }
-}
+  if (redirect) return <Redirect to={redirect} />;
+  if (isLoading) return <Loading centeredVertical />;
+  return (
+    <AuthLayout context={CONTEXT} links={[]}>
+      <Formik initialValues={initValues} onSubmit={onSubmit}>
+        {() => <PasswordForm context={CONTEXT} message={message} />}
+      </Formik>
+    </AuthLayout>
+  );
+};

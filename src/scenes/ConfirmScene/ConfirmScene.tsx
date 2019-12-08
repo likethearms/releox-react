@@ -1,59 +1,38 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import queryString from 'query-string';
 import { AxiosError } from 'axios';
 import { Redirect } from 'react-router';
-import { successScene, SuccessSceneProps } from '../../HOC/success-scene';
-import { routes } from '../../routes';
+import { SuccessScene } from '../../components/SuccessScene';
 import { getErrorMessage, getAuthErrorUrl } from '../../config';
 import { Loading } from '../../components/Loading/Loading';
 import { confirmUserRequest } from '../../requests';
 
-export interface ConfirmSceneProps {}
-interface State {
-  redirect: string;
-  loading: boolean;
-}
+export const ConfirmScene = () => {
+  const [redirect, setRedirect] = useState('');
+  const [loading, setLoading] = useState(true);
 
-export class ConfirmScene extends Component<ConfirmSceneProps & SuccessSceneProps, State> {
-  constructor(props: ConfirmSceneProps) {
-    super(props);
-    this.state = {
-      redirect: '',
-      loading: true,
-    };
-    this.handleAxiosError = this.handleAxiosError.bind(this);
-    this.turnLoadingOff = this.turnLoadingOff.bind(this);
-  }
+  const redirectToAuthErrorPage = (message: string) => {
+    setRedirect(getAuthErrorUrl(message));
+  };
 
-  componentDidMount(): any {
+  useEffect(() => {
     const query = queryString.parse(window.location.search);
 
-    if (!query.uid || !query.token) return this.redirectToAuthErrorPage('Missing information');
-    if (Array.isArray(query.uid) || Array.isArray(query.token))
-      return this.redirectToAuthErrorPage('Information is on wrong format');
+    if (!query.uid || !query.token) {
+      return redirectToAuthErrorPage('Missing information');
+    }
 
-    return confirmUserRequest(query.uid, query.token)
-      .then(this.turnLoadingOff)
-      .catch(this.handleAxiosError);
-  }
+    if (Array.isArray(query.uid) || Array.isArray(query.token)) {
+      return redirectToAuthErrorPage('Information is on wrong format');
+    }
 
-  turnLoadingOff(): void {
-    this.setState({ loading: false });
-  }
+    confirmUserRequest(query.uid, query.token)
+      .then(() => setLoading(false))
+      .catch((e: AxiosError) => redirectToAuthErrorPage(getErrorMessage(e)));
+    return undefined;
+  }, []);
 
-  handleAxiosError(e: AxiosError): void {
-    this.redirectToAuthErrorPage(getErrorMessage(e));
-  }
-
-  redirectToAuthErrorPage(message: string): void {
-    this.setState({ redirect: getAuthErrorUrl(message) });
-  }
-
-  render(): JSX.Element {
-    const { locale } = this.props;
-    const { redirect, loading } = this.state;
-    if (redirect) return <Redirect to={redirect} />;
-    if (loading) return <Loading centeredVertical />;
-    return successScene('ConfirmScene', 'confirm', routes.LOGIN)({ locale });
-  }
-}
+  if (redirect) return <Redirect to={redirect} />;
+  if (loading) return <Loading centeredVertical />;
+  return <SuccessScene context="ConfirmScene" />;
+};

@@ -1,4 +1,4 @@
-import { routes } from '../../routes';
-import { successScene } from '../../HOC/success-scene';
+import React from 'react';
+import { SuccessScene } from '../../components/SuccessScene';
 
-export const ForgotSuccessScene = successScene('ForgotSuccessScene', 'forgotSuccess', routes.LOGIN);
+export const ForgotSuccessScene = () => <SuccessScene context="ForgotSuccessScene" />;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { push } from 'react-router-redux';
+import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { Card } from '../components/Card/Card';
 import {
@@ -10,7 +11,6 @@ import {
   DataTable,
 } from '../components/DataTable/DataTable';
 import { CardTitle } from '../components/CardTitle/CardTitle';
-import { ct } from '../I18N';
 
 interface IndexSceneProps {
   title: string;
@@ -39,7 +39,7 @@ const IndexScene = (props: IndexSceneProps): JSX.Element => {
     loading,
   } = props;
   let addLink = <span />;
-  const t = ct('genericIndex');
+  const { t } = useTranslation('genericIndex');
   if (createLink) {
     addLink = (
       <Link className="btn btn-primary float-right" to={createLink}>

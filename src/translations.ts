@@ -1,91 +1,15 @@
-interface TranslationObject {
-  [key: string]: string;
-  // Login
-  'login.title': string;
-  'login.subTitle': string;
-  'login.emailPlaceholder': string;
-  'login.passwordPlaceholder': string;
-  'login.forgotPasswordText': string;
-  'login.registerText': string;
-  'login.loginButtonText': string;
-
-  // Forgot
-  'forgot.title': string;
-  'forgot.buttonText': string;
-  'forgot.linkText': string;
-  'forgot.subTitle': string;
-  'forgot.placeholder': string;
-
-  // ForgotSuccess
-  'forgotSuccess.title': string;
-  'forgotSuccess.link': string;
-  'forgotSuccess.subTitle': string;
-
-  // ResetPassword
-  'resetPassword.title': string;
-  'resetPassword.subTitle': string;
-  'resetPassword.placeholder': string;
-  'resetPassword.buttonText': string;
-
-  // ResetPasswordSuccess
-  'resetPasswordSuccess.title': string;
-  'resetPasswordSuccess.link': string;
-  'resetPasswordSuccess.subTitle': string;
-
-  // AuthError
-  'authError.title': string;
-  'authError.link': string;
-  'authError.subTitle': string;
-
-  // Confirm
-  'confirm.title': string;
-  'confirm.link': string;
-  'confirm.subTitle': string;
-
-  // Accept Invitation
-  'acceptInvitation.buttonText': string;
-  'acceptInvitation.title': string;
-  'acceptInvitation.subTitle': string;
-  'acceptInvitation.placeholder': string;
-
-  // Accept Invitation Success
-  'acceptInvitationSuccess.title': string;
-  'acceptInvitationSuccess.link': string;
-  'acceptInvitationSuccess.subTitle': string;
-
-  // Validate Model
-  'validateModel.title': string;
-  'validateModel.subTitle': string;
-  'validateModel.button': string;
-
-  // Generic Form
-  'genericForm.save': string;
-  'genericForm.back': string;
-  'genericForm.delete': string;
-
-  // Generic Index
-  'genericIndex.addNew': string;
-
-  // DataTable
-  'dataTable.noDataText': string;
-  'dataTable.loading': string;
-}
-
-interface Translation<T> {
-  [key: string]: T;
-}
-
-export const translations: Translation<TranslationObject> = {
+export const translations = {
   fi: {
-    // Login
-    'login.title': 'Kirjaudu',
-    'login.subTitle': 'Täytä tiedot ja kirjaudu sisään',
-    'login.emailPlaceholder': 'Sähköposti',
-    'login.usernamePlaceholder': 'Käyttäjänimi',
-    'login.passwordPlaceholder': 'Salasana',
-    'login.forgotPasswordText': 'Unohditko salasanasi?',
-    'login.registerText': 'Oletko uusi? Luo tunnus!',
-    'login.loginButtonText': 'Kirjaudu',
+    LoginScene: {
+      title: 'Kirjaudu',
+      subTitle: 'Täytä tiedot ja kirjaudu sisään',
+      emailPlaceholder: 'Sähköposti',
+      usernamePlaceholder: 'Käyttäjänimi',
+      passwordPlaceholder: 'Salasana',
+      forgotPasswordText: 'Unohditko salasanasi?',
+      registerText: 'Oletko uusi? Luo tunnus!',
+      loginButtonText: 'Kirjaudu',
+    },
 
     // Forgot
     'forgot.buttonText': 'Nollaa',

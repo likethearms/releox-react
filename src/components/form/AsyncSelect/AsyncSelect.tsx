@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Async from 'react-select/async';
 import { Field } from 'formik';
 import Axios from 'axios';
-import { ct } from '../../../I18N';
+import { useTranslation } from 'react-i18next';
 import { BaseInput } from '../BaseInput/BaseInput';
 
 export interface AsyncSelectInputDefaultProps {
@@ -131,7 +131,7 @@ export class AsyncSelectElement extends Component<ExtendedProps, AsyncSelectInpu
   render() {
     const { className, id, field, form } = this.props;
     const { defaultValue, loading } = this.state;
-    const t = ct('asyncSelect');
+    const { t } = useTranslation('AsyncSelect');
     if (loading) return <p>{t('loading')}</p>;
     return (
       // eslint-disable-next-line

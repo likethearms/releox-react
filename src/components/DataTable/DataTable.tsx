@@ -1,8 +1,8 @@
 import React, { Component, ReactElement } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import { useTranslation } from 'react-i18next';
 import overlayElementFunction from './overlayElementFunction';
-import { ct } from '../../I18N';
 
 export interface DataTableColumn {
   dataField: string;
@@ -146,7 +146,7 @@ export class DataTable extends Component<DataTableProps, State> {
     let rowEvents;
     const { page, sizePerPage } = this.state;
     const combinedRowClasses = this.getCombinedRowClasses();
-    const t = ct('dataTable');
+    const { t } = useTranslation('dataTable');
     if (onClick) rowEvents = { onClick };
     return (
       <BootstrapTable

@@ -1,8 +1,6 @@
-import { successScene } from '../../HOC/success-scene';
-import { routes } from '../../routes';
+import React from 'react';
+import { SuccessScene } from '../../components/SuccessScene';
 
-export const AcceptInvitationSuccessScene = successScene(
-  'AcceptInvitationSuccessScene',
-  'acceptInvitationSuccess',
-  routes.LOGIN
+export const AcceptInvitationSuccessScene = () => (
+  <SuccessScene context="AcceptInvitationSuccessScene" />
 );
