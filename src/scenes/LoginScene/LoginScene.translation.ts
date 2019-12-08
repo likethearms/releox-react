@@ -1,3 +1,5 @@
+import { Translation } from '../../Translation.d';
+
 export interface LoginTranslation {
   title: string;
   subTitle: string;
@@ -9,12 +11,7 @@ export interface LoginTranslation {
   button: string;
 }
 
-interface Translation {
-  fi: LoginTranslation;
-  en: LoginTranslation;
-}
-
-const LoginSceneTranslation: Translation = {
+const LoginSceneTranslation: Translation<LoginTranslation> = {
   fi: {
     title: 'Kirjaudu',
     subTitle: 'Täytä tiedot ja kirjaudu sisään',

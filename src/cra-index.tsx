@@ -7,7 +7,7 @@ import App from './testing-cra/App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import './releox.css';
-import { translations } from './trans';
+import { releoxTranslations } from './releox-translations';
 
 i18next.use(initReactI18next).init({
   fallbackLng: 'en',
@@ -17,7 +17,7 @@ i18next.use(initReactI18next).init({
   interpolation: {
     escapeValue: false, // react already safes from xss
   },
-  resources: translations,
+  resources: releoxTranslations,
 });
 
 ReactDom.render(

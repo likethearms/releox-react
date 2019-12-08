@@ -10,7 +10,7 @@ export interface ForgotFromProps {
 }
 
 export const ForgotForm = ({ context, message }: ForgotFromProps) => {
-  const { t } = useTranslation('ForgotForm');
+  const { t } = useTranslation('ForgotScene');
   return (
     <Form>
       <Input name="email" label={t('email')} id={`${context}-email-input`} />
