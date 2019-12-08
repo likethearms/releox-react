@@ -25,3 +25,4 @@ export * from './components/Details/DetailField';
 export * from './components/Details/Details';
 export * from './components/form/ReactSelect/ReactSelect';
 export * from './components/form/Select/Select';
+export * from './releox-translations';

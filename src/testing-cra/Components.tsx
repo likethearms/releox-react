@@ -17,7 +17,7 @@ const Components = () => (
     <span>Foo</span>
     <Card>
       <Formik
-        onSubmit={(x) => console.log(x)} // eslint-disable-line
+        onSubmit={console.log} // eslint-disable-line
         initialValues={{
           foo: '',
           bar: '',

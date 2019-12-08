@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "author": "Henrik Salmela",
   "dependencies": {
+    "deepmerge": "^4.2.2",
     "get-value": "^3.0.1",
     "query-string": "^6.8.3",
     "react-bootstrap-table-next": "^3.2.1",
