@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import { Redirect } from 'react-router';
-import queryString from 'query-string';
 import Axios, { AxiosError } from 'axios';
 import { getErrorMessage, getAuthErrorUrl } from '../../config';
 import { AuthLayout } from '../../components/AuthLayout/AuthLayout';
@@ -10,6 +9,7 @@ import { routes } from '../../routes';
 import { validateInvitationTokenRequest } from '../../requests';
 import { InvitationForm } from '../../scene-forms/InvitationForm';
 import { Loading } from '../../components/Loading/Loading';
+import { parseAndGetQuery, InviteQuery } from '../../parse-params';
 
 interface BodyData {
   password: string;
@@ -21,7 +21,7 @@ export const AcceptInvitationScene = () => {
   const [redirect, setRedirect] = useState('');
   const [message, setMessage] = useState('');
   const [token, setToken] = useState('');
-  const [uid, setUid] = useState('');
+  const [userId, setUserId] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   const redirectToAuthErrorPage = (msg: string): void => {
@@ -29,28 +29,20 @@ export const AcceptInvitationScene = () => {
   };
 
   useEffect(() => {
-    const query = queryString.parse(window.location.search);
-
-    if (!query.uid || !query.invitation_token) {
-      return redirectToAuthErrorPage('Missing information');
-    }
-
-    if (Array.isArray(query.uid) || Array.isArray(query.invitation_token)) {
-      return redirectToAuthErrorPage('Information is on wrong format');
-    }
-
-    validateInvitationTokenRequest(query.uid, query.invitation_token)
-      .then(() => {
-        setUid(query.uid as string);
-        setToken(query.invitation_token as string);
-        setIsLoading(false);
+    parseAndGetQuery(true, ['uid', 'invitation_token'])
+      // eslint-disable-next-line camelcase
+      .then(({ uid, invitation_token }: InviteQuery) => {
+        setUserId(uid);
+        setToken(invitation_token);
+        return validateInvitationTokenRequest(uid, invitation_token);
       })
+      .then(() => setIsLoading(false))
       .catch((e: AxiosError) => redirectToAuthErrorPage(getErrorMessage(e)));
-    return undefined;
   }, []);
 
   const onSubmit = (body: BodyData) => {
-    const url = apis.ACCEPT_INVITATION.replace(':userId', uid).replace(':invitationToken', token);
+    let url = apis.ACCEPT_INVITATION.replace(':invitationToken', token);
+    url = url.replace(':userId', userId);
     Axios.post(url, body)
       .then(() => setRedirect(routes.ACCEPT_INVITATION_SUCCESS))
       .catch((e) => setMessage(getErrorMessage(e)));

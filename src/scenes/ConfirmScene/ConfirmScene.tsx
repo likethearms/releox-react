@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import queryString from 'query-string';
 import { AxiosError } from 'axios';
 import { Redirect } from 'react-router';
 import { SuccessScene } from '../../components/SuccessScene';
 import { getErrorMessage, getAuthErrorUrl } from '../../config';
 import { Loading } from '../../components/Loading/Loading';
 import { confirmUserRequest } from '../../requests';
+import { parseAndGetQuery } from '../../parse-params';
 
 export const ConfirmScene = () => {
   const [redirect, setRedirect] = useState('');
@@ -16,20 +16,10 @@ export const ConfirmScene = () => {
   };
 
   useEffect(() => {
-    const query = queryString.parse(window.location.search);
-
-    if (!query.uid || !query.token) {
-      return redirectToAuthErrorPage('Missing information');
-    }
-
-    if (Array.isArray(query.uid) || Array.isArray(query.token)) {
-      return redirectToAuthErrorPage('Information is on wrong format');
-    }
-
-    confirmUserRequest(query.uid, query.token)
+    parseAndGetQuery(true, ['uid', 'token'])
+      .then((query) => confirmUserRequest(query.uid, query.token))
       .then(() => setLoading(false))
       .catch((e: AxiosError) => redirectToAuthErrorPage(getErrorMessage(e)));
-    return undefined;
   }, []);
 
   if (redirect) return <Redirect to={redirect} />;

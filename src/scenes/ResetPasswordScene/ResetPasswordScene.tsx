@@ -5,7 +5,7 @@ import { Redirect } from 'react-router';
 import { PasswordForm } from '../../scene-forms/PasswordForm';
 import { Loading } from '../../components/Loading/Loading';
 import { AuthLayout } from '../../components/AuthLayout/AuthLayout';
-import { parseParams } from '../../parse-params';
+import { parseAndGetQuery, AccessQuery } from '../../parse-params';
 import { validateTokenRequest } from '../../requests';
 import { getErrorMessage, getAuthErrorUrl } from '../../config';
 import { apis } from '../../apis';
@@ -24,9 +24,9 @@ export const ResetPasswordScene = () => {
   const [accessToken, setAccessToken] = useState('');
 
   useEffect(() => {
-    parseParams(true)
+    parseAndGetQuery(true)
       // eslint-disable-next-line camelcase
-      .then(({ user, access_token }) => {
+      .then(({ user, access_token }: AccessQuery) => {
         setAccessToken(access_token);
         return validateTokenRequest(user, access_token);
       })
