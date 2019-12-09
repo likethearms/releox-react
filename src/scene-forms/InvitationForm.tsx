@@ -10,7 +10,7 @@ export interface ForgotFromProps {
 }
 
 export const InvitationForm = ({ context, message }: ForgotFromProps) => {
-  const { t } = useTranslation('InvitationForm');
+  const { t } = useTranslation('AcceptInvitationScene');
   return (
     <Form>
       <Input

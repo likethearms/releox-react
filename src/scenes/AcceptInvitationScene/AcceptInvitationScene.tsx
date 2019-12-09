@@ -15,7 +15,7 @@ interface BodyData {
   password: string;
 }
 
-const CONTEXT = 'AcceptInvitation';
+const CONTEXT = 'AcceptInvitationScene';
 
 export const AcceptInvitationScene = () => {
   const [redirect, setRedirect] = useState('');

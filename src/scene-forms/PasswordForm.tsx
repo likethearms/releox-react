@@ -10,7 +10,7 @@ export interface ForgotFromProps {
 }
 
 export const PasswordForm = ({ context, message }: ForgotFromProps) => {
-  const { t } = useTranslation('PasswordForm');
+  const { t } = useTranslation('ResetPasswordScene');
   return (
     <Form>
       <Input

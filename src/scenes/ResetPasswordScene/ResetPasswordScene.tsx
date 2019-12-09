@@ -15,7 +15,7 @@ interface BodyData {
   newPassword: string;
 }
 
-const CONTEXT = 'ForgotScene';
+const CONTEXT = 'ResetPasswordScene';
 
 export const ResetPasswordScene = () => {
   const [message, setMessage] = useState('');

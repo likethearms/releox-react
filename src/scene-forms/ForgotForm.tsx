@@ -13,7 +13,7 @@ export const ForgotForm = ({ context, message }: ForgotFromProps) => {
   const { t } = useTranslation('ForgotScene');
   return (
     <Form>
-      <Input name="email" label={t('email')} id={`${context}-email-input`} />
+      <Input name="email" label={t('email')} id={`${context}-email-input`} type="email" />
       <div className="text-center">{message}</div>
       <Button className="float-right" type="submit" id={`${context}-button`}>
         {t('button')}
