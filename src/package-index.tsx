@@ -16,7 +16,7 @@ export * from './routes';
 export * from './auth-routes';
 export * from './HOC/auth-middleware';
 export * from './HOC/guest-middleware';
-export * from './HOC/validate-model';
+export * from './HOC/validate-model/validate-model';
 export * from './config';
 export * from './components/DataTable/DataTable';
 export * from './generic-scenes/create-generic-index-scene';

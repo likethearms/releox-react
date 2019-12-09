@@ -8,6 +8,7 @@ import AuthErrorSceneTranslation from './scenes/AuthErrorScene/AuthErrorScene.tr
 import ConfirmSceneTranslation from './scenes/ConfirmScene/ConfirmScene.translation';
 import AcceptInvitationSceneTranslation from './scenes/AcceptInvitationScene/AcceptInvitationScene.translation';
 import AcceptInvitationSuccessSceneTranslation from './scenes/AcceptInvitationSuccessScene/AcceptInvitationSuccessScene.translation';
+import validateModelTranslation from './HOC/validate-model/validate-model.translation';
 
 export const releoxTranslations = deepmerge.all([
   LoginSceneTranslation,
@@ -19,4 +20,5 @@ export const releoxTranslations = deepmerge.all([
   AcceptInvitationSceneTranslation,
   AcceptInvitationSuccessSceneTranslation,
   ConfirmSceneTranslation,
+  validateModelTranslation,
 ]) as any;

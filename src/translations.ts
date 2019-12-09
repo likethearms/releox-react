@@ -18,9 +18,6 @@ export const translations = {
   },
   en: {
     // Validate Model
-    'validateModel.title': 'Complete your account',
-    'validateModel.subTitle': 'Complete missing information and click save',
-    'validateModel.button': 'Save',
 
     // Generic Form
     'genericForm.save': 'Save',
