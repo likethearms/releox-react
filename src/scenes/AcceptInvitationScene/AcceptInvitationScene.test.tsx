@@ -2,10 +2,9 @@ import React from 'react';
 import moxios from 'moxios';
 import { createWaitForElement } from 'enzyme-wait';
 import { ShallowWrapper, shallow } from 'enzyme';
-import { AbstractAuthOneInputScene } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 import { AcceptInvitationScene } from './AcceptInvitationScene';
 
-let wrapper: ShallowWrapper<{}, {}, AbstractAuthOneInputScene<{}, {}>>;
+let wrapper: ShallowWrapper<any, any, any>;
 const validateTokenUrl = '/Members/validate-invitation-token?uid=1&invitation_token=2';
 
 window = Object.create(window); // eslint-disable-line

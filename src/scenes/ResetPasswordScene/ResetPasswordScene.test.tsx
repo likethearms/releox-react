@@ -3,12 +3,11 @@ import moxios from 'moxios';
 import { createWaitForElement } from 'enzyme-wait';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { ResetPasswordScene } from './ResetPasswordScene';
-import { AbstractAuthOneInputScene } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 
 window = Object.create(window); // eslint-disable-line
 Object.defineProperty(window, 'location', { value: { search: '' }, writable: true });
 
-let wrapper: ShallowWrapper<{}, {}, AbstractAuthOneInputScene<{}, {}>>;
+let wrapper: ShallowWrapper<any, any, any>;
 
 describe('Abstract methods', () => {
   beforeAll(() => {
@@ -105,7 +104,7 @@ describe('UI tests', () => {
   describe('English translations', () => {
     beforeAll(async () => {
       const waitForSample = createWaitForElement('AuthLayout');
-      wrapper = shallow(<ResetPasswordScene locale="en" />);
+      wrapper = shallow(<ResetPasswordScene />);
       await waitForSample(wrapper);
     });
 

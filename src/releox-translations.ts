@@ -12,10 +12,12 @@ import validateModelTranslation from './HOC/validate-model/validate-model.transl
 import GenericIndexSceneTranslation from './generic-scenes/GenericIndexScene/GenericIndexScene.translation';
 import DataTableTranslation from './components/DataTable/DataTable.translation';
 import GenericFormSceneTranslation from './generic-scenes/GenericFormScene/GenericFormScene.translation';
+import AsyncSelectTranslations from './components/form/AsyncSelect/AsyncSelect.translation';
 
 export const releoxTranslations = deepmerge.all([
   AcceptInvitationSuccessSceneTranslation,
   AcceptInvitationSceneTranslation,
+  AsyncSelectTranslations,
   AuthErrorSceneTranslation,
   DataTableTranslation,
   ConfirmSceneTranslation,

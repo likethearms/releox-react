@@ -4,7 +4,7 @@ import reduxThunk from 'redux-thunk';
 import ReactDom from 'react-dom';
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { Router } from 'react-router-dom';
+import { BrowserRouter, Router } from 'react-router-dom';
 import { routerMiddleware } from 'react-router-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { createBrowserHistory } from 'history';
@@ -19,7 +19,7 @@ i18next.use(initReactI18next).init({
   fallbackLng: 'en',
   debug: true,
   keySeparator: false, // we do not use keys in form messages.welcome
-  lng: 'fi',
+  lng: 'en',
   interpolation: {
     escapeValue: false, // react already safes from xss
   },
@@ -36,7 +36,9 @@ const store = createStore(
 ReactDom.render(
   <Provider store={store}>
     <Router history={history}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Router>
   </Provider>,
   document.getElementById('root')

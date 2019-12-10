@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter, Route } from 'react-router';
 import thunk from 'redux-thunk';
 import { Input } from '../../components/form/Input/Input';
-import { createGenericFormScene } from './GenericFormScene';
+import { GenericFormScene } from './GenericFormScene';
 
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
@@ -39,13 +39,16 @@ describe('create-generic-form-scene', () => {
   it('should show all key elements on create scene', () => {
     const spy = jest.fn();
     const save = (a: any) => () => spy(a);
-    const El: any = createGenericFormScene({
-      title: 'Create form',
-      EmbedForm: F,
-      initialValues: { name: 'Foo Bar' },
-      saveAction: save,
-      reduxEntry: 'entry',
-    });
+    const El = () => (
+      <GenericFormScene
+        title="Create form"
+        EmbedForm={F}
+        initialValues={{ name: 'Foo Bar' }}
+        redirectUrl="/"
+        saveAction={save}
+        reduxEntry="entry"
+      />
+    );
     const wrapper = mount(
       <Provider store={store}>
         <MemoryRouter initialEntries={['/record/new']}>
@@ -72,15 +75,19 @@ describe('create-generic-form-scene', () => {
     const save = (a: any) => () => spy1(a);
     const fetch = (a: any) => () => spy2(a);
     const del = (a: any) => () => spy3(a);
-    const El: any = createGenericFormScene({
-      title: 'Create form',
-      EmbedForm: F,
-      saveAction: save,
-      initialValues: {},
-      fetchAction: fetch,
-      delAction: del,
-      reduxEntry: 'entry',
-    });
+
+    const El = () => (
+      <GenericFormScene
+        title="Create form"
+        EmbedForm={F}
+        initialValues={{}}
+        redirectUrl="/"
+        saveAction={save}
+        fetchAction={fetch}
+        delAction={del}
+        reduxEntry="entry"
+      />
+    );
     const wrapper = mount(
       <Provider store={store}>
         <MemoryRouter initialEntries={['/record/1']}>
@@ -122,13 +129,16 @@ describe('create-generic-form-scene', () => {
         },
       },
     });
-    const El: any = createGenericFormScene({
-      title: 'Create form',
-      EmbedForm: F,
-      initialValues: { name: 'Foo Bar' },
-      saveAction: save,
-      reduxEntry: 'entry',
-    });
+    const El = () => (
+      <GenericFormScene
+        title="Create form"
+        EmbedForm={F}
+        initialValues={{}}
+        redirectUrl="/"
+        saveAction={save}
+        reduxEntry="entry"
+      />
+    );
     const wrapper = mount(
       <Provider store={store2}>
         <MemoryRouter initialEntries={['/record/1']}>

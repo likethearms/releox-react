@@ -2,9 +2,8 @@ import React from 'react';
 import moxios from 'moxios';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { ForgotScene } from './ForgotScene';
-import { AbstractAuthOneInputScene } from '../../components/AbstractAuthOneInputScene/AbstractAuthOneInputScene';
 
-let wrapper: ShallowWrapper<{}, {}, AbstractAuthOneInputScene<{}, {}>>;
+let wrapper: ShallowWrapper<any, any, any>;
 
 describe('Instance function call tests', () => {
   beforeAll(() => {
@@ -53,7 +52,7 @@ describe('UI tests', () => {
 
   describe('English translations', () => {
     beforeAll(() => {
-      wrapper = shallow(<ForgotScene locale="en" />);
+      wrapper = shallow(<ForgotScene />);
     });
 
     it('should have english title', () => {
@@ -91,7 +90,7 @@ describe('UI tests', () => {
     });
 
     it('should have default links in english if locale is set to EN', () => {
-      wrapper = shallow(<ForgotScene locale="en" />);
+      wrapper = shallow(<ForgotScene />);
       const links = wrapper.find('AuthLayout').prop('links');
       expect(links).toEqual([
         {

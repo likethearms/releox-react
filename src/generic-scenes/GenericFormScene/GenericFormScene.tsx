@@ -133,7 +133,7 @@ const WrappedGenericFormScene = (props: GenericFormSceneProps) => {
 };
 
 interface GenericIndexDispatchedProps {
-  redirectUrl: string;
+  redirectUrl?: string;
   reduxEntry: string;
   mapUser?: boolean;
   saveAction: Function;

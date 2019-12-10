@@ -23,7 +23,7 @@ const Components = () => (
           bar: '',
           baz: '',
           baz1: '',
-          baz2: '',
+          baz2: '5deff27d2f687331c4637ff5',
         }}
         validate={(v) => {
           const e: any = {};
@@ -43,8 +43,9 @@ const Components = () => (
             <ReactSelect name="baz1" label="Baz1" options={opts} />
             <AsyncSelect
               name="baz2"
-              label="Baz2"
+              label="Async Select"
               searchFields={['name']}
+              order="name ASC"
               getUrl="http://localhost:3001/api/Items"
             />
             <button type="submit">Submit</button>
