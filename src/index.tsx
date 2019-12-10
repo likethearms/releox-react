@@ -4,7 +4,7 @@ import reduxThunk from 'redux-thunk';
 import ReactDom from 'react-dom';
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { routerMiddleware } from 'react-router-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { createBrowserHistory } from 'history';
@@ -35,9 +35,9 @@ const store = createStore(
 
 ReactDom.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <App />
-    </BrowserRouter>
+    </Router>
   </Provider>,
   document.getElementById('root')
 );

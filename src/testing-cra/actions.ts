@@ -8,4 +8,5 @@ export const createItemAction = actions.getCreateAction();
 export const listItemAction = actions.getListAndCountAction();
 export const updateItemAction = actions.getUpdateAction();
 export const fetchItemAction = actions.getFetchAction();
+export const deleteItemAction = actions.getDeleteAction();
 export const clearItemAction = actions.getCleanAction();

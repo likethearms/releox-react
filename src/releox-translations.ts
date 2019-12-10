@@ -11,6 +11,7 @@ import AcceptInvitationSuccessSceneTranslation from './scenes/AcceptInvitationSu
 import validateModelTranslation from './HOC/validate-model/validate-model.translation';
 import GenericIndexSceneTranslation from './generic-scenes/GenericIndexScene/GenericIndexScene.translation';
 import DataTableTranslation from './components/DataTable/DataTable.translation';
+import GenericFormSceneTranslation from './generic-scenes/GenericFormScene/GenericFormScene.translation';
 
 export const releoxTranslations = deepmerge.all([
   AcceptInvitationSuccessSceneTranslation,
@@ -21,6 +22,7 @@ export const releoxTranslations = deepmerge.all([
   ForgotSceneTranslation,
   ForgotSuccessSceneTranslation,
   GenericIndexSceneTranslation,
+  GenericFormSceneTranslation,
   LoginSceneTranslation,
   ResetPasswordSceneTranslation,
   ResetPasswordSuccessSceneTranslation,

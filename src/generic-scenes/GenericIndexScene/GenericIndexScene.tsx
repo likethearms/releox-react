@@ -13,12 +13,13 @@ import {
 import { CardTitle } from '../../components/CardTitle/CardTitle';
 
 interface IndexSceneProps {
-  title: string;
+  title?: string;
   createLink?: string;
   totalSize: number;
   onClick?(_: string, row: any): void;
   onChangeLoopback(): void;
   columns: DataTableColumn[];
+  context?: string;
   loading: boolean;
   defaultSorted?: DataTableDefaultSort;
   data: any[];
@@ -34,12 +35,13 @@ const IndexScene = (props: IndexSceneProps): JSX.Element => {
     title,
     columns,
     defaultSorted,
+    context,
     data,
     query,
     loading,
   } = props;
   let addLink = <span />;
-  const { t } = useTranslation('GenericIndexScene');
+  const { t } = useTranslation(context || 'GenericIndexScene');
   if (createLink) {
     addLink = (
       <Link className="btn btn-primary float-right" to={createLink}>
@@ -51,10 +53,11 @@ const IndexScene = (props: IndexSceneProps): JSX.Element => {
   return (
     <Card>
       {addLink}
-      <CardTitle lg>{title}</CardTitle>
+      <CardTitle lg>{title || t('title')}</CardTitle>
       <DataTable
         data={data}
         totalSize={totalSize}
+        context={context}
         keyField="id"
         onChangeLoopback={onChangeLoopback}
         loading={loading}
@@ -75,7 +78,8 @@ export interface GenericIndexProps {
   loading: boolean;
   dataTableProps: DataTableProps;
   onRowClick?(_: string, row: any): void;
-  title: string;
+  title?: string;
+  context?: string;
   createLink?: string;
 }
 
@@ -88,6 +92,7 @@ const WrappedGenericIndex = (props: GenericIndexProps): JSX.Element => {
     loading,
     user,
     dataTableProps,
+    context,
     createLink,
     title,
   } = props;
@@ -104,6 +109,7 @@ const WrappedGenericIndex = (props: GenericIndexProps): JSX.Element => {
       onClick={onRowClick}
       defaultSorted={dataTableProps.defaultSorted}
       loading={loading}
+      context={context}
       totalSize={count}
       query={query}
       onChangeLoopback={fetch}

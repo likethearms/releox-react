@@ -20,7 +20,7 @@ export * from './HOC/validate-model/validate-model';
 export * from './config';
 export * from './components/DataTable/DataTable';
 export * from './generic-scenes/GenericIndexScene/GenericIndexScene';
-export * from './generic-scenes/create-generic-form-scene';
+export * from './generic-scenes/GenericFormScene/GenericFormScene';
 export * from './components/Details/DetailField';
 export * from './components/Details/Details';
 export * from './components/form/ReactSelect/ReactSelect';
