@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { Card } from '../components/Card/Card';
+import { Card } from '../../components/Card/Card';
 import {
   DataTableLoopbackFilter,
   DataTableColumn,
   DataTableDefaultSort,
   DataTable,
-} from '../components/DataTable/DataTable';
-import { CardTitle } from '../components/CardTitle/CardTitle';
+} from '../../components/DataTable/DataTable';
+import { CardTitle } from '../../components/CardTitle/CardTitle';
 
 interface IndexSceneProps {
   title: string;
@@ -39,7 +39,7 @@ const IndexScene = (props: IndexSceneProps): JSX.Element => {
     loading,
   } = props;
   let addLink = <span />;
-  const { t } = useTranslation('genericIndex');
+  const { t } = useTranslation('GenericIndexScene');
   if (createLink) {
     addLink = (
       <Link className="btn btn-primary float-right" to={createLink}>
@@ -67,31 +67,42 @@ const IndexScene = (props: IndexSceneProps): JSX.Element => {
   );
 };
 
-interface WrapperProps {
+export interface GenericIndexProps {
   data: any[];
   count: number;
   user: any;
   fetch: any;
   loading: boolean;
+  dataTableProps: DataTableProps;
   onRowClick?(_: string, row: any): void;
+  title: string;
+  createLink?: string;
 }
 
-const getWrappedIndexScene = (title: string, passProps: DataTableProps, createLink?: string) => (
-  props: WrapperProps
-): JSX.Element => {
-  const { data, count, fetch, onRowClick, loading, user } = props;
+const WrappedGenericIndex = (props: GenericIndexProps): JSX.Element => {
+  const {
+    data,
+    count,
+    fetch,
+    onRowClick,
+    loading,
+    user,
+    dataTableProps,
+    createLink,
+    title,
+  } = props;
 
   let query;
 
-  if (typeof passProps.query === 'object') query = passProps.query;
-  else if (typeof passProps.query === 'object') query = passProps.query({ user });
+  if (typeof dataTableProps.query === 'object') query = dataTableProps.query;
+  else if (typeof dataTableProps.query === 'object') query = dataTableProps.query({ user });
 
   return (
     <IndexScene
-      columns={passProps.columns}
+      columns={dataTableProps.columns}
       data={data}
       onClick={onRowClick}
-      defaultSorted={passProps.defaultSorted}
+      defaultSorted={dataTableProps.defaultSorted}
       loading={loading}
       totalSize={count}
       query={query}
@@ -108,39 +119,38 @@ interface DataTableProps {
   defaultSorted?: DataTableDefaultSort;
 }
 
-interface GenericIndexOptions {
-  title: string;
+interface GenericIndexDispatchedProps {
   reduxEntry: string;
-  listAction: Function;
-  dataTableProps: DataTableProps;
-  redirectUrl?: string;
-  createLink?: string;
   mapUser?: boolean;
+  listAction: Function;
+  redirectUrl?: string;
 }
 
-export const createGenericIndex = (opts: GenericIndexOptions) => {
-  const { title, reduxEntry, listAction, dataTableProps, redirectUrl, createLink, mapUser } = opts;
-  const mapStateToProps = (state: any) => {
-    const map: any = {
-      data: state[reduxEntry].list.data,
-      count: state[reduxEntry].list.count,
-      loading: state[reduxEntry].list.isFetchLoading || state[reduxEntry].list.isCountLoading,
-    };
-    if (mapUser) {
-      map.user = state.user.model.data;
-    }
-    return map;
+const mapDispatchToProps = (
+  dispatch: Function,
+  { redirectUrl, listAction }: GenericIndexDispatchedProps
+) => {
+  const obj: { onRowClick?: any; fetch: any } = {
+    fetch: (filter: DataTableLoopbackFilter) => dispatch(listAction(filter)),
   };
-
-  const mapDispatchToProps = (dispatch: Function) => {
-    const obj: any = { fetch: (filter: DataTableLoopbackFilter) => dispatch(listAction(filter)) };
-    if (redirectUrl) {
-      obj.onRowClick = (_: string, row: any) =>
-        dispatch(push(redirectUrl.replace(':id', `${row.id}`)));
-    }
-    return obj;
-  };
-
-  const Component = getWrappedIndexScene(title, dataTableProps, createLink);
-  return connect(mapStateToProps, mapDispatchToProps)(Component);
+  if (redirectUrl) {
+    obj.onRowClick = (_: string, row: any) =>
+      dispatch(push(redirectUrl.replace(':id', `${row.id}`)));
+  }
+  return obj;
 };
+
+const mapStateToProps = (state: any, { reduxEntry, mapUser }: GenericIndexDispatchedProps) => {
+  const map = {
+    data: state[reduxEntry].list.data as any[],
+    count: state[reduxEntry].list.count as number,
+    user: undefined,
+    loading: state[reduxEntry].list.isFetchLoading || state[reduxEntry].list.isCountLoading,
+  };
+
+  if (mapUser) map.user = state.user.model.data;
+
+  return map;
+};
+
+export const GenericIndexScene = connect(mapStateToProps, mapDispatchToProps)(WrappedGenericIndex);

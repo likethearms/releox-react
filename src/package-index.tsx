@@ -19,7 +19,7 @@ export * from './HOC/guest-middleware';
 export * from './HOC/validate-model/validate-model';
 export * from './config';
 export * from './components/DataTable/DataTable';
-export * from './generic-scenes/create-generic-index-scene';
+export * from './generic-scenes/GenericIndexScene/GenericIndexScene';
 export * from './generic-scenes/create-generic-form-scene';
 export * from './components/Details/DetailField';
 export * from './components/Details/Details';
