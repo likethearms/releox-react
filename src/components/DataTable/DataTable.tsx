@@ -23,7 +23,7 @@ export interface DataTableDefaultSort {
 }
 
 export interface DataTableProps {
-  keyField: string;
+  keyField?: string;
   hover?: boolean;
   context?: string;
   striped?: boolean;
