@@ -1,5 +1,6 @@
 import queryString from 'query-string';
 import deepmerge from 'deepmerge';
+import * as H from 'history';
 
 export interface AccessQuery {
   user: string;
@@ -12,11 +13,11 @@ export interface InviteQuery {
 }
 
 export const parseAndGetQuery = (
+  location: H.Location,
   strict: boolean = false,
   keys: string[] = ['access_token', 'user']
 ): Promise<any> => {
-  const query = queryString.parse(window.location.search);
-
+  const query = queryString.parse(location.search);
   return new Promise((resolve, reject) => {
     const params = deepmerge.all(
       keys.map((key) => {
