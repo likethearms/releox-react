@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Formik } from 'formik';
-import { Redirect } from 'react-router';
+import { Redirect, useLocation } from 'react-router';
 import Axios, { AxiosError } from 'axios';
 import { getErrorMessage, getAuthErrorUrl } from '../../config';
 import { AuthLayout } from '../../components/AuthLayout/AuthLayout';
@@ -24,12 +24,14 @@ export const AcceptInvitationScene = () => {
   const [userId, setUserId] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
+  const location = useLocation();
+
   const redirectToAuthErrorPage = (msg: string): void => {
     setRedirect(getAuthErrorUrl(msg));
   };
 
   useEffect(() => {
-    parseAndGetQuery(true, ['uid', 'invitation_token'])
+    parseAndGetQuery(location, true, ['uid', 'invitation_token'])
       // eslint-disable-next-line camelcase
       .then(({ uid, invitation_token }: InviteQuery) => {
         setUserId(uid);

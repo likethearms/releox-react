@@ -1,0 +1,32 @@
+{
+  "db": {
+    "host": "",
+    "port": 0,
+    "url": "mongodb://localhost/releox",
+    "database": "",
+    "password": "",
+    "name": "db",
+    "user": "",
+    "useNewUrlParser": true,
+    "connector": "mongodb"
+  },
+  "email": {
+    "name": "email",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "smtp.mailtrap.io",
+        "secure": false,
+        "port": 2525,
+        "tls": {
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "4a85865f9ad428",
+          "pass": "e93a04a87b9db2"
+        }
+      }
+    ]
+  }
+}

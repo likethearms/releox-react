@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
 import Axios from 'axios';
-import { Redirect } from 'react-router';
+import { Redirect, useLocation } from 'react-router';
 import { PasswordForm } from '../../scene-forms/PasswordForm';
 import { Loading } from '../../components/Loading/Loading';
 import { AuthLayout } from '../../components/AuthLayout/AuthLayout';
@@ -23,8 +23,10 @@ export const ResetPasswordScene = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [accessToken, setAccessToken] = useState('');
 
+  const location = useLocation();
+
   useEffect(() => {
-    parseAndGetQuery(true)
+    parseAndGetQuery(location, true)
       // eslint-disable-next-line camelcase
       .then(({ user, access_token }: AccessQuery) => {
         setAccessToken(access_token);
