@@ -39,11 +39,19 @@ describe('ConfirmScene', () => {
       status: 200,
       response: {},
     });
-    let getByText: Function;
     await act(async () => {
-      ({ getByText } = render(withAuthErrorRouter(ConfirmScene)));
+      const { getByText, debug, container } = render(withAuthErrorRouter(ConfirmScene));
+      await waitForElement(() => getByText('Your account is now activated.'));
+      const links = container.getElementsByTagName('a');
+      expect(getByText('Your account is now activated.')).toBeTruthy();
+      expect(
+        getByText('Your account is now activated. You can now continue using application.')
+      ).toBeTruthy();
+      expect(links).toHaveLength(1);
+      expect(links[0].innerHTML).toBe('Back');
+      expect(links[0].getAttribute('href')).toBe('/login');
+      debug();
     });
-    await waitForElement(() => getByText('Your account is now activated.'));
   });
 
   it('should redirect to auth error page if response is not 2xx', async () => {
