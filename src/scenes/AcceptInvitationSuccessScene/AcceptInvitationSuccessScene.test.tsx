@@ -1,58 +1,29 @@
 import React from 'react';
-import { ShallowWrapper, shallow } from 'enzyme';
+import { render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router';
 import { AcceptInvitationSuccessScene } from './AcceptInvitationSuccessScene';
-import { AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
 
-let wrapper: ShallowWrapper;
-let authLayout: ShallowWrapper;
-
-describe('UI', () => {
-  describe('Finnish translation', () => {
-    beforeAll(() => {
-      wrapper = shallow(<AcceptInvitationSuccessScene />);
-      authLayout = wrapper.find('AuthLayout');
+describe('AcceptInvitationSuccessScene', () => {
+  describe('UI Element', () => {
+    it('should have a title', () => {
+      const { debug, getByText } = render(<AcceptInvitationSuccessScene />, {
+        wrapper: MemoryRouter,
+      });
+      debug();
+      expect(getByText('Your password is saved')).toBeTruthy();
     });
 
-    it('should have finnish title', () => {
-      expect(authLayout.prop('title')).toBe('Salasanasi on tallennettu');
+    it('should have a subTitle', () => {
+      const { getByText } = render(<AcceptInvitationSuccessScene />, { wrapper: MemoryRouter });
+      expect(getByText('Your password is saved. You can now login.')).toBeTruthy();
     });
 
-    it('should have finnish subTitle', () => {
-      expect(authLayout.prop('subTitle')).toBe(
-        'Tunnuksesi on valmis. Voit nyt kirjautua ohjelmaan.'
-      );
-    });
-
-    it('should have finnish login link', () => {
-      const arr = authLayout.prop('links') as AuthLayoutLinkItem[];
-      expect(arr[0].text).toBe('Kirjautumissivulle');
-    });
-  });
-
-  describe('English translation', () => {
-    beforeAll(() => {
-      wrapper = shallow(<AcceptInvitationSuccessScene locale="en" />);
-      authLayout = wrapper.find('AuthLayout');
-    });
-
-    it('should have english title', () => {
-      expect(authLayout.prop('title')).toBe('Your password is saved');
-    });
-
-    it('should have english subTitle', () => {
-      expect(authLayout.prop('subTitle')).toBe('Your password is saved. You can now login.');
-    });
-
-    it('should have english login link', () => {
-      const arr = authLayout.prop('links') as AuthLayoutLinkItem[];
-      expect(arr[0].text).toBe('To Login');
-    });
-  });
-
-  describe('Links', () => {
-    it('should have button to login screen', () => {
-      const arr = authLayout.prop('links') as AuthLayoutLinkItem[];
-      expect(arr[0].to).toBe('/login');
+    it('should have a link to login', () => {
+      const { container } = render(<AcceptInvitationSuccessScene />, { wrapper: MemoryRouter });
+      const links = container.getElementsByTagName('a');
+      expect(links).toHaveLength(1);
+      expect(links[0].innerHTML).toBe('To Login');
+      expect(links[0].getAttribute('href')).toBe('/login');
     });
   });
 });
