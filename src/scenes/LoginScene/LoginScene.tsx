@@ -27,7 +27,13 @@ export interface LoginBody {
 type LoginFieldName = 'username' | 'email';
 
 export const LoginSceneComponent = (props: LoginSceneProps) => {
-  const { titleBlock, loginFieldName, onError, onSubmit, showForgotPasswordLink } = props;
+  const {
+    onError,
+    onSubmit,
+    titleBlock,
+    loginFieldName = 'email',
+    showForgotPasswordLink = true,
+  } = props;
 
   const [redirect, setRedirect] = useState('');
   const [message, setMessage] = useState('');
@@ -75,11 +81,6 @@ export const LoginSceneComponent = (props: LoginSceneProps) => {
       </Formik>
     </AuthLayout>
   );
-};
-
-LoginSceneComponent.defaultProps = {
-  loginFieldName: 'email',
-  showForgotPasswordLink: true,
 };
 
 export const LoginScene = LoginSceneComponent;
