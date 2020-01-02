@@ -15,8 +15,8 @@ export interface LoginSceneProps {
   onSubmit?: (body: LoginBody) => Promise<void>;
   onError?: (err: Error) => void;
   titleBlock?: string | JSX.Element;
-  loginFieldName: LoginFieldName;
-  showForgotPasswordLink: boolean;
+  loginFieldName?: LoginFieldName;
+  showForgotPasswordLink?: boolean;
 }
 
 export interface LoginBody {
