@@ -1,17 +1,24 @@
 {
   "name": "releox-react",
-  "version": "2.0.0-beta.3",
+  "version": "2.0.0-beta.5",
   "typings": "lib/index.d.ts",
   "main": "lib/index.js",
   "author": "Henrik Salmela",
-  "dependencies": {
+  "peerDependencies": {
+    "@types/react-redux": "^7.1.5",
+    "axios": "^0.19.0",
     "deepmerge": "^4.2.2",
     "get-value": "^3.0.1",
     "query-string": "^6.8.3",
     "react-bootstrap-table-next": "^3.2.1",
     "react-bootstrap-table2-paginator": "^2.1.0",
     "react-loading": "^2.0.3",
-    "react-select": "^3.0.8"
+    "react-select": "^3.0.8",
+    "formik": "^2.0.6",
+    "i18next": "^19.0.1",
+    "bootstrap": "^4.3.1",
+    "react-redux": "^7.1.1",
+    "react-i18next": "^11.2.5"
   },
   "scripts": {
     "start": "react-scripts start",
