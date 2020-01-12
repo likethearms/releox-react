@@ -12,52 +12,53 @@ import { ConfirmScene } from './scenes/ConfirmScene/ConfirmScene';
 import { LogoutScene } from './scenes/LogoutScene/LogoutScene';
 import { getReleoxOption } from './config';
 
-const r = [
-  {
-    url: routes.RESET,
-    component: guestMiddleware(ResetPasswordScene),
-  },
-  {
-    url: routes.RESET_SUCCESS,
-    component: guestMiddleware(ResetPasswordSuccessScene),
-  },
-  {
-    url: routes.ERROR,
-    component: AuthErrorScene,
-  },
-  {
-    url: routes.ACCEPT_INVITATION,
-    component: guestMiddleware(AcceptInvitationScene),
-  },
-  {
-    url: routes.ACCEPT_INVITATION_SUCCESS,
-    component: guestMiddleware(AcceptInvitationSuccessScene),
-  },
-  {
-    url: routes.CONFIRM,
-    component: ConfirmScene,
-  },
-];
+export const getAuthRoutes: () => ReleoxRoutes[] = () => {
+  const r = [
+    {
+      url: routes.RESET,
+      component: guestMiddleware(ResetPasswordScene),
+    },
+    {
+      url: routes.RESET_SUCCESS,
+      component: guestMiddleware(ResetPasswordSuccessScene),
+    },
+    {
+      url: routes.ERROR,
+      component: AuthErrorScene,
+    },
+    {
+      url: routes.ACCEPT_INVITATION,
+      component: guestMiddleware(AcceptInvitationScene),
+    },
+    {
+      url: routes.ACCEPT_INVITATION_SUCCESS,
+      component: guestMiddleware(AcceptInvitationSuccessScene),
+    },
+    {
+      url: routes.CONFIRM,
+      component: ConfirmScene,
+    },
+  ];
 
-if (getReleoxOption('mobileSupportOnly')) {
-  r.push(
-    {
-      url: routes.LOGIN,
-      component: guestMiddleware<any>(LoginScene),
-    },
-    {
-      url: routes.FORGOT,
-      component: guestMiddleware(ForgotScene),
-    },
-    {
-      url: routes.FORGOT_SUCCESS,
-      component: guestMiddleware(ForgotSuccessScene),
-    },
-    {
-      url: routes.LOGOUT,
-      component: LogoutScene,
-    }
-  );
-}
-
-export const authRoutes: ReleoxRoutes[] = r;
+  if (getReleoxOption('mobileSupportOnly')) {
+    r.push(
+      {
+        url: routes.LOGIN,
+        component: guestMiddleware<any>(LoginScene),
+      },
+      {
+        url: routes.FORGOT,
+        component: guestMiddleware(ForgotScene),
+      },
+      {
+        url: routes.FORGOT_SUCCESS,
+        component: guestMiddleware(ForgotSuccessScene),
+      },
+      {
+        url: routes.LOGOUT,
+        component: LogoutScene,
+      }
+    );
+  }
+  return r;
+};
