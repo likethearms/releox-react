@@ -14,12 +14,18 @@ export interface AccessInformation {
 
 export interface ReleoxOptions {
   showRegisterLink?: boolean;
+  mobileSupportOnly?: boolean;
   userIdKey?: string;
   tokenKey?: string;
   loginModelName?: string;
 }
 
-export type ReleoxOptionKeys = 'showRegisterLink' | 'userIdKey' | 'tokenKey' | 'loginModelName';
+export type ReleoxOptionKeys =
+  | 'showRegisterLink'
+  | 'userIdKey'
+  | 'tokenKey'
+  | 'loginModelName'
+  | 'mobileSupportOnly';
 
 const defaultOptions: ReleoxOptions = {
   userIdKey: 'userId',

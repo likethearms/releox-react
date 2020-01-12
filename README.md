@@ -1,5 +1,11 @@
 # Releox react
 
+# Installing
+
+```sh
+npx install-peerdeps releox-react
+```
+
 ## Table of Content
 
 - [Button](#button)

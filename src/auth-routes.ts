@@ -10,20 +10,9 @@ import { AcceptInvitationSuccessScene } from './scenes/AcceptInvitationSuccessSc
 import { AuthErrorScene } from './scenes/AuthErrorScene/AuthErrorScene';
 import { ConfirmScene } from './scenes/ConfirmScene/ConfirmScene';
 import { LogoutScene } from './scenes/LogoutScene/LogoutScene';
+import { getReleoxOption } from './config';
 
-export const authRoutes: ReleoxRoutes[] = [
-  {
-    url: routes.LOGIN,
-    component: guestMiddleware<any>(LoginScene),
-  },
-  {
-    url: routes.FORGOT,
-    component: guestMiddleware(ForgotScene),
-  },
-  {
-    url: routes.FORGOT_SUCCESS,
-    component: guestMiddleware(ForgotSuccessScene),
-  },
+const r = [
   {
     url: routes.RESET,
     component: guestMiddleware(ResetPasswordScene),
@@ -31,6 +20,10 @@ export const authRoutes: ReleoxRoutes[] = [
   {
     url: routes.RESET_SUCCESS,
     component: guestMiddleware(ResetPasswordSuccessScene),
+  },
+  {
+    url: routes.ERROR,
+    component: AuthErrorScene,
   },
   {
     url: routes.ACCEPT_INVITATION,
@@ -41,15 +34,30 @@ export const authRoutes: ReleoxRoutes[] = [
     component: guestMiddleware(AcceptInvitationSuccessScene),
   },
   {
-    url: routes.ERROR,
-    component: AuthErrorScene,
-  },
-  {
     url: routes.CONFIRM,
     component: ConfirmScene,
   },
-  {
-    url: routes.LOGOUT,
-    component: LogoutScene,
-  },
 ];
+
+if (getReleoxOption('mobileSupportOnly')) {
+  r.push(
+    {
+      url: routes.LOGIN,
+      component: guestMiddleware<any>(LoginScene),
+    },
+    {
+      url: routes.FORGOT,
+      component: guestMiddleware(ForgotScene),
+    },
+    {
+      url: routes.FORGOT_SUCCESS,
+      component: guestMiddleware(ForgotSuccessScene),
+    },
+    {
+      url: routes.LOGOUT,
+      component: LogoutScene,
+    }
+  );
+}
+
+export const authRoutes: ReleoxRoutes[] = r;
