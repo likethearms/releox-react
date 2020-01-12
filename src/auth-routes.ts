@@ -40,7 +40,7 @@ export const getAuthRoutes: () => ReleoxRoutes[] = () => {
     },
   ];
 
-  if (getReleoxOption('mobileSupportOnly')) {
+  if (!getReleoxOption('mobileSupportOnly')) {
     r.push(
       {
         url: routes.LOGIN,
