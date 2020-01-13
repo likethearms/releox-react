@@ -88,13 +88,17 @@ export const AsyncSelectElement = (props: ExtendedProps) => {
     const { searchFields, queryFormat, query } = props;
     const qf = queryFormat || defaultProps.queryFormat;
     let inputQuery: any;
+
     if (qf === 'postgresql') {
       inputQuery = { ilike: `%${inputValue}%` };
     } else {
       inputQuery = { like: inputValue, options: 'i' };
     }
+
     if (query) {
       inputQuery = { and: [query, { [searchFields[0]]: inputQuery }] };
+    } else {
+      inputQuery = { [searchFields[0]]: inputQuery };
     }
     return inputQuery;
   };
