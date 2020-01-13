@@ -55,8 +55,8 @@ export const BaseInput = <T extends BaseInput>(props: T) => {
   const getInvalidClass = ({ field, form: { touched, errors } }: FieldProps) =>
     getValue(errors, field.name) && getValue(touched, field.name) ? 'is-invalid' : '';
 
-  const getInputClass = (fieldProps: FieldProps) =>
-    `form-control ${className || ''} ${getInvalidClass(fieldProps)}`;
+  const getInputClass = (fieldProps: FieldProps, baseClassName: string = 'form-control') =>
+    `${baseClassName} ${className || ''} ${getInvalidClass(fieldProps)}`;
 
   const getId = () => id || `${name}-input`;
   const getPlaceholder = () => placeholder || label;

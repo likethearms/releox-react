@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router';
 import Core from './Core';
 import Components from './Components';
-import { authRoutes } from '../auth-routes';
+import { getAuthRoutes } from '../auth-routes';
 import { routeMapper } from '../routeMapper';
 import { GenericIndexScene } from '../generic-scenes/GenericIndexScene/GenericIndexScene';
 import {
@@ -63,7 +63,7 @@ const Edit = () => (
 const App = () => {
   return (
     <Switch>
-      {authRoutes.map(routeMapper)}
+      {getAuthRoutes().map(routeMapper)}
       <Route exact path="/" component={Core} />
       <Route exact path="/components" component={Components} />
       <Route exact path="/index" component={Index} />

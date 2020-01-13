@@ -23,7 +23,7 @@ const Components = () => (
           bar: '',
           baz: '',
           baz1: '',
-          baz2: '5deff27d2f687331c4637ff5',
+          baz2: '',
         }}
         validate={(v) => {
           const e: any = {};
@@ -45,6 +45,7 @@ const Components = () => (
               name="baz2"
               label="Async Select"
               searchFields={['name']}
+              query={{ foo: true }}
               order="name ASC"
               getUrl="http://localhost:3001/api/Items"
             />

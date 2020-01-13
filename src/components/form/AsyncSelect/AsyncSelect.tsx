@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Async from 'react-select/async';
-import { Field } from 'formik';
+import { Field, FieldInputProps, FormikProps, FieldMetaProps } from 'formik';
 import Axios from 'axios';
 import { useTranslation } from 'react-i18next';
-import { BaseInput } from '../BaseInput/BaseInput';
+import { BaseInput, AbstractBaseInputProps } from '../BaseInput/BaseInput';
 
 export interface AsyncSelectInputDefaultProps {
   onError?: (e: Error) => any;
@@ -17,18 +17,15 @@ export interface AsyncSelectInputDefaultProps {
 
 export type AsyncSelectQueryFormat = 'mongodb' | 'postgresql';
 
-export interface AsyncSelectInputProps {
+export interface AsyncSelectInputProps extends AbstractBaseInputProps {
   searchFields: string[];
   getUrl: string;
-  name: string;
-  label: string;
   onChange?(value: string | number | null): void;
   onError?(e: Error): any;
   queryFormat?: AsyncSelectQueryFormat;
   order?: string;
-  className?: string;
-  id?: string;
   value?: string;
+  query?: any;
   mapValue?: string;
   mapLabel?: string;
 }
@@ -46,9 +43,9 @@ const defaultProps = {
 };
 
 interface ExtendedProps extends AsyncSelectInputProps {
-  form: any;
-  field: any;
-  meta: any;
+  field: FieldInputProps<any>;
+  form: FormikProps<any>;
+  meta: FieldMetaProps<any>;
 }
 
 export const AsyncSelectElement = (props: ExtendedProps) => {
@@ -88,15 +85,18 @@ export const AsyncSelectElement = (props: ExtendedProps) => {
   };
 
   const buildQuery = (inputValue: string): { [key: string]: { ilike: string } } => {
-    const { searchFields, queryFormat } = props;
+    const { searchFields, queryFormat, query } = props;
     const qf = queryFormat || defaultProps.queryFormat;
-    let query: any;
+    let inputQuery: any;
     if (qf === 'postgresql') {
-      query = { ilike: `%${inputValue}%` };
+      inputQuery = { ilike: `%${inputValue}%` };
     } else {
-      query = { like: inputValue, options: 'i' };
+      inputQuery = { like: inputValue, options: 'i' };
     }
-    return { [searchFields[0]]: query };
+    if (query) {
+      inputQuery = { and: [query, { [searchFields[0]]: inputQuery }] };
+    }
+    return inputQuery;
   };
 
   const loadOptions = (inputValue: string): Promise<{ value: string; label: string }[]> => {
@@ -115,19 +115,19 @@ export const AsyncSelectElement = (props: ExtendedProps) => {
     });
   };
 
-  const { className, id, form } = props;
+  const { form, className } = props;
   const { t } = useTranslation('AsyncSelect');
   if (isLoading) return <p>{t('loading')}</p>;
   return (
     // eslint-disable-next-line
     <BaseInput {...props} name={props.field.name}>
-      {({ getInvalidClass, getErrorMessageField }) => (
+      {({ getInvalidClass, getErrorMessageField, getId, getPlaceholder }) => (
         <div className="ReactSelectHelper">
           <Async
             cacheOptions
-            placeholder={t('placeholder')}
+            placeholder={getPlaceholder()}
             className={`${className || ''} ${getInvalidClass(props)}`}
-            id={id}
+            id={getId()}
             classNamePrefix="AsynSelect"
             defaultOptions
             isClearable

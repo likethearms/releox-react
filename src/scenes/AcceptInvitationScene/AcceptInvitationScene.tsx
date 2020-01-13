@@ -40,7 +40,7 @@ export const AcceptInvitationScene = () => {
       })
       .then(() => setIsLoading(false))
       .catch((e: AxiosError) => redirectToAuthErrorPage(getErrorMessage(e)));
-  }, []);
+  }, [location]);
 
   const onSubmit = (body: BodyData) => {
     let url = apis.ACCEPT_INVITATION.replace(':invitationToken', token);

@@ -34,7 +34,7 @@ export const ResetPasswordScene = () => {
       })
       .then(() => setIsLoading(false))
       .catch((e) => setRedirect(getAuthErrorUrl(getErrorMessage(e))));
-  }, []);
+  }, [location]);
 
   const onSubmit = (body: BodyData) => {
     setMessage('');

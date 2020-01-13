@@ -11,7 +11,7 @@ export const AuthErrorScene = () => {
     parseAndGetQuery(location, false, ['message']).then((query) =>
       setMessage(query.message as string)
     );
-  }, []);
+  }, [setMessage, location]);
 
   return <SuccessScene context="AuthErrorScene" subTitle={message} />;
 };
