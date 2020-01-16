@@ -26,7 +26,7 @@ export const AuthLayout = (props: AuthLayoutProps) => {
   const { t } = useTranslation(context);
   return (
     <CenterContent>
-      <div className="col-lg-6" id={context}>
+      <div className="col-lg-6 AuthLayout" id={context}>
         {titleBlock}
         <Card>
           <>
