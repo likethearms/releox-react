@@ -11,7 +11,7 @@ interface Props extends GenericFormPropsBase {
   paramKey?: string;
   recordId?: GenericId;
   requestParams?: any;
-  onDelete(id: GenericId): any;
+  onDelete?(id: GenericId): any;
 }
 
 type GenericFormUpdateSubmit = (id: GenericId, body: any) => any;

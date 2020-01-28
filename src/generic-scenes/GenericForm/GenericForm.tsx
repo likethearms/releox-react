@@ -15,7 +15,7 @@ export interface GenericFormPropsBase {
   rowClassName?: string;
   colClassName?: string;
   validationSchema?: ObjectSchema<any> | (() => ObjectSchema<any>);
-  onBack: string | boolean | Function;
+  onBack?: string | boolean | Function;
   EmbedForm: React.FunctionComponent;
   loadingSelector(state: any): any;
 }
