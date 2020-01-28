@@ -4,7 +4,6 @@ import { GenericForm, GenericFormPropsBase } from './GenericForm';
 type GenericFormCreateSubmit = (body: any) => any;
 
 interface Props extends GenericFormPropsBase {
-  dataSelector(state: any): any;
   onSubmit: GenericFormCreateSubmit;
 }
 
