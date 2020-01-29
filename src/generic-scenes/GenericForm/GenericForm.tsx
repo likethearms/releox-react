@@ -10,7 +10,7 @@ import { CardTitle } from '../../components/CardTitle/CardTitle';
 import { Loading } from '../../components/Loading/Loading';
 
 export interface GenericFormPropsBase {
-  tNamespace?: string;
+  tNamespace: string;
   initialValues: any;
   rowClassName?: string;
   colClassName?: string;
@@ -45,7 +45,8 @@ export const GenericForm = (props: GenericFormProps) => {
   } = props;
   const dispatch = useDispatch();
   const isLoading = useSelector(loadingSelector);
-  const { t } = useTranslation(['GenericForm', tNamespace || '']);
+
+  const { t } = useTranslation([tNamespace, 'GenericForm']);
 
   const onBackClick = useCallback(() => {
     if (onBack) {
@@ -83,13 +84,13 @@ export const GenericForm = (props: GenericFormProps) => {
                 <EmbedForm />
                 {onBack ? (
                   <Button id="GenericForm-back" onClick={onBackClick}>
-                    {t('back')}
+                    {t(['back', 'GenericForm:back'])}
                   </Button>
                 ) : (
                   ''
                 )}
                 <Button type="submit" id="GenericFormScene-submit" className="float-right">
-                  {t('save')}
+                  {t(['save', 'GenericForm:save'])}
                 </Button>
               </Form>
             </Formik>
@@ -97,7 +98,7 @@ export const GenericForm = (props: GenericFormProps) => {
               <>
                 <hr />
                 <Button id="delete-button" color="danger" onClick={onDeleteClick}>
-                  {t('delete')}
+                  {t(['delete', 'GenericForm:delete'])}
                 </Button>
               </>
             ) : (
