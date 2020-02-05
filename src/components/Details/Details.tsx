@@ -1,10 +1,10 @@
-import React from 'react';
 import getValue from 'get-value';
+import React from 'react';
 import { DetailField } from './DetailField';
 
 interface DetailsFieldData {
-  label: string;
-  key: string;
+  text: string;
+  dataField: string;
   formatter?(value: any, object: any): string | JSX.Element;
 }
 
@@ -17,10 +17,10 @@ export const Details = ({ object, properties }: DetailsProps) => (
   <table className="Details">
     <tbody>
       {properties.map((prop) => (
-        <DetailField key={prop.key} label={prop.label}>
+        <DetailField key={prop.dataField} label={prop.text}>
           {prop.formatter
-            ? prop.formatter(getValue(object, prop.key), object)
-            : getValue(object, prop.key)}
+            ? prop.formatter(getValue(object, prop.dataField), object)
+            : getValue(object, prop.dataField)}
         </DetailField>
       ))}
     </tbody>
