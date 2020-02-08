@@ -1,6 +1,6 @@
-import React from 'react';
-import { FieldProps, ErrorMessage } from 'formik';
+import { ErrorMessage, FieldProps } from 'formik';
 import getValue from 'get-value';
+import React from 'react';
 
 export type InputTypes = 'text' | 'email' | 'password' | 'date' | 'number';
 
@@ -27,6 +27,8 @@ export interface AbstractBaseInputProps {
   placeholder?: string;
   labelClass?: string;
   className?: string;
+  hideLabel?: boolean;
+  wrapperClassName?: string;
 }
 
 export interface BaseInput extends AbstractBaseInputProps {
@@ -44,6 +46,8 @@ export const BaseInput = <T extends BaseInput>(props: T) => {
     className,
     children,
     placeholder,
+    hideLabel,
+    wrapperClassName,
   } = props;
 
   const getErrorMessageField = () => (
@@ -65,13 +69,17 @@ export const BaseInput = <T extends BaseInput>(props: T) => {
   if (typeof inlineLabelWidth === 'number') inlineWidth = inlineLabelWidth;
   const inputWidth = 12 - inlineWidth;
   return (
-    <div className={`form-group ${inline ? 'row' : ''}`}>
-      <label
-        htmlFor={id || `${name}-input`}
-        className={`${labelClass || ''} ${inline ? `col-md-${inlineWidth} col-form-label` : ''}`}
-      >
-        {label}
-      </label>
+    <div className={`${wrapperClassName || 'form-group'} ${inline ? 'row' : ''}`}>
+      {!hideLabel ? (
+        <label
+          htmlFor={id || `${name}-input`}
+          className={`${labelClass || ''} ${inline ? `col-md-${inlineWidth} col-form-label` : ''}`}
+        >
+          {label}
+        </label>
+      ) : (
+        ''
+      )}
       <div className={inline ? `col-md-${inputWidth}` : ''}>
         {children({ getErrorMessageField, getInputClass, getPlaceholder, getId, getInvalidClass })}
       </div>
