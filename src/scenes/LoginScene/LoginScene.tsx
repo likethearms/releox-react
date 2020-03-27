@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
-import { Formik } from 'formik';
-import { useTranslation } from 'react-i18next';
 import { AxiosResponse } from 'axios';
+import { Formik } from 'formik';
+import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
+import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router-dom';
-import { saveAccessInformation, getErrorMessage, getReleoxOptions } from '../../config';
-import { routes } from '../../routes';
-import { AuthLayoutLinkItem, AuthLayout } from '../../components/AuthLayout/AuthLayout';
+import { AuthLayout, AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
+import {
+  getErrorMessage,
+  getReleoxOption,
+  getReleoxOptions,
+  saveAccessInformation,
+} from '../../config';
 import { loginRequest } from '../../requests';
+import { routes } from '../../routes';
 import { LoginForm } from '../../scene-forms/LoginForm';
 
 const CONTEXT = 'LoginScene';
@@ -76,6 +82,9 @@ export const LoginSceneComponent = (props: LoginSceneProps) => {
   if (redirect) return <Redirect to={redirect} />;
   return (
     <AuthLayout titleBlock={titleBlock} context={CONTEXT} links={getLinks()}>
+      <Helmet>
+        <title>{`${t('title')} | ${getReleoxOption('siteTitle')}`}</title>
+      </Helmet>
       <Formik initialValues={initFormValues} onSubmit={submit}>
         {() => <LoginForm loginFieldName={loginFieldName} context={CONTEXT} message={message} />}
       </Formik>

@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Formik } from 'formik';
-import { Redirect, useLocation } from 'react-router';
 import Axios, { AxiosError } from 'axios';
-import { getErrorMessage, getAuthErrorUrl } from '../../config';
-import { AuthLayout } from '../../components/AuthLayout/AuthLayout';
+import { Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
+import Helmet from 'react-helmet';
+import { useTranslation } from 'react-i18next';
+import { Redirect, useLocation } from 'react-router';
 import { apis } from '../../apis';
-import { routes } from '../../routes';
-import { validateInvitationTokenRequest } from '../../requests';
-import { InvitationForm } from '../../scene-forms/InvitationForm';
+import { AuthLayout } from '../../components/AuthLayout/AuthLayout';
 import { Loading } from '../../components/Loading/Loading';
-import { parseAndGetQuery, InviteQuery } from '../../parse-params';
+import { getAuthErrorUrl, getErrorMessage, getReleoxOption } from '../../config';
+import { InviteQuery, parseAndGetQuery } from '../../parse-params';
+import { validateInvitationTokenRequest } from '../../requests';
+import { routes } from '../../routes';
+import { InvitationForm } from '../../scene-forms/InvitationForm';
 
 interface BodyData {
   password: string;
@@ -23,6 +25,7 @@ export const AcceptInvitationScene = () => {
   const [token, setToken] = useState('');
   const [userId, setUserId] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const { t } = useTranslation('AcceptInvitationScene');
 
   const location = useLocation();
 
@@ -56,6 +59,9 @@ export const AcceptInvitationScene = () => {
   if (isLoading) return <Loading centeredVertical />;
   return (
     <AuthLayout context={CONTEXT} links={[]}>
+      <Helmet>
+        <title>{`${t('title')} | ${getReleoxOption('siteTitle')}`}</title>
+      </Helmet>
       <Formik initialValues={initValues} onSubmit={onSubmit}>
         {() => <InvitationForm context={CONTEXT} message={message} />}
       </Formik>

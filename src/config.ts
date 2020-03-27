@@ -18,6 +18,7 @@ export interface ReleoxOptions {
   userIdKey?: string;
   tokenKey?: string;
   loginModelName?: string;
+  siteTitle?: string;
 }
 
 export type ReleoxOptionKeys =
@@ -25,7 +26,8 @@ export type ReleoxOptionKeys =
   | 'userIdKey'
   | 'tokenKey'
   | 'loginModelName'
-  | 'mobileSupportOnly';
+  | 'mobileSupportOnly'
+  | 'siteTitle';
 
 const defaultOptions: ReleoxOptions = {
   userIdKey: 'userId',

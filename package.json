@@ -1,6 +1,6 @@
 {
   "name": "releox-react",
-  "version": "2.0.0-beta.20",
+  "version": "2.0.0-beta.22",
   "typings": "lib/index.d.ts",
   "main": "lib/index.js",
   "author": "Henrik Salmela",
@@ -18,7 +18,9 @@
     "i18next": "^19.0.1",
     "bootstrap": "^4.3.1",
     "react-redux": "^7.1.1",
-    "react-i18next": "^11.2.5"
+    "react-i18next": "^11.2.5",
+    "react-helmet": "^5.2.1",
+    "@types/react-helmet": "^5.0.15"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -109,6 +111,12 @@
     "sass": "^1.23.0",
     "typescript": "^3.6.3",
     "webpack": "^4.41.0",
-    "yup": "^0.27.0"
+    "yup": "^0.27.0",
+    "react-helmet": "^5.2.1",
+    "@types/react-helmet": "^5.0.15",
+    "deepmerge": "^4.2.2",
+    "get-value": "^3.0.1",
+    "query-string": "^6.8.3",
+    "react-loading": "^2.0.3"
   }
 }

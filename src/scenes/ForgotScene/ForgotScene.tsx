@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Formik } from 'formik';
-import { useTranslation } from 'react-i18next';
 import Axios from 'axios';
+import { Formik } from 'formik';
+import React, { useState } from 'react';
+import Helmet from 'react-helmet';
+import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router';
-import { routes } from '../../routes';
-import { AuthLayoutLinkItem, AuthLayout } from '../../components/AuthLayout/AuthLayout';
-import { ForgotForm } from '../../scene-forms/ForgotForm';
 import { apis } from '../../apis';
-import { getErrorMessage } from '../../config';
+import { AuthLayout, AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
+import { getErrorMessage, getReleoxOption } from '../../config';
+import { routes } from '../../routes';
+import { ForgotForm } from '../../scene-forms/ForgotForm';
 
 interface BodyData {
   email: string;
@@ -43,6 +44,9 @@ export const ForgotScene = () => {
   if (redirect) return <Redirect to={redirect} />;
   return (
     <AuthLayout context={CONTEXT} links={getLinks()}>
+      <Helmet>
+        <title>{`${t('title')} | ${getReleoxOption('siteTitle')}`}</title>
+      </Helmet>
       <Formik initialValues={initValues} onSubmit={submit}>
         {() => <ForgotForm context={CONTEXT} message={message} />}
       </Formik>

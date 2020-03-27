@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Formik } from 'formik';
 import Axios from 'axios';
+import { Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
+import Helmet from 'react-helmet';
+import { useTranslation } from 'react-i18next';
 import { Redirect, useLocation } from 'react-router';
-import { PasswordForm } from '../../scene-forms/PasswordForm';
-import { Loading } from '../../components/Loading/Loading';
-import { AuthLayout } from '../../components/AuthLayout/AuthLayout';
-import { parseAndGetQuery, AccessQuery } from '../../parse-params';
-import { validateTokenRequest } from '../../requests';
-import { getErrorMessage, getAuthErrorUrl } from '../../config';
 import { apis } from '../../apis';
+import { AuthLayout } from '../../components/AuthLayout/AuthLayout';
+import { Loading } from '../../components/Loading/Loading';
+import { getAuthErrorUrl, getErrorMessage, getReleoxOption } from '../../config';
+import { AccessQuery, parseAndGetQuery } from '../../parse-params';
+import { validateTokenRequest } from '../../requests';
 import { routes } from '../../routes';
+import { PasswordForm } from '../../scene-forms/PasswordForm';
 
 interface BodyData {
   newPassword: string;
@@ -22,6 +24,7 @@ export const ResetPasswordScene = () => {
   const [redirect, setRedirect] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [accessToken, setAccessToken] = useState('');
+  const { t } = useTranslation('ResetPasswordScene');
 
   const location = useLocation();
 
@@ -49,6 +52,9 @@ export const ResetPasswordScene = () => {
   if (isLoading) return <Loading centeredVertical />;
   return (
     <AuthLayout context={CONTEXT} links={[]}>
+      <Helmet>
+        <title>{`${t('siteTitle')} | ${getReleoxOption('siteTitle')}`}</title>
+      </Helmet>
       <Formik initialValues={initValues} onSubmit={onSubmit}>
         {() => <PasswordForm context={CONTEXT} message={message} />}
       </Formik>
