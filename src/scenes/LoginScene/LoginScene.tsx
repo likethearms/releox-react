@@ -5,12 +5,7 @@ import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router-dom';
 import { AuthLayout, AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
-import {
-  getErrorMessage,
-  getReleoxOption,
-  getReleoxOptions,
-  saveAccessInformation,
-} from '../../config';
+import { getErrorMessage, getReleoxOptions, saveAccessInformation } from '../../config';
 import { loginRequest } from '../../requests';
 import { routes } from '../../routes';
 import { LoginForm } from '../../scene-forms/LoginForm';
@@ -83,7 +78,7 @@ export const LoginSceneComponent = (props: LoginSceneProps) => {
   return (
     <AuthLayout titleBlock={titleBlock} context={CONTEXT} links={getLinks()}>
       <Helmet>
-        <title>{`${t('title')} | ${getReleoxOption('siteTitle')}`}</title>
+        <title>{`${t('title')}`}</title>
       </Helmet>
       <Formik initialValues={initFormValues} onSubmit={submit}>
         {() => <LoginForm loginFieldName={loginFieldName} context={CONTEXT} message={message} />}

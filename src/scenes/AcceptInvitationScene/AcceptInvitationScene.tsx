@@ -7,7 +7,7 @@ import { Redirect, useLocation } from 'react-router';
 import { apis } from '../../apis';
 import { AuthLayout } from '../../components/AuthLayout/AuthLayout';
 import { Loading } from '../../components/Loading/Loading';
-import { getAuthErrorUrl, getErrorMessage, getReleoxOption } from '../../config';
+import { getAuthErrorUrl, getErrorMessage } from '../../config';
 import { InviteQuery, parseAndGetQuery } from '../../parse-params';
 import { validateInvitationTokenRequest } from '../../requests';
 import { routes } from '../../routes';
@@ -60,7 +60,7 @@ export const AcceptInvitationScene = () => {
   return (
     <AuthLayout context={CONTEXT} links={[]}>
       <Helmet>
-        <title>{`${t('title')} | ${getReleoxOption('siteTitle')}`}</title>
+        <title>{`${t('title')}`}</title>
       </Helmet>
       <Formik initialValues={initValues} onSubmit={onSubmit}>
         {() => <InvitationForm context={CONTEXT} message={message} />}

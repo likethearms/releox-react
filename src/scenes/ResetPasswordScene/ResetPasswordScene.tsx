@@ -7,7 +7,7 @@ import { Redirect, useLocation } from 'react-router';
 import { apis } from '../../apis';
 import { AuthLayout } from '../../components/AuthLayout/AuthLayout';
 import { Loading } from '../../components/Loading/Loading';
-import { getAuthErrorUrl, getErrorMessage, getReleoxOption } from '../../config';
+import { getAuthErrorUrl, getErrorMessage } from '../../config';
 import { AccessQuery, parseAndGetQuery } from '../../parse-params';
 import { validateTokenRequest } from '../../requests';
 import { routes } from '../../routes';
@@ -53,7 +53,7 @@ export const ResetPasswordScene = () => {
   return (
     <AuthLayout context={CONTEXT} links={[]}>
       <Helmet>
-        <title>{`${t('siteTitle')} | ${getReleoxOption('siteTitle')}`}</title>
+        <title>{`${t('siteTitle')}`}</title>
       </Helmet>
       <Formik initialValues={initValues} onSubmit={onSubmit}>
         {() => <PasswordForm context={CONTEXT} message={message} />}

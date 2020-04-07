@@ -24,7 +24,7 @@ export const SuccessScene = ({ context, subTitle }: SuccessSceneProps) => {
   return (
     <>
       <Helmet>
-        <title>{`${t('title')} | ${getReleoxOption('siteTitle')}`}</title>
+        <title>{`${t('title')}`}</title>
       </Helmet>
       <AuthLayout
         title={t('title')}

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router';
 import { apis } from '../../apis';
 import { AuthLayout, AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
-import { getErrorMessage, getReleoxOption } from '../../config';
+import { getErrorMessage } from '../../config';
 import { routes } from '../../routes';
 import { ForgotForm } from '../../scene-forms/ForgotForm';
 
@@ -45,7 +45,7 @@ export const ForgotScene = () => {
   return (
     <AuthLayout context={CONTEXT} links={getLinks()}>
       <Helmet>
-        <title>{`${t('title')} | ${getReleoxOption('siteTitle')}`}</title>
+        <title>{`${t('title')}`}</title>
       </Helmet>
       <Formik initialValues={initValues} onSubmit={submit}>
         {() => <ForgotForm context={CONTEXT} message={message} />}
