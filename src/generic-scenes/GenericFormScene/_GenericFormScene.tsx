@@ -1,13 +1,13 @@
+import { Form, Formik, FormikErrors } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { Formik, Form, FormikErrors } from 'formik';
-import { goBack } from 'react-router-redux';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router';
-import { ObjectSchema } from 'yup';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router';
+import { goBack } from 'react-router-redux';
+import { ObjectSchema } from 'yup';
+import { Button } from '../../components/Button/Button';
 import { Card } from '../../components/Card/Card';
 import { CardTitle } from '../../components/CardTitle/CardTitle';
-import { Button } from '../../components/Button/Button';
 import { Loading } from '../../components/Loading/Loading';
 
 interface Props {
@@ -177,7 +177,7 @@ const mapStateToProps = (store: any, { reduxEntry, mapUser }: GenericIndexDispat
   return map;
 };
 
-export const GenericFormScene = connect(
+export const _GenericFormScene = connect(
   mapStateToProps,
   mapDispatchToProps
 )(WrappedGenericFormScene);

@@ -1,19 +1,19 @@
 import React from 'react';
-import { Switch, Route } from 'react-router';
-import Core from './Core';
-import Components from './Components';
+import { Route, Switch } from 'react-router';
 import { getAuthRoutes } from '../auth-routes';
-import { routeMapper } from '../routeMapper';
-import { GenericIndexScene } from '../generic-scenes/GenericIndexScene/GenericIndexScene';
-import {
-  listItemAction,
-  createItemAction,
-  updateItemAction,
-  fetchItemAction,
-  deleteItemAction,
-} from './actions';
-import { GenericFormScene } from '../generic-scenes/GenericFormScene/GenericFormScene';
 import { Input } from '../components/form/Input/Input';
+import { GenericFormScene } from '../generic-scenes/GenericFormScene/_GenericFormScene';
+import { GenericIndexScene } from '../generic-scenes/GenericIndexScene/GenericIndexScene';
+import { routeMapper } from '../routeMapper';
+import {
+  createItemAction,
+  deleteItemAction,
+  fetchItemAction,
+  listItemAction,
+  updateItemAction,
+} from './actions';
+import Components from './Components';
+import Core from './Core';
 
 const Index = () => (
   <GenericIndexScene

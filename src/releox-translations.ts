@@ -2,7 +2,7 @@ import deepmerge from 'deepmerge';
 import DataTableTranslation from './components/DataTable/DataTable.translation';
 import AsyncSelectTranslations from './components/form/AsyncSelect/AsyncSelect.translation';
 import GenericFormTranslations from './generic-scenes/GenericForm/GenericForm.translation';
-import GenericFormSceneTranslation from './generic-scenes/GenericFormScene/GenericFormScene.translation';
+import GenericFormSceneTranslation from './generic-scenes/GenericFormScene/_GenericFormScene.translation';
 import GenericIndexSceneTranslation from './generic-scenes/GenericIndexScene/GenericIndexScene.translation';
 import validateModelTranslation from './HOC/validate-model/validate-model.translation';
 import AcceptInvitationSceneTranslation from './scenes/AcceptInvitationScene/AcceptInvitationScene.translation';

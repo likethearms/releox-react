@@ -1,11 +1,11 @@
-import React from 'react';
 import { mount } from 'enzyme';
-import configureMockStore from 'redux-mock-store';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route } from 'react-router';
+import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Input } from '../../components/form/Input/Input';
-import { GenericFormScene } from './GenericFormScene';
+import { GenericFormScene } from './_GenericFormScene';
 
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);

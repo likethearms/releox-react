@@ -20,7 +20,7 @@ export * from './coreui-layout/CoreuiLayout';
 export * from './generic-scenes/GenericForm/GenericCreateForm';
 export * from './generic-scenes/GenericForm/GenericEditForm';
 export * from './generic-scenes/GenericForm/GenericForm';
-export * from './generic-scenes/GenericFormScene/GenericFormScene';
+export * from './generic-scenes/GenericFormScene/_GenericFormScene';
 export * from './generic-scenes/GenericIndexScene/GenericIndexScene';
 export * from './HOC/auth-middleware';
 export * from './HOC/guest-middleware';
