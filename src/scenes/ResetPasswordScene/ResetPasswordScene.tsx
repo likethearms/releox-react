@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Helmet from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { Redirect, useLocation } from 'react-router';
-import { apis } from '../../apis';
+import { getApis } from '../../apis';
 import { AuthLayout } from '../../components/AuthLayout/AuthLayout';
 import { Loading } from '../../components/Loading/Loading';
 import { getAuthErrorUrl, getErrorMessage } from '../../config';
@@ -41,7 +41,7 @@ export const ResetPasswordScene = () => {
 
   const onSubmit = (body: BodyData) => {
     setMessage('');
-    Axios.post(`${apis.PASSWORD_RESET}?access_token=${accessToken}`, body)
+    Axios.post(`${getApis().PASSWORD_RESET}?access_token=${accessToken}`, body)
       .then(() => setRedirect(routes.RESET_SUCCESS))
       .catch((e) => setMessage(getErrorMessage(e)));
   };

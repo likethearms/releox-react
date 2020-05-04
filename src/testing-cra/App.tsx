@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 import { getAuthRoutes } from '../auth-routes';
 import { Input } from '../components/form/Input/Input';
-import { GenericFormScene } from '../generic-scenes/GenericFormScene/_GenericFormScene';
+import { _GenericFormScene } from '../generic-scenes/GenericFormScene/_GenericFormScene';
 import { GenericIndexScene } from '../generic-scenes/GenericIndexScene/GenericIndexScene';
 import { routeMapper } from '../routeMapper';
 import {
@@ -38,7 +38,7 @@ const EForm = () => (
 );
 
 const Create = () => (
-  <GenericFormScene
+  <_GenericFormScene
     title="Foo"
     reduxEntry="itemReducer"
     redirectUrl="/index"
@@ -48,7 +48,7 @@ const Create = () => (
   />
 );
 const Edit = () => (
-  <GenericFormScene
+  <_GenericFormScene
     title="Foo"
     reduxEntry="itemReducer"
     redirectUrl="/index"

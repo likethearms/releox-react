@@ -30,6 +30,7 @@ export type ReleoxOptionKeys =
 const defaultOptions: ReleoxOptions = {
   userIdKey: 'userId',
   tokenKey: 'accessToken',
+  loginModelName: 'Members',
 };
 
 export const getReleoxOptions = (): ReleoxOptions => {

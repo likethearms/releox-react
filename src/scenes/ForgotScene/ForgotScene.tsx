@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Helmet from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { Redirect } from 'react-router';
-import { apis } from '../../apis';
+import { getApis } from '../../apis';
 import { AuthLayout, AuthLayoutLinkItem } from '../../components/AuthLayout/AuthLayout';
 import { getErrorMessage } from '../../config';
 import { routes } from '../../routes';
@@ -34,7 +34,7 @@ export const ForgotScene = () => {
 
   const submit = (body: BodyData) => {
     setMessage('');
-    Axios.post(apis.FORGOT, body)
+    Axios.post(getApis().FORGOT, body)
       .then(() => setRedirect(routes.FORGOT_SUCCESS))
       .catch((e) => setMessage(getErrorMessage(e)));
   };

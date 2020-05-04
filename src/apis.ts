@@ -1,14 +1,17 @@
-import { getApiUrl } from './config';
+import { getApiUrl, getReleoxOption } from './config';
 
-export const apis = {
-  MEMBER: `${getApiUrl()}/Members`,
-  LOGIN: `${getApiUrl()}/Members/login`,
-  FORGOT: `${getApiUrl()}/Members/reset`,
-  PASSWORD_RESET: `${getApiUrl()}/Members/reset-password`,
-  LOGOUT: `${getApiUrl()}/Members/logout`,
-  PATCH: `${getApiUrl()}/Members`,
-  CONFIRM: `${getApiUrl()}/Members/confirm?uid=:userId&token=:confirmationToken`,
-  ACCEPT_INVITATION: `${getApiUrl()}/Members/accept-invitation?uid=:userId&invitation_token=:invitationToken`,
-  VALIDATE_INVITATION_TOKEN: `${getApiUrl()}/Members/validate-invitation-token?uid=:userId&invitation_token=:invitationToken`,
-  VALIDATE_ACCESS_TOKEN: `${getApiUrl()}/Members/:userId?access_token=:accessToken`,
+export const getApis = () => {
+  const model = getReleoxOption('loginModelName');
+  return {
+    MEMBER: `${getApiUrl()}/${model}`,
+    LOGIN: `${getApiUrl()}/${model}/login`,
+    FORGOT: `${getApiUrl()}/${model}/reset`,
+    PASSWORD_RESET: `${getApiUrl()}/${model}/reset-password`,
+    LOGOUT: `${getApiUrl()}/${model}/logout`,
+    PATCH: `${getApiUrl()}/${model}`,
+    CONFIRM: `${getApiUrl()}/${model}/confirm?uid=:userId&token=:confirmationToken`,
+    ACCEPT_INVITATION: `${getApiUrl()}/${model}/accept-invitation?uid=:userId&invitation_token=:invitationToken`,
+    VALIDATE_INVITATION_TOKEN: `${getApiUrl()}/${model}/validate-invitation-token?uid=:userId&invitation_token=:invitationToken`,
+    VALIDATE_ACCESS_TOKEN: `${getApiUrl()}/${model}/:userId?access_token=:accessToken`,
+  };
 };

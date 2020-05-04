@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Helmet from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { Redirect, useLocation } from 'react-router';
-import { apis } from '../../apis';
+import { getApis } from '../../apis';
 import { AuthLayout } from '../../components/AuthLayout/AuthLayout';
 import { Loading } from '../../components/Loading/Loading';
 import { getAuthErrorUrl, getErrorMessage } from '../../config';
@@ -46,7 +46,7 @@ export const AcceptInvitationScene = () => {
   }, [location]);
 
   const onSubmit = (body: BodyData) => {
-    let url = apis.ACCEPT_INVITATION.replace(':invitationToken', token);
+    let url = getApis().ACCEPT_INVITATION.replace(':invitationToken', token);
     url = url.replace(':userId', userId);
     Axios.post(url, body)
       .then(() => setRedirect(routes.ACCEPT_INVITATION_SUCCESS))
