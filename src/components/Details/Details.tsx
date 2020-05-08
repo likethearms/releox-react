@@ -2,7 +2,7 @@ import getValue from 'get-value';
 import React from 'react';
 import { DetailField } from './DetailField';
 
-interface DetailsFieldData {
+export interface DetailsFieldData {
   text: string;
   dataField: string;
   formatter?(value: any, object: any): string | JSX.Element;
