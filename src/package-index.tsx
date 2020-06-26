@@ -22,6 +22,7 @@ export * from './generic-scenes/GenericForm/GenericEditForm';
 export * from './generic-scenes/GenericForm/GenericForm';
 export * from './generic-scenes/GenericFormScene/_GenericFormScene';
 export * from './generic-scenes/GenericIndexScene/GenericIndexScene';
+export * from './generic-scenes/_GenericIndexScene/_GenericIndexScene';
 export * from './HOC/auth-middleware';
 export * from './HOC/guest-middleware';
 export * from './HOC/validate-model/validate-model';

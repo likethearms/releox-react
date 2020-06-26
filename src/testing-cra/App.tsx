@@ -1,9 +1,10 @@
+/* eslint-disable react/jsx-pascal-case */
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import { getAuthRoutes } from '../auth-routes';
 import { Input } from '../components/form/Input/Input';
 import { _GenericFormScene } from '../generic-scenes/GenericFormScene/_GenericFormScene';
-import { GenericIndexScene } from '../generic-scenes/GenericIndexScene/GenericIndexScene';
+import { GenericIndexScene } from '../generic-scenes/_GenericIndexScene/_GenericIndexScene';
 import { routeMapper } from '../routeMapper';
 import {
   createItemAction,

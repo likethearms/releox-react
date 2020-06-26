@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import { mount } from 'enzyme';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -5,7 +6,7 @@ import { MemoryRouter, Route } from 'react-router';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Input } from '../../components/form/Input/Input';
-import { GenericFormScene } from './_GenericFormScene';
+import { _GenericFormScene } from './_GenericFormScene';
 
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
@@ -40,7 +41,7 @@ describe('create-generic-form-scene', () => {
     const spy = jest.fn();
     const save = (a: any) => () => spy(a);
     const El = () => (
-      <GenericFormScene
+      <_GenericFormScene
         title="Create form"
         EmbedForm={F}
         initialValues={{ name: 'Foo Bar' }}
@@ -77,7 +78,7 @@ describe('create-generic-form-scene', () => {
     const del = (a: any) => () => spy3(a);
 
     const El = () => (
-      <GenericFormScene
+      <_GenericFormScene
         title="Create form"
         EmbedForm={F}
         initialValues={{}}
@@ -130,7 +131,7 @@ describe('create-generic-form-scene', () => {
       },
     });
     const El = () => (
-      <GenericFormScene
+      <_GenericFormScene
         title="Create form"
         EmbedForm={F}
         initialValues={{}}

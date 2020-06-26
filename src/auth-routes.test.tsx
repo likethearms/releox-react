@@ -1,12 +1,12 @@
-import React from 'react';
 import { shallow } from 'enzyme';
+import React from 'react';
 import { MemoryRouter } from 'react-router';
+import { getAuthRoutes } from './auth-routes';
 import { routeMapper } from './routeMapper';
-import { authRoutes } from './auth-routes';
 
 describe('routeMapper', () => {
   it('should render routes correctly', () => {
-    const wrapper = shallow(<MemoryRouter>{authRoutes.map(routeMapper)}</MemoryRouter>);
+    const wrapper = shallow(<MemoryRouter>{getAuthRoutes().map(routeMapper)}</MemoryRouter>);
     expect(wrapper.find('Route[path="/login"]')).toHaveLength(1);
     expect(wrapper.find('Route[path="/forgot"]')).toHaveLength(1);
     expect(wrapper.find('Route[path="/forgot-success"]')).toHaveLength(1);

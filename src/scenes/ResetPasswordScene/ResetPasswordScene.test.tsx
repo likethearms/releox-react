@@ -1,10 +1,7 @@
-import React from 'react';
-import moxios from 'moxios';
-import { createWaitForElement } from 'enzyme-wait';
-import { shallow, ShallowWrapper } from 'enzyme';
-import { ResetPasswordScene } from './ResetPasswordScene';
 import { render } from '@testing-library/react';
+import React from 'react';
 import { MemoryRouter } from 'react-router';
+import { ResetPasswordScene } from './ResetPasswordScene';
 
 describe('ResetPasswordScene', () => {
   describe('UI Elements', () => {
