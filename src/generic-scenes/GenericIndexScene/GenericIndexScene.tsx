@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { push } from 'react-router-redux';
 import { Card } from '../../components/Card/Card';
 import { CardTitle } from '../../components/CardTitle/CardTitle';
 import {
@@ -19,6 +20,7 @@ export interface GenericIndexProps {
 
   createLink?: string;
   onClick?(event: string, row: any): void;
+  redirectUrl?: string;
   context?: string;
   defaultSorted?: DataTableDefaultSort;
   query?: any;
@@ -31,6 +33,7 @@ export const GenericIndexScene = (props: GenericIndexProps) => {
     columns,
     defaultSorted,
     query,
+    redirectUrl,
     onClick,
     loadingSelector,
     dataSelector,
@@ -42,6 +45,8 @@ export const GenericIndexScene = (props: GenericIndexProps) => {
   const dataSize = useSelector(dataSizeSelector);
   const data = useSelector(dataSelector);
 
+  const dispatch = useDispatch();
+
   const { t } = useTranslation(context || 'DataTable');
 
   let addLink = <span />;
@@ -50,6 +55,17 @@ export const GenericIndexScene = (props: GenericIndexProps) => {
       <Link className="btn btn-primary float-right" to={createLink}>
         {t('addNew')}
       </Link>
+    );
+  }
+
+  let handleClick = onClick;
+
+  if (redirectUrl) {
+    handleClick = useCallback(
+      (_: string, row: any) => {
+        dispatch(push(redirectUrl.replace(':id', `${row.id}`)));
+      },
+      [redirectUrl, dispatch]
     );
   }
 
@@ -63,7 +79,7 @@ export const GenericIndexScene = (props: GenericIndexProps) => {
         keyField="id"
         onChangeLoopback={onChangeLoopback}
         loading={isLoading}
-        onClick={onClick}
+        onClick={handleClick}
         columns={columns}
         defaultSorted={defaultSorted || { dataField: 'id', order: 'asc' }}
         query={query}
