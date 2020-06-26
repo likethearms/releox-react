@@ -9,13 +9,14 @@ import {
   DataTable,
   DataTableColumn,
   DataTableDefaultSort,
+  DataTableLoopbackFilter,
 } from '../../components/DataTable/DataTable';
 
 export interface GenericIndexProps {
   loadingSelector(state: any): boolean;
   dataSelector(state: any): any;
   dataSizeSelector(state: any): number;
-  onChangeLoopback(): void;
+  onChangeLoopback(config: DataTableLoopbackFilter): void;
   columns: DataTableColumn[];
 
   createLink?: string;
@@ -58,6 +59,13 @@ export const GenericIndexScene = (props: GenericIndexProps) => {
     );
   }
 
+  const onChange = useCallback(
+    (config: DataTableLoopbackFilter) => {
+      dispatch(onChangeLoopback(config));
+    },
+    [onChangeLoopback, dispatch]
+  );
+
   let handleClick = onClick;
 
   if (redirectUrl) {
@@ -77,7 +85,7 @@ export const GenericIndexScene = (props: GenericIndexProps) => {
         data={data}
         totalSize={dataSize}
         keyField="id"
-        onChangeLoopback={onChangeLoopback}
+        onChangeLoopback={onChange}
         loading={isLoading}
         onClick={handleClick}
         columns={columns}
