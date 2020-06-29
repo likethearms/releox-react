@@ -22,7 +22,8 @@ export interface GenericIndexProps {
   createLink?: string;
   onClick?(event: string, row: any): void;
   redirectUrl?: string;
-  context?: string;
+  tNamespace?: string;
+  title?: string;
   defaultSorted?: DataTableDefaultSort;
   query?: any;
 }
@@ -30,7 +31,8 @@ export interface GenericIndexProps {
 export const GenericIndexScene = (props: GenericIndexProps) => {
   const {
     createLink,
-    context,
+    title,
+    tNamespace,
     columns,
     defaultSorted,
     query,
@@ -48,7 +50,7 @@ export const GenericIndexScene = (props: GenericIndexProps) => {
 
   const dispatch = useDispatch();
 
-  const { t } = useTranslation(context || 'DataTable');
+  const { t } = useTranslation(tNamespace);
 
   let addLink = <span />;
   if (createLink) {
@@ -80,7 +82,7 @@ export const GenericIndexScene = (props: GenericIndexProps) => {
   return (
     <Card>
       {addLink}
-      <CardTitle lg>{t('title')}</CardTitle>
+      <CardTitle lg>{title || t('title')}</CardTitle>
       <DataTable
         data={data}
         totalSize={dataSize}
