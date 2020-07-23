@@ -14,7 +14,7 @@ interface Props extends GenericFormPropsBase {
   onDelete?(id: GenericId): any;
 }
 
-type GenericFormUpdateSubmit = (id: GenericId, body: any) => any;
+type GenericFormUpdateSubmit = (id: GenericId, body: any, options?: { redirect?: string }) => any;
 
 export const GenericEditForm = (props: Props) => {
   const {
@@ -23,6 +23,7 @@ export const GenericEditForm = (props: Props) => {
     paramKey = 'id',
     recordId,
     onSubmit,
+    onSubmitOptions,
     onBack,
     onFetch,
     onDelete,
@@ -58,6 +59,7 @@ export const GenericEditForm = (props: Props) => {
       rowClassName={rowClassName}
       colClassName={colClassName}
       onSubmit={onSubmit}
+      onSubmitOptions={onSubmitOptions}
       onDelete={onDelete}
       recordId={getId()}
       validationSchema={validationSchema}

@@ -1,4 +1,4 @@
-import { Form, Formik } from 'formik';
+import { Formik, FormikProps } from 'formik';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,14 +9,19 @@ import { Card } from '../../components/Card/Card';
 import { CardTitle } from '../../components/CardTitle/CardTitle';
 import { Loading } from '../../components/Loading/Loading';
 
+interface FormProps {
+  formikProps: FormikProps<any>;
+}
+
 export interface GenericFormPropsBase {
   tNamespace: string;
   initialValues: any;
   rowClassName?: string;
   colClassName?: string;
+  onSubmitOptions?: { redirect?: string };
   validationSchema?: ObjectSchema<any> | (() => ObjectSchema<any>);
   onBack?: string | boolean | Function;
-  EmbedForm: React.FunctionComponent;
+  EmbedForm: React.FunctionComponent<FormProps> | ((props: FormProps) => JSX.Element);
   loadingSelector(state: any): any;
 }
 
@@ -38,6 +43,7 @@ export const GenericForm = (props: GenericFormProps) => {
     tNamespace,
     EmbedForm,
     recordId,
+    onSubmitOptions,
     onDelete,
     onBack = true,
     colClassName = 'col-lg-6',
@@ -51,10 +57,10 @@ export const GenericForm = (props: GenericFormProps) => {
   const onBackClick = useCallback(() => {
     if (onBack) {
       if (onBack === true) dispatch(goBack());
-      if (typeof onBack === 'string') dispatch(push(onBack));
-      if (typeof onBack === 'function') onBack();
+      else if (typeof onBack === 'string') dispatch(push(onBack));
+      else if (typeof onBack === 'function') onBack();
     }
-  }, [dispatch]);
+  }, [dispatch, onBack]);
 
   const onDeleteClick = useCallback(() => {
     if (recordId && onDelete) dispatch(onDelete(recordId));
@@ -62,10 +68,10 @@ export const GenericForm = (props: GenericFormProps) => {
 
   const onFormikSubmit = useCallback(
     (data: any) => {
-      if (recordId) dispatch(onSubmit(recordId, data));
-      else dispatch(onSubmit(data));
+      if (recordId) dispatch(onSubmit(recordId, data, onSubmitOptions));
+      else dispatch(onSubmit(data, onSubmitOptions));
     },
-    [dispatch]
+    [dispatch, onSubmitOptions, onSubmit, recordId]
   );
 
   if (isLoading) return <Loading centeredVertical />;
@@ -80,19 +86,21 @@ export const GenericForm = (props: GenericFormProps) => {
               initialValues={initialValues}
               validationSchema={validationSchema}
             >
-              <Form>
-                <EmbedForm />
-                {onBack ? (
-                  <Button id="GenericForm-back" onClick={onBackClick}>
-                    {t(['back', 'GenericForm:back'])}
+              {(formikProps: FormikProps<any>) => (
+                <form onSubmit={formikProps.handleSubmit}>
+                  <EmbedForm formikProps={formikProps} />
+                  {onBack ? (
+                    <Button id="GenericForm-back" onClick={onBackClick}>
+                      {t(['back', 'GenericForm:back'])}
+                    </Button>
+                  ) : (
+                    ''
+                  )}
+                  <Button type="submit" id="GenericFormScene-submit" className="float-right">
+                    {t(['save', 'GenericForm:save'])}
                   </Button>
-                ) : (
-                  ''
-                )}
-                <Button type="submit" id="GenericFormScene-submit" className="float-right">
-                  {t(['save', 'GenericForm:save'])}
-                </Button>
-              </Form>
+                </form>
+              )}
             </Formik>
             {onDelete ? (
               <>

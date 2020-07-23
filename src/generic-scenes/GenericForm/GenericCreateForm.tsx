@@ -1,7 +1,7 @@
 import React from 'react';
 import { GenericForm, GenericFormPropsBase } from './GenericForm';
 
-type GenericFormCreateSubmit = (body: any) => any;
+type GenericFormCreateSubmit = (body: any, options?: { redirect?: string }) => any;
 
 interface Props extends GenericFormPropsBase {
   onSubmit: GenericFormCreateSubmit;
@@ -11,6 +11,7 @@ export const GenericCreateForm = (props: Props) => {
   const {
     initialValues,
     onSubmit,
+    onSubmitOptions,
     tNamespace,
     validationSchema,
     onBack,
@@ -28,6 +29,7 @@ export const GenericCreateForm = (props: Props) => {
       validationSchema={validationSchema}
       onBack={onBack}
       onSubmit={onSubmit}
+      onSubmitOptions={onSubmitOptions}
       EmbedForm={EmbedForm}
       loadingSelector={loadingSelector}
     />
