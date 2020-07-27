@@ -17,6 +17,7 @@ export interface GenericIndexProps {
   dataSelector(state: any): any;
   dataSizeSelector(state: any): number;
   onChangeLoopback(config: DataTableLoopbackFilter): void;
+  ExtraElement?: () => JSX.Element;
   columns: DataTableColumn[];
 
   createLink?: string;
@@ -37,6 +38,7 @@ export const GenericIndexScene = (props: GenericIndexProps) => {
     defaultSorted,
     query,
     redirectUrl,
+    ExtraElement,
     onClick,
     loadingSelector,
     dataSelector,
@@ -81,19 +83,22 @@ export const GenericIndexScene = (props: GenericIndexProps) => {
 
   return (
     <Card>
-      {addLink}
-      <CardTitle lg>{title || t('title')}</CardTitle>
-      <DataTable
-        data={data}
-        totalSize={dataSize}
-        keyField="id"
-        onChangeLoopback={onChange}
-        loading={isLoading}
-        onClick={handleClick}
-        columns={columns}
-        defaultSorted={defaultSorted || { dataField: 'id', order: 'asc' }}
-        query={query}
-      />
+      <>
+        {addLink}
+        <CardTitle lg>{title || t('title')}</CardTitle>
+        {ExtraElement ? <ExtraElement /> : ''}
+        <DataTable
+          data={data}
+          totalSize={dataSize}
+          keyField="id"
+          onChangeLoopback={onChange}
+          loading={isLoading}
+          onClick={handleClick}
+          columns={columns}
+          defaultSorted={defaultSorted || { dataField: 'id', order: 'asc' }}
+          query={query}
+        />
+      </>
     </Card>
   );
 };
