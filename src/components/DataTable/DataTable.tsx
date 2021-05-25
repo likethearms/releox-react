@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { useTranslation } from 'react-i18next';
@@ -32,6 +32,7 @@ export interface DataTableProps {
   noDataText?: string;
   overlayElement?: () => JSX.Element;
   loading?: boolean;
+  defaultPage?: number;
   bordered?: boolean;
   onClick?(event: string, row: any): void;
   data: any[];
@@ -75,8 +76,9 @@ export const DataTable = ({
   query,
   context,
   noDataText,
+  defaultPage,
 }: DataTableProps) => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(defaultPage || 1);
   const [sizePerPage, setSizePerPage] = useState(20);
 
   const { t } = useTranslation(context || 'DataTable');

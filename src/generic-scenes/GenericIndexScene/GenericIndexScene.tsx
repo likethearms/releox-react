@@ -27,6 +27,7 @@ export interface GenericIndexProps {
   title?: string;
   defaultSorted?: DataTableDefaultSort;
   query?: any;
+  defaultPage?: number;
 }
 
 export const GenericIndexScene = (props: GenericIndexProps) => {
@@ -42,6 +43,7 @@ export const GenericIndexScene = (props: GenericIndexProps) => {
     onClick,
     loadingSelector,
     dataSelector,
+    defaultPage,
     dataSizeSelector,
     onChangeLoopback,
   } = props;
@@ -91,6 +93,7 @@ export const GenericIndexScene = (props: GenericIndexProps) => {
           data={data}
           totalSize={dataSize}
           keyField="id"
+          defaultPage={defaultPage}
           onChangeLoopback={onChange}
           loading={isLoading}
           onClick={handleClick}

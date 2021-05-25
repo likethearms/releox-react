@@ -1,6 +1,6 @@
 {
   "name": "releox-react",
-  "version": "2.0.0-beta.43",
+  "version": "2.0.0-beta.44",
   "typings": "lib/index.d.ts",
   "main": "lib/index.js",
   "author": "Henrik Salmela",
@@ -98,8 +98,8 @@
     "prop-types": "^15.7.2",
     "query-string": "^6.8.3",
     "react": "^16.10.2",
-    "react-bootstrap-table-next": "^3.2.1",
-    "react-bootstrap-table2-paginator": "^2.1.0",
+    "react-bootstrap-table-next": "^4.0.3",
+    "react-bootstrap-table2-paginator": "^2.1.2",
     "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1",
     "react-i18next": "^11.2.5",
